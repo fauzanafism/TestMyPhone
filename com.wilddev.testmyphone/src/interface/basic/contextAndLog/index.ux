@@ -1,0 +1,58 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <input type="button" class="btn" value="getPackageInfo" onclick="getPackageInfo" />
+        <text class="label" id="text">{{info}}</text>
+        <text class="label">{{packageInfo}}</text>
+    </div>
+</template>
+
+<style>
+    @import '../../../common/css/common.css';
+
+    a {
+        margin-left: 75px;
+        width: 600px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        margin-bottom: 100px;
+        background-color: #ffffff;
+        text-decoration: underline;
+        text-align: center;
+    }
+</style>
+
+<script>
+    import app from '@system.app'
+
+    export default {
+        data: {
+            componentName: 'ContextAndLog',
+            info: '',
+            packageInfo: ''
+        },
+        onInit() {
+            this.$page.setTitleBar({text: 'ContextAndLog'});
+            this.info = JSON.stringify(app.getInfo());
+            console.log(JSON.stringify(app.getInfo()));
+        },
+        getPackageInfo() {
+            app.getPackageInfo({
+                packageName: "com.tencent.mm",
+                success: (data) => {
+                    this.packageInfo = JSON.stringify(data);
+                    console.info("getPackageInfo success", JSON.stringify(data))
+                },
+                fail: (errormsg, errorcode) => {
+                    this.packageInfo = 'get fail --- ' + errorcode + ':' + errormsg;
+                    console.info('get fail --- ' + errorcode + ':' + errormsg)
+                },
+                complete: () => {
+                    console.info('get complete.')
+                }
+            })
+        }
+    }
+</script>

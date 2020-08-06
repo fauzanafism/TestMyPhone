@@ -1,0 +1,261 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.network.websocket.connectUrl1')}}：{{isSuccess}}</text>
+        </div>
+        <input type="button" class="btn" onclick="connectWebsocket" value="{{$t('message.interface.network.websocket.connectUrl1')}}" />
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.network.websocket.connectUrl2')}}：{{isSuccess2}}</text>
+        </div>
+        <input type="button" class="btn" onclick="connectWebsocket2" value="{{$t('message.interface.network.websocket.connectUrl2')}}" />
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.network.websocket.connectUrl3')}}：{{isSuccess3}}</text>
+        </div>
+        <input type="button" class="btn" onclick="connectWebsocket3" value="{{$t('message.interface.network.websocket.connectUrl3')}}" />
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.network.websocket.sendMessage')}}：{{isSend}}</text>
+        </div>
+        <input type="button" class="btn" onclick="sendMessage" value="{{$t('message.interface.network.websocket.sendMessage')}}" />
+        <input type="button" class="btn" onclick="closeWebsocket" value="{{$t('message.interface.network.websocket.closeMessage')}}" />
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.network.websocket.sendMessage')}}：{{isSend2}}</text>
+        </div>
+        <input type="button" class="btn" onclick="sendMessage2" value="{{$t('message.interface.network.websocket.sendMessage2')}}" />
+        <input type="button" class="btn" onclick="closeWebsocket2" value="{{$t('message.interface.network.websocket.closeMessage2')}}" />
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.network.websocket.sendMessage')}}：{{isSend3}}</text>
+        </div>
+        <input type="button" class="btn" onclick="sendMessage3" value="{{$t('message.interface.network.websocket.sendMessage3')}}" />
+        <input type="button" class="btn" onclick="closeWebsocket3" value="{{$t('message.interface.network.websocket.closeMessage3')}}" />
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+    }
+
+    .txt {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<script>
+    import websocketfactory from '@system.websocketfactory'
+
+
+    export default {
+        data: {
+            componentName: 'Websocket',
+            componentData: {},
+            isSuccess: '',
+            isSend: '',
+            isSend2: '',
+            isSend3: '',
+            websocket: '',
+            isSuccess2: '',
+            isSuccess3: '',
+            websocket2: '',
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'Websocket' })
+            this.componentData = this.$t('message.interface.network.websocket');
+        },
+
+        connectWebsocket: function () {
+            var that = this;
+            that.websocket = websocketfactory.create({
+                url: 'ws://echo.websocket.org'
+            })
+
+            that.websocket.onmessage = function (e) {
+                console.log("onmessage e = " + e.data);
+            }
+            that.websocket.onclose = function (e) {
+                console.log("onclose e.code = " + e.code + ", e.reason = " + e.reason + ", wasClean = " + e.wasClean);
+            }
+            that.websocket.onerror = function (e) {
+                console.log("onerror e.data = " + e.data);
+                that.isSuccess = that.componentData.connectFailed;
+            }
+            that.websocket.onopen = function () {
+                console.log('connnect open');
+                that.isSuccess = that.componentData.connectSuccess;
+            }
+        },
+        sendMessage: function () {
+            var that = this;
+            if (that.websocket) {
+                that.websocket.send({
+                    data: 'send message',
+                    success: function () {
+                        console.log(' success');
+                        that.isSend = that.componentData.sendSuccess;
+                    },
+                    fail: function () {
+                        console.log('failed');
+                        that.isSend = that.componentData.sendFailed;
+                    }
+                })
+            }
+        },
+
+        closeWebsocket: function () {
+            var that = this;
+            if (that.websocket) {
+                that.websocket.close({
+                    code: 1000,
+                    reason: 'close as normal',
+                    success: function () {
+                        console.log('close success!!!');
+                    },
+                    fail: function () {
+                        console.log('close fail');
+                    }
+                })
+            }
+        },
+
+        connectWebsocket2: function () {
+            var that = this;
+
+            that.websocket2 = websocketfactory.create({
+                url: 'ws://echo.websocket.org',
+                header: {
+                    'content-type': 'application/json'
+                },
+                protocols: ['protocol1']
+            })
+
+            that.websocket2.onmessage = function (e) {
+                console.log("2 onmessage e = " + e.data);
+            }
+            that.websocket2.onclose = function (e) {
+                console.log("2 onclose e.code = " + e.code + ", e.reason = " + e.reason);
+            }
+            that.websocket2.onerror = function (e) {
+                console.log("2 onerror e.data = " + e.data);
+                that.isSuccess2 = that.componentData.connectFailed;
+            }
+            that.websocket2.onopen = function () {
+                console.log('2 connnect open');
+                that.isSuccess2 = that.componentData.connectSuccess;
+            }
+        },
+        sendMessage2: function () {
+            var that = this;
+            if (that.websocket2) {
+                that.websocket2.send({
+                    data: 'send2 message',
+                    success: function () {
+                        console.log('success2');
+                        that.isSend2 = that.componentData.sendSuccess;
+                    },
+                    fail: function () {
+                        console.log('failed 2');
+                        that.isSend2 = that.componentData.sendFailed;
+                    }
+                })
+            }
+        },
+
+        closeWebsocket2: function () {
+            var that = this;
+            if (that.websocket2) {
+                that.websocket2.close({
+                    code: 1000,
+                    reason: 'close as normal',
+                    success: function () {
+                        console.log('close2 success!!!');
+                    },
+                    fail: function () {
+                        console.log('close2 fail');
+                    }
+                })
+            }
+        },
+        connectWebsocket3: function () {
+            var that = this;
+            that.websocket3 = websocketfactory.create({
+                url: 'ws://echo.websocket.org',
+                header: {
+                    'content-type': 'application/json'
+                },
+                protocols: ['protocol1']
+            })
+
+            that.websocket3.onmessage = function (e) {
+                console.log("3 onmessage e = " + JSON.stringify(String.fromCharCode.apply(null, new Uint8Array(e.data))));
+            }
+            that.websocket3.onclose = function (e) {
+                console.log("3 onclose e.code = " + e.code + ", e.reason = " + e.reason);
+            }
+            that.websocket3.onerror = function (e) {
+                console.log("3 onerror e.data = " + e.data);
+                that.isSuccess3 = that.componentData.connectFailed;
+            }
+            that.websocket3.onopen = function () {
+                console.log('3 connnect open');
+                that.isSuccess3 = that.componentData.connectSuccess;
+            }
+        },
+        sendMessage3: function () {
+            var that = this;
+            var buffer = new ArrayBuffer(4);
+            var a = new Uint8Array(buffer);
+            a[0] = 1;
+            a[1] = 2;
+            a[2] = 3;
+            a[3] = 4;
+            if (that.websocket3) {
+                that.websocket3.send({
+                    data: buffer,
+                    success: function () {
+                        console.log('success3');
+                        that.isSend3 = that.componentData.sendSuccess;
+                    },
+                    fail: function () {
+                        console.log('failed 3');
+                        that.isSend3 = that.componentData.sendFailed;
+                    }
+                })
+            }
+        },
+
+        closeWebsocket3: function () {
+            var that = this;
+            if (that.websocket3) {
+                that.websocket3.close({
+                    code: 1000,
+                    reason: 'close as normal',
+                    success: function () {
+                        console.log('close3 success!!!');
+                    },
+                    fail: function () {
+                        console.log('close3 fail');
+                    }
+                })
+            }
+        }
+    }
+</script>

@@ -1,0 +1,140 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.interaction.share.title')}}</text>
+                <input style="flex: 1; font-size: 30px;" value="{{input_key}}" placeholder="请输入要分享的内容" onchange="shareContent" />
+            </div>
+            <input type="button" class="btn" onclick="shareText" value="{{$t('message.interface.interaction.share.shareText')}}" />
+            <input type="button" class="btn" onclick="sharelocal" value="{{$t('message.interface.interaction.share.sharelocal')}}" />
+            <input type="button" class="btn" onclick="media_pickImage" value="{{$t('message.interface.interaction.share.media_pickImage')}}" />
+
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        background-color: #ffffff;
+        padding: 30px;
+        margin-bottom: 100px;
+        align-items: center;
+    }
+
+    .txt {
+        width: 200px;
+        text-align: right;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    import share from '@system.share'
+    import media from '@system.media'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'share',
+            shareData: '',
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'share' })
+        },
+        shareContent: function (e) {
+            this.shareData = e.text;
+        },
+        shareText: function () {
+            share.share({
+                type: 'text/html',
+                data: this.shareData,
+                success: function () {
+                    prompt.showToast({ message: "share success" });
+                    console.info('share success')
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'share fail --- ' + errocode + ':' + erromsg });
+                    console.info('share fail --- ' + errocode + ':' + erromsg)
+                },
+                cancel: function () {
+                    prompt.showToast({ message: "share cancel" });
+                    console.info('share cancel  ')
+                },
+                complete: function () {
+                    prompt.showToast({ message: "share complete " })
+                    console.info('share complete  ')
+                }
+            })
+        },
+
+        sharelocal: function () {
+            share.share({
+                type: "image/jpeg",
+                data: "/common/img/xmad.jpg",
+                success: function () {
+                    prompt.showToast({ message: 'share local success' });
+                    console.info('share local success')
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'share local fail --- ' + errocode + ':' + erromsg });
+                    console.info('share local fail --- ' + errocode + ':' + erromsg)
+                },
+                cancel: function () {
+                    prompt.showToast({ message: 'share local cancel' });
+                    console.info('share cancel  ')
+                },
+                complete: function () {
+                    prompt.showToast({ message: 'share local complete' });
+                    console.info('share complete  ')
+                }
+            })
+        },
+
+        media_pickImage: function () {
+            media.pickImage({
+                success: function (ret) {
+                    console.log('fetch--------callback ' + ret.uri);
+                    share.share({
+                        type: 'image/jpg',
+                        data: ret.uri,
+                        success: function () {
+                            prompt.showToast({ message: "share pickImage success" });
+                            console.info('share pickImage success')
+                        },
+                        fail: function (erromsg, errocode) {
+                            prompt.showToast({ message: 'share pickImage fail --- ' + errocode + ':' + erromsg });
+                            console.info('share pickImage fail --- ' + errocode + ':' + erromsg)
+                        },
+                        cancel: function () {
+                            prompt.showToast({ message: "share pickImage cancel" });
+                            console.info('share pickImage cancel  ')
+                        },
+                        complete: function () {
+                            prompt.showToast({ message: "share pickImage complete " })
+                            console.info('share pickImage complete  ')
+                        }
+                    })
+                },
+                cancel: function () {
+                },
+                fail: function () {
+                },
+                complete: function () {
+                }
+            })
+        }
+
+    }
+</script>

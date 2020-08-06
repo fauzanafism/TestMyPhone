@@ -1,0 +1,60 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="item-container">
+            <input type="button" class="btn" onclick="getAdProvider" value="{{$t('message.interface.service.ad.getAdProvider')}}" />
+            <div class="item-content">
+                <text class="titleBar-title"> {{$t('message.interface.service.ad.adProvider')}}:{{provider}}</text>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-top: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+        margin-bottom: 100px;
+        align-items: flex-start;
+    }
+</style>
+
+<script>
+    import ad from "@service.ad"
+    import prompt from '@system.prompt'
+    export default {
+        data: {
+            componentName: 'ad',
+            fetchData: '',
+            requestid: '',
+            sign: '',
+            ts: Date.now(),
+            provider: ''
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'ad' })
+        },
+
+        getAdProvider: function () {
+            this.provider = ad.getProvider()
+            prompt.showToast({
+                message: 'getProvider : ' + this.provider,
+                duration: 2000,
+                gravity: 'center'
+            })
+
+        }
+    }
+
+</script>

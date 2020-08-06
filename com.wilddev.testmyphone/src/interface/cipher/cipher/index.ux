@@ -1,0 +1,123 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+      <div class="item-content">
+        <text class="txt" if="{{show}}">{{cipher}}</text>
+      </div>
+
+      <div class="btn-wrap-column">
+        <input type="button" class="btn" value="{{ $t('message.interface.cipher.cipher.inputValue1') }}" @click="encrypt" />
+        <input type="button" class="btn" value="{{ $t('message.interface.cipher.cipher.inputValue2') }}" @click="decrypt" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+        margin-bottom: 50px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .txt {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .txt-left {
+        align-items: flex-start;
+    }
+    .btn-wrap-column {
+        margin-left: 60px;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+  import cipher from '@system.cipher'
+  import prompt from '@system.prompt'
+
+  export default {
+    data: {
+      componentName: 'cipher',
+      show: true,
+      clipboard: 'quickApp',
+      textAES: '',
+      dealTxt: ''
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: 'cipher' })
+    },
+    encrypt: function () {
+      cipher.aes({
+        action: 'encrypt',
+        // Text content to be encrypted
+        text: 'Hello!',
+        // Base64 encoded key
+        key: 'NDM5Qjk2UjAzMEE0NzVCRjlFMkQwQkVGOFc1NkM1QkQ=',
+        transformation: 'AES/CBC/PKCS5Padding',
+        iv: 'YWZzZGZhc2Rmd2Vmc2RmYXNk',
+        ivOffset: 0,
+        ivLen: 16,
+        success: (data) => {
+          prompt.showToast({
+            message: data.text,
+            duration: 1000,
+          });
+          this.textAES = data.text
+          console.log(`handling success: ${data.text}`);
+        },
+        fail: (data, code) => {
+          prompt.showToast({
+            message: `cipher.aes fail  ${code}: ${data}`
+          });
+          console.log(`cipher.aes fail  ${code}: ${data}`)
+        }
+      })
+
+    },
+    decrypt: function () {
+      cipher.aes({
+        action: 'decrypt',
+        // The content to be decrypted is a binary value after Base64 encoding
+        text: this.textAES,
+        // Base64 encoded key
+        key: 'NDM5Qjk2UjAzMEE0NzVCRjlFMkQwQkVGOFc1NkM1QkQ=',
+        transformation: 'AES/CBC/PKCS5Padding',
+        iv: 'YWZzZGZhc2Rmd2Vmc2RmYXNk',
+        ivOffset: 0,
+        ivLen: 16,
+        success: (data) => {
+          prompt.showToast({
+            message: data.text
+          });
+          this.dealTxt = data.text
+        },
+        fail: (data, code) => {
+          prompt.showToast({
+            message: `cipher.aes fail  ${code}: ${data}`
+          });
+          console.log(`cipher.aes fail  ${code}: ${data}`)
+        }
+      })
+
+    }
+  }
+</script>

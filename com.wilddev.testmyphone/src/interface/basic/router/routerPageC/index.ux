@@ -1,0 +1,98 @@
+<template>
+  <!-- There can only be one root node in the template -->
+  <div class="demo-page">
+    <text class="title">{{ $t('message.interface.basic.routerPageC.title') }}{{title}}</text>
+    <!-- Click to jump to the details page -->
+    <div class="label-item">
+      <input name="radio" type="radio" id="radio1" style="width: 80px;" onclick="checkDefault" /><text>default</text>
+      <input name="radio" type="radio" id="radio2" style="width: 80px;" onclick="checkClearTask" /><text>clearTask</text>
+    </div>
+
+    <input class="btn" type="button" value="{{ $t('message.interface.basic.routerPageC.pageAValue') }}" onclick="routePageA" />
+    <input class="btn" type="button" value="{{ $t('message.interface.basic.routerPageC.pageBValue') }}" onclick="routePageB" />
+    <input class="btn" type="button" value="{{ $t('message.interface.basic.routerPageC.pageCValue') }}" onclick="routePageC" />
+    <input class="btn" type="button" value="{{ $t('message.interface.basic.routerPageC.homeValue') }}" onclick="routeHome" />
+  </div>
+</template>
+
+<style>
+  .demo-page {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .label-item {
+    align-items: center;
+    border-bottom-width: 1px;
+    border-color: #dddddd;
+  }
+
+  .btn {
+    width: 550px;
+    height: 86px;
+    margin-top: 75px;
+    border-radius: 43px;
+    background-color: #007dff;
+    font-size: 30px;
+    color: #ffffff;
+  }
+</style>
+
+<script>
+  import router from '@system.router'
+
+  export default {
+    // The data model of page level components, which affects the coverage mechanism of incoming data: properties defined in private are not allowed to be overwritten
+    private: {
+      title: 'PageC',
+      flag: ''
+    },
+    onRefresh: function (data) {
+      console.log('pagec on onRefresh', JSON.stringify(data));
+    },
+    onDestroy: function () {
+      console.log("pagec on destroy");
+    },
+    routePageA() {
+      router.push({
+        params: {
+          ___PARAM_LAUNCH_FLAG___: this.flag
+        },
+        uri: '/interface/basic/router/routerPageA'
+      })
+    },
+    routePageB() {
+      router.push({
+        params: {
+          ___PARAM_LAUNCH_FLAG___: this.flag
+        },
+        uri: '/interface/basic/router/routerPageB'
+      })
+    },
+    routePageC() {
+      router.push({
+        params: {
+          ___PARAM_LAUNCH_FLAG___: this.flag
+        },
+        uri: '/interface/basic/router/routerPageC'
+      })
+    },
+    routeHome() {
+      router.push({
+        uri: '/interface/basic/router/routerLaunchHome'
+      })
+    },
+    checkDefault() {
+      this.flag = ""
+    },
+    checkClearTask() {
+      this.flag = "clearTask"
+    }
+  }
+</script>

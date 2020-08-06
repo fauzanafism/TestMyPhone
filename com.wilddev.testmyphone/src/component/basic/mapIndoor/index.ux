@@ -1,0 +1,250 @@
+<template>
+  <div class="container">
+    <map class="map lc2" id='mapid' latitude=39.914164 longitude=116.374959 scale=19 @indoormodechange="indoormodechange"></map>
+    <div class="myDiv">
+      <input type="button" value="setFloorsB2" onclick="setFloorsB2" />
+      <input type="button" value="setFloorsB1" onclick="setFloorsB1" />
+      <input type="button" value="setFloorsF1" onclick="setFloorsF1" />
+    </div>
+    <div class="myDiv">
+      <input type="button" value="setFloorsF2" onclick="setFloorsF2" />
+      <input type="button" value="setFloorsF3" onclick="setFloorsF3" />
+      <input type="button" value="setFloorsF4" onclick="setFloorsF4" />
+    </div>
+    <div class="myDiv">
+      <input type="button" value="setFloorsF5" onclick="setFloorsF5" />
+      <input type="button" value="setFloorsB3" onclick="setFloorsB3" />
+      <input type="button" value="setFloorsF6" onclick="setFloorsF6" />
+    </div>
+
+
+
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .myDiv {
+    flex-direction: row;
+  }
+
+  #cc {
+    width: 600px;
+    height: 800px;
+  }
+
+  .map {
+    background-color: #a9a9a9;
+    width: 750px;
+    height: 750px;
+  }
+</style>
+
+<script>
+  import prompt from '@system.prompt'
+  module.exports = {
+    data: {
+      max: 7,
+      floors: [],
+      poid: "0",
+      curFloor: "F1"
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: 'MapIndoor' })
+    },
+    onMenuPress() {
+      var mapcom = this.$element('mapid')
+      prompt.showContextMenu({
+        itemList: ["setIndoorEnable true", "setIndoorEnable falses"],
+        success: function (data) {
+          var index = data.index;
+          // 39.4908329079,116.2552545922
+          console.log("index = " + index);
+          switch (index) {
+            case 0:
+              console.log("setIndoorEnable");
+              mapcom.setIndoorEnable({
+                enable: true,
+              });
+              break;
+            case 1:
+              mapcom.setIndoorEnable({
+                enable: false,
+              });
+              break;
+          }
+        }
+      })
+
+    },
+
+    setFloorsB2() {
+      var mapcom = this.$element('mapid')
+      mapcom.switchIndoorFloor({
+        toFloor: "B2",
+        poiId: this.poiId,
+        success: function () {
+          console.log("switchIndoorFloor success ");
+        },
+        fail: function (errorMsg, errorCode) {
+          console.log("switchIndoorFloor fail " + errorMsg + " errorCode =" + errorCode);
+        },
+        complete: function () {
+          console.log("switchIndoorFloor complete");
+        }
+      })
+
+    },
+    setFloorsB1() {
+      var mapcom = this.$element('mapid')
+      mapcom.switchIndoorFloor({
+        toFloor: "B1",
+        poiId: this.poiId,
+        success: function () {
+          console.log("switchIndoorFloor success ");
+        },
+        fail: function (errorMsg, errorCode) {
+          console.log("switchIndoorFloor fail " + errorMsg + " errorCode =" + errorCode);
+        },
+        complete: function () {
+          console.log("switchIndoorFloor complete");
+        }
+      })
+
+    },
+    setFloorsF1() {
+      var mapcom = this.$element('mapid')
+      mapcom.switchIndoorFloor({
+        toFloor: "F1",
+        poiId: this.poiId,
+        success: function () {
+          console.log("switchIndoorFloor success ");
+        },
+        fail: function (errorMsg, errorCode) {
+          console.log("switchIndoorFloor fail " + errorMsg + " errorCode =" + errorCode);
+        },
+        complete: function () {
+          console.log("switchIndoorFloor complete");
+        }
+      })
+
+    },
+    setFloorsF2() {
+      var mapcom = this.$element('mapid')
+      mapcom.switchIndoorFloor({
+        toFloor: "F2",
+        poiId: this.poiId,
+        success: function () {
+          console.log("switchIndoorFloor success ");
+        },
+        fail: function (errorMsg, errorCode) {
+          console.log("switchIndoorFloor fail " + errorMsg + " errorCode =" + errorCode);
+        },
+        complete: function () {
+          console.log("switchIndoorFloor complete");
+        }
+      })
+
+    },
+    setFloorsF3() {
+      var mapcom = this.$element('mapid')
+      mapcom.switchIndoorFloor({
+        toFloor: "F3",
+        poiId: this.poiId,
+        success: function () {
+          console.log("switchIndoorFloor success ");
+        },
+        fail: function (errorMsg, errorCode) {
+          console.log("switchIndoorFloor fail " + errorMsg + " errorCode =" + errorCode);
+        },
+        complete: function () {
+          console.log("switchIndoorFloor complete");
+        }
+      })
+
+    },
+    setFloorsF4() {
+      var mapcom = this.$element('mapid')
+      mapcom.switchIndoorFloor({
+        toFloor: "F4",
+        poiId: this.poiId,
+        success: function () {
+          console.log("switchIndoorFloor success ");
+        },
+        fail: function (errorMsg, errorCode) {
+          console.log("switchIndoorFloor fail " + errorMsg + " errorCode =" + errorCode);
+        },
+        complete: function () {
+          console.log("switchIndoorFloor complete");
+        }
+      })
+
+    },
+    setFloorsF5() {
+      var mapcom = this.$element('mapid')
+      mapcom.switchIndoorFloor({
+        toFloor: "F5",
+        poiId: this.poiId,
+        success: function () {
+          console.log("switchIndoorFloor success ");
+        },
+        fail: function (errorMsg, errorCode) {
+          console.log("switchIndoorFloor fail " + errorMsg + " errorCode =" + errorCode);
+        },
+        complete: function () {
+          console.log("switchIndoorFloor complete");
+        }
+      })
+
+    },
+    setFloorsB3() {
+      var mapcom = this.$element('mapid')
+      mapcom.switchIndoorFloor({
+        toFloor: "B3",
+        poiId: this.poiId,
+        success: function () {
+          console.log("switchIndoorFloor success ");
+        },
+        fail: function (errorMsg, errorCode) {
+          console.log("switchIndoorFloor fail " + errorMsg + " errorCode =" + errorCode);
+        },
+        complete: function () {
+          console.log("switchIndoorFloor complete");
+        }
+      })
+
+    },
+    setFloorsF6() {
+      var mapcom = this.$element('mapid')
+      mapcom.switchIndoorFloor({
+        toFloor: "F6",
+        poiId: this.poiId,
+        success: function () {
+          console.log("switchIndoorFloor success ");
+        },
+        fail: function (errorMsg, errorCode) {
+          console.log("switchIndoorFloor fail " + errorMsg + " errorCode =" + errorCode);
+        },
+        complete: function () {
+          console.log("switchIndoorFloor complete");
+        }
+      })
+
+    },
+
+    indoormodechange(data) {
+      this.floors = data.indoorInfo.floorNames;
+      this.curFloor = data.indoorInfo.curFloor
+      this.poiId = data.indoorInfo.poiId
+      console.log("this.floors =" + this.floors + "this.curFloor =" + this.curFloor + " this.poiId =" + this.poiId + "isEnter =" + data.isEnter);
+    }
+
+
+  }
+</script>

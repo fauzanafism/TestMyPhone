@@ -1,0 +1,210 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+      <div class="item-content">
+        <text class="txt">{{$t('message.interface.system.sensor.sensorAccelerometerData')}}</text>
+        <text class="txt">X: {{sensorAccelerometerData.x}}</text>
+        <text class="txt">Y: {{sensorAccelerometerData.y}}</text>
+        <text class="txt">Z: {{sensorAccelerometerData.z}}</text>
+      </div>
+      <input type="button" class="btn" onclick="accelerometer" value="{{$t('message.interface.system.sensor.accelerometer')}}" />
+      <input type="button" class="btn" onclick="unaccelerometer" value="{{$t('message.interface.system.sensor.unaccelerometer')}}" />
+
+      <div class="item-content">
+        <text class="txt">{{$t('message.interface.system.sensor.sensorCompassData')}}</text>
+        <text class="txt">direction: {{sensorCompassData.direction}}</text>
+        <text class="txt">accuracy: {{sensorCompassData.accuracy}}</text>
+      </div>
+      <input type="button" class="btn" onclick="compass" value="{{$t('message.interface.system.sensor.compass')}}" />
+      <input type="button" class="btn" onclick="uncompass" value="{{$t('message.interface.system.sensor.uncompass')}}" />
+
+      <div class="item-content">
+        <text class="txt">{{$t('message.interface.system.sensor.sensorDistanceData')}}</text>
+        <text class="txt">distance: {{sensorDistanceData.distance}}</text>
+      </div>
+      <input type="button" class="btn" onclick="distance" value="{{$t('message.interface.system.sensor.distance')}}" />
+      <input type="button" class="btn" onclick="undistance" value="{{$t('message.interface.system.sensor.undistance')}}" />
+      <div class="item-content">
+        <text class="txt">{{$t('message.interface.system.sensor.sensorIntensityData')}}</text>
+        <text class="txt">intensity: {{sensorIntensityData.intensity}}</text>
+      </div>
+      <input type="button" class="btn" onclick="intensity" value="{{$t('message.interface.system.sensor.intensity')}}" />
+      <input type="button" class="btn" onclick="unintensity" value="{{$t('message.interface.system.sensor.unintensity')}}" />
+
+      <div class="item-content">
+        <text class="txt">{{$t('message.interface.system.sensor.sensorStepData')}}</text>
+        <text class="txt">step: {{sensorStepData.steps}}</text>
+      </div>
+      <input type="button" class="btn" onclick="step" value="{{$t('message.interface.system.sensor.step')}}" />
+      <input type="button" class="btn" onclick="unstep" value="{{$t('message.interface.system.sensor.unstep')}}" />
+      <div class="item-content">
+        <text class="txt">health:</text>
+        <text class="txt">support: {{healthStep.support}}</text>
+      </div>
+      <input type="button" class="btn" onclick="healthSupport" value="{{$t('message.interface.system.sensor.healthSupport')}}" />
+      <input type="button" class="btn" onclick="getDaySteps" value="{{$t('message.interface.system.sensor.getDaySteps')}}" />
+      <input type="button" class="btn" onclick="getWeekSteps" value="{{$t('message.interface.system.sensor.getWeekSteps')}}" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .item-container {
+    margin-bottom: 50px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+
+  .item-content {
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 30px;
+    margin-bottom: 100px;
+    align-items: flex-start;
+  }
+</style>
+
+<script>
+  import sensor from '@system.sensor'
+  import health from '@service.health'
+
+  export default {
+    data: {
+      componentName: 'sensor',
+      sensorAccelerometerData: {
+        x: '',
+        y: '',
+        z: ''
+      },
+      sensorCompassData: {
+        direction: '',
+        accuracy: ''
+      }
+      ,
+      sensorDistanceData: {
+        distance: ''
+      }
+      ,
+      sensorIntensityData: {
+        intensity: ''
+      },
+      sensorStepData: {
+        steps: ''
+      },
+      healthStep: {
+        support: ''
+      }
+
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'sensor' })
+    },
+    accelerometer: function () {
+      var that = this;
+      sensor.subscribeAccelerometer({
+        callback: function (ret) {
+          that.sensorAccelerometerData = ret;
+        }
+      })
+    },
+    unaccelerometer: function () {
+      sensor.unsubscribeAccelerometer()
+    },
+    compass: function () {
+      var that = this;
+      sensor.subscribeCompass({
+        callback: function (ret) {
+          that.sensorCompassData = ret;
+        }
+      })
+    },
+    uncompass: function () {
+      sensor.unsubscribeCompass()
+    },
+    distance: function () {
+      var that = this;
+      sensor.subscribeProximity({
+        callback: function (ret) {
+          that.sensorDistanceData = ret;
+        }
+      })
+    },
+    undistance: function () {
+      sensor.unsubscribeProximity()
+    },
+    intensity: function () {
+      var that = this;
+      sensor.subscribeLight({
+        callback: function (ret) {
+          that.sensorIntensityData = ret;
+        }
+      })
+    },
+    unintensity: function () {
+      sensor.unsubscribeLight()
+    },
+    step: function () {
+      var that = this;
+      sensor.subscribeStepCounter({
+        callback: function (ret) {
+          console.error("subscribeStepCounter steps =" + ret.steps);
+          that.sensorStepData = ret;
+        }
+      })
+    },
+    unstep: function () {
+      sensor.unsubscribeStepCounter();
+    },
+    healthSupport: function () {
+      var that = this;
+      health.hasStepsOfDay({
+        success: function (ret) {
+          that.healthStep = ret;
+          console.log("hasStepsOfDay success" + ret.support);
+        },
+        fail: function () {
+          console.log("hasStepsOfDay fail")
+        },
+        complete: function () {
+          console.log("hasStepsOfDay complete")
+        }
+
+      })
+    },
+    getDaySteps: function () {
+      health.getTodaySteps({
+        success: function (ret) {
+          console.log("getTodaySteps success" + ret.steps);
+        },
+        fail: function (data, code) {
+          console.log("getTodaySteps fail" + data + code)
+        },
+        complete: function () {
+          console.log("getTodaySteps complete")
+        }
+
+      })
+    },
+    getWeekSteps: function () {
+      health.getLastWeekSteps({
+        success: function (ret) {
+          console.log("getLastWeekSteps success" + ret.steps);
+        },
+        fail: function (data, code) {
+          console.log("getLastWeekSteps fail" + data + code)
+        },
+        complete: function () {
+          console.log("getLastWeekSteps complete")
+        }
+
+      })
+    }
+  }
+</script>

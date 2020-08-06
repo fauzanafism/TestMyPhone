@@ -1,0 +1,94 @@
+<template>
+    <div class="container">
+
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <input class="btn" type="button" value="{{$t('message.interface.service.pushStatShare.getPushProvider')}}" onclick="getPushProvider" />
+        <input class="btn" type="button" value="{{$t('message.interface.service.pushStatShare.pushsubscribe')}}" onclick="pushsubscribe" />
+        <input class="btn" type="button" value="{{$t('message.interface.service.pushStatShare.pushunsubscribe')}}" onclick="pushunsubscribe" />
+        <input class="btn" type="button" value="{{$t('message.interface.service.pushStatShare.pushon')}}" onclick="pushon" />
+        <input class="btn" type="button" value="{{$t('message.interface.service.pushStatShare.pushoff')}}" onclick="pushoff" />
+
+        <input class="btn" type="button" value="{{$t('message.interface.service.pushStatShare.getStatProvider')}} "onclick="getStatProvider" />
+        <input class="btn" type="button" value="{{$t('message.interface.service.pushStatShare.getShareProvider')}}" onclick="getShareProvider" />
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+</style>
+
+<script>
+    import push from '@service.push'
+    import stats from '@service.stats'
+    import share from '@service.share'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'push&stat&share',
+            componentData: {},
+            compressImageUri: ""
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'push&stat&share' })
+            this.componentData = this.$t('message.interface.service.pushStatShare');
+        },
+        getPushProvider: function () {
+            prompt.showToast({
+                message: this.componentData.serviceProvider + push.getProvider()
+
+            })
+        },
+        getStatProvider: function () {
+            prompt.showToast({
+                message: this.componentData.serviceProvider + stats.getProvider()
+
+            })
+        },
+        getShareProvider: function () {
+            prompt.showToast({
+                message: this.componentData.serviceProvider + share.getProvider()
+
+            })
+        },
+        pushsubscribe(e) {
+            push.subscribe({
+                success: function (data) {
+                    console.log("push.subscribe succeeded, result data=" + JSON.stringify(data));
+                },
+                fail: function (data, code) {
+                    console.log("push.subscribe failed, result data=" + JSON.stringify(data) + ", code=" + code);
+                },
+                complete: function () {
+                    console.log("push.subscribe completed");
+                }
+            });
+        },
+        pushunsubscribe(e) {
+            push.unsubscribe({
+                success: function (data) {
+                    console.log("push.unsubscribe succeeded, result data=" + JSON.stringify(data));
+                },
+                fail: function (data, code) {
+                    console.log("push.unsubscribe failed, result data=" + JSON.stringify(data) + ", code=" + code);
+                },
+                complete: function () {
+                    console.log("push.unsubscribe completed");
+                }
+            });
+        },
+        pushon(e) {
+            push.on({
+                callback: function (ret) {
+                    console.log("received pass through message, ret=" + JSON.stringify(ret));
+                }
+            });
+        },
+        pushoff(e) {
+            push.off();
+        }
+    }
+</script>

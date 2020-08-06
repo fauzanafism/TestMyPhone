@@ -1,0 +1,97 @@
+<template>
+  <div class="img-container">
+    <div class="left-area">
+      <div class="img-wrapper">
+        <image class="img" src={{firstUri}} />
+      </div>
+      <input type="button" class="upload-btn" onclick="upload('first')" value={{componentData.image1}}></input>
+    </div>
+    <div class="right-area">
+      <div class="img-wrapper">
+        <image class="img" src={{secondUri}} />
+      </div>
+      <input type="button" class="upload-btn" onclick="upload('second')" value={{componentData.image2}}></input>
+    </div>
+    <div class="score-wrapper" if="score !== ''">
+      <text class="score-text">{{info}}{{score}}</text>
+    </div>
+  </div>
+</template>
+
+<style>
+  .img-container {
+    height: 500px;
+    width: 100%;
+    background-color: #e8e8e8;
+  }
+
+  .left-area,
+  .right-area {
+    height: 100%;
+    width: 50%;
+    flex-direction: column;
+  }
+
+  .left-area {
+    padding-left: 30px;
+  }
+
+  .right-area {
+    padding-left: 15px;
+  }
+
+  .img-wrapper {
+    width: 330px;
+    height: 330px;
+    margin-top: 30px;
+    background-color: #ffffff;
+  }
+
+  .img {
+    width: 330px;
+    height: 330px;
+    resize-mode: contain;
+  }
+
+  .upload-btn {
+    width: 330px;
+    height: 80px;
+    margin-top: 30px;
+    background-color: #ffffff;
+    border-color: #d9d9d9;
+    border-width: 1px;
+    border-radius: 12px;
+    justify-content: center;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  .score-wrapper {
+    position: fixed;
+    height: 280px;
+    width: 100%;
+    background-color: transparent;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .score-text {
+    color: #52c41a;
+    font-size: 45px;
+  }
+</style>
+
+<script>
+  export default {
+    props: ['firstUri', 'secondUri', 'info', 'score'],
+    data: {
+      componentData: {}
+    },
+    onInit: function () {
+      this.componentData = this.$t('message.interface.ai.common.twoImageContainer');
+    },
+    upload(type) {
+      this.$emit('upload', type)
+    }
+  }
+</script>

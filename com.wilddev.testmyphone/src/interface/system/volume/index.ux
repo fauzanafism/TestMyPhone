@@ -1,0 +1,88 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+
+      <div class="item">
+        <text>{{$t('message.interface.system.volume.set')}}</text>
+        <input class="item-input" value="{{setVolume}}" placeholder="{{$t('message.interface.system.volume.setVolume')}}" onchange="updateData('setVolume')"></input>
+      </div>
+      <input type="button" class="btn margin-50" onclick="setMediaVolume" value="{{$t('message.interface.system.volume.setMediaVolume')}}" />
+      <input type="button" class="btn" onclick="getVolume" value="{{$t('message.interface.system.volume.getVolume')}}" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .item-container {
+    margin-top: 50px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+
+  .item {
+    height: 100px;
+    border-bottom-width: 1px;
+    border-bottom-color: #cccccc;
+  }
+
+  .item-input {
+    flex: 1;
+    margin-left: 10px;
+    font-size: 30px;
+  }
+
+  .margin-50 {
+    margin-top: 50px;
+  }
+</style>
+
+<script>
+  import volume from '@system.volume'
+  import prompt from '@system.prompt'
+
+  export default {
+    data: {
+      componentName: 'volume',
+      componentData: {},
+      setVolume: '',
+
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'volume' })
+      this.componentData = this.$t('message.interface.system.volume');
+    },
+    updateData(name, e) {
+      this[name] = e.text
+    },
+    setMediaVolume: function () {
+      var that = this;
+      volume.setMediaValue({
+        volume: that.setVolume,
+        success: function (ret) {
+          prompt.showToast({ message: that.componentData.setSuccess })
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({ message: "fail------" + errocode + ': ' + erromsg })
+          console.log('fail---------' + errocode + ': ' + erromsg)
+        },
+        complete: function () {
+          console.log('complete')
+        }
+      })
+    },
+    getVolume: function () {
+      volume.getMediaValue({
+        success: function (ret) {
+          prompt.showToast({ message: "Volume : " + ret.value })
+        }
+      })
+    }
+  }
+</script>

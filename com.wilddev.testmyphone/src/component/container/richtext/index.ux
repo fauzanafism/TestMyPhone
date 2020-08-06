@@ -1,0 +1,78 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title ">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-hint" style="color: #0faeff">richtext type=html</text>
+            <text class="item-hint">{{$t('message.component.richtext.description')}}</text>
+            <richtext class="rich-text" type="html" ontouchstart="touchStart" onstart="richtextStart" oncomplete="richTextComplete"
+                onclick="clickText" onlongpress="longPress" ontouchmove="touchMove" ontouchend="touchEnd">{{htmlText}}</richtext>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 30px;
+        margin-right: 30px;
+        margin-left: 30px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        padding-bottom: 30px;
+    }
+
+    .item-title {
+        padding-top: 50px;
+        padding-bottom: 20px;
+        color: #aaaaaa;
+    }
+
+    .item-hint {
+        height: 100px;
+    }
+
+    .rich-text {
+        padding: 30px;
+        background-color: #ffffff;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'richtext',
+            htmlText: '<div class="item-content"><p class="item-title">h1</p><h1>Huawei</h1><p class="item-title">h2</p><h2>Huawei</h2><p class="item-title">h3</p><h3>Huawei</h3><p class="item-title">h4</p><h4>Huawei</h4><p class="item-title">h5</p><h5>Huawei</h5><p class="item-title">h6</p><h6>Huawei</h6><p class="item-title">img</p><div><img src="http://www.huawei.com/Assets/CBG/img/logo.png" style="width: 100%;"/></div><p class="item-title">p</p><p>Huawei</p><p class="item-title">span</p><p><span>Huawei</span></p><p class="item-title">strong</p><p><strong>Huawei</strong></p><p class="item-title">del</p><p><del>Huawei</del></p><p class="item-title">b</p><p><b>Huawei</b></p><p class="item-title">i</p><p><i>Huawei</i></p></div>'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'richtext' })
+        },
+        richtextStart: function () {
+            console.debug("richtextStart");
+        },
+        richTextComplete: function () {
+            console.debug("richTextComplete");
+        },
+        clickText: function () {
+            console.debug("clickText");
+        },
+        longPress: function () {
+            console.debug("longPress");
+        },
+        touchStart: function () {
+            console.debug("touchStart");
+        },
+        touchMove: function () {
+            console.debug("touchMove");
+        },
+        touchEnd: function () {
+            console.debug("touchEnd");
+        }
+    }
+</script>

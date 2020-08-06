@@ -1,0 +1,98 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+      <div class="item-content">
+        <text class="txt">{{$t('message.interface.system.record.recordPath')}}{{pathRecordSave}}</text>
+      </div>
+      <input type="button" class="btn" onclick="takeRecord" value="{{$t('message.interface.system.record.takeRecord')}}" />
+      <input type="button" class="btn" onclick="takeRecordDuration" value="{{$t('message.interface.system.record.takeRecordDuration')}}" />
+      <input type="button" class="btn" onclick="stopRecord" value="{{$t('message.interface.system.record.stopRecord')}}" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .item-container {
+    margin-top: 50px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+
+  .item-content {
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 30px;
+  }
+</style>
+
+<script>
+  import record from '@system.record'
+  import prompt from '@system.prompt'
+
+  export default {
+    data: {
+      componentName: 'record',
+      pathRecordSave: '',
+
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'record' })
+    },
+    takeRecord: function () {
+      var that = this;
+      record.start({
+        success: function (ret) {
+          that.pathRecordSave = ret.uri;
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({ message: "record.startRecord fail------" + errocode + ': ' + erromsg })
+          console.log('record.startRecord----------' + errocode + ': ' + erromsg)
+        },
+        complete: function () {
+          console.log('record.startRecord----------complete')
+        }
+      })
+    },
+    takeRecordDuration: function () {
+      var that = this;
+      record.start({
+        duration: 3000,
+        sampleRate: 44100,
+        numberOfChannels: 1,
+        encodeBitRate: 64000,
+        success: function (ret) {
+          that.pathRecordSave = ret.uri;
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({ message: "record.startRecord fail------" + errocode + ': ' + erromsg })
+          console.log('record.startRecord----------' + errocode + ': ' + erromsg)
+          that.pathRecordSave = "Fail";
+        },
+        complete: function () {
+          console.log('record.startRecord----------complete')
+        }
+      })
+    },
+    stopRecord: function () {
+      record.stop({
+        success: function () {
+          prompt.showToast({ message: "record.stopRecord success------" })
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({ message: "record.stopRecord fail------" + errocode + ': ' + erromsg })
+          console.log('record.stopRecord----------' + errocode + ': ' + erromsg)
+        },
+        complete: function () {
+          console.log('record.stopRecord----------complete')
+        }
+      })
+    }
+  }
+</script>

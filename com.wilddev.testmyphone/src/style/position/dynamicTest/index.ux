@@ -1,0 +1,261 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+    <div class="demo-page">
+      <div class="title-container">
+        <text class="title">{{$t("message.style.position.positioning")}}</text>
+      </div>
+      <div class="select-container">
+        <label class="small-title">{{$t("message.style.position.specifyValue")}}</label>
+        <select class="position-select" onchange="onSelectChanged">
+          <option value="relative" class="position-select">relative</option>
+          <option value="absolute" class="position-select">absolute</option>
+          <option value="fixed" class="position-select">fixed</option>
+        </select>
+      </div>
+      <div class="title-container">
+        <text class="title">{{$t("message.style.position.offsetParmeter")}}</text>
+      </div>
+      <text class="description-without-margin">{{$t("message.style.position.distanceIntro")}}</text>
+      <div class="slider-container">
+        <label class="small-title offset-label">top: {{top}}</label>
+        <input type="checkbox" checked="{{topCheckFlag}}" class="position-checkbox" onchange="getCheckValue('topCheckFlag')" />
+        <slider class="slider" min="0" max="100" value="{{top}}" step="{{step}}" onchange="getSliderValue('top')"></slider>
+      </div>
+      <div class="slider-container">
+        <label class="small-title offset-label">left: {{left}}</label>
+        <input type="checkbox" checked="{{leftCheckFlag}}" class="position-checkbox" onchange="getCheckValue('leftCheckFlag')" />
+        <slider class="slider" min="0" max="100" value="{{left}}" step="{{step}}" onchange="getSliderValue('left')"></slider>
+      </div>
+      <div class="slider-container">
+        <label class="small-title offset-label">right: {{right}}</label>
+        <input type="checkbox" checked="{{rightCheckFlag}}" class="position-checkbox" onchange="getCheckValue('rightCheckFlag')" />
+        <slider class="slider" min="0" max="100" value="{{right}}" step="{{step}}" onchange="getSliderValue('right')"></slider>
+      </div>
+      <div class="slider-container">
+        <label class="small-title offset-label">bottom: {{bottom}}</label>
+        <input type="checkbox" checked="{{bottomCheckFlag}}" class="position-checkbox" onchange="getCheckValue('bottomCheckFlag')" />
+        <slider class="slider" min="0" max="100" value="{{bottom}}" step="{{step}}" onchange="getSliderValue('bottom')"></slider>
+      </div>
+      <div class="slider-container">
+        <label class="small-title offset-label">width: {{width}}</label>
+        <slider class="slider" min="100" max="280" value="{{width}}" step="{{step}}" onchange="getSliderValue('width')"></slider>
+      </div>
+      <div class="slider-container">
+        <label class="small-title offset-label">height: {{height}}</label>
+        <slider class="slider" min="100" max="280" value="{{height}}" step="{{step}}" onchange="getSliderValue('height')"></slider>
+      </div>
+      <text class="description">{{getStyleText}}</text>
+      <div class="reset-button" onclick="resetState">
+        <text class="reset-text">Reset</text>
+      </div>
+      <div class="box-container">
+        <div class="outside-container">
+          <div style="background-color:green; width:100px; height:100px;"></div>
+          <div class="square-container" style="{{getStyleText}}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+  export default {
+    // The data model of the page-level component affects the overwriting mechanism of the incoming data: properties defined in private cannot be overwritten
+    private: {
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      width: 100,
+      height: 100,
+      position: 'relative',
+      topCheckFlag: false,
+      leftCheckFlag: false,
+      rightCheckFlag: false,
+      bottomCheckFlag: false,
+      componentName: 'all Positions',
+    },
+    computed: {
+      getStyleText() {
+        let { top, left, right, bottom, position = 'relative', topCheckFlag, leftCheckFlag, rightCheckFlag, bottomCheckFlag, width = 100, height = 100 } = this
+        let styleText = `position:${position};`
+
+        let addStyleOffset = (offsetDirection, offsetNumber, positionAttribute, enableFlag = false) => {
+          if (offsetDirection) {
+            let newStringTextPrefix = positionAttribute === 'relative' ? 'margin-' : ''
+            if (!enableFlag) {
+              offsetNumber = null
+            } else {
+              offsetNumber += 'px'
+            }
+            styleText += `${newStringTextPrefix}${offsetDirection}:${offsetNumber};`
+          }
+        }
+
+        let addStyleLength = (lengthName, lengthNumber) => {
+          styleText += `${lengthName}:${lengthNumber}px;`
+        }
+        addStyleOffset('top', top, position, topCheckFlag)
+        addStyleOffset('left', left, position, leftCheckFlag)
+        addStyleOffset('right', right, position, rightCheckFlag)
+        addStyleOffset('bottom', bottom, position, bottomCheckFlag)
+        addStyleLength('width', width)
+        addStyleLength('height', height)
+        return styleText
+      }
+    },
+    onSelectChanged(e) {
+      this.position = e.newValue
+    },
+    getSliderValue(name, e) {
+      this[name] = e.progress
+    },
+    getCheckValue(name, e) {
+      this[name] = e.checked
+    },
+    resetState() {
+      this.top = 0
+      this.left = 0
+      this.right = 0
+      this.bottom = 0
+      this.width = 100
+      this.height = 100
+      this.topCheckFlag = false
+      this.leftCheckFlag = false
+      this.rightCheckFlag = false
+      this.bottomCheckFlag = false
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: this.$t("message.style.position.testPage") })
+    }
+  }
+</script>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .demo-page {
+    flex-direction: column;
+    margin: 24px;
+  }
+
+  .title-container {
+    height: 72px;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 4px;
+    padding: 0 24px;
+    margin-bottom: 12px;
+    background-color: #eee;
+  }
+
+  .title {
+    font-size: 36px;
+    color: #242424;
+  }
+
+  .small-title {
+    font-size: 36px;
+    margin-right: 40px;
+  }
+
+  .position-select {
+    font-size: 36px;
+    padding: 8px;
+    width: 300px;
+  }
+
+  .select-container {
+    margin-bottom: 12px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .box-container {
+    width: 600px;
+    height: 600px;
+    margin: 12px 51px;
+    border-width: 2px;
+    border-color: #242424;
+  }
+
+  .square-container {
+    background-color: #4c9afa;
+  }
+
+  .square-container-black {
+    width: 100px;
+    height: 100px;
+    background-color: #242424;
+    border-color: #242424;
+  }
+
+  .slider {
+    width: 400px;
+    margin-left: 16px;
+  }
+
+  .slider-container {
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 12px;
+  }
+
+  .offset-label {
+    width: 200px;
+  }
+
+  .position-checkbox {
+    width: 100px;
+  }
+
+  .description {
+    font-size: 36px;
+    color: #ccc;
+    width: 700px;
+    margin-bottom: 24px;
+  }
+
+  .description-without-margin {
+    font-size: 36px;
+    color: #ccc;
+    width: 700px;
+  }
+
+  .reset-button {
+    position: fixed;
+    z-index: 9999;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    right: 40px;
+    bottom: 80px;
+    background-color: #f44336;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .reset-button:active {
+    opacity: 0.5;
+  }
+
+  .reset-text {
+    font-size: 36px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .outside-container {
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border: 1px solid black;
+  }
+</style>

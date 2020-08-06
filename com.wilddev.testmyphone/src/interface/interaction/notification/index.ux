@@ -1,0 +1,98 @@
+<template>
+    <div class="container">
+
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <div class="item-content-detail">
+                    <text class="txt">{{$t('message.interface.interaction.notification.title')}}</text>
+                    <input class="input" placeholder="{{$t('message.interface.interaction.notification.titlePlaceholder')}}" onchange="titleFn" />
+                </div>
+
+                <div class="item-content-detail">
+                    <text class="txt">{{$t('message.interface.interaction.notification.text')}}</text>
+                    <input class="input" placeholder="{{$t('message.interface.interaction.notification.textPlaceholder')}}" onchange="contentFn" />
+                </div>
+            </div>
+            <input type="button" class="btn" value="{{$t('message.interface.interaction.notification.sendNotification')}}" onclick="show" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-top: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-bottom: 100px;
+    }
+
+    .item-content-detail {
+        align-items: center;
+    }
+
+    .input {
+        flex: 1;
+        font-size: 30px;
+        padding-left: 20px;
+    }
+
+    .txt {
+        width: 150px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: right;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    import notification from '@system.notification'
+
+    export default {
+        data: {
+            componentName: 'notification',
+            componentData: {},
+            inputTitle: 'title',
+            inputContent: 'content'
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'notification' })
+            this.componentData = this.$t('message.interface.interaction.notification');
+        },
+        show: function () {
+            var that = this;
+            prompt.showToast({
+                message: this.componentData.titleAs + that.inputTitle + this.componentData.notificationHasSend,
+            })
+            notification.show({
+                contentTitle: that.inputTitle,
+                contentText: that.inputContent,
+                clickAction: {
+                    uri: '/main'
+                }
+            })
+        },
+        titleFn: function (e) {
+            this.inputTitle = e.text;
+        },
+        contentFn: function (e) {
+            this.inputContent = e.text;
+        }
+    }
+</script>

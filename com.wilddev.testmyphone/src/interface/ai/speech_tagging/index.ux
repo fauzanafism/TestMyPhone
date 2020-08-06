@@ -1,0 +1,203 @@
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <main-btn onclick-main="openUse" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.speech_tagging.btnText')}}" btn-text-err="{{$t('message.interface.ai.speech_tagging.btnTextErr')}}"
+      complete={{complete}} back-result={{backResult}} back-data={{backData}}></main-btn>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+    color: #242424;
+  }
+
+  .option-box {
+    width: 750px;
+    height: 90px;
+    justify-content: space-between;
+  }
+
+  .option-item {
+    width: 30%;
+    margin: 10px 14px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 12px;
+  }
+
+  .main-btn-container {
+    width: 750px;
+    margin: 10px 20px;
+    height: 120px;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-btn {
+    width: 310px;
+    margin: 10px 20px;
+    height: 80px;
+    background-color: #096dd9;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 35px;
+    color: #ffffff;
+  }
+
+  .result-box {
+    background-color: #ffffff;
+    width: 750px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .list-box {
+    height: 120px;
+    width: 750px;
+    align-items: center;
+  }
+
+  .list-items {
+    width: 750px;
+    flex-wrap: wrap;
+  }
+
+  .result-info {
+    width: 730px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  .result-text {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .wave-box {
+    height: 180px;
+    align-items: flex-end;
+  }
+
+  .result-wave {
+    width: 60px;
+    height: 180px;
+    background-color: #096dd9;
+    margin: 10px;
+  }
+</style>
+
+<script>
+  import ai from '@system.ai';
+  import prompt from '@system.prompt';
+
+  export default {
+    data: {
+      componentData: {},
+      testtxt: '',
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: '',
+      type: 0
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openUse(e) {
+      var a = e.detail.split(';')[0], b = e.detail.split(';')[1];
+      this.testtxt = this.changeMsg(a);
+      this.type = this.changeMsg(b, true);
+      this.test();
+    },
+    openErrorUse(e) {
+      // 2-
+      var a = e.detail.split(';')[0], b = e.detail.split(';')[1];
+      this.testtxt = this.changeMsg(a);
+      this.type = this.changeMsg(b, true);
+      this.test();
+    },
+    test() {
+      console.log('text: ' + this.testtxt);
+      let self = this;
+      this.complete = '';
+      ai.getWordPos({
+        text: self.testtxt,
+        type: self.type,
+        success: (res) => {
+          console.log(JSON.stringify(res))
+          self.backResult = 'success';
+          self.backData = JSON.stringify(res);
+          if (res && res.pos && res.pos[0].word && res.pos[0].tag) {
+            setTimeout(() => {
+              prompt.showToast({
+                message: self.componentData.toast1 + res.pos[0].word + self.componentData.toast2 + res.pos[0].tag
+              });
+            }, 1000)
+          }
+        },
+        fail: (errMsg, errcode) => {
+          console.log("fail msg:" + errMsg);
+          self.backResult = 'fail';
+          self.backData = 'code:' + errcode + ' msg:' + errMsg;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.speech_tagging');
+      this.$page.setTitleBar({ text: this.componentData.title });
+    }
+  }
+</script>

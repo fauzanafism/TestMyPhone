@@ -1,0 +1,44 @@
+<import name="user-item" src="../Common/UserItem.ux"></import>
+
+<template>
+  <div class="container">
+    <user-item ai-items="{{$t('message.interface.ai.index.AIItems')}}" onclick-item="goPage"></user-item>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+
+  export default {
+    data: {
+      componentData: {},
+      AIItems: []
+    },
+    goPage: function (obj) {
+      console.info("obj : " + obj.detail);
+      if (obj.detail !== '') {
+        router.push({ uri: "interface/ai/" + obj.detail })
+      }
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.index');
+      this.AIItems=this.componentData.AIItems;
+      this.$page.setTitleBar({
+        text: this.componentData.title,
+        textColor: 'rgba(0, 0, 0, 0.85)',
+        backgroundColor: '#ffffff',
+        backgroundOpacity: 1
+      })
+    }
+  }
+</script>

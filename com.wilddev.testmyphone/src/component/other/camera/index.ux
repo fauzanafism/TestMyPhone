@@ -1,0 +1,99 @@
+<template>
+    <!-- There can only be one root node in the template -->
+    <div class="container" style=" width: 100%; height:100%">
+        <stack class="stack" style=" width: 100%; height:100%">
+            <camera id="camera" style=" width: 600px; height:600px"  flash="on" onerror="error"> </camera>
+            <div>
+                <input class="btn" type="button" onclick="takePhoto" value="takePhoto"></input>
+                <input class="btn" type="button" onclick="flash" value="flash"></input>
+                <input class="btn" type="button" onclick="whichCamera" value="whichCamera"></input>
+                <input class="btn" type="button" onclick="atuoOrOff" value="atuoOrOff"></input>
+                <image src="{{photoUri}}"></image>
+            </div>
+        </stack>
+    </div>
+</template>
+
+<style>
+    @import '../../../common/css/common.css';
+
+    .stack {
+        height: 300px;
+
+        align-items: flex-start;
+    }
+
+    .title {
+        font-size: 100px;
+    }
+
+    .btn2 {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+</style>
+
+<script>
+    module.exports = {
+        data: {
+            title: 'World',
+            photoUri: ""
+        },
+        onInit() {
+            this.$page.setTitleBar({
+                text: 'menu',
+                textColor: '#ffffff',
+                backgroundColor: '#007DFF',
+                backgroundOpacity: 0.5
+            })
+        },
+        takePhoto() {
+            var camera = this.$element('camera');
+            //camera.flash = "flash_on";
+            console.log("take photo =" + camera.flash);
+            camera.takePhoto({
+                quality: "high",
+                success: (res) => {
+                    console.log("res =" + res.uri);
+                    this.photoUri = res.uri;
+                },
+                fail: (erromsg, errocode) => {
+                    console.log('media.takePhoto----------' + errocode + ': ' + erromsg)
+                }
+            })
+        },
+        flash() {
+            var camera = this.$element('camera');
+            console.error("yyyy", "camera.falsh =" + camera.flash)
+            if (camera.flash !== "torch") {
+                camera.flash = "torch"
+            } else {
+                camera.flash = "off"
+            }
+        },
+
+        whichCamera() {
+            var camera = this.$element('camera');
+            console.error("yyyy", "camera.falsh =" + camera.deviceposition)
+            if (camera.deviceposition !== "back") {
+                camera.deviceposition = "back"
+            } else {
+                camera.deviceposition = "front"
+            }
+
+        },
+        atuoOrOff() {
+            var camera = this.$element('camera');
+            console.error("yyyy", "camera.falsh =" + camera.flash)
+            if (camera.flash !== "auto") {
+                camera.flash = "auto"
+            } else {
+                camera.flash = "off"
+            }
+        },
+        error(e) {
+            console.error(e.detail)
+        }
+
+    }
+</script>

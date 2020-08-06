@@ -1,0 +1,249 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{interface}}</text>
+        </div>
+        <!-- list component method -->
+        <div class="btn-wrap-column ">
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.pickSDPhoto')}}" onclick="pickSDPhoto" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.pickDataPhoto')}}" onclick="pickDataPhoto" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.pickNetPhoto')}}" onclick="pickNetPhoto" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.getProvider')}}" onclick="getProvider" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.getAvailablePlatforms')}}" onclick="getAvailablePlatforms" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.wxFriendShare')}}" onclick="wxFriendShare" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.wxCircleShare')}}" onclick="wxCircleShare" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.sinaShare')}}" onclick="sinaShare" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.systemShare')}}" onclick="systemShare" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.morePlatforms')}}" onclick="morePlatforms" />
+            <input type="button" class="btn" value="{{$t('message.interface.thirdparty.serviceShare.allPlatforms')}}" onclick="allPlatforms" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        justify-content: center;
+    }
+
+    .item-title {
+        padding-left: 30px;
+        padding-bottom: 20px;
+    }
+
+    .item-content {
+        height: 300px;
+        justify-content: center;
+    }
+
+    .btn-wrap-column {
+        margin-left: 60px;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+    import share from '@service.share'
+    import media from '@system.media'
+    import prompt from '@system.prompt'
+    export default {
+        data: {
+            componentData: {},
+            interface: "",
+            //The default is the local app internal image
+            photoUri: '/common/logo.png'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'service_share' })
+            this.componentData = this.$t('message.interface.thirdparty.serviceShare');
+            this.interface=this.componentData.thirdShare;
+        },
+        getProvider: function () {
+            prompt.showToast({
+                message: 'message provider ：' + share.getProvider(),
+                duration: 0
+            })
+        },
+        getAvailablePlatforms: function () {
+            share.getAvailablePlatforms({
+                success: function (data) {
+                    for (const i in data.platforms) {
+                        console.log("share platforms: " + data.platforms[i]);
+                    }
+                },
+                fail: function (data, code) {
+                    console.log("handling fail, code = " + code);
+                }
+            })
+        },
+        wxFriendShare: function () {
+            share.share({
+                shareType: 2,
+                title: this.componentData.wxFriendShareTitle,
+                summary: this.componentData.wxFriendShareSummary,
+                imagePath: this.photoUri,
+                targetUrl: 'https://www.baidu.com/',
+                mediaUrl: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/cae-legoup-video-target/93be3d88-9fc2-4fbd-bd14-833bca731ca7.mp4',
+                platforms: ["WEIXIN"],
+                fail: function (data, code) {
+                    prompt.showToast({
+                        message: 'message fail message ：' + data + " code " + code,
+                        duration: 0
+                    })
+                },
+                cancel: function () {
+                    prompt.showToast({
+                        message: 'message cancel ：',
+                        duration: 0
+                    })
+                }
+            })
+        },
+        wxCircleShare: function () {
+            share.share({
+                shareType: 4,
+                title: this.componentData.wxCicleShareTitle,
+                summary: this.componentData.wxCicleShareSummary,
+                imagePath: this.photoUri,
+                targetUrl: 'https://www.baidu.com/',
+                mediaUrl: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/cae-legoup-video-target/93be3d88-9fc2-4fbd-bd14-833bca731ca7.mp4',
+                platforms: ["WEIXIN_CIRCLE"],
+                fail: function (data, code) {
+                    prompt.showToast({
+                        message: 'message fail message ：' + data + " code " + code,
+                        duration: 0
+                    })
+                },
+                cancel: function () {
+                    prompt.showToast({
+                        message: 'message cancel ：',
+                        duration: 0
+                    })
+                }
+            })
+        },
+
+        sinaShare: function () {
+            share.share({
+                shareType: 4,
+                title: this.componentData.sinaShareTitle,
+                summary: this.componentData.sinaShareSummary,
+                imagePath: this.photoUri,
+                targetUrl: 'https://www.baidu.com/',
+                mediaUrl: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/cae-legoup-video-target/93be3d88-9fc2-4fbd-bd14-833bca731ca7.mp4',
+                platforms: ["WEIBO"],
+                fail: function (data, code) {
+                    prompt.showToast({
+                        message: 'message fail message ：' + data + " code " + code,
+                        duration: 0
+                    })
+                },
+                cancel: function () {
+                    prompt.showToast({
+                        message: 'message cancel ：',
+                        duration: 0
+                    })
+                }
+            })
+        },
+        systemShare: function () {
+            share.share({
+                shareType: 4,
+                title: this.componentData.systemShareTitle,
+                summary: this.componentData.systemShareSummary,
+                imagePath: this.photoUri,
+                targetUrl: 'https://www.baidu.com/',
+                mediaUrl: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/cae-legoup-video-target/93be3d88-9fc2-4fbd-bd14-833bca731ca7.mp4',
+                platforms: ["SYSTEM"],
+                fail: function (data, code) {
+                    prompt.showToast({
+                        message: 'message fail message ：' + data + " code " + code,
+                        duration: 0
+                    })
+                },
+                cancel: function () {
+                    prompt.showToast({
+                        message: 'message cancel ：',
+                        duration: 0
+                    })
+                }
+            })
+        },
+        morePlatforms: function () {
+            share.share({
+                shareType: 4,
+                title: this.componentData.morePlatformsTitle,
+                summary: this.componentData.morePlatformsSummary,
+                imagePath: this.photoUri,
+                targetUrl: 'https://www.baidu.com/',
+                mediaUrl: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/cae-legoup-video-target/93be3d88-9fc2-4fbd-bd14-833bca731ca7.mp4',
+                platforms: ["WEIXIN", "WEIBO", "SYSTEM"],
+                fail: function (data, code) {
+                    prompt.showToast({
+                        message: 'message fail message ：' + data + " code " + code,
+                        duration: 0
+                    })
+                },
+                cancel: function () {
+                    prompt.showToast({
+                        message: 'message cancel ：',
+                        duration: 0
+                    })
+                }
+            })
+        },
+        allPlatforms: function () {
+            share.share({
+                shareType: 4,
+                title: this.componentData.allPlatformsTitle,
+                summary: this.componentData.allPlatformsSummary,
+                imagePath: this.photoUri,
+                targetUrl: 'https://www.baidu.com/',
+                mediaUrl: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/cae-legoup-video-target/93be3d88-9fc2-4fbd-bd14-833bca731ca7.mp4',
+                platforms: "",
+                fail: function (data, code) {
+                    prompt.showToast({
+                        message: 'message fail message ：' + data + " code " + code,
+                        duration: 0
+                    })
+                },
+                cancel: function () {
+                    prompt.showToast({
+                        message: 'message cancel ：',
+                        duration: 0
+                    })
+                }
+            })
+        },
+        pickSDPhoto: function () {
+            var that = this;
+            media.pickImage({
+                success: function (ret) {
+                    that.photoUri = ret.uri;
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "pickImage fail------" + errocode + ': ' + erromsg })
+                    console.log('media.pickImage----------' + errocode + ': ' + erromsg)
+                },
+                cancel: function () {
+                    console.log('media.pickImage----------cancel')
+                },
+                complete: function () {
+                    console.log('media.pickImage----------complete')
+                }
+            })
+        },
+        pickDataPhoto: function () {
+            var that = this;
+            that.photoUri = '/common/logo.png';
+        },
+        pickNetPhoto: function () {
+            var that = this;
+            that.photoUri = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542175176&di=948a7a2a8cec225c82741c773fcd8e64&imgtype=jpg&er=1&src=http%3A%2F%2Fpic9.nipic.com%2F20100813%2F3525627_135840092720_2.jpg';
+        }
+    }
+</script>

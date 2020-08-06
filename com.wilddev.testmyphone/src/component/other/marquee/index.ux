@@ -1,0 +1,95 @@
+<template>
+    <!-- There can only be one root node in the template -->
+    <div class="container">
+        <marquee  id="bbb" loop= "2" direction="right" style="font-weight:lighter; width:700px ;
+         height:200px;font-family: normal "  >huaweiWebsite</marquee>
+        <marquee id="aaa" direction="left" scrollamount="30px"
+        style="color : red; width:700px ; height:300px;font-family:network,local"
+              onbounce = "b" onfinish = "f" onstart="s">huaweiWebsite
+        </marquee>
+        <div class="myDiv">
+            <input type="button" value="start" onclick="start" />
+            <input type="button" value="stop" onclick="stop" />
+        </div>
+    </div>
+</template>
+
+<style>
+    .container {
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    .myDiv {
+        flex-direction: row;
+    }
+
+    #aaa {
+        font-size: 37.5px;
+        background-color: #00ffff;
+    }
+
+    @font-face {
+        font-family: 'sampleA';
+        src:
+        /* Here is just an example of a local address. Do not use font files in your product.*/
+            url('/common/fonts/FZLTTHBJW.TTF'),
+              /* Here is just an example of a local address. Do not use font files in your product.*/
+            url('http://lfmemberdev.hwcloudtest.cn:9094/fastapp/download/FZCCHJW.TTF')
+    }
+
+    @font-face {
+        font-family: 'local';
+        /* Here is just an example of a local address. Do not use font files in your product.*/
+        src: url('/common/fonts/FZLTTHBJW.TTF');
+    }
+
+    @font-face {
+        font-family: 'sample';
+        src: /* Here is just an example of a local address. Do not use font files in your product.*/
+        url('/common/fonts/FZLTTHBJW.TTF'),
+        /* Here is just an example of a local address. Do not use font files in your product.*/
+        url('http://lfmemberdev.hwcloudtest.cn:9094/fastapp/download/FZCCHJW.TTF'),
+        local(serif);
+    }
+    @font-face {
+        font-family: 'system';
+        src: local('serif');
+    }
+
+    @font-face {
+        font-family: 'network';
+        /* Here is just an example of a local address. Do not use font files in your product.*/
+        src: url('http://lfmemberdev.hwcloudtest.cn:9094/fastapp/download/FZCCHJW.TTF');
+    }
+</style>
+
+<script>
+    module.exports = {
+        onInit() {
+        },
+        onReady: function () {
+            console.log("onReady ")
+        },
+        stop: function () {
+           this.$element('aaa').stop();
+            this.$element('bbb').stop();
+        },
+        start: function () {
+            this.$element('aaa').start();
+            this.$element('bbb').start();
+        },
+        b:function(){
+            console.log("onBounce")
+        },
+        f:function(){
+            console.log("onFinish")
+        },
+        s:function(){
+            console.log("onStart")
+        }
+
+    }
+</script>

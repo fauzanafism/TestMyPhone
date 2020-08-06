@@ -1,0 +1,278 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="nav">
+            <text class="nav-item {{listClass}}" onclick="showListMethod">{{$t('message.component.list.listComponentMethod')}}</text>
+            <text class="nav-item {{arrayClass}}" onclick="showArrayMethod">{{$t('message.component.list.arrayObjectMethod')}}</text>
+        </div>
+
+        <!-- List component method -->
+        <div class="btn-wrap-column" show="{{showListBtn}}">
+            <input type="button" class="btn" name="listmethod" value="{{$t('message.component.list.backToFirstItem')}}" onclick="goIndex" />
+            <input type="button" class="btn" name="listmethod" value="{{$t('message.component.list.smoothToTheRight')}}" onclick="scrollBy" />
+        </div>
+
+        <!-- Array object method -->
+        <div class="btn-wrap-row" show="{{!showListBtn}}">
+            <input type="button" class="btn-little" onclick="clickPush" value="push"></input>
+            <input type="button" class="btn-little" onclick="clickPop" value="pop"></input>
+            <input type="button" class="btn-little" onclick="clickShift" value="shift"></input>
+            <input type="button" class="btn-little" onclick="clickUnshift" value="unshift"></input>
+        </div>
+
+        <div class="btn-wrap-row" show="{{!showListBtn}}">
+            <input type="button" class="btn-little" onclick="clickSplice" value="splice"></input>
+            <input type="button" class="btn-little" onclick="clickSort" value="sort"></input>
+            <input type="button" class="btn-little" onclick="clickReverse" value="reverse"></input>
+        </div>
+
+        <!-- List -->
+        <list class="list" onclick="listClick" onlongpress="listLongPress" onscrollbottom="scrollbottom" onscrolltop="scrolltop"
+            onscroll="scroll" onscrollend="scrollend" onscrolltouchup="scrolltouchup" id="list" scrollpage="{{scrollPage}}">
+            <!-- List elements, when the attribute type values are the same, you need to ensure that the rendered view layout is also the same, use show instead of if to ensure that the layout view is unchanged -->
+            <list-item type="listItem" class="item item-color" onlongpress="listItemLongPress" onclick="listItemClick"
+                for="{{listData}}">
+                <text onclick="textClick" class="txt">{{$item}}--{{$idx}}</text>
+            </list-item>
+
+            <!-- Loading More  -->
+            <list-item type="loadMore" class="load-more" if="{{loadMore}}">
+                <progress type="circular"></progress>
+                <text>{{$t('message.component.list.loadMore')}}</text>
+            </list-item>
+        </list>
+    </div>
+</template>
+<style>
+    @import "../../../common/css/common.css";
+
+    .list {
+        /* flex-direction: row-reverse; */
+        flex: 1;
+        padding-left: 60px;
+        padding-right: 60px;
+        columns: 4;
+        border-color: #ff0000;
+        border-width: 5px;
+    }
+
+    .item {
+        height: 150px;
+        align-items: flex-start;
+        margin-bottom: 15px;
+        border-color: #9400d3;
+        border-width: 5px;
+        margin-right: 20px;
+    }
+
+    .load-more {
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        border-color: #bbbbbb;
+        border-bottom-width: 1px;
+    }
+
+    .btn-wrap-column {
+        flex-direction: column;
+        margin-right: 60px;
+        margin-left: 60px;
+    }
+
+    .btn-wrap-row {
+        margin-right: 60px;
+        margin-left: 45px;
+        margin-bottom: 30px;
+    }
+
+    .btn-little {
+        flex: 1;
+        height: 80px;
+        margin-left: 15px;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 30px;
+        text-align: center;
+        background-color: #0faeff;
+    }
+
+    .item-color {
+        background-color: #f76160;
+    }
+
+    .nav {
+        padding-left: 60px;
+        padding-right: 60px;
+        padding-bottom: 30px;
+    }
+
+    .nav-item {
+        flex: 1;
+        padding-bottom: 30px;
+        border-bottom-width: 5px;
+        border-color: #fbf9fe;
+        font-size: 35px;
+        color: #666666;
+        text-align: center;
+    }
+
+    .selected {
+        border-color: #0faeff;
+    }
+</style>
+<script>
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'list',
+            loadMore: true,
+            listAdd: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+            listData: [],
+            scrollPage: false,
+            showListBtn: true,
+            listClass: 'selected',
+            arrayClass: '',
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'list' })
+            // Initialize list data
+            this.listData = [].concat(this.listAdd);
+        },
+        showListMethod: function () {
+            if (!this.showListBtn) {
+                this.showListBtn = true;
+                this.listClass = 'selected';
+                this.arrayClass = '';
+            }
+        },
+        showArrayMethod: function () {
+            if (this.showListBtn) {
+                this.showListBtn = false;
+                this.listClass = '';
+                this.arrayClass = 'selected';
+            }
+        },
+        scrollbottom: function () {
+            prompt.showToast({
+                message: this.$t('message.component.list.isBottom')
+            })
+            // Load next page
+            var that = this;
+            var renderData = [].concat(that.listData, that.listAdd);
+            setTimeout(function () {
+                that.listData = renderData;
+            }, 1000)
+        },
+        scrolltop: function () {
+            prompt.showToast({
+                message: this.$t('message.component.list.isTop')
+            })
+        },
+        scrollend: function () {
+            prompt.showToast({
+                message: this.$t('message.component.list.scrollStoped')
+
+            })
+            console.error(this.$t('message.component.list.scrollStoped'));
+        },
+        scrolltouchup: function () {
+            prompt.showToast({
+                message: this.$t('message.component.list.theFingerIsRaised')
+            })
+            console.error(this.$t('message.component.list.theFingerIsRaised'))
+        },
+
+        //滑动过程 中的监听
+        scroll: function (e) {
+            let msg = this.$t('message.component.list.sliding')+".scrollX:" + e.scrollX
+                + " .scrollY:" + e.scrollY
+                + " .scrollState:" + e.scrollState;
+            console.info(msg);
+        },
+        goIndex: function () {
+            this.$element('list').scrollTo({ index: 0, smooth: true })
+        },
+        scrollBy: function(){
+            console.log("list.scrollBy: left=200, behavior= smooth")
+            this.$element('list').scrollBy({left: 200,  behavior:"smooth"})
+        },
+        clickPush: function () {
+            this.listData.push('push');
+            prompt.showToast({
+                message: this.$t('message.component.list.addPush')
+            })
+        },
+        clickPop: function () {
+            prompt.showToast({
+                message: this.$t('message.component.list.deleteArrayLastElement') + JSON.stringify(this.listData.pop())
+            })
+        },
+        clickShift: function () {
+            prompt.showToast({
+                message: this.$t('message.component.list.deleteArrayFirstElement') + JSON.stringify(this.listData.shift())
+            })
+        },
+        clickUnshift: function () {
+            this.listData.unshift('unshift');
+            prompt.showToast({
+                message: this.$t('message.component.list.addUnshift')
+            })
+        },
+        clickSplice: function () {
+            prompt.showToast({
+                message: this.$t('message.component.list.deleteFirstElement') + JSON.stringify(this.listData.splice(0, 1, 'splice')[0]) + '，'+this.$t('message.component.list.addSpliceElement')
+            })
+        },
+        clickSort: function () {
+            this.listData.sort();
+            prompt.showToast({
+                message: 'sort'
+            })
+        },
+        clickReverse: function () {
+            this.listData.reverse();
+            prompt.showToast({
+                message: 'reverse'
+            })
+        },
+        listItemClick: function (e) {
+            e.stopPropagation();
+            console.info("List Item is clicked.");
+            prompt.showToast({
+                message: 'List Item is clicked.'
+            })
+        },
+        listClick: function (e) {
+            e.stopPropagation();
+            console.info("List is clicked.");
+            prompt.showToast({
+                message: 'List is clicked.'
+            })
+        },
+        textClick: function (e) {
+            e.stopPropagation();
+            console.info("Text is clicked.");
+            prompt.showToast({
+                message: 'Text is clicked.'
+            })
+        },
+        listLongPress: function (e) {
+            e.stopPropagation();
+            console.info("List is long pressed.");
+            prompt.showToast({
+                message: 'List is long pressed.'
+            })
+        },
+        listItemLongPress: function (e) {
+            e.stopPropagation();
+            console.info("List Item is long pressed.");
+            prompt.showToast({
+                message: 'List Item is long pressed.'
+            })
+        },
+    }
+</script>

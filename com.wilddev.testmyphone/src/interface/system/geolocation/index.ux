@@ -1,0 +1,213 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="item-container">
+                <div class="item-content">
+                    <text>{{$t('message.interface.system.geolocation.deviceInfo')}}</text>
+                    <text>{{deviceInfo}}</text>
+                    <text>{{$t('message.interface.system.geolocation.isHuawei')}}{{isHuawei}}</text>
+                </div>
+                <input type="button" class="btn" onclick="getDeviceInfo" value="{{$t('message.interface.system.geolocation.getDeviceInfo')}}" />
+            </div>
+
+
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.system.geolocation.getGeolocation')}}</text>
+                <text class="txt">latitude: {{geolocationGetData.latitude}}</text>
+                <text class="txt">longitude: {{geolocationGetData.longitude}}</text>
+                <text class="txt">altitude: {{geolocationGetData.altitude}}</text>
+                <text class="txt">accuracy: {{geolocationGetData.accuracy}}</text>
+                <text class="txt">heading: {{geolocationGetData.heading}}</text>
+                <text class="txt">speed: {{geolocationGetData.speed}}</text>
+                <text class="txt">time: {{geolocationGetData.time}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getGeolocation" value="{{$t('message.interface.system.geolocation.getGeolocationBtn')}}" />
+
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.system.geolocation.geolocation')}}</text>
+                <text class="txt">latitude: {{geolocationListenData.latitude}}</text>
+                <text class="txt">longitude: {{geolocationListenData.longitude}}</text>
+                <text class="txt">accuracy: {{geolocationListenData.accuracy}}</text>
+                <text class="txt">time: {{geolocationListenData.time}}</text>
+            </div>
+            <input type="button" class="btn" onclick="listenGeolocation" value="{{$t('message.interface.system.geolocation.listenGeolocation')}}" />
+            <input type="button" class="btn" onclick="cancelGeolocation" value="{{$t('message.interface.system.geolocation.cancelGeolocation')}}" />
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.system.geolocation.type')}}{{typeVaule}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getLocationType" value="{{$t('message.interface.system.geolocation.getLocationType')}}" />
+            <input type="button" class="btn" onclick="openLocation" value="openLocation" />
+            <input type="button" class="btn" onclick="chooseLocation" value="chooseLocation" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+        margin-bottom: 100px;
+        align-items: flex-start;
+    }
+</style>
+
+<script>
+    import geolocation from '@system.geolocation'
+    import device from '@system.device'
+    import prompt from '@system.prompt'
+    export default {
+        data: {
+            componentName: 'geolocation',
+            componentData: {},
+            deviceInfo: '',
+            isHuawei: false,
+            geolocationGetData: {
+                latitude: '',
+                longitude: '',
+                altitude: '',
+                accuracy: '',
+                heading: '',
+                speed: '',
+                time: ''
+            },
+            geolocationListenData: {
+                latitude: '',
+                longitude: '',
+                time: '',
+                accuracy: ''
+            },
+            typeVaule: ''
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'geolocation' })
+            this.componentData = this.$t('message.interface.system.geolocation');
+        },
+        getDeviceInfo: function () {
+            var that = this;
+            device.getInfo({
+                success: function (ret) {
+                    that.deviceInfo = JSON.stringify(ret);
+                    if (that.deviceInfo.indexOf("engineProvider") >= 0 && that.deviceInfo.indexOf("huawei") >= 0) {
+                        that.isHuawei = true;
+                    } else {
+                        that.isHuawei = false;
+                    }
+                },
+                fail: function (erromsg, errocode) {
+                    that.deviceInfo = errocode + ': ' + erromsg
+                }
+            })
+        },
+        getGeolocation: function () {
+            var that = this;
+            if (that.isHuawei) {
+                prompt.showToast({
+                    message: this.componentData.baiduMap
+                })
+                geolocation.getLocation({
+                    coordType: "gcj02",
+                    timeout: 2000,
+                    success: function (ret) {
+                        that.geolocationGetData = ret;
+                    },
+                    fail: function (erromsg, errocode) {
+                        console.log('geolocation.getLocation----------' + errocode + ': ' + erromsg)
+                    },
+                    complete: function () {
+                        console.log('geolocation complete----------')
+                    }
+                })
+            } else {
+                prompt.showToast({
+                    message: this.componentData.systemMap
+                })
+                geolocation.getLocation({
+                    timeout: 2000,
+                    success: function (ret) {
+                        that.geolocationGetData = ret;
+                    },
+                    fail: function (erromsg, errocode) {
+                        console.log('geolocation.getLocation----------' + errocode + ': ' + erromsg)
+                    },
+                    complete: function () {
+                        console.log('geolocation complete----------')
+                    }
+                })
+            }
+        },
+        listenGeolocation: function () {
+            var that = this;
+            geolocation.subscribe({
+                callback: function (ret) {
+                    that.geolocationListenData = ret;
+                },
+                fail: function (erromsg, errocode) {
+                    console.log('geolocation.subscribe----------' + errocode + ': ' + erromsg)
+                }
+            })
+        },
+        cancelGeolocation: function () {
+            geolocation.unsubscribe();
+        },
+
+        getLocationType: function () {
+            var that = this;
+            geolocation.getLocationType({
+                success: function (data) {
+                    that.typeVaule = data.types;
+                    console.log("ret - " + data.types)
+                }
+            })
+        },
+        openLocation: function(){
+            geolocation.openLocation({
+                latitude: 31.94830062319531,
+                longitude: 118.84177933970965,
+                coordType:"gcj02",
+                name: "Zhushan Road Metro Station",
+                address: "Zhushan Road Metro Station",
+                scale: 18,
+                success: function () {
+                    console.log('openLocation success .');
+                },
+                fail: function (erromsg, errocode) {
+                    console.log('geolocation.openLocation----------' + errocode + ': ' + erromsg)
+                },
+                complete: function () {
+                    console.log('openLocation complete.');
+                }
+            })
+        },
+        chooseLocation: function(){
+            console.log("chooseLocation");
+            geolocation.chooseLocation({
+                latitude: 31.948300696908,
+                longitude: 118.84177721902,
+                coordType:"gcj02",
+                success: function (data) {
+                    console.log('chooseLocation success £º ' + JSON.stringify(data));
+                },
+                fail: function (error) {
+                    console.log('chooseLocation fail : ' + error.message);
+                },
+                complete: function () {
+                    console.log('chooseLocation complete.');
+                }
+            })
+        }
+    }
+</script>

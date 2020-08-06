@@ -1,0 +1,182 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+    <div class="content">
+      <div class="item">
+        <text>{{$t('message.interface.system.brightness.screenBrightness')}}</text>
+        <input class="item-input" value="{{ScreenBrightness}}" placeholder="{{$t('message.interface.system.brightness.screenBrightness')}}" onchange="updateData('ScreenBrightness')"></input>
+      </div>
+      <input class="btn margin-50" type="button" value="{{$t('message.interface.system.brightness.setScreenBrightness')}}" onclick="insertScreenBrightness"></input>
+      <input class="btn margin-50" type="button" value="{{$t('message.interface.system.brightness.getScreenBrightness')}}" onclick="getScreenBrightness"></input>
+      <div class="item">
+        <text>{{$t('message.interface.system.brightness.screenMode')}}</text>
+        <input class="item-input" value="{{description}}" placeholder="{{$t('message.interface.system.brightness.screenMode')}}" onchange="updateData('ScreenMode')"></input>
+      </div>
+      <input class="btn margin-50" type="button" value="{{$t('message.interface.system.brightness.setScreenMode')}}" onclick="insertBrightnessMode"></input>
+      <input class="btn margin-50" type="button" value="{{$t('message.interface.system.brightness.getScreenMode')}}" onclick="getBrightnessMode"></input>
+      <div class="item">
+        <text>{{$t('message.interface.system.brightness.keyScreenBrightness')}}</text>
+      </div>
+      <input class="btn margin-50" type="button" value="{{$t('message.interface.system.brightness.setScreenOn')}}" onclick="activeKeepScreenOn"></input>
+      <input class="btn margin-50" type="button" value="{{$t('message.interface.system.brightness.notSetScreenOn')}}" onclick="cancelKeepScreenOn"></input>
+    </div>
+  </div>
+</template>
+<style>
+  @import "../../../common/css/common.css";
+
+  .content {
+    flex-direction: column;
+    padding: 0px 30px 30px 30px;
+  }
+
+  .item {
+    height: 100px;
+    border-bottom-width: 1px;
+    border-bottom-color: #cccccc;
+  }
+
+  .item-input {
+    flex: 1;
+    margin-left: 10px;
+    font-size: 30px;
+  }
+
+  .margin-50 {
+    margin-top: 50px;
+  }
+</style>
+<script>
+  import brightness from '@system.brightness'
+  import prompt from '@system.prompt'
+
+  export default {
+    data: {
+      componentName: 'screenBrightness',
+      componentData: {},
+      ScreenBrightness: '',
+      ScreenMode: ''
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: 'screenBrightness' })
+      this.componentData = this.$t('message.interface.system.brightness');
+    },
+    updateData(name, e) {
+      this[name] = e.text
+    },
+    insertScreenBrightness: function () {
+      var that = this;
+      if (that.ScreenBrightness) {
+        brightness.setValue({
+          value: Number(that.ScreenBrightness),
+          success: function (ret) {
+            prompt.showToast({
+              message: that.componentData.setSuccess
+            })
+          },
+          fail: function (erromsg, errocode) {
+            prompt.showToast({
+              message: that.componentData.setFailed
+            })
+          }
+        })
+      } else {
+        prompt.showToast({
+          message: that.componentData.notSetScreenBrightness
+        })
+      }
+    },
+    getScreenBrightness: function () {
+      let that=this;
+      brightness.getValue({
+        success: function (res) {
+          prompt.showToast({
+            message: that.componentData.getSuccess + res.value
+          })
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({
+            message: that.componentData.getFailed
+          })
+        }
+      })
+    },
+    insertBrightnessMode: function () {
+      var that = this;
+      if (that.ScreenMode) {
+        brightness.setMode({
+          mode: that.ScreenMode,
+          success: function (ret) {
+            prompt.showToast({
+              message: that.componentData.setSuccess
+            })
+          },
+          fail: function (erromsg, errocode) {
+            prompt.showToast({
+              message: that.componentData.setFailed
+            })
+          }
+        })
+      } else {
+        prompt.showToast({
+          message: that.componentData.notSetScreenMode
+        })
+      }
+    },
+    getBrightnessMode: function () {
+      let that=this;
+      brightness.getMode({
+        success: function (res) {
+          prompt.showToast({
+            message: that.componentData.getSuccess+ res.mode
+          })
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({
+            message: that.componentData.getFailed
+          })
+        }
+      })
+    },
+    activeKeepScreenOn: function () {
+      brightness.setKeepScreenOn({
+        keepScreenOn: true,
+        success: () => {
+          prompt.showToast({
+            message: this.$t('message.interface.system.brightness.setScreenOnSuccessful'),
+            duration: 2000,
+            gravity: 'center'
+          })
+        },
+        fail: (message, code) => {
+          prompt.showToast({
+            message: this.$t('message.interface.system.brightness.setScreenOnFails') + `, code = ${code}, message = ${message}`,
+            duration: 2000,
+            gravity: 'center'
+          })
+        }
+      })
+    },
+    cancelKeepScreenOn: function () {
+      brightness.setKeepScreenOn({
+        keepScreenOn: false,
+        success: () => {
+          prompt.showToast({
+            message: this.$t('message.interface.system.brightness.notSetScreenOnSuccessful'),
+            duration: 2000,
+            gravity: 'center'
+          })
+        },
+        fail: (code, message) => {
+          prompt.showToast({
+            message: this.$t('message.interface.system.brightness.notSetScreenOnFails') + `, code = ${code}, message = ${message}`,
+            duration: 2000,
+            gravity: 'center'
+          })
+        }
+      })
+    }
+  }
+</script>

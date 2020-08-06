@@ -1,0 +1,148 @@
+<template>
+  <div class="photo-selector-wrapper {{aniOpClass}}" onclick="hide">
+    <div class="photo-selector-container {{aniTrClass}}">
+      <div class="photo-selector-btn" onclick="takePhoto">
+        <text class="photo-selector-text">{{componentData.takePhoto}}</text>
+      </div>
+      <div class="first-divider"></div>
+      <div class="photo-selector-btn" onclick="pickPhoto">
+        <text class="photo-selector-text">{{componentData.selectPhoto}}</text>
+      </div>
+      <div class="second-divider"></div>
+      <div class="photo-selector-btn" onclick="hide">
+        <text class="photo-selector-text">{{componentData.cancel}}</text>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  .photo-selector-wrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+  }
+
+  .photo-selector-container {
+    width: 100%;
+    height: 311px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    flex-direction: column;
+    transform: translateY(311px);
+  }
+
+  .show-opacity-ani {
+    animation-name: opacityAni;
+    animation-duration: 300ms;
+  }
+
+  @keyframes opacityAni {
+    from {
+      opacity: 0;
+    }
+    to {
+    }
+  }
+
+  .show-transform-ani {
+    transform: translateY(0);
+    animation-name: transformAni;
+    animation-duration: 300ms;
+  }
+
+  @keyframes transformAni {
+    from {
+      transform: translateY(311px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .photo-selector-btn {
+    width: 100%;
+    height: 100px;
+    background-color: #ffffff;
+    justify-content: center;
+  }
+
+  .first-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #d9d9d9;
+  }
+
+  .second-divider {
+    width: 100%;
+    height: 10px;
+    background-color: #e8e8e8;
+  }
+
+  .photo-selector-text {
+    color: rgba(0, 0, 0, 0.85);
+  }
+</style>
+<script>
+  import media from '@system.media';
+  import prompt from '@system.prompt';
+
+  export default {
+    data: {
+      componentData: {},
+      aniOpClass: '',
+      aniTrClass: '',
+    },
+    onInit: function () {
+      this.componentData = this.$t('message.interface.ai.common.photoSelector');
+    },
+    hide() {
+      this.$emit('hide')
+    },
+    takePhoto() {
+      media.takePhoto({
+        success: (ret) => {
+          this.$dispatch('getPhotoUri', ret.uri);
+        },
+        fail: (erromsg, errocode) => {
+          prompt.showToast({ message: "takePhoto fail " + errocode + ': ' + erromsg });
+          console.log('media.takePhoto ' + errocode + ': ' + erromsg);
+        },
+        cancel: () => {
+          console.log('media.takePhoto cancel');
+        },
+        complete: () => {
+          console.log('media.takePhoto complete');
+        }
+      })
+      this.hide()
+    },
+    pickPhoto() {
+      media.pickImage({
+        success: (ret) => {
+          this.$dispatch('getPhotoUri', ret.uri);
+        },
+        fail: (erromsg, errocode) => {
+          prompt.showToast({ message: "pickImage fail " + errocode + ': ' + erromsg });
+          console.log('media.pickImage ' + errocode + ': ' + erromsg);
+        },
+        cancel: () => {
+          console.log('media.pickImage cancel');
+        },
+        complete: () => {
+          console.log('media.pickImage complete');
+        }
+      })
+      this.hide()
+    },
+    onReady() {
+      this.aniOpClass = 'show-opacity-ani';
+      this.aniTrClass = 'show-transform-ani';
+    }
+  }
+</script>

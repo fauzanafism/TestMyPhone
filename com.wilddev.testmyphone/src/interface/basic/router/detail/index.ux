@@ -1,0 +1,39 @@
+<template>
+    <div class="page-title">
+        <text>{{privateData}}</text>
+        <text>{{protectedData}}</text>
+        <text>{{publicData}}</text>
+		<text>{{uri}}</text>
+    </div>
+</template>
+
+<style>
+    .page-title {
+        flex-direction: column;
+    }
+
+    text {
+        flex: 1;
+        font-size: 35px;
+        text-align: center;
+    }
+</style>
+
+<script>
+  export default {
+    private: {
+      privateData: 'privateData',
+	  uri:"not get"
+    },
+    protected: {
+      protectedData: 'protectedData' 
+    },
+    public: {
+      publicData: 'publicData'
+    },
+    onInit() {
+      this.$page.setTitleBar({text: 'detail'});
+	  this.uri = this.$page.uri
+    }
+  }
+</script>

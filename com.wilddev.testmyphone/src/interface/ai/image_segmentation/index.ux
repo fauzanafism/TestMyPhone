@@ -1,0 +1,165 @@
+<import name="image-container" src="../Common/ImageContainer.ux"></import>
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="photo-selector" src="../Common/PhotoSelector.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <image-container photo-uri={{photoUri}} info="{{$t('message.interface.ai.image_segmentation.info')}}" score={{score}}></image-container>
+    <div class="result-container">
+      <div class="result-title" if="resultUri">
+        <text class="result-title-text">{{$t('message.interface.ai.image_segmentation.text')}}</text>
+      </div>
+      <image-container if="resultUri" photo-uri={{resultUri}}></image-container>
+    </div>
+    <main-btn onclick-main="openPhotoSelector" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.image_segmentation.btnText')}}" btn-text-err="{{$t('message.interface.ai.image_segmentation.btnTextErr')}}"
+      complete={{complete}} back-result={{backResult}} back-data={{backData}}></main-btn>
+    <photo-selector if="{{isPSshow}}" onhide="hidePhotoSelector"></photo-selector>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+
+  .result-container {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .result-title {
+    width: 100%;
+    height: 90px;
+    background-color: #ffffff;
+    justify-content: center;
+  }
+
+  .result-title-text {
+    color: #000000;
+    font-size: 28px;
+  }
+</style>
+
+<script>
+  import ai from '@system.ai';
+  import prompt from '@system.prompt';
+
+  export default {
+    data: {
+      componentData: {},
+      score: '',
+      resultUri: '',
+      photoUri: '../Common/images/compare1.jpg',
+      isPSshow: false,
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: '',
+      aiType: 0
+    },
+    openPhotoSelector() {
+      this.isPSshow = true
+    },
+    hidePhotoSelector() {
+      this.isPSshow = false
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openErrorUse(e) {
+      let a = e.detail.split(';')[0], b = e.detail.split(';')[1];
+      this.photoUri = this.changeMsg(a);
+      this.aiType = this.changeMsg(b, true);
+      this.test();
+    },
+    getPhotoUri(obj) {
+      this.photoUri = obj.detail;
+      this.isLoadingShow = true;
+      this.test();
+    },
+    test() {
+      this.score = '';
+      this.complete = '';
+      let uri = this.photoUri;
+      console.log(uri);
+      console.log('type: ' + this.aiType);
+      let self = this;
+      ai.imageSegmentation({
+        uri: uri,
+        type: self.aiType,
+        success: (res) => {
+          setTimeout(() => {
+            self.score = res.uri;
+            self.resultUri = res.uri;
+            self.isLoadingShow = false;
+          }, 1000)
+          self.backResult = 'success';
+          self.backData = JSON.stringify(res);
+        },
+        fail: (erromsg, errocode) => {
+          setTimeout(() => {
+            prompt.showToast({ message: self.componentData.error });
+            self.isLoadingShow = false;
+          }, 1000)
+          self.backResult = 'fail';
+          self.backData = 'code:' + errocode + ' msg:' + erromsg;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.image_segmentation');
+      this.$page.setTitleBar({ text: this.componentData.title });
+      this.$on('getPhotoUri', this.getPhotoUri);
+      this.isLoadingShow = true;
+    },
+    onReady() {
+      this.test()
+    }
+  }
+</script>

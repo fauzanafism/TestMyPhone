@@ -1,0 +1,61 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div style="flex-direction: column;  align-items: center;">
+            <text>{{$t('message.style.linearGradient.gradient1')}}</text>
+            <div class="gradient gradient1"></div>
+            <text>{{$t('message.style.linearGradient.gradient2')}}</text>
+            <div class="gradient gradient2"></div>
+            <text>{{$t('message.style.linearGradient.gradient3')}}</text>
+            <div class="gradient gradient3"></div>
+            <text>{{$t('message.style.linearGradient.gradient4')}}</text>
+            <div class="gradient gradient4"></div>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .normal-text {
+        font-weight: bold;
+        font-size: 40px;
+        margin-bottom: 60px;
+    }
+
+    .gradient {
+        height: 100px;
+        width: 200px;
+    }
+
+    .gradient1 {
+        background: linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255));
+    }
+
+    .gradient2 {
+        background: linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 0, 255));
+    }
+
+    .gradient3 {
+        background: linear-gradient(to right, rgb(255, 0, 0) 90px, rgb(0, 0, 255) 60%);
+    }
+
+    .gradient4 {
+        background: repeating-linear-gradient(to right, rgba(255, 0, 0, 0.5) 10px, rgba(0, 0, 255, 0.5) 20px);
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'styleLinearGradient',
+            className: 'text-blue',
+            textColor: '#0faeff'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'styleLinearGradient' })
+        }
+    }
+</script>

@@ -1,0 +1,23 @@
+<template>
+    <div>
+        <text>{{ header }}</text>
+        <slot name="header"></slot>
+        <slot></slot>
+        <slot name="toggleDefault">
+            <text>{{$t('message.directive.slot.slotDefault')}}</text>
+        </slot>
+        <slot name="footer"></slot>
+        <text>{{ footer }}</text>
+    </div>
+</template>
+
+<style>
+</style>
+
+<script>
+    export default {
+        props: [
+            'header', 'footer'
+        ]
+    }
+</script>

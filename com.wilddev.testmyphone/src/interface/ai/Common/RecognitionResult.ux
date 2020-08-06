@@ -1,0 +1,100 @@
+<template>
+  <div>
+    <div class="result-container" if="items.length !== 0">
+      <div class="result-title">
+        <text class="result-title-text">{{componentData.title}}</text>
+      </div>
+      <div class="result-content-wrapper">
+        <div class="result-content" for="item in items">
+          <div class="result-name">
+            <text class="result-name-text">{{item.name}}</text>
+          </div>
+          <div class="result-progress-wrapper">
+            <div class="result-progress" style="width: {{item.percent}}"></div>
+          </div>
+          <div class="result-percent">
+            <text class="result-percent-text">{{item.percent}}</text>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+  .result-container {
+    width: 100%;
+    background-color: #ffffff;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .result-title {
+    width: 100%;
+    height: 90px;
+    justify-content: center;
+  }
+
+  .result-title-text {
+    color: #000000;
+    font-size: 28px;
+  }
+
+  .result-content-wrapper {
+    width: 94%;
+    border-width: 1px;
+    border-color: #d6e4ff;
+    flex-wrap: wrap;
+    padding-left: 25px;
+    padding-top: 30px;
+  }
+
+  .result-content {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .result-name {
+    width: 17%;
+    align-items: center;
+  }
+
+  .result-progress-wrapper {
+    width: 78%;
+    height: 25px;
+    background-color: #e8e8e8;
+  }
+
+  .result-progress {
+    width: 5%;
+    height: 100%;
+    background-color: #389e0d;
+  }
+
+  .result-percent {
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+  }
+
+  .result-name-text,
+  .result-percent-text {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+</style>
+
+<script>
+  export default {
+    props: ['items'],
+    data: {
+      componentData: {}
+    },
+    onInit: function () {
+      this.componentData = this.$t('message.interface.ai.common.recognitionResult');
+    },
+  }
+</script>

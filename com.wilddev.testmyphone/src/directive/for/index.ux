@@ -1,0 +1,51 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="tutorial-page">
+
+            <!-- Method 1: The default $item represents an element in the array, and $idx represents an index in the array. -->
+            <div class="tutorial-row" for="{{list}}">
+                <text>{{$idx}}.{{$item.name}}</text>
+            </div>
+
+            <!-- Method 2: Custom element variable name -->
+            <div class="tutorial-row" for="value in list">
+                <text>{{$idx}}.{{value.name}}</text>
+            </div>
+
+            <!-- Method 3: Custom element, index variable name -->
+            <div class="tutorial-row" for="(personIndex, personItem) in list">
+                <text>{{personIndex}}.{{personItem.name}}</text>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import '../../common/css/common.css';
+
+    .tutorial-page {
+        flex-direction: column;
+    }
+
+    .tutorial-row {
+        width: 85%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 60px;
+    }
+</style>
+
+<script>
+    export default {
+        onInit() {
+            this.$page.setTitleBar({text: 'for'})
+        },
+        data: {
+            componentName: 'for',
+            list: [{name: 'data1'}, {name: 'data2'}]
+        }
+    }
+</script>

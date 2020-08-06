@@ -1,0 +1,63 @@
+<import name="part1" src="./compA"></import>
+<import name="part2" src="./compB"></import>
+<import name="part3" src="./compC"></import>
+
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="tutorial-page">
+            <div class="item-content">
+                <component is="{{who}}"></component>
+            </div>
+            <input type="button" class="btnComponent" onclick="onchangeComponent" value="{{ $t('message.directive.component.inputValue') }}"/>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import '../../common/css/common.css';
+
+    .tutorial-page {
+        flex-direction: column;
+    }
+
+    .btnComponent {
+        height: 80px;
+        text-align: center;
+        border-radius: 5px;
+        margin-right: 60px;
+        margin-top: 60px;
+        margin-left: 60px;
+        margin-bottom: 50px;
+        color: #ffffff;
+        font-size: 30px;
+        background-color: #0faeff;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+        align-items: center;
+    }
+</style>
+
+<script>
+  export default {
+    data: {
+      componentName: 'Component dynamic component',  
+      who:'part1'
+    },
+    onchangeComponent() {
+      if (this.who === 'part1') {
+          this.who = 'part2';
+      } else if (this.who === 'part2') {
+          this.who = 'part3';
+      } else {
+          this.who = 'part1';
+      }
+    }
+  }
+</script>

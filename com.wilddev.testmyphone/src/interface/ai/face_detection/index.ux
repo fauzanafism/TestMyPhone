@@ -1,0 +1,190 @@
+<import name="image-container" src="../Common/ImageContainer.ux"></import>
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="photo-selector" src="../Common/PhotoSelector.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <image-container photo-uri={{photoUri}}></image-container>
+    <main-btn onclick-main="openPhotoSelector" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.face_detection.btnText')}}" btn-text-err="{{$t('message.interface.ai.face_detection.btnTextErr')}}"
+      complete={{complete}} back-result={{backResult}} back-data={{backData}}></main-btn>
+    <div if="{{result !== ''}}">
+      <div class="face-rect" for="face in result" style="left:{{face.left}};top:{{face.top}};width:{{face.width}};height:{{face.height}};">
+      </div>
+    </div>
+    <photo-selector if="{{isPSshow}}" onhide="hidePhotoSelector"></photo-selector>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+
+  .face-rect {
+    position: fixed;
+    border-color: #52c41a;
+    border-width: 1px;
+    border: solid;
+  }
+</style>
+
+<script>
+  import prompt from '@system.prompt';
+  import ai from '@system.ai';
+
+  export default {
+    data: {
+      componentData: {},
+      photoUri: '../Common/images/face_detect.jpg',
+      isPSshow: false,
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: '',
+      result: '',
+      res: []
+    },
+    openPhotoSelector() {
+      this.isPSshow = true
+    },
+    hidePhotoSelector() {
+      this.isPSshow = false
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openErrorUse(e) {
+      let sliceUri = e.detail.split(';')[0];
+      sliceUri = this.changeMsg(sliceUri);
+      this.photoUri = sliceUri;
+      this.test();
+    },
+    test() {
+      this.result = '';
+      this.complete = '';
+      let uri = this.photoUri;
+      console.log('start test, uri: ' + uri);
+
+      let self = this;
+
+      ai.detectFace({
+        uri: uri,
+        success: (res) => {
+          setTimeout(() => {
+            self.isLoadingShow = false;
+            if (res.faces.length > 0) {
+              try {
+                self.result = self.formatResult(res);
+              } catch (e) {
+                console.log(e);
+              }
+            } else {
+              prompt.showToast({ message: self.componentData.checkNoFace });
+            }
+          }, 1000)
+          self.backResult = 'success';
+          self.backData = JSON.stringify(res);
+        },
+        fail: (erromsg, errocode) => {
+          setTimeout(() => {
+            self.isLoadingShow = false;
+            prompt.showToast({ message: this.componentData.error });
+          }, 1000)
+          console.log('test detectFace error: ' + errocode + ': ' + erromsg);
+          self.backResult = 'fail';
+          self.backData = 'code:' + errocode + ' msg:' + erromsg;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    formatResult(result) {
+      let resultArr = [];
+      let scale = 1;
+      let centerPos = { x: 375, y: 250 };//图片中心点坐标
+      let wrapperWidth = 720;//图片容器宽度
+      let wrapperHeight = 450;//图片容器高度
+      let wrapperRatio = 1.6;//wrapperWidth / wrapperHeight
+      let imageWidth = result.imageWidth;
+      let imageHeight = result.imageHeight;
+      let imageRatio = imageWidth / imageHeight;
+      if (imageRatio > wrapperRatio) {
+        scale = wrapperWidth / imageWidth;
+        imageHeight = imageHeight * scale;
+        imageWidth = wrapperWidth;
+      } else {
+        scale = wrapperHeight / imageHeight;
+        imageWidth = imageWidth * scale;
+        imageHeight = wrapperHeight;
+      }
+      for (let face of result.faces) {
+        let rect = face.faceRect;
+        resultArr.push({
+          width: (rect.width * scale).toFixed(0) + 'px',
+          height: (rect.height * scale).toFixed(0) + 'px',
+          left: (centerPos.x - imageWidth / 2 + rect.left * scale).toFixed(0) + 'px',
+          top: (centerPos.y - imageHeight / 2 + rect.top * scale).toFixed(0) + 'px'
+        })
+      }
+      return resultArr;
+    },
+    getPhotoUri(obj) {
+      this.photoUri = obj.detail;
+      this.isLoadingShow = true;
+      this.test();
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.face_detection');
+      this.$page.setTitleBar({ text: this.componentData.title });
+      this.$on('getPhotoUri', this.getPhotoUri);
+      this.isLoadingShow = true;
+    },
+    onReady() {
+      this.test()
+    }
+  }
+</script>

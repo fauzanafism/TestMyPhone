@@ -1,0 +1,68 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="label-item">
+      <label>{{$t('message.component.label.label')}}</label>
+    </div>
+
+    <div class="label-item">
+      <label target="input1">input:</label>
+      <input class="flex" id="input1" placeholder="{{$t('message.component.label.pleaseEnter')}}" />
+    </div>
+
+    <div class="label-item">
+      <label target="textarea1">textarea:</label>
+      <textarea class="flex textareaPadding" id="textarea1" placeholder="textarea..."></textarea>
+    </div>
+
+    <div class="label-item">
+      <label target="radio1">radio:</label>
+      <input type="radio" id="radio1" style="width: 60px;" />
+    </div>
+
+    <div class="label-item">
+      <label target="checkbox1">checkbox:</label>
+      <input class="flex" type="checkbox" id="checkbox1" style="width: 60px;" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .label-item {
+    align-items: center;
+    border-bottom-width: 1px;
+    border-color: #dddddd;
+  }
+
+  label {
+    padding: 30px;
+    font-size: 35px;
+    width: 250px;
+  }
+
+  .flex {
+    flex: 1;
+  }
+
+  .textareaPadding {
+    padding-top: 20px;
+  }
+</style>
+
+<script>
+
+  export default {
+    data: {
+      componentName: 'label',
+      input_value: ''
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: 'label' });
+    }
+  }
+</script>

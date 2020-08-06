@@ -1,0 +1,99 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+      <div class="item-content">
+        <text class="txt" if="{{show}}">{{clipboard}}</text>
+      </div>
+
+      <div class="item-content txt-left">
+        <text class="txt">{{$t('message.interface.system.clipboard.setClipboard')}}：{{showSet}}</text>
+        <text class="txt">{{$t('message.interface.system.clipboard.getClipboard')}}：{{showGet}}</text>
+      </div>
+      <input type="button" class="btn" onclick="set" value="{{$t('message.interface.system.clipboard.setClipboard')}}" />
+      <input type="button" class="btn" onclick="get" value="{{$t('message.interface.system.clipboard.getClipboard')}}" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .item-container {
+    margin-bottom: 50px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+
+  .item-content {
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 30px;
+    margin-bottom: 50px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .txt {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .txt-left {
+    align-items: flex-start;
+  }
+</style>
+
+<script>
+  import clipboard from '@system.clipboard'
+
+  export default {
+    data: {
+      componentName: 'clipboard',
+      componentData: {},
+      show: true,
+      clipboard: '',
+      showSet: '',
+      showGet: ''
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: 'clipboard' })
+      this.componentData = this.$t('message.interface.system.clipboard');
+      this.clipboard=this.componentData.clipboard;
+    },
+    set: function () {
+      this.showSet = this.clipboard;
+      clipboard.set({
+        text: this.clipboard,
+        success: function () {
+          console.info('set success--- ')
+        },
+        fail: function () {
+          console.info('set fail--- ')
+        },
+        complete: function () {
+          console.info('set complete  ')
+        }
+      });
+    },
+    get: function () {
+      var that = this;
+      clipboard.get({
+        success: function (obj) {
+          that.showGet = obj.text;
+        },
+        fail: function () {
+          console.info('get fail--- ')
+        },
+        complete: function () {
+          console.info('get complete  ')
+        }
+      });
+    }
+
+  }
+</script>

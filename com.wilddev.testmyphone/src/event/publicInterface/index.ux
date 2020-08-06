@@ -1,0 +1,94 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="input-item">
+            <input type="button" class="btn" id="getdom" value="{{$t('message.event.publicInterface.getDom')}}" @click="btnGetDom"></input>
+            <input class="btn" type="button" value="getdata" @click="btnGetdata"></input>
+            <input class="btn" type="button" value="deleteData" @click="btnDeleteData"></input>
+            <input class="btn" type="button" value="getScreenOrientation" @click="getScreenOrientation"></input>
+            <input class="btn" type="button" value="getViewId" @click="getViewId"></input>
+            <div class="tutorial-panel">
+                <text for="lcList">{{$idx}}:{{$item}}</text>
+            </div>
+            <text class="text">{{screenOrientation}}</text>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .input-item {
+        margin-bottom: 80px;
+        flex-direction: column;
+    }
+
+    text {
+        font-size: 30px;
+    }
+
+    .tutorial-panel {
+        flex-direction: column;
+        flex-grow: 1;
+        font-size: 15px;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    export default {
+        data: {
+            showVar: true,
+            componentName: 'publicInterface',
+            lcList: [],
+            screenOrientation: ''
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'publicInterface' });
+            this.$set('setdata', 'value')
+        },
+        btnGetDom() {
+            this.lcList.push('btn click')
+            console.info('btn click')
+
+            this.lcList.push('this.$element(getdom)==========' + this.$element("getdom"))
+            console.info('this.$element(getdom)==========' + this.$element("getdom"))
+
+            this.lcList.push('this.$element()==========' + this.$element())
+            console.info('this.$element()==========' + this.$element())
+
+            this.lcList.push('this.$rootElement()==========' + this.$rootElement())
+            console.info('this.$rootElement()==========' + this.$rootElement())
+
+            this.lcList.push('this.$app==========' + this.$app.$data.globalData)
+            console.info('this.$app==========' + this.$app.$data.globalData)
+        },
+        btnDeleteData() {
+            this.$delete('setdata')
+        },
+        btnGetdata() {
+            this.lcList.push('setdata===' + this.setdata)
+        },
+        getScreenOrientation() {
+            this.screenOrientation = "screenOrientation :" + this.$page.orientation
+            console.log("getScreenOrientation");
+        },
+        getViewId() {
+            let showData = []
+            showData.push('this.$element("getdom").getViewId()·µ»Ø£º' + this.$element('getdom').getViewId())
+            showData.push('this.$element()·µ»Ø£º' + this.$element().getViewId())
+            showData.push('this.$rootElement()·µ»Ø£º' + this.$rootElement().getViewId())
+            prompt.showContextMenu({
+                itemList: showData,
+                success: function (data) {
+                    console.log("handling callback");
+                },
+                cancel: function () {
+                    console.log("user cancel");
+                }
+            })
+        }
+    }
+</script>

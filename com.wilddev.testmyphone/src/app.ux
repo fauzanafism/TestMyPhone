@@ -1,0 +1,49 @@
+<script>
+    import utils from './Common/utils.js'
+    import configuration from '@system.configuration';
+    const injectRef = Object.getPrototypeOf(global) || global;
+    // injection regeneratorRuntime
+    injectRef.regeneratorRuntime = require('@babel/runtime/regenerator');
+
+    module.exports = {
+        onCreate() {
+            console.info('Application onCreate');
+        },
+        onRequest() {
+            console.info('Application onRequest');
+        },
+        onShow() {
+            console.info('Application onShow');
+        },
+        onHide() {
+            console.info('Application onHide');
+        },
+        onDestroy() {
+            console.info('Application onDestroy');
+        },
+
+        onError(error) {
+            console.info('Application onError')
+            console.info('Application error message :' + error.message);
+            console.info('Application error stack : ' + error.stack);
+        },
+
+        // Exposed to all pages, accessed in the page by: this.$app.$def.method1
+        methodApp() {
+            console.info('This is App method')
+        },
+        // Exposed to all pages, accessed in the page via: this.$app.$def.data1
+        dataApp: {
+            name: 'this is APP data'
+        },
+        commonutils: utils,
+        /**manifest**/
+
+        // get language
+        getConfigurationLanguage: function () {
+            var locale = configuration.getLocale();
+            console.info("===locale.language===", locale.language);
+            return locale.language;
+        }
+    }
+</script>

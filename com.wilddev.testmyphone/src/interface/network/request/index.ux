@@ -1,0 +1,131 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.network.request.downloadFile')}}：{{fileDownloadData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="downloadFile" value="{{$t('message.interface.network.request.downloadFile')}}" />
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.network.request.downloadFileStatus')}}：{{fileDownloadUri}}</text>
+            </div>
+            <input type="button" class="btn" onclick="downloadFileComplete" value="{{$t('message.interface.network.request.downloadFileStatus')}}" />
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.network.request.uploadFile')}}：{{fileUploadData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="uploadFile" value="{{$t('message.interface.network.request.uploadFile')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+    }
+
+    .txt {
+        lines: 5;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+
+<script>
+    import request from '@system.request'
+    import prompt from '@system.prompt'
+    export default {
+        data: {
+            componentName: 'request',
+            componentData: {},
+            fileDownloadData: '',
+            fileUploadData: '',
+            fileDownloadUri: ""
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'requst' })
+            this.componentData = this.$t('message.interface.network.request');
+        },
+        downloadFile: function () {
+            var that = this;
+            // 下载文件，存储在本地
+            request.download({
+                url: 'http://www.huawei.com/Assets/CBG/img/logo.png',
+                description: 'This is description.',
+                filename: 'HuaweiLogo.png',
+                success: function (ret) {
+                    that.fileDownloadData = ret.token;
+                    console.log('file_downlaod_data--------' + JSON.stringify(ret.token));
+                    prompt.showToast({
+                        message: 'file_downlaod_data--------' + JSON.stringify(ret.token)
+                    })
+                },
+                fail: function (errmsg, errcode) {
+                    prompt.showToast({
+                        message: this.componentData.downloadFailed + errcode + ': ' + errmsg
+                    })
+
+                }
+            })
+        },
+        downloadFileComplete: function () {
+            var that = this;
+            // Download file, stored locally
+            console.log('下载文件');
+            request.onDownloadComplete({
+
+                token: that.fileDownloadData,
+
+                success: function (ret) {
+                    that.fileDownloadUri = ret.uri;
+                    console.log('fileDownloadUri--------' + JSON.stringify(ret.uri));
+                    prompt.showToast({
+                        message: 'fileDownloadUri--------' + JSON.stringify(ret.uri)
+                    })
+                },
+                fail: function (errmsg, errcode) {
+                    prompt.showToast({
+                        message: this.componentData.downloadFailed + errcode + ': ' + errmsg
+                    })
+                }
+            })
+        },
+        uploadFile() {
+            var that = this;
+            // Upload the downloaded local file. Where data is the requested parameter and files is the list of files to be uploaded.
+            request.upload({
+                url: "http://117.78.33.207:48080/uploadDemo/api/uploadFile",
+                header: { "Accept-Encoding": "gzip, deflate", "Accept-Language": "zh-CN,en-US;q=0.8,en;q=0.6" },
+                files: [
+                    {
+                        uri: that.fileDownloadUri,
+                        name: "component_test.png",
+                        type: "multipart/form-data"
+                    }
+                ],
+                success: function (ret) {
+                    console.log("===success===");
+                    that.fileUploadData = ret.data;
+                }
+            })
+        }
+    }
+</script>

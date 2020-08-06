@@ -1,0 +1,205 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="swiper-container">
+                <swiper class="swiper" vertical = "{{vertical}}" id="swiper" autoplay="{{autoPlay}}" interval="{{sliderValue}}" indicator="{{indicator}}" loop="{{isLoop}}"
+                    onchange="change" @click="swiperClick"
+                    duration = "{{sliderValueForDuration}}"
+                      style="height:{{heightSwiper}};;indicator-top:70px ;indicator-left:{{MarginLeft}};indicator-size:{{iSize}}">
+                    <text class="item color-1">A</text>
+                    <text class="item color-2">B</text>
+                    <text class="item color-3">C</text>
+                    <text class="item color-4">D</text>
+                    <text class="item color-5">E</text>
+                    <text class="item color-6">F</text>
+                </swiper>
+            </div>
+        </div>
+        <div class="item-container">
+            <div>
+                <text class="item-content_title">{{$t('message.component.swiper.indicator')}}</text>
+                <switch class="switch" checked="true" onchange="showIndicator"></switch>
+            </div>
+            <div>
+                <text class="item-content_title">{{$t('message.component.swiper.autoPlay')}}</text>
+                <switch class="switch" onchange="startAutoPlay"></switch>
+            </div>
+            <div>
+                <text class="item-content_title">{{$t('message.component.swiper.loopChange')}}</text>
+                <switch class="switch" checked="true" onchange="onLoopChanged"></switch>
+            </div>
+            <div>
+                <text class="item-content_title">{{$t('message.component.swiper.vertical')}}</text>
+                <switch class="switch" checked="true" onchange="onVerticalChanged"></switch>
+            </div>
+        </div>
+        <div class="item-container">
+            <div>
+                <text class="item-content_title">{{$t('message.component.swiper.autoPlayInterval')}}</text>
+                <text class="item_left">{{sliderValue}}</text>
+            </div>
+            <slider class="slider" min="1000" max="3000" onchange="setSliderValue"></slider>
+        </div>
+        <div class="item-container">
+            <div>
+                <text class="item-content_title">{{$t('message.component.swiper.animation')}}</text>
+                <text class="item_left">{{sliderValueForDuration}}</text>
+            </div>
+            <slider class="slider" min="0" max="1000"  onchange="sliderValueForDuration"></slider>
+        </div>
+
+        <div class="item-container">
+            <div>
+                <text class="item-content_title">MarginLeft(px)</text>
+                <text class="item_left">{{MarginLeft}}</text>
+            </div>
+            <slider class="slider" min="0" max="1000"  onchange="setMarginLeft"></slider>
+        </div>
+         <div class="item-container">
+            <div>
+                <text class="item-content_title">heightSwiper(px)</text>
+                <text class="item_left">{{heightSwiper}}</text>
+            </div>
+            <slider class="slider" min="250"  max="1000" onchange="setHeightSwiper"></slider>
+        </div>
+        
+        <div>
+            <input type="button" class="btn" value="{{$t('message.component.swiper.toSecondPage')}}" onclick="goIndex" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import '../../../common/css/common.css';
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .swiper-container {
+        flex-direction: column;
+    }
+
+    .swiper {
+        flex-direction: column;
+        indicator-color: #800080;
+        indicator-selected-color: #000000;
+        height: 250px;
+    }
+
+    .item-content_title {
+        flex: 1;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .item_left {
+        padding: 20px;
+    }
+
+    .switch {
+        height: 50px;
+        width: 320px;
+    }
+
+    .slider {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .item {
+        height: 250px;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .color-1 {
+        background-color: #09ba07;
+    }
+
+    .color-2 {
+        background-color: #f76160;
+    }
+
+    .color-3 {
+        background-color: #0faeff;
+    }
+    .color-4 {
+        background-color: #9acd32;
+    }
+    .color-5 {
+        background-color: #000000;
+    }
+    .color-6 {
+        background-color: #ffff00;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            heightSwiper:"250px",
+            componentName: 'swiper',
+            autoPlay: false,
+            indicator: true,
+            sliderValue: 1000,
+            sliderValueForDuration:300,
+            isLoop: true,
+            vertical:true,
+            MarginLeft:"0px",
+            iSize:"20px"
+
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'swiper' })
+        },
+        startAutoPlay: function (e) {
+            this.autoPlay = e.checked;
+        },
+        showIndicator: function (e) {
+            this.indicator = e.checked;
+        },
+        setSliderValue: function (e) {
+            this.sliderValue = e.progress;
+        },
+        onLoopChanged: function (e) {
+            this.isLoop = e.checked;
+        },
+        goIndex: function () {
+            this.$element('swiper').swipeTo({ index: 2 })
+        },
+        change: function (e) {
+
+            prompt.showToast({
+                message: this.$t('message.component.swiper.range') + e.index + this.$t('message.component.swiper.page')
+            })
+        },
+        swiperClick:function(e){
+          prompt.showToast({
+                message: 'Swiper click'
+            })
+        },
+        onVerticalChanged:function(e){
+            this.vertical = e.checked;
+        },
+        sliderValueForDuration :function(e){
+                this.sliderValueForDuration = e.progress;
+        },
+        setMarginLeft:function(e) {
+            this.MarginLeft = e.progress +"px";
+        },
+        setHeightSwiper:function(e) {
+            this.heightSwiper = e.progress +"px";
+        }
+    }
+</script>

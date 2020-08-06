@@ -1,0 +1,216 @@
+<template>
+    <div>
+        <map class="map lc2" id = 'mapid' latitude=39.906901 longitude=116.397972  showmylocation='true' includepoints={{tincludepoints}} groundoverlays={{tgroundlay}}
+        circles={{tcircles}} polylines={{tpolylines}} controls={{tcontrols}} polygons={{tpolygones}}
+        @loaded="loaded" @regionchange="regionchange" @tap="tap" @controltap="controltap"
+        @poitap="poitap"></map>
+    </div>
+</template>
+
+<style>
+    .d1 {
+        flex-direction: column;
+    }
+
+    .map {
+        background-color: #a9a9a9;
+        width: 750px;
+        height: 750px;
+    }
+
+    #mapid {
+
+    }
+
+    .lc1 {
+        mylocation:rgba(255, 0, 255, 0.5) rgba(255, 255, 0, 1) url(/common/logo.png)
+    }
+
+    .lc2 {
+        mylocation-fill-color:rgba(255, 0, 255, 0.5);
+        mylocation-stroke-color:rgba(255, 255, 0, 1);
+        mylocation-icon-path:url(/common/logo.png);
+
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+
+    module.exports = {
+        data: {
+            tcircles: [{ latitude: 39.906901, longitude: 116.397972, borderColor: '#ff0000', borderWidth: '15px',zIndex:20,
+                fillColor: '#EE7AE9', radius: 3500, strokeWidth: 15 }],
+            tincludepoints:[{latitude: 39.074112, longitude: 116.686649}],
+            tpolylines:[{
+                points:[{latitude:39.906901,longitude:116.397972,coordType:'gcj02'},
+                {latitude:39.074112,longitude:116.686649,coordType:'gcj02'}],
+                color:'#EE7AE9',dotted:true,width:'15px',
+                arrowLine:true,arrowIconPath:'/common/logo.png'
+            },
+            {
+                points:[{latitude:38.406665,longitude:116.995047,coordType:'gcj02'},
+                {latitude:38.206665,longitude:116.595047,coordType:'gcj02'}],
+                color:'#EE7AE9',dotted:true,width:'15px',
+                arrowLine:true,arrowIconPath:'/common/logo.png'
+            }],
+            tpolygones:[{
+                points:[{latitude:39.906901,longitude:116.397972,coordType:'gcj02'},
+                {latitude:39.506901,longitude:116.097972,coordType:'gcj02'},
+                {latitude:39.006901,longitude:115.597972,coordType:'gcj02'}],
+                strokeWidth:'5px',strokeColor:'red',fillColor:'yellow',zIndex:3
+            }],
+            tcontrols:[{id: 1,position: {left:'20px',top:'20px',width:'150px',height:'150px'},iconPath:'/common/logo.png',clickable:true},
+                {id: 2,position: {left:'20px',bottom:'20px',width:'150px',height:'150px'},iconPath:'/common/logo.png',clickable:true},
+                {id: 3,position: {right:'20px',top:'20px',width:'150px',height:'150px'},iconPath:'/common/logo.png',clickable:true},
+                {id: 4,position: {right:'20px',bottom:'20px',width:'150px',height:'150px'},iconPath:'/common/logo.png',clickable:true}],
+            tgroundlay: [{ 'id': 1, southWest: { latitude: 39.906901, longitude: 116.397972, coordType:'gcj02'},
+                northEast: { latitude: 39.776909, longitude: 116.596205, coordType:'gcj02'},
+                iconPath: '/common/logo.png', visible: true, zIndex: 3, opacity: 1}]
+        },
+        onInit() {
+        this.$page.setTitleBar({
+            text: 'mapbase',
+            textColor: '#ffffff',
+            backgroundColor: '#007DFF',
+            backgroundOpacity: 0.5,
+            menu: true
+        })
+        },
+        onMenuPress() {
+            var mapcom = this.$element('mapid')
+            prompt.showContextMenu({
+                itemList: ['getCenterLocation','translateMarker','moveToMyLocation','includePoints',
+                    'getRegion','getScale','getCoordType','convertCoord'],
+                success: function(data) {
+                    var index = data.index;
+                    // 39.4908329079,116.2552545922
+                    console.log("index = "+index);
+                    switch(index) {
+                        case 0:
+                            console.log('getCenterLocation');
+                            mapcom.getCenterLocation({
+                                success:function(data) {
+                                    console.log("getCenterLocation   latitude = " + data.latitude + "   longitude = " + data.longitude);
+                                },
+                                fail:function() {
+                                    console.log("getCenterLocation fail");
+                                },
+                                complete:function() {
+                                    console.log("getCenterLocation complete");
+                                }
+                            });
+
+                        break;
+                        case 1:
+                            console.log('translateMarker');
+                        break;
+                        case 2:
+                            console.log('moveToMyLocation');
+                            mapcom.moveToMyLocation();
+                        break;
+                        case 3:
+                            console.log('includePoints');
+                            mapcom.includePoints({
+                                points:[{latitude:38.406665,longitude:116.995047,coordType:'gcj02'}],padding:"10 0 0 10",
+                                success:function() {
+                                    console.log("includePoints success");
+                                },
+                                fail:function() {
+                                    console.log("includePoints fail");
+                                },
+                                complete:function() {
+                                    console.log("includePoints complete");
+                                }
+                            });
+                        break;
+                        case 4:
+                            console.log('getRegion');
+                            mapcom.getRegion({
+                                success:function(data) {
+                                    console.log("getRegion   southwest = " + data.southwest + "   northeast = " + data.northeast);
+                                },
+                                fail:function() {
+                                    console.log("getRegion fail");
+                                },
+                                complete:function() {
+                                    console.log("getRegion complete");
+                                }
+                            });
+                        break;
+                        case 5:
+                            console.log('getScale');
+                            mapcom.getScale({
+                                success:function(data) {
+                                    console.log("getScale   scale = " + data.scale);
+                                },
+                                fail:function() {
+                                    console.log("getScale fail");
+                                },
+                                complete:function() {
+                                    console.log("getScale complete");
+                                }
+                            });
+                        break;
+                        case 6:
+                            console.log('getCoordType');
+                            mapcom.getCoordType({
+                                success:function(data) {
+                                    console.log("getCoordType   coordtype = "+data.coordtype);
+                                },
+                                fail:function() {
+                                    console.log("getCoordType fail");
+                                },
+                                complete:function() {
+                                    console.log("getCoordType complete");
+                                }
+                            });
+                        break;
+                        case 7:
+                            console.log('convertCoord');
+                            mapcom.convertCoord({
+                                from:'wgs84',
+                                to:'gcj02',
+                                latitude:39.747872,
+                                longitude:116.438955,
+                                success:function(data) {
+                                    console.log("convertCoord   latitude = " + data.latitude + "   longitude = " + data.longitude);
+                                },
+                                fail:function() {
+                                    console.log("convertCoord fail");
+                                },
+                                complete:function() {
+                                    console.log("convertCoord complete");
+                                }
+                            });
+                        break;
+                    }
+                },
+                cancel: function (data) {
+                    console.log("handling cancel");
+                },
+                complete: function () {
+                    console.log("handling complete");
+                },
+            })
+        },
+        loaded () {
+          console.log('map has been loaded')
+        },
+        regionchange (event) {
+           console.log('map_xxx regionchange' + " northeast latitude " + event.northeast.latitude + " northeast longitude  " + event.northeast.longitude + " southwest.latitude " + event.southwest.latitude + " southwest.longitude " + event.southwest.longitude)
+        },
+        tap (event) {
+          console.log('map_xxx tap' + " latitude " + event.latitude + " longitude " + event.longitude)
+        },
+        controltap (event) {
+          console.log('controltap id:' + event.id)
+        },
+        poitap(event) {
+            console.log("poiId = " + event.poiId);
+            console.log("poiName = " + event.poiName);
+            console.log("latitude = " + event.latitude);
+            console.log("longitude = " + event.longitude);
+        }
+    }
+</script>

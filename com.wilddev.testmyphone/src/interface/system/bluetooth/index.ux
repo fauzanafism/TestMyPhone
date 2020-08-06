@@ -1,0 +1,647 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.openBluetooth')}}：{{openBluetoothSuccess}}</text>
+        </div>
+        <input type="button" class="btn" onclick="openAdapter" value="{{$t('message.interface.system.bluetooth.openBluetooth')}}" />
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.closeBluetooth')}}：{{closeBluetoothSuccess}}</text>
+        </div>
+        <input type="button" class="btn" onclick="closeAdapter" value="{{$t('message.interface.system.bluetooth.closeBluetooth')}}" />
+
+        <div class="item-content">
+            <text class="txt"> {{$t('message.interface.system.bluetooth.getAdapterState')}}：{{bluetoothstate}}</text>
+        </div>
+        <input type="button" class="btn" onclick="getAdapterState" value="{{$t('message.interface.system.bluetooth.getAdapterState')}}" />
+        <input type="button" class="btn" onclick="onAdapterState" value="{{$t('message.interface.system.bluetooth.onAdapterState')}}" />
+        <div class="input-item">
+            <text class="input-hint">{{$t('message.interface.system.bluetooth.inputUuid')}}</text>
+            <input class="input-text" placeholder="{{$t('message.interface.system.bluetooth.uuid')}}" onchange="oninput"></input>
+        </div>
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.bluetoothDiscoveryDevices')}}：{{bluetoothdevices}}</text>
+        </div>
+        <input type="button" class="btn" onclick="startBluetoothDevicesDiscovery" value="{{$t('message.interface.system.bluetooth.discoveryDevices')}}" />
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.stopDiscovery')}}：{{stopDiscoverSuccess}}</text>
+        </div>
+        <input type="button" class="btn" onclick="stopBluetoothDevicesDiscovery" value="{{$t('message.interface.system.bluetooth.stopDiscoveryDevices')}}" />
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.getBluetoothDevices')}}：{{bluetoothdevices}}</text>
+        </div>
+        <input type="button" class="btn" onclick="getBluetoothDevices" value="{{$t('message.interface.system.bluetooth.getBluetoothDevices')}}" />
+
+        <div class="input-item">
+            <text class="input-hint">{{$t('message.interface.system.bluetooth.inputDeviceId')}}</text>
+            <input class="input-text" placeholder="deviceId" onchange="oninputdeviceId"></input>
+        </div>
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.connectBluetoothDevice')}}：{{connectionstate}}</text>
+        </div>
+        <input type="button" class="btn" onclick="createBLEConnection" value="{{$t('message.interface.system.bluetooth.connectBluetoothDevice')}}" />
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.disconnectBluetooth')}}：{{closeconnectionstate}}</text>
+        </div>
+        <input type="button" class="btn" onclick="closeBLEConnection" value="{{$t('message.interface.system.bluetooth.disconnectBluetooth')}}" />
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.getBluetoothDevicesService')}}：{{deviceservices}}</text>
+        </div>
+        <input type="button" class="btn" onclick="getBLEDeviceServices" value="{{$t('message.interface.system.bluetooth.getBluetoothDevicesService')}}" />
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.getConnectedDevices')}}：{{connecteddevices}}</text>
+        </div>
+        <input type="button" class="btn" onclick="getConnectedDevices" value="{{$t('message.interface.system.bluetooth.getConnectedDevices')}}" />
+
+        <div class="input-item">
+            <text class="input-hint">{{$t('message.interface.system.bluetooth.inputServiceId')}}</text>
+            <input class="input-text" placeholder="serviceId" onchange="oninputserviceId"></input>
+        </div>
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.getBLEDeviceCharacteristics')}}：{{servicecharacters}}</text>
+        </div>
+        <input type="button" class="btn" onclick="getBLEDeviceCharacteristics" value="{{$t('message.interface.system.bluetooth.getBLEDeviceCharacteristics')}}" />
+
+        <div class="input-item">
+            <text class="input-hint">{{$t('message.interface.system.bluetooth.inputCharacteristicId')}}</text>
+            <input class="input-text" placeholder="characteristicId" onchange="oninputcharacteristicId"></input>
+        </div>
+
+        <div class="input-item">
+            <text class="input-hint">{{$t('message.interface.system.bluetooth.toggleNotify')}}</text>
+            <input class="input-text" type="checkbox" onchange="oninputnotifystate"></input>
+        </div>
+
+        <div class="item-content">
+            <text class="txt">notifyBLECharacteristicValueChange：{{notifyBLECharacteristicValue}}</text>
+        </div>
+        <input type="button" class="btn" onclick="notifyBLECharacteristicValueChange" value="{{$t('message.interface.system.bluetooth.notifyBLECharacteristicValueChange')}}" />
+        <input type="button" class="btn" onclick="onblecharacteristicvaluechange" value="{{$t('message.interface.system.bluetooth.onblecharacteristicvaluechange')}}" />
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.SpecifyBluetoothServiceFeatureValue')}}：{{characteristicsvalue}}</text>
+        </div>
+        <input type="button" class="btn" onclick="readBLECharacteristicValue" value="{{$t('message.interface.system.bluetooth.readBLECharacteristicValue')}}" />
+
+        <div class="input-item">
+            <text class="input-hint">{{$t('message.interface.system.bluetooth.inputByteStringValue')}}</text>
+            <input class="input-text" placeholder="byteStringValue" onchange="oninputbyteStringValue"></input>
+        </div>
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.writeCharacteristicValue')}}：{{writecharacteristicsvalue}}</text>
+        </div>
+        <input type="button" class="btn" onclick="writeBLECharacteristicValue" value="{{$t('message.interface.system.bluetooth.writeCharacteristicValue')}}" />
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.bluetooth.lowpowerBleconnectionstate')}}：{{bleconnectionstate}}</text>
+        </div>
+        <input type="button" class="btn" onclick="onbleconnectionstatechange" value="{{$t('message.interface.system.bluetooth.watchLowpowerBleconnectionstate')}}" />
+
+    </div>
+</template>
+
+<style>
+    @import '../../../common/css/common.css';
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+    }
+
+    .txt {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .input-item {
+        margin-bottom: 80px;
+        flex-direction: column;
+    }
+
+    .input-hint {
+        margin-left: 30px;
+        margin-bottom: 30px;
+        margin-right: 30px;
+    }
+
+    .input-text {
+        height: 80px;
+        line-height: 80px;
+        padding-left: 30px;
+        padding-right: 30px;
+        margin-left: 30px;
+        margin-right: 30px;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-color: #999999;
+        font-size: 30px;
+        background-color: #ffffff;
+    }
+</style>
+<script>
+    import bluetooth from '@system.bluetooth'
+
+    export default {
+        data: {
+            componentName: 'bluetooth',
+            componentData: {},
+            openBluetoothSuccess: '',
+            closeBluetoothSuccess: '',
+            bluetoothstate: '',
+            bluetoothdevices: '',
+            stopDiscoverSuccess: '',
+            connectionstate: '',
+            closeconnectionstate: '',
+            connecteddevices: '',
+            notifyBLECharacteristicValue: '',
+            scanedresult: '',
+            deviceservices: '',
+            servicecharacters: '',
+            characteristicsvalue: '',
+            writecharacteristicsvalue: '',
+            bleconnectionstate: '',
+            deviceIdInput: '',
+            serviceId: '',//592B3370-3900-9A71-4535-35D4212D2837
+            serviceMac: '',//C9:9B:4C:E7:DE:10
+            service_psd: '',//855525B837253705595800000329
+            service_uuid: '',
+            service_uuidarray: [],
+            characteristics_uuid: '',
+            byteStringValue: '',
+            byteValue: '',
+            deviceId: '',
+            notifystate: false,
+            ble_isonnectting: false,
+            characteristics: [] //characteristics
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'bluetooth' })
+            this.componentData = this.$t('message.interface.system.bluetooth');
+        },
+        openAdapter:function() {
+            var that = this;
+            that.openBluetoothSuccess = "";
+            bluetooth.openAdapter({
+                operateAdapter: true,
+                success: function (res) {
+                    console.log("openBluetoothAdapter success");
+                    that.openBluetoothSuccess = "success";
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("openBluetoothAdapter fail");
+                    that.openBluetoothSuccess = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("openBluetoothAdapter complete");
+                }
+            })
+
+        },
+
+        closeAdapter() {
+            var that = this;
+            bluetooth.closeAdapter({
+                operateAdapter: true,
+                success: function () {
+                    console.log("closeAdapter success");
+                    that.closeBluetoothSuccess = "success";
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("closeAdapter fail");
+                    that.closeBluetoothSuccess = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("closeAdapter complete");
+                }
+            })
+
+        },
+
+        getAdapterState() {
+            var that = this;
+            bluetooth.getAdapterState({
+                success: function (res) {
+                    console.log('getBluetoothAdapterState success', res);
+                    var available = res.available;
+                    var discovering = res.discovering;
+                    that.bluetoothstate = "available " + available + " discovering " + discovering;
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("getAdapterState fail");
+                    that.bluetoothstate = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("getAdapterState complete");
+                }
+            })
+
+        },
+
+        onAdapterState() {
+            var that = this;
+            bluetooth.onadapterstatechange = function (res) {
+                console.log('adapterState changed, now is', res)
+                var available = res.available;
+                var discovering = res.discovering;
+                that.bluetoothstate = "available " + available + " discovering " + discovering;
+            };
+        },
+
+        startBluetoothDevicesDiscovery: function () {
+            var that = this;
+            // var services = [];
+            // services.push(this.data.serviceId);
+            // that.showProgress = true;
+            console.log('startBluetoothDevicesDiscovery begin ' + that.service_uuidarray);
+            bluetooth.startDevicesDiscovery({
+                services: that.service_uuidarray,
+                allowDuplicatesKey: false,
+                success: function (res) {
+                    console.log('startBluetoothDevicesDiscovery success', res);
+                    // that.showProgress = false;
+                    that.onBluetoothDeviceFound();
+                },
+                fail: function (erromsg, errocode) {
+                    console.log('startBluetoothDevicesDiscovery fail ', erromsg);
+                    that.bluetoothdevices = "code " + errocode + " errormsg " + erromsg;
+                }
+            });
+
+        },
+        stopBluetoothDevicesDiscovery: function () {
+            var that = this;
+            console.log('stopBluetoothDevicesDiscovery begin');
+            bluetooth.stopDevicesDiscovery({
+                success: function (res) {
+                    console.log('stopBluetoothDevicesDiscovery success ', res);
+                    that.stopDiscoverSuccess = "success";
+                },
+                fail: function (erromsg, errocode) {
+                    console.log('stopBluetoothDevicesDiscovery fail ', erromsg);
+                    that.stopDiscoverSuccess = "code " + errocode + " errormsg " + erromsg;
+                }
+            });
+        },
+
+        onBluetoothDeviceFound: function () {
+            var that = this;
+            var devicefound = false;
+            console.log('onBluetoothDeviceFound begin');
+            //Monitor scan
+            bluetooth.ondevicefound = function (res) {
+                console.log(that.componentData.monitorSearchNewDevices, res);
+                that.bluetoothdevices = JSON.stringify(res);
+                if (Array.isArray(res.devices)) {
+                    for (var i = 0; i < res.devices.length; i++) {
+                        console.log(res.devices$page);
+                        if (res.devices[i].name === "HUAWEI Mate 20") {
+                            that.deviceId = res.devices[i].deviceId;
+                            devicefound = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (devicefound) {
+                    that.stopBluetoothDevicesDiscovery();
+                }
+            }
+        },
+
+        getBluetoothDevices() {
+            var that = this;
+            console.log("getBluetoothDevices begin");
+            bluetooth.getDevices({
+                success: function (res) {
+                    console.log("getBluetoothDevices success", res);
+                    that.bluetoothdevices = JSON.stringify(res);
+                    if (res.devices[0]) {
+                        console.log(res.devices[0].deviceId)
+                        console.log(res.devices[0].name)
+                    }
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("getBluetoothDevices fail ", erromsg);
+                    that.bluetoothdevices = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("getBluetoothDevices complete");
+                }
+            })
+        },
+
+        createBLEConnection() {
+            var that = this;
+            console.log("createBLEConnection begin deviceId " + that.deviceId);
+            bluetooth.createBLEConnection({
+                deviceId: that.deviceId,
+                success: function (res) {
+                    console.log("createBLEConnection success", res);
+                    that.connectionstate = "success";
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("createBLEConnection fail ", erromsg);
+                    that.connectionstate = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("createBLEConnection complete");
+                }
+            })
+        },
+
+        closeBLEConnection() {
+            var that = this;
+            console.log("closeBLEConnection  begin deviceId " + that.deviceId);
+            bluetooth.closeBLEConnection({
+                deviceId: that.deviceId,
+                success: function (res) {
+                    console.log("closeBLEConnection  success", res);
+                    that.closeconnectionstate = "success";
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("closeBLEConnection  fail ", erromsg);
+                    that.closeconnectionstate = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("closeBLEConnection  complete");
+                }
+            })
+        },
+
+        getBLEDeviceServices() {
+            var that = this;
+            console.log("getBLEDeviceServices  begin deviceId " + that.deviceId);
+            bluetooth.getBLEDeviceServices({
+                deviceId: that.deviceId,
+                success: function (res) {
+                    console.log("getBLEDeviceServices  success", res);
+                    that.deviceservices = JSON.stringify(res);
+                    if (Array.isArray(res.services)) {
+                        for (var i = 0; i < res.services.length; i++) {
+                            console.log(res.services[i].uuid);
+                            if (res.services[i].isPrimary) {
+                                that.service_uuid = res.services[i].uuid;
+                                console.log("getBLEDeviceServices  service_uuid ", that.service_uuid);
+                                break;
+                            }
+                        }
+                    }
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("getBLEDeviceServices  fail ", erromsg);
+                    that.deviceservices = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("getBLEDeviceServices  complete");
+                }
+            })
+        },
+
+        getConnectedDevices() {
+            var that = this;
+            //Here you need to get the device first, then connect, then get the services of the device, and then pass in the main uuid of the service.
+            var services = [];
+            console.log("getConnectedDevices begin");
+            bluetooth.getConnectedDevices({
+                services: that.service_uuidarray,
+                success: function (res) {
+                    console.log("getConnectedDevices success", res);
+                    that.connecteddevices = JSON.stringify(res);
+                    if (res.devices[0]) {
+                        console.log(res.devices[0].deviceId)
+                        console.log(res.devices[0].name)
+                    }
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("getConnectedDevices fail ", erromsg);
+                    that.connecteddevices = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("getBluetoothDevices complete");
+                }
+            })
+        },
+
+        getBLEDeviceCharacteristics() {
+            var that = this;
+            console.log("getBLEDeviceCharacteristics  begin deviceId " + that.deviceId);
+            bluetooth.getBLEDeviceCharacteristics({
+                deviceId: that.deviceId,
+                serviceId: that.service_uuid,
+                success: function (res) {
+                    console.log("getBLEDeviceCharacteristics  success", res);
+                    that.servicecharacters = JSON.stringify(res);
+                    if (Array.isArray(res.characteristics)) {
+                        for (var i = 0; i < res.characteristics.length; i++) {
+                            console.log(res.characteristics[i].uuid);
+                            if (res.characteristics[i].properties.write) {
+                                that.characteristics_uuid = res.characteristics[i].uuid;
+                                console.log("getBLEDeviceCharacteristics  characteristics_uuid ", that.characteristics_uuid);
+                                break;
+                            }
+                        }
+                    }
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("getBLEDeviceCharacteristics  fail ", erromsg);
+                    that.servicecharacters = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("getBLEDeviceCharacteristics  complete");
+                }
+            })
+        },
+
+        readBLECharacteristicValue() {
+            var that = this;
+            console.log("readBLECharacteristicValue  begin deviceId " + that.deviceId);
+            console.log("readBLECharacteristicValue  begin serviceId " + that.service_uuid);
+            console.log("readBLECharacteristicValue  begin characteristicId " + that.characteristics_uuid);
+            bluetooth.readBLECharacteristicValue({
+                deviceId: that.deviceId,
+                serviceId: that.service_uuid,
+                characteristicId: that.characteristics_uuid,
+                success: function (res) {
+                    console.log("readBLECharacteristicValue  success", res);
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("readBLECharacteristicValue  fail ", "code " + errocode + " errormsg " + erromsg);
+                    that.characteristicsvalue = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("readBLECharacteristicValue  complete");
+                }
+            })
+        },
+
+        writeBLECharacteristicValue() {
+            var that = this;
+            console.log("writeBLECharacteristicValue  begin deviceId " + that.deviceId);
+            console.log("writeBLECharacteristicValue  begin serviceId " + that.service_uuid);
+            console.log("writeBLECharacteristicValue  begin characteristicId " + that.characteristics_uuid);
+            // Send a 0x00 hexadecimal data to the Bluetooth device
+            let buffer = new ArrayBuffer(1)
+            let dataView = new DataView(buffer)
+            dataView.setUint8(0, 0)
+            that.byteValue = that.stringToByte(that.byteStringValue)
+            bluetooth.writeBLECharacteristicValue({
+                deviceId: that.deviceId,
+                serviceId: that.service_uuid,
+                characteristicId: that.characteristics_uuid,
+                value: that.byteStringValue,
+                success: function (res) {
+                    console.log("writeBLECharacteristicValue  success", res);
+                    that.writecharacteristicsvalue = "success";
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("writeBLECharacteristicValue  fail ", erromsg);
+                    that.writecharacteristicsvalue = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("writeBLECharacteristicValue  complete");
+                }
+            })
+
+        },
+
+        notifyBLECharacteristicValueChange() {
+            var that = this;
+            console.log("notifyBLECharacteristicValueChange  begin deviceId " + that.deviceId);
+            console.log("notifyBLECharacteristicValueChange  begin serviceId " + that.service_uuid);
+            console.log("notifyBLECharacteristicValueChange  begin characteristicId " + that.characteristics_uuid);
+
+            bluetooth.notifyBLECharacteristicValueChange({
+                state: that.notifystate,
+                deviceId: that.deviceId,
+                serviceId: that.service_uuid,
+                characteristicId: that.characteristics_uuid,
+                success: function (res) {
+                    console.log("notifyBLECharacteristicValueChange  success", res);
+                    that.notifyBLECharacteristicValue = "success";
+                },
+                fail: function (erromsg, errocode) {
+                    console.log("notifyBLECharacteristicValueChange  fail ", erromsg);
+                    that.notifyBLECharacteristicValue = "code " + errocode + " errormsg " + erromsg;
+                },
+                complete: function () {
+                    console.log("notifyBLECharacteristicValueChange  complete");
+                }
+            })
+
+        },
+
+        onblecharacteristicvaluechange: function () {
+            var that = this;
+            console.log('onblecharacteristicvaluechange  begin');
+            bluetooth.onblecharacteristicvaluechange = function (res) {
+                console.log(this.componentData.monitorCharacteristicChange, res);
+                that.characteristicsvalue = JSON.stringify(res);
+            }
+        },
+
+        onbleconnectionstatechange: function () {
+            var that = this;
+            console.log('onbleconnectionstatechange  begin');
+            bluetooth.onbleconnectionstatechange = function (res) {
+                console.log(this.componentData.monitorConnectChange, res);
+                that.bleconnectionstate = JSON.stringify(res);
+            }
+        },
+
+        stringToByte(str) {
+            var bytes = []
+            var len, c
+            len = str.length
+            for (var i = 0; i < len; i++) {
+                c = str.charCodeAt(i)
+                if (c >= 0x010000 && c <= 0x10FFFF) {
+                    bytes.push(((c >> 18) & 0x07) | 0xF0)
+                    bytes.push(((c >> 12) & 0x3F) | 0x80)
+                    bytes.push(((c >> 6) & 0x3F) | 0x80)
+                    bytes.push((c & 0x3F) | 0x80)
+                } else if (c >= 0x000800 && c <= 0x00FFFF) {
+                    bytes.push(((c >> 12) & 0x0F) | 0xE0)
+                    bytes.push(((c >> 6) & 0x3F) | 0x80)
+                    bytes.push((c & 0x3F) | 0x80)
+                } else if (c >= 0x000080 && c <= 0x0007FF) {
+                    bytes.push(((c >> 6) & 0x1F) | 0xC0)
+                    bytes.push((c & 0x3F) | 0x80)
+                } else {
+                    bytes.push(c & 0xFF)
+                }
+            }
+            return bytes
+        },
+
+        oninput: function (event) {
+            var self = this
+            var arra = []
+            // if(event.value.length != 36) {
+            //   return
+            // }
+            arra.push(event.value)
+            self.service_uuidarray = arra
+            // var type = typeOf(arra)
+            // console.error('aaaaaa' + arra + type)
+        },
+
+        oninputdeviceId: function (event) {
+            var self = this;
+            self.deviceId = event.value
+            // var type = typeOf(arra)
+            // console.error('aaaaaa' + arra + type)
+        },
+
+        oninputserviceId: function (event) {
+            var self = this;
+            self.service_uuid = event.value
+            // var type = typeOf(arra)
+            // console.error('aaaaaa' + arra + type)
+        },
+
+        oninputcharacteristicId: function (event) {
+            var self = this;
+            self.characteristics_uuid = event.value
+            // var type = typeOf(arra)
+            // console.error('aaaaaa' + arra + type)
+        },
+
+        oninputbyteStringValue: function (event) {
+            var self = this;
+            self.byteStringValue = event.value
+            // var type = typeOf(arra)
+            // console.error('aaaaaa' + arra + type)
+        },
+
+        oninputnotifystate: function (event) {
+            var self = this;
+            self.notifystate = event.checked
+            console.log('notifystate ' + self.notifystate);
+            // var type = typeOf(arra)
+            // console.error('aaaaaa' + arra + type)
+        },
+
+    }
+</script>

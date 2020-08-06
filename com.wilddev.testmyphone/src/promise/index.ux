@@ -1,0 +1,114 @@
+<template>
+	<div class="container">
+		<div class="page-title-wrap">
+			<text class="page-title">{{$t('message.promise.promise.componentName')}}</text>
+		</div>
+	</div>
+</template>
+
+<style>
+	@import "../common/css/common.css";
+
+	.item-container {
+		margin-bottom: 50px;
+		margin-right: 60px;
+		margin-left: 60px;
+		flex-direction: column;
+	}
+
+	.item-content {
+		flex-direction: column;
+		background-color: #ffffff;
+		padding: 30px;
+		margin-bottom: 100px;
+		align-items: flex-start;
+	}
+</style>
+
+<script>
+	import network from '@system.network'
+	import prompt from '@system.prompt'
+	import storage from '@system.storage'
+
+	export default {
+		data: {
+			componentName: '',
+			networkType: '',
+			currentType: '',
+		},
+		onInit: function () {
+			this.$page.setTitleBar({ text: 'Promise' });
+			this.testAsync()
+		},
+
+		testAsync() {
+			async function testNet() {
+
+				var network = require('@system.network')
+				var ret = await network.getType({
+					success: function (e) {
+						console.log("gettype callback:" + e.type)
+					}
+				})
+				console.log("gettype wait result:" + JSON.stringify(ret))
+
+				network.getType({
+					success: function (e) {
+						console.log("gettype callback:" + e.type)
+					}
+				})
+
+
+				const prompt = require('@system.prompt')
+				prompt.showToast({
+					message: 'message'
+				})
+
+				await storage.set({ key: 'A1', value: 'V1dddddddddddddddd' })
+				let ret11 = await storage.get({
+					key: 'A1', success: function (data) {
+						console.log("storage get" + data)
+					}
+				})
+
+				console.log("storage get wait" + JSON.stringify(ret11))
+
+
+				function catching(promise) {
+					return promise.then(res => res).catch(err => err)
+				}
+				const device = require('@system.device')
+
+				try {
+					var let123 = await catching(device.getDeviceId())
+					console.log("get deviceId wait success:" + JSON.stringify(let123))
+				} catch (e) {
+					console.log("get deviceId error " + e.code)
+				}
+
+				device.getDeviceId({
+					success: function (data) {
+						console.log("get device id common success:" + JSON.stringify(data))
+					},
+					fail: async function (err) {
+						console.log("get device id common error:" + JSON.stringify(err))
+						var network = require('@system.network')
+						try {
+							var ret = await network.getType()
+							console.log("get network type when getDeviceID error:", JSON.stringify(ret))
+						} catch (e) {
+							console.log("get network type error:", JSON.stringify(e))
+						}
+
+					}
+				})
+				console.log("After invoke API")
+				var app = require('@system.app')
+				console.log("get app info res : " + JSON.stringify(app.getInfo()))
+			}
+
+			testNet()
+			console.log("bdf", "after testAsync")
+		}
+	}
+</script>

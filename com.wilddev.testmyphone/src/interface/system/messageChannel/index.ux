@@ -1,0 +1,95 @@
+<template>
+    <div class="container">
+        <input type="button" class="btn" value="connect" onclick="connect" />
+        <input type="button" class="btn" value="send message" onclick="send" />
+        <input type="button" class="btn" value="close" onclick="close" />
+    </div>
+</template>
+
+<style>
+    @import '../../../common/css/common.css';
+
+    .container {
+        flex-direction: column;
+    }
+</style>
+
+<script>
+  import mssageChannel from '@hap.io.MessageChannel'
+
+  module.exports = {
+    private: {
+      componentName: 'MessageChannel',
+      text: '',
+      channel: null
+    },
+
+    connect() {
+      this.channel = new mssageChannel({
+        package: 'native app packagename',
+        sign: 'native app signatures'
+      })
+
+      this.channel.onopen = () => {
+        console.log('channel open')
+      }
+
+      this.channel.onmessage = (data) => {
+        this.text = data.data
+        console.log(`onmessage code: data=` + JSON.stringify(data))
+      }
+
+      this.channel.onclose = (data) => {
+        console.log(`onclose data.code = ${data.code}, data.reason = ${data.reason}`)
+      }
+
+      this.channel.onerror = (data) => {
+        console.log(`onerror data.code = ${data.code}, data.data = ${data.data}`);
+      }
+    },
+
+    send() {
+      if (!this.channel) {
+        return
+      }
+
+      this.channel.send({
+        message: {
+          code: 0,
+          data: 'data from hap app'
+        },
+
+        success: () => {
+          console.log('send success')
+        },
+
+        fail: (data, code) => {
+          console.log(`handling send fail, code = ${code}`)
+        }
+      })
+    },
+
+    close() {
+      if (!this.channel) {
+        return
+      }
+
+      this.channel.close({
+        reason: 'hap app close',
+
+        success: () => {
+          console.log('close success')
+        },
+
+        fail: (data, code) => {
+          console.log(`handling close fail, code = ${code}`)
+        }
+      })
+    },
+
+    onDestroy() {
+      this.close()
+      this.channel = null
+    }
+  }
+</script>

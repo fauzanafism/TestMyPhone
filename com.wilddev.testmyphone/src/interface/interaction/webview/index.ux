@@ -1,0 +1,77 @@
+<template>
+    <div class="container">
+
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="item-container">
+            <input type="button" class="btn" onclick="loadUrl" value="{{$t('message.interface.interaction.webview.openHuaweiWebsite')}}" />
+        </div>
+        <div class="item-container">
+            <input type="button" class="btn" onclick="loaddownLoadUrl" value="{{$t('message.interface.interaction.webview.loaddownLoadUrl')}}" />
+        </div>
+        <div class="item-container">
+            <input type="button" class="btn" onclick="loadFileUploadSupportUrl" value="{{$t('message.interface.interaction.webview.loadFileUploadSupportUrl')}}" />
+        </div>
+        <div class="item-container">
+            <input type="button" class="btn" onclick="allowthirdcookie" value="{{$t('message.interface.interaction.webview.allowthirdcookie')}}" />
+        </div>
+        <div class="item-container">
+            <input type="button" class="btn" onclick="testDeepLink" value="{{$t('message.interface.interaction.webview.testDeepLink')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+    import webview from '@system.webview'
+
+    export default {
+        data: {
+            componentName: 'webview'
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'webview' })
+        },
+        loadUrl: function () {
+            webview.loadUrl({
+                url: 'http://www.huawei.com/',
+                showloadingdialog: false
+            });
+        },
+        loaddownLoadUrl: function () {
+            webview.loadUrl({
+                url: 'http://www.toutiao.com'
+            });
+        },
+        loadFileUploadSupportUrl() {
+            webview.loadUrl({
+                url: "http://lfmemberdev.hwcloudtest.cn:9094//fastapp/download/webview/file_chooser_demo_3.html"
+            });
+        },
+        allowthirdcookie: function () {
+            webview.loadUrl({
+                url: 'https://page.cainiao.com/mcn/publichome/pkg.html',
+                // url: "https://www.hao123.com/",
+                allowthirdpartycookies: true
+            });
+        },
+        testDeepLink: function () {
+            webview.loadUrl({
+                url: 'http://117.78.34.30:9094//fastapp/download/webview/deepLink_test.html',
+                // url: "https://www.hao123.com/",
+                allowthirdpartycookies: true
+            });
+        }
+    }
+</script>

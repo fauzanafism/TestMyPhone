@@ -1,0 +1,179 @@
+<template>
+    <div class="doc-page">
+
+        <div class="titleBar" style="height:100px;background-color:#0faeff;">
+            <div class="arrow-content" onclick="back">
+                <image src="../component/arrow-left.png" class="arrow-left" style="object-fit:contain;"></image>
+            </div>
+            <text class="titleBar-title" style="color: #ffffff;text-align: center">
+                {{title}}
+            </text>
+            <block if="{{arrowRightShow}}">
+                <div class="arrow-content" onclick="next">
+                    <image src="../component/arrow-right.png" class="flex-1" style="object-fit:contain;"></image>
+                </div>
+            </block>
+        </div>
+        <web class="web-page" src="{{websrc}}" supportzoom="true" showloadingdialog="false"  trustedurl="{{list}}" onpagestart="onPageStart" onpagefinish="onPageFinish" ontitlereceive="onTitleReceive"
+            onerror="onError" onmessage="onMessage" onprogress="onProgress" id="web" allowthirdpartycookies="true"
+            useragent="{{ua}}" jumppolicy="{{jumppolicy}}"></web>
+        <input class="input-button" type="button" value="{{$t('message.component.web.refresh')}}" onclick="refresh"></input>
+        <input class="input-button" type="button" value="{{$t('message.component.web.sendMessage')}}" onclick="sendMessage"></input>
+
+    </div>
+</template>
+
+<style>
+    .doc-page { 
+        flex-direction: column;
+    }
+
+    .web-page {
+        width: 750px;
+        height: 1000px;
+    }
+
+    .titleBar {
+        padding: 20px;
+        height: 100px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .arrow-content {
+        height: 80px;
+        width: 80px;
+        padding: 15px;
+    }
+
+    .arrow-left {
+        height: 50px;
+        width: 50px;
+        padding: 10px;
+        border-radius: 25px;
+    }
+
+    .titleBar-title {
+        lines: 1;
+        text-overflow: ellipsis;
+        text-align: center;
+        flex: 1;
+        font-size: 40px;
+        color: #ffffff;
+    }
+
+    .flex-1 {
+        flex: 1;
+    }
+
+    .input-button {
+        height: 80px;
+        text-align: center;
+        border-radius: 5px;
+        margin-right: 60px;
+        margin-left: 60px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        color: #ffffff;
+        font-size: 30px;
+        background-color: #0faeff;
+    }
+</style>
+<script>
+    import router from "@system.router"
+    import prompt from '@system.prompt'
+
+    export default {
+        props: ['websrc', 'ua', 'jumppolicy'],
+        data: {
+            componentData: {},
+            title: "",
+            arrowRightShow: true,
+            isRefreshing: false,
+            list: ['^http.*', 'http://lfmemberdev.hwcloudtest.cn:9094/fastapp/download/webview/webcommunication.html']
+        },
+        onInit() {
+            this.$on('arrowLeft', this.arrowLeftIcon)
+            this.$on('arrowRight', this.arrowRightIcon)
+            console.info('websrc: ' + this.websrc);
+            this.componentData = this.$t('message.component.web');
+        },
+        onPageStart(e) {
+            this.isRefreshing = false;
+            console.info('pagestart: ' + e.url)
+        },
+        // Every time the page is switched, it will trigger
+        onPageFinish(e) {
+            // console.info('pagefinish: '+e.url, e.canBack, e.canForward)
+            // Hide the right icon depending on whether the data can advance to the history page
+            this.arrowRightShow = e.canForward;
+        },
+        onProgress(e) {
+            console.log('newProgress:' + e.newProgress)
+        },
+        onTitleReceive(e) {
+            this.title = e.title;
+        },
+        onError() {
+            console.info('pageError')
+        },
+        onMessage(e) {
+            console.info('onmessage e = ' + e.message + ", url = " + e.url);
+            prompt.showToast({
+                message: e.message + ': ' + e.url
+            })
+        },
+        arrowLeftIcon() {
+            this.isCanBack();
+        },
+        arrowRightIcon() {
+            this.isCanForward();
+        },
+        isCanForward() {
+            this.$element('web').canForward({
+                callback: function (e) {
+                    if (e) {
+                        this.$element('web').forward();
+                    }
+                }.bind(this)
+            })
+        },
+        isCanBack() {
+            this.$element('web').canBack({
+                callback: function (e) {
+                    if (e) {
+                        this.$element('web').back();
+                    } else {
+                        router.back();
+                    }
+                }.bind(this)
+            })
+        },
+        back() {
+            this.$dispatch("arrowLeft");
+        },
+        next() {
+            this.$dispatch('arrowRight');
+        },
+        refresh: function (e) {
+            this.$element('web').reload();
+        },
+        sendMessage: function () {
+            this.$element('web').postMessage({ message: 'message to Web page' });
+        },
+        onBackPress() {
+            this.$element('web').canBack({
+                callback: function (e) {
+                    if (e) {
+                        console.info(`trigger：onBackPress`);
+                        this.$element('web').back();
+                    } else {
+                        router.back();
+                    }
+                }.bind(this)
+            });
+
+            return true;
+        }
+    }
+</script>

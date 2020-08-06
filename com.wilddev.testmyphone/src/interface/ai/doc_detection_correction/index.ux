@@ -1,0 +1,246 @@
+<import name="image-container" src="../Common/ImageContainer.ux"></import>
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="photo-selector" src="../Common/PhotoSelector.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <image-container photo-uri={{photoUri}}></image-container>
+    <div class="result-container">
+      <div class="result-title" if="resultUri">
+        <text class="result-title-text">{{$t('message.interface.ai.doc_detection_correction.result')}}</text>
+      </div>
+      <image-container if="resultUri" photo-uri={{resultUri}}></image-container>
+    </div>
+    <main-btn onclick-main="openPhotoSelector" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.doc_detection_correction.btnText')}}" btn-text-err="{{$t('message.interface.ai.doc_detection_correction.btnTextErr')}}"
+      complete={{complete}} back-result={{backResult}} back-data={{backData}}></main-btn>
+    <photo-selector if="{{isPSshow}}" onhide="hidePhotoSelector"></photo-selector>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+
+  .result-container {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .result-title {
+    width: 100%;
+    height: 90px;
+    background-color: #ffffff;
+    justify-content: center;
+  }
+
+  .result-title-text {
+    color: #000000;
+    font-size: 28px;
+  }
+</style>
+
+<script>
+  import prompt from '@system.prompt';
+  import ai from '@system.ai';
+
+  export default {
+    data: {
+      componentData: {},
+      photoUri: '../Common/images/doc.jpg',
+      resultUri: '',
+      isPSshow: false,
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: '',
+      coordinates: '',
+      coordinatesTest: false
+    },
+    openPhotoSelector() {
+      this.isPSshow = true
+    },
+    hidePhotoSelector() {
+      this.isPSshow = false
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openErrorUse(e) {
+      let sliceUri = e.detail.split(';')[0];
+      sliceUri = this.changeMsg(sliceUri);
+      this.photoUri = sliceUri;
+
+      let coordinates = e.detail.split(';')[1];
+      coordinates = this.changeMsg(coordinates, true);
+      this.coordinatesTest = false;
+      if (coordinates === '') {
+        this.coordinatesTest = true;
+      }
+      if (typeof coordinates === 'string') {
+        let arr = coordinates.split(',');
+        let objTest = {
+          topLeft: { x: 0, y: 0 },
+          topRight: { x: 0, y: 0 },
+          bottomLeft: { x: 0, y: 0 },
+          bottomRight: { x: 0, y: 0 }
+        };
+        for (var i = 0, len = arr.length; i < len; i++) {
+          arr[i] = this.changeMsg(arr[i])
+        }
+        objTest.topLeft.x = arr[0];
+        objTest.topLeft.y = arr[1];
+        objTest.topRight.x = arr[2];
+        objTest.topRight.y = arr[3];
+        objTest.bottomLeft.x = arr[4];
+        objTest.bottomLeft.y = arr[5];
+        objTest.bottomRight.x = arr[6];
+        objTest.bottomRight.y = arr[7];
+        this.coordinatesTest = true;
+      }
+      this.coordinates = coordinates;
+
+      this.test();
+    },
+    test() {
+      let uri = this.photoUri, coordinates = this.coordinates;
+      this.resultUri = '';
+      this.complete = '';
+      console.log('start test uri: ' + uri);
+      if (this.coordinatesTest) {
+        console.log(JSON.stringify(this.coordinates))
+      }
+
+      let self = this;
+      ai.detectDoc({
+        uri: uri,
+        success: function (detectData) {
+          if (self.coordinatesTest) {
+            ai.refineDoc({
+              uri: uri,
+              coordinates: coordinates,
+              success: function (data) {
+                setTimeout(() => {
+                  self.resultUri = data.uri;
+                  self.isLoadingShow = false;
+                }, 1000);
+                console.log("test success: " + data.url);
+                self.backResult = 'success';
+                self.backData = JSON.stringify(data);
+              },
+              fail: function (data, code) {
+                setTimeout(() => {
+                  self.isLoadingShow = false
+                  prompt.showToast({ message: self.componentData.redressDocError })
+                }, 1000)
+                console.log("test fail, code: " + code);
+                self.backResult = 'fail';
+                self.backData = 'code:' + code + ' msg:' + data;
+              },
+              complete: (e) => {
+                self.complete = 'completed';
+                console.log(JSON.stringify(e));
+              }
+            })
+          } else {
+            ai.refineDoc({
+              uri: uri,
+              coordinates: detectData,
+              success: function (data) {
+                setTimeout(() => {
+                  // self.photoUri = data.url
+                  self.resultUri = data.uri;
+                  self.isLoadingShow = false;
+                }, 1000);
+                console.log("test success: " + data.url);
+                self.backResult = 'success';
+                self.backData = JSON.stringify(data);
+              },
+              fail: function (data, code) {
+                setTimeout(() => {
+                  self.isLoadingShow = false;
+                  prompt.showToast({ message: self.componentData.redressDocError });
+                }, 1000)
+                console.log("test fail, code= " + code);
+                self.backResult = 'fail';
+                self.backData = JSON.stringify(code);
+              },
+              complete: (e) => {
+                self.complete = 'completed';
+                console.log(JSON.stringify(e));
+              }
+            })
+          }
+        },
+        fail: function (data, code) {
+          setTimeout(() => {
+            self.isLoadingShow = false;
+            prompt.showToast({ message: self.componentData.checkDocError });
+          }, 1000);
+          console.log("test fail, code= " + code);
+          self.backResult = 'fail';
+          self.backData = JSON.stringify(code);
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      });
+      this.coordinatesTest = false;
+    },
+    getPhotoUri(obj) {
+      this.photoUri = obj.detail;
+      this.isLoadingShow = true;
+      this.test();
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.doc_detection_correction');
+      this.$page.setTitleBar({ text: this.componentData.docCheckRedress });
+      this.$on('getPhotoUri', this.getPhotoUri);
+      this.isLoadingShow = true;
+    },
+    onReady() {
+      this.test()
+    }
+  }
+</script>

@@ -1,0 +1,52 @@
+<template>
+    <div class="tutorial-page">
+        <text class="tutorial-title">{{componentData.customComponent}}</text>
+        <text>{{ prop1 }}</text>
+    </div>
+</template>
+
+<style>
+    .tutorial-page {
+        flex-direction: column;
+        padding-top: 20px;
+    }
+
+    .tutorial-title {
+        font-weight: bold;
+        font-size: 35px;
+    }
+
+    .btn {
+        height: 80px;
+        text-align: center;
+        border-radius: 5px;
+        margin-right: 60px;
+        margin-top: 60px;
+        margin-bottom: 50px;
+        color: #ffffff;
+        font-size: 30px;
+        background-color: #0faeff;
+    }
+</style>
+
+<script>
+    export default {
+        props: {
+            prop1: {
+                default: "I am Default"
+            },
+            prop2: {
+                required: true
+            },
+            Prop3: {
+                type: Number
+            }
+        },
+        data: {
+            componentData: {},
+        },
+        onInit: function () {
+            this.componentData = this.$t('message.event.interVms');
+        },
+    }
+</script>

@@ -1,0 +1,63 @@
+<template>
+    <div class="container">
+  <!-- The attribute refreshing is used to identify the loading status of the refresh component. -->
+        <refresh class="refresh" onrefresh="refresh" refreshing="{{isRefreshing}}" offset=800px>
+            <div class="page-title-wrap">
+                <text class="page-title ">{{componentName}}</text>
+            </div>
+            <div class="item-container">
+                <input class="btn" type="button" value="{{$t('message.component.refreshMeterial.stopRefresh')}}" onclick="stopRefresh" />
+            </div>
+        </refresh>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .refresh {
+        background-color: #ffffff;
+        progress-color: #0faeff;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'refresh',
+            isRefreshing: false
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'refresh' });
+        },
+        refresh: function (e) {
+            prompt.showToast({
+                message: this.$t('message.component.refreshMeterial.refreshing')
+            })
+            var that = this;
+            // Update refresh status (the value of the property refreshing changed from false to true will trigger the status update of the refresh component, and vice versa)
+            that.isRefreshing = e.refreshing;
+            setTimeout(function () {
+                // Turn off refresh status
+                that.isRefreshing = false;
+                prompt.showToast({
+                    message: that.$t('message.component.refreshMeterial.refreshComplete')
+                })
+            }, 3000)
+        },
+        stopRefresh: function () {
+            this.isRefreshing = false;
+        }
+    }
+</script>

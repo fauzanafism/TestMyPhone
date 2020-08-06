@@ -1,0 +1,63 @@
+<import src="./part1"></import>
+
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <part1 class="component" header="{{header}}" footer="{{footer}}">
+            <div slot="header">
+                <text>{{$t('message.directive.slot.slotHeader')}}</text>
+            </div>
+            <div>
+                <text>{{$t('message.directive.slot.slotContent')}}</text>
+            </div>
+            <div slot="toggleDefault" if="showContent">
+                <text>{{$t('message.directive.slot.slotNode')}}</text>
+            </div>
+            <div slot="footer">
+                <text>{{$t('message.directive.slot.slotFooter')}}</text>
+            </div>
+        </part1>
+        <input class="btn" type="button" value="{{$t('message.directive.slot.toggleContent')}}" onclick="toggleShowContent" />
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .component {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        height: 80px;
+        text-align: center;
+        border-radius: 5px;
+        margin-right: 60px;
+        margin-top: 60px;
+        margin-left: 60px;
+        margin-bottom: 50px;
+        color: #ffffff;
+        font-size: 30px;
+        background-color: #0faeff;
+    }
+</style>
+
+<script>
+    export default {
+        onInit() {
+            this.$page.setTitleBar({ text: 'slot' });
+        },
+        data: {
+            componentName: 'slot',
+            'header': 'HEAD',
+            'footer': 'FOOT',
+            showContent: true
+        },
+        toggleShowContent() {
+            this.showContent = !this.showContent
+        }
+    }
+</script>

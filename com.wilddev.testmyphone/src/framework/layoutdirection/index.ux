@@ -1,0 +1,45 @@
+<template>
+    <div style="width: 100%;height: 100%;">
+        <div style="width: 600px;height:200px;margin:50px;" dir="auto">
+            <text style="width: 200px;height: 50px">show dialog!</text>
+            <image style="height: 50px" src="{{nextImg}}"></image>
+        </div>
+    </div>
+</template>
+
+<style>
+</style>
+
+<script>
+    import configuration from '@system.configuration'
+    export default {
+        data: {
+            nextImg: "/Common/next.png"
+        },
+        onInit: function () {
+            const dir = configuration.getLayoutDirection()
+            if (dir === "ltr") {
+                // When the system language direction is from left to right, set component properties or styles as required
+                this.nextImg = "/common/img/next.png";
+            } else if (dir === "rtl") {
+                // When the system language direction is right to left, set component properties or styles as needed
+                this.nextImg = "/common/img/next_mirror.png";
+            }
+        },
+        onConfigurationChanged(e) {
+            var that = this;
+            var types = e.types;
+            if (types.includes('layoutDirection')) {
+                var dir = configuration.getLayoutDirection()
+                // Developers can make special customization according to the direction
+                if (dir === "ltr") {
+                    //When the system language direction is from left to right, set component properties or styles as required
+                    that.nextImg = "/common/img/next.png";
+                } else if (dir === "rtl") {
+                    // When the system language direction is right to left, set component properties or styles as needed
+                    that.nextImg = "/common/img/next_mirror.png";
+                }
+            }
+        }
+    }
+</script>

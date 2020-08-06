@@ -1,0 +1,181 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <text class="txt">{{fetchData}}</text>
+                <image show="{{showVar}}" src="{{photoUri}}" class="image"></image>
+            </div>
+            <input type="button" class="btn" onclick="refresh" value="{{$t('message.interface.network.fetch.refresh')}}" />
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <text class="txt">{{fetchData1}}</text>
+            </div>
+            <input type="button" class="btn" onclick="refresh1" value="{{$t('message.interface.network.fetch.refresh1')}}" />
+            <input type="button" class="btn" onclick="refresh2" value="{{$t('message.interface.network.fetch.refresh2')}}" />
+            <input type="button" class="btn" onclick="refresh3" value="{{$t('message.interface.network.fetch.refresh3')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .image {
+        margin: 50px 0px;
+        width: 600px;
+        height: 140px;
+    }
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+        margin-bottom: 50px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .txt {
+        line-height: 45px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+
+<script>
+    import fetch from '@system.fetch'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'fetch',
+            componentData: {},
+            fetchData: '',
+            fetchData1: '',
+            photoUri: '',
+            showVar: true,
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'fetch' })
+            this.componentData = this.$t('message.interface.network.fetch');
+            // this.getphoto()
+        },
+        postarraybuffer: function () {
+            var that = this;
+            var buffer = new ArrayBuffer(4);
+            var a = new Uint16Array(buffer);
+            a[0] = 1;
+            a[1] = 2;
+            fetch.fetch({
+                url: "http://httpbin.org/post",
+                data: buffer,
+                responseType: 'arraybuffer',
+                method: "POST",
+                success: function (ret) {
+                    var buf1 = ret.data;
+                    that.fetchData1 = that.componentData.getData + JSON.stringify(String.fromCharCode.apply(null, new Uint8Array(buf1)));
+                    that.showVar = true;
+                    prompt.showToast({
+                        message: "success"
+                    })
+                },
+                fail: function (msg, code) {
+                    console.log(msg, code);
+                },
+                complete: function () {
+                    console.log("complete");
+                }
+            })
+        },
+        postjson: function () {
+            var that = this;
+            var str = '{"username":"123","password":"123"}';
+            fetch.fetch({
+                url: "http://httpbin.org/post",
+                data: JSON.parse(str),
+                header: { "User-Agent": "Mozilla/5.0 (Linux; U; Android 7.0; zh-cn; STF-AL00 Build/HUAWEISTF-AL00) AppleWebKit/537.36 (KHTML, like Gecko)Version/4.0 Chrome/37.0.0.0 MQQBrowser/7.9 Mobile Safari/537.36", "Accept-Encoding": "gzip, deflate", "Accept-Language": "zh-CN,en-US;q=0.8,en;q=0.6" },
+                responseType: 'json',
+                method: "POST",
+                success: function (ret) {
+                    that.fetchData1 = that.componentData.getData + JSON.stringify(ret.data);
+                    that.showVar = true;
+                    prompt.showToast({
+                        message: "success"
+                    })
+                },
+                fail: function (msg, code) {
+                    console.log(msg, code);
+                },
+                complete: function () {
+                    console.log("complete");
+                }
+            })
+        },
+        poststring: function () {
+            var that = this;
+            var str = '"name"="huaweitest"&"password":"123"';
+            fetch.fetch({
+                url: "http://httpbin.org/post",
+                responseType: 'text',
+                data: str,
+                method: "POST",
+                success: function (ret) {
+                    that.fetchData1 = that.componentData.getData + JSON.stringify(ret.data);
+                    that.showVar = true;
+                    prompt.showToast({
+                        message: "success"
+                    })
+                },
+                fail: function (msg, code) {
+                    console.log(msg, code);
+                },
+                complete: function () {
+                    console.log("complete");
+                }
+            })
+        },
+        getphoto: function () {
+            var that = this;
+            fetch.fetch({
+                url: "http://www.huawei.com/Assets/CBG/img/logo.png",
+                success: function (ret) {
+                    that.fetchData = that.componentData.getData + JSON.stringify(ret.data);// Note that the .fetchData is consistent with the data type received by ret.
+                    that.photoUri = ret.data;
+                    that.showVar = true;
+                    prompt.showToast({
+                        message: "success"
+                    })
+                },
+                fail: function (msg, code) {
+                    console.log(msg, code);
+                },
+                complete: function () {
+                    console.log("complete");
+                }
+            })
+        },
+        refresh: function () {
+            this.getphoto();
+        },
+        refresh1: function () {
+            this.postarraybuffer();
+        },
+        refresh2: function () {
+            this.postjson();
+        },
+        refresh3: function () {
+            this.poststring();
+        }
+    }
+</script>

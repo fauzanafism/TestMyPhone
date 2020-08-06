@@ -1,0 +1,65 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <input type="button" class="btn" onclick="creatChannel" value="{{$t('message.interface.interaction.messageChannel.creatChannel')}}" />
+            <input type="button" class="btn" onclick="routeChannel" value="{{$t('message.interface.interaction.messageChannel.routeChannel')}}" />
+            <input type="button" class="btn" onclick="cancelChannel" value="{{$t('message.interface.interaction.messageChannel.cancelChannel')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    import router from "@system.router"
+    var channel = null;
+    export default {
+        data: {
+            componentName: 'messageChannel',
+            componentData: {},
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'messageChannel' });
+            this.componentData = this.$t('message.interface.interaction.messageChannel');
+        },
+        onDestroy: function () {
+            this.cancelChannel();
+        },
+        creatChannel: function () {
+            let that=this;
+            if (channel === null) {
+                channel = new BroadcastChannel('channel1');
+                channel.onmessage = function (event) {
+                    console.log(event.data)
+                    prompt.showToast({ message: that.componentData.toast + event.data });
+                };
+            }
+        },
+        routeChannel: function () {
+            router.push({
+                uri: '/interface/interaction/messageChannel/detail'
+            });
+        },
+        cancelChannel: function () {
+            if (channel !== null) {
+                channel.close();
+                channel = null;
+            }
+        }
+
+    }
+</script>

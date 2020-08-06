@@ -1,0 +1,43 @@
+<template>
+  <div class="img-container">
+    <image class="img" src={{photoUri}} />
+    <div class="score-wrapper" if="score !== '' && score !== undefined">
+      <text class="score-text">{{info}}{{score}}</text>
+    </div>
+  </div>
+</template>
+
+<style>
+  .img-container {
+    height: 500px;
+    width: 100%;
+    background-color: #e8e8e8;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .img {
+    width: 720px;
+    height: 450px;
+    resize-mode: contain;
+  }
+
+  .score-wrapper {
+    position: fixed;
+    height: 500px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+  }
+
+  .score-text {
+    color: #52c41a;
+    font-size: 45px;
+  }
+</style>
+
+<script>
+  export default {
+    props: ['photoUri', 'info', 'score']
+  }
+</script>

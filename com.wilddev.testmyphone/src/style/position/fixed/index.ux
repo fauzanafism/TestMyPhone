@@ -1,0 +1,64 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+    <div class="item-container">
+      <text style="height: 50px; background-color: cyan;">{{$t("message.style.position.firstIndividualNode")}}</text>
+      <div class="fixed-box">
+        <text class="relative-text">absolute-relative-text</text>
+        <text class="absolute-text">absolute-absolute-text</text>
+        <text class="fixed-text">absolute-fixed-text</text>
+      </div>
+      <text style="height: 50px; background-color: cyan;">{{$t("message.style.position.singleNodeAtTheEnd")}}</text>
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .item-container {
+    flex: 1;
+    margin: 50px 60px 50px 60px;
+    flex-direction: column;
+  }
+
+  .fixed-box {
+    margin-left: 100px;
+    position: fixed;
+    height: 200px;
+    top: 50px;
+    background-color: green;
+    flex-direction: column;
+  }
+
+  .relative-text {
+    left: 50px;
+    top: 50px;
+  }
+
+  .absolute-text {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    width: 300px;
+  }
+
+  .fixed-text {
+    position: fixed;
+    left: 50px;
+    top: 50px;
+  }
+</style>
+
+<script>
+  export default {
+    data: {
+      componentName: 'fixed Position',
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: this.$t("message.style.position.fixedTestPage") })
+    }
+  }
+</script>

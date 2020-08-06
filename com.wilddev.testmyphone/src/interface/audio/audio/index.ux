@@ -1,0 +1,196 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <text>{{time}}</text>
+            <text style="margin-left:6px;margin-right:6px;">/</text>
+            <text style="margin-right:50px;">{{total}}</text>
+        </div>
+
+        <!-- list component method -->
+        <div class="btn-wrap-column ">
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.showStatusInNotification')}}" onclick="controlNotify" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.autoPlay')}}" onclick="btnautoplay" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.play')}}" onclick="btnstart" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.pause')}}" onclick="btnpause" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.stop')}}" onclick="btnstop" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.seek')}}" onclick="btnSeek" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.volume')}}" onclick="btnVolume" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.mute')}}" onclick="btnMute" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.loop')}}" onclick="btnLoop" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.streamType')}}" onclick="setStreamType" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.setTitle')}}" onclick="setTitle" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.setArtist')}}" onclick="setArtist" />
+            <input type="button" class="btn" value="{{$t('message.interface.audio.audio.setCover')}}" onclick="setCover" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        justify-content: center;
+    }
+
+    .item-title {
+        padding-left: 30px;
+        padding-bottom: 20px;
+    }
+
+    .item-content {
+        height: 300px;
+        justify-content: center;
+    }
+
+    .btn-wrap-column {
+        margin-left: 60px;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+
+    import audio from '@system.audio'
+
+    export default {
+        data: {
+            componentName: "audio",
+            componentData: {},
+            muted: false,
+            loop: false,
+            time: 0,
+            total: 0,
+        },
+        onInit() {
+            this.componentData = this.$t('message.interface.audio.audio');
+            this.$page.setTitleBar({ text: 'Audio' })
+        },
+        controlNotify: function () {
+            audio.notificationVisible = !audio.notificationVisible;
+        },
+        btnautoplay: function () {
+            var that = this;
+            var srcUri = 'http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a';
+            audio.src = srcUri;
+            audio.autoplay = true;
+            audio.loop = true;
+            audio.volume = 0.1;
+            audio.streamType = "music"
+            audio.title = this.componentData.musicName1;
+            audio.artist = this.componentData.artist1;
+            audio.currentTime = 0;
+            audio.cover = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542175176&di=948a7a2a8cec225c82741c773fcd8e64&imgtype=jpg&er=1&src=http%3A%2F%2Fpic9.nipic.com%2F20100813%2F3525627_135840092720_2.jpg";
+            audio.onplay = function () {
+                console.log("audio onplay");
+            };
+
+            audio.onpause = function () {
+                console.log("audio onpause");
+            };
+
+            audio.onended = function () {
+                console.log("audio onended");
+            };
+
+            audio.ondurationchange = function () {
+                console.log("audio ondurationchange");
+                that.total = audio.duration;
+                console.log("audio ondurationchange total=" + that.total);
+            };
+
+            audio.ontimeupdate = function () {
+                that.time = audio.currentTime;
+                console.log("ontimeupdate time=" + that.time);
+            };
+
+            audio.onprevious = function () {
+                audio.cover = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541580537380&di=7d2b3e9881217beb6e5e207506f45ff0&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F013e6d59a4cfbfa801211d258f8db6.jpg%401280w_1l_2o_100sh.jpg"
+                audio.title = this.componentData.musicName2;
+                audio.artist = this.componentData.artist2;
+                //Replace with NetEase cloud music resource link
+                audio.src = "http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a"
+                that.cover = audio.cover;
+                that.title = audio.title;
+                that.artist = audio.artist;
+                that.src = audio.src;
+                console.log(" on previout event from notification ");
+            };
+
+            audio.onnext = function () {
+                audio.cover = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541580537211&di=4196057c0e091ab455dbfbc9a5a064ca&imgtype=0&src=http%3A%2F%2Fpic17.nipic.com%2F20111104%2F3320946_202642007378_2.jpg"
+                audio.title = this.componentData.musicName3;
+                audio.artist = this.componentData.artist3;
+                //Replace with NetEase cloud music resource link
+                audio.src = "http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a"
+                that.cover = audio.cover;
+                that.title = audio.title;
+                that.artist = audio.artist;
+                that.src = audio.src;
+                console.log(" on next event from notification ");
+            };
+        },
+        btnstart: function () {
+            audio.play();
+        },
+        btnpause: function () {
+            audio.pause();
+        },
+        btnstop: function () {
+            var that = this;
+            audio.stop();
+            that.time = audio.currentTime;
+        },
+        btnSeek: function () {
+            var that = this;
+            audio.currentTime = '5';
+            that.time = audio.currentTime;
+        },
+        btnVolume: function () {
+            audio.volume = 0.6;
+        },
+        btnMute: function () {
+            var that = this;
+            var isMuted = !that.muted;
+            that.muted = isMuted;
+            audio.muted = isMuted;
+        },
+        btnLoop: function () {
+            var that = this;
+            var isloop = !that.loop;
+            that.loop = isloop;
+            audio.loop = isloop;
+        },
+        setStreamType: function () {
+            var that = this;
+            if (audio.streamType === "music") {
+                audio.streamType = "voicecall";
+            } else {
+                audio.streamType = "music";
+            }
+            that.streamType = audio.streamType;
+            console.error("audio.streamType =" + audio.streamType);
+        },
+        setTitle: function () {
+            var that = this;
+            audio.title = ""
+            that.title = audio.title;
+        },
+        setArtist: function () {
+            var that = this;
+            audio.artist = "";
+            that.artist = audio.artist;
+        },
+        setCover: function () {
+            var that = this;
+            audio.cover = "https://p1.music.126.net/eceGOpc0kdFWRS25FJdTcA==/109951163076161101.jpg?param=34y34";
+            that.cover = audio.cover;
+        }
+    }
+</script>

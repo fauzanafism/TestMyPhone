@@ -1,0 +1,114 @@
+<template>
+    <div class="container container1">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="item-container">
+            <text style="margin-bottom: 50px">{{$t('message.component.select.nanjing')}}</text>
+            <select class="select" onchange="changeValue">
+                <option class="option" value="item1">{{$t('message.component.select.attraction1')}}</option>
+                <option class="optionrgb" value="item2" selected="true">{{$t('message.component.select.attraction2')}}</option>
+                <option class="optionrgba" value="item3">{{$t('message.component.select.attraction3')}}</option>
+                <option class="optionhsl" value="item4">{{$t('message.component.select.attraction4')}}</option>
+                <option class="optionhsla" value="item5">{{$t('message.component.select.attraction5')}}</option>
+            </select>
+        </div>
+
+        <div class="item-container">
+            <text style="margin-bottom: 50px">font-family</text>
+            <select class="select font-family2" onchange="changeValue">
+                <option class="option font-family1" value="item1">font-family is sans-serif</option>
+                <option class="option font-family2" value="item2" selected="true">font-family is serif</option>
+                <option class="option font-family3" value="item3">font-family is monospace</option>
+            </select>
+        </div>
+
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .select {
+        width: 60%;
+        margin-left: 30px;
+        margin-right: 30px;
+        align-items: flex-start;
+        border-color: #007dff;
+        border-width: 1px;
+    }
+
+    .container1 {
+        align-items: center;
+    }
+
+    .option {
+        color: #007dff;
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+    .optionrgb {
+        color: rgb(207, 18, 49);
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+    .optionrgba {
+        color: rgba(86, 206, 38, 0.452);
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+    .optionhsl {
+        /* color: rgba(86, 206, 38, 0.452); */
+        color: hsl(180, 100%, 80%);
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+    .optionhsla {
+        color: hsla(10, 90%, 60%, 0.9);
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+
+    .font-family1 {
+        font-family: sans-serif;
+    }
+
+    .font-family2 {
+        font-family: serif;
+    }
+
+    .font-family3 {
+        font-family: monospace;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt';
+    export default {
+        data: {
+            componentName: 'select'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'select' });
+        },
+        changeValue(e) {
+            prompt.showToast({
+                message: `[${e.newValue}] selected`,
+                duration: 2000,
+                gravity: 'center'
+            })
+        }
+    }
+</script>

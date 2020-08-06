@@ -1,0 +1,102 @@
+<template>
+    <div class="container">
+
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <input class="btn" type="button" value="{{$t('message.interface.thirdparty.wxpay.payType')}}" onclick="payType" />
+        <input class="btn" type="button" value="{{$t('message.interface.thirdparty.wxpay.appPay')}}" onclick="appPay" />
+        <input class="btn" type="button" value="{{$t('message.interface.thirdparty.wxpay.webPay')}}" onclick="webPay" />
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+</style>
+
+<script>
+    import pay from '@service.wxpay'
+    import prompt from '@system.prompt'
+    import device from '@system.device'
+
+    export default {
+        data: {
+            componentName: 'wxpay',
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'wxpay' })
+            console.info('page init ing')
+            console.info('platform  VersionCode ' + device.platform.versionCode)
+            console.info('page  name ' + this.$page.name + " page component " + this.$page.component + " page path " + this.$page.path)
+        },
+        payType: function () {
+            var payType = pay.getType()
+            console.info(' wxpay call function getType')
+            prompt.showToast({
+                message: 'pay type is ' + payType
+            })
+        },
+
+        appPay: function () {
+            console.info('wxpay call function appPay')
+            pay.pay({
+                prepayid: 'wx31144125075572856c06803c3317399963', // your order prepayid,eg: wx20170101abcdef1234567890
+                extra: {
+                    app_id: 'wxf2d0692792ceed2e', // your app_id
+                    partner_id: '1217180501', // your partner_id
+                    package_value: 'Sign=WXPay', // your package_value
+                    nonce_str: '6f65bd777a1e4b5f9cab39223f8311ae', // your nonce_str
+                    time_stamp: '1533019285', // your time_stamp
+                    order_sign: 'AA7AFB31EAA6881ED23C1D71A38AE95D' // your order sign
+                },
+                fail: function (data, code) {
+                    console.log('WX PAY ' + pay.getType() + 'failed, code = ' + code);
+                    prompt.showToast({
+                        message: 'WX PAY ' + pay.getType() + ' failed, code = ' + code
+                    })
+                },
+                cancel: function (data) {
+                    console.log('WX PAY ' + pay.getType() + ' cancelled by user');
+                    prompt.showToast({
+                        message: 'WX PAY ' + pay.getType() + ' cancelled by user'
+                    })
+                },
+                success: function (data) {
+                    console.log('WX PAY ' + pay.getType() + ' success');
+                    prompt.showToast({
+                        message: 'WX PAY ' + pay.getType() + ' success'
+                    })
+                }
+            })
+        },
+
+        webPay: function () {
+            console.info('wxpay call function webPay')
+            pay.pay({
+                prepayid: 'wx09113246667953cfb8d067ad1892777375', // your order prepayid,eg: wx20170101abcdef1234567890
+                extra: {
+                    mweb_url: 'https%3A%2F%2Fwx.tenpay.com%2Fcgi-bin%2Fmmpayweb-bin%2Fcheckmweb%3Fprepay_id%3Dwx09113246667953cfb8d067ad1892777375%26package%3D299247950%26redirect_url%3Dhttps%3A%2F%2Fm.vip.com%2Fuser-order-detail-list-0.html',
+                    prepayid: 'wx09113246667953cfb8d067ad1892777375'
+                },
+                fail: function (data, code) {
+                    console.log('WX PAY ' + pay.getType() + ' failed, code = ' + code);
+                    prompt.showToast({
+                        message: 'WX PAY ' + pay.getType() + ' failed, code = ' + code
+                    })
+                },
+                cancel: function (data) {
+                    console.log('WX PAY ' + pay.getType() + ' cancelled by user');
+                    prompt.showToast({
+                        message: 'WX PAY ' + pay.getType() + ' cancelled by user'
+                    })
+                },
+                success: function (data) {
+                    console.log('WX PAY ' + pay.getType() + ' success');
+                    prompt.showToast({
+                        message: 'WX PAY ' + pay.getType() + ' success'
+                    })
+                }
+            })
+        }
+    }
+</script>

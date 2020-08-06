@@ -1,0 +1,132 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+     <div class="item-container">
+      <input type="button" class="btn" onclick="pkgHasInstalled" value="{{$t('message.interface.system.package.pkgHasInstalled')}}" />
+    </div>
+
+    <div class="item-container">
+      <input type="button" class="btn" onclick="pkgInstall" value="{{$t('message.interface.system.package.installPkg')}}" />
+    </div>
+    <div class="item-container">
+      <text>{{versionInfo}}</text>
+      <input type="button" class="btn" onclick="pkgGetInfo" value="{{$t('message.interface.system.package.getPkgInfo')}}" />
+    </div>
+
+    <div class="item-container">
+      <text>{{signatures}}</text>
+      <input type="button" class="btn" onclick="pkgGetSignatureDigests" value="{{$t('message.interface.system.package.getPkgSignatureDigests')}}" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .item-container {
+    margin-top: 50px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+</style>
+
+<script>
+  import pkg from '@system.package'
+  import prompt from '@system.prompt'
+
+  export default {
+    data: {
+      componentName: 'package',
+      componentData: {},
+      versionInfo: '',
+      signatures: ''
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'package' })
+      this.componentData = this.$t('message.interface.system.package');
+    },
+    pkgHasInstalled: function () {
+      let that=this;
+      pkg.hasInstalled({
+        package: 'com.sina.news',
+        success: function (data) {
+          console.log("handling success: " + data.result);
+          prompt.showToast({
+            message: 'result---' + data.result
+          })
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({ message: that.componentData.fail + errocode + ': ' + erromsg })
+        },
+        complete: function () {
+          console.log('complete');
+
+        }
+      })
+    },
+    pkgInstall: function () {
+      pkg.install({
+        package: 'com.sina.news',
+        success: function (data) {
+          console.log("handling success: " + data.result);
+          prompt.showToast({
+            message: "success"
+          })
+        },
+        fail: function (data, code) {
+          console.log("handling fail, code=" + code);
+          prompt.showToast({
+            message: "fail"
+          })
+        },
+        complete: function () {
+          console.log('pkg install complete');
+        }
+      })
+    },
+    pkgGetInfo: function () {
+      var that = this;
+      pkg.getInfo({
+        package: 'com.huawei.appmarket',
+        success: function (ret) {
+          console.log("getInfo succ data:" + JSON.stringify(ret));
+          that.versionInfo = JSON.stringify(ret);
+          prompt.showToast({
+            message: 'succ! versionCode:' + ret.versionCode + '\n versionName:' + ret.versionName
+          });
+        },
+        fail: function (erromsg, errocode) {
+          that.versionInfo = errocode + ': ' + erromsg
+          prompt.showToast({ message: that.componentData.fail + errocode + ': ' + erromsg })
+        },
+        complete: function () {
+          console.log('complete');
+        }
+      })
+    },
+    pkgGetSignatureDigests: function () {
+      var that = this;
+      pkg.getSignatureDigests({
+        package: 'com.huawei.appmarket',
+        success: function (ret) {
+          console.log("getSignatureDigests succ data:" + JSON.stringify(ret));
+          that.signatures = JSON.stringify(ret);
+          prompt.showToast({
+            message: 'succ!' + "sing:\n" + ret.signatures
+          });
+        },
+        fail: function (erromsg, errocode) {
+          that.signatures = errocode + ': ' + erromsg
+          prompt.showToast({ message: that.componentData.fail + errocode + ': ' + erromsg })
+        },
+        complete: function () {
+          console.log('complete');
+        }
+      })
+    }
+  }
+</script>

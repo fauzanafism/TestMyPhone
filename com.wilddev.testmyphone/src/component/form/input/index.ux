@@ -1,0 +1,440 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <!-- Various types of input examples -->
+        <div class="input-item">
+            <text class="input-hint">input type="text"</text>
+            <input class="input-text" id="text1" placeholder="{{$t('message.component.input.pleaseEnter')+'text'}}" style="placeholder-color:#FF0000;"
+                @change="showChangePrompt"></input>
+            <div class="input-item1">
+                <input class="input-button color-3" type="button" style="margin-top: 50px;" value="{{$t('message.component.input.value1')}}"
+                    onclick="truefocus"></input>
+                <input class="input-button color-3" type="button" style="margin-top: 50px;" value="{{$t('message.component.input.value2')}}"
+                    onclick="falsefocus"></input>
+            </div>
+        </div>
+
+        <div class="input-item">
+            <text class="input-hint">input type="email"</text>
+            <input class="input-text" type="email" placeholder="{{$t('message.component.input.pleaseEnter')+'email'}}" style="placeholder-color:#FFF000"
+                onchange="showChangePrompt"></input>
+        </div>
+
+        <div class="input-item">
+            <text class="input-hint">input type="date"</text>
+            <input class="input-text" type="date" placeholder="{{$t('message.component.input.pleaseEnter')+'date'}}" style="placeholder-color:#FFC0CB"
+                onchange="showChangePrompt"></input>
+        </div>
+
+        <div class="input-item">
+            <text class="input-hint">input type="time"</text>
+            <input class="input-text" type="time" placeholder="{{$t('message.component.input.pleaseEnter')+'time'}}" style="placeholder-color:#FF0000"
+                onchange="showChangePrompt"></input>
+        </div>
+
+        <div class="input-item">
+            <text class="input-hint">input type="number"</text>
+            <input class="input-text" type="number" placeholder="{{$t('message.component.input.pleaseEnter')+'number'}}" onchange="showChangePrompt"></input>
+        </div>
+
+        <div class="input-item">
+            <text class="input-hint">input type="password"</text>
+            <input class="input-text" type="password" placeholder="{{$t('message.component.input.pleaseEnter')+'password'}}" onchange="showChangePrompt"></input>
+        </div>
+
+        <!-- radio -->
+        <div class="input-item">
+            <text class="input-hint">input type="radio":</text>
+            <div class="doc-row">
+                <label target="radio1">label1:</label>
+                <input id="radio1" class="flex-grow" type="radio" name="radio" value="radio1" onchange="showChangePrompt"></input>
+                <label target="radio2">label2:</label>
+                <input id="radio2" class="flex-grow" type="radio" name="radio" value="radio2" checked="true" onchange="showChangePrompt"></input>
+                <label target="radio3">label3:</label>
+                <input id="radio3" class="flex-grow" type="radio" name="radio" value="radio3" onchange="showChangePrompt"></input>
+            </div>
+        </div>
+
+        <!-- checkbox -->
+        <div class="input-item">
+            <text class="input-hint">input type="checkbox":</text>
+            <div class="doc-row">
+                <label target="checkbox1">label1:</label>
+                <input id="checkbox1" class="flex-grow" type="checkbox" name="checkbox" value="checkbox1" onchange="showChangePrompt"></input>
+                <label target="checkbox2">label2:</label>
+                <input id="checkbox2" class="flex-grow" type="checkbox" name="checkbox" value="checkbox2" checked="true"
+                    onchange="showChangePrompt"></input>
+                <label target="checkbox3">label3:</label>
+                <input id="checkbox3" class="flex-grow" type="checkbox" name="checkbox" value="checkbox3" onchange="showChangePrompt"></input>
+            </div>
+        </div>
+
+        <!-- button -->
+        <div class="input-item">
+            <text class="input-hint">input type="button"</text>
+            <div class="doc-row">
+                <input class="input-button color-1" type="button" value="{{$t('message.component.input.ok')}}" onclick="showClickPrompt($t('message.component.input.ok'))"></input>
+                <input class="input-button color-2" type="button" value="{{$t('message.component.input.cancel')}}" onclick="showClickPrompt($t('message.component.input.cancel'))"></input>
+                <input class="input-button color-3" type="button" value="{{$t('message.component.input.submit')}}" onclick="showClickPrompt($t('message.component.input.submit'))"></input>
+            </div>
+        </div>
+
+        <!-- Set or clear the value of the input box. Note: The variable value of value must be synchronized in the change event of input -->
+        <div class="input-item">
+            <text class="input-hint">{{$t('message.component.input.setInputValue')}}</text>
+            <input class="input-text" placeholder="{{$t('message.component.input.placeholder1')}}" value="{{inputValue}}" onchange="updateValue"></input>
+            <div class="doc-row" style="margin-top: 30px;">
+                <input class="input-button color-3" type="button" value="{{$t('message.component.input.setValue')}}" onclick="setValue"></input>
+                <input class="input-button color-3" type="button" value="{{$t('message.component.input.clearValue')}}" onclick="resetValue"></input>
+            </div>
+        </div>
+
+        <!-- Example of setting the input placeholder color -->
+        <div class="input-item">
+            <text class="input-hint">{{$t('message.component.input.controlPlaceholderColor')}}</text>
+            <input class="input-text" placeholder="{{$t('message.component.input.placeholder2')}}" style="placeholder-color:#FF0000"></input>
+        </div>
+
+        <!-- Set the enterkeytype and enterkeyclick examples -->
+        <div class="input-item">
+            <text class="input-hint">enterkeytype = [next] search go done send default</text>
+            <input class="input-text" enterkeytype="next" onenterkeyclick="enterkeyclicked" placeholder="{{$t('message.component.input.placeholder3')}}"
+                onchange="showChangePrompt" style="background-color:#fafafa;">
+            </input>
+        </div>
+        <div class="input-item">
+            <text class="input-hint">enterkeytype = next [search] go done send default</text>
+            <input class="input-text" enterkeytype="search" onenterkeyclick="enterkeyclicked" placeholder="{{$t('message.component.input.placeholder4')}}"
+                onchange="showChangePrompt" style="background-color:#fafafa;">
+            </input>
+        </div>
+        <div class="input-item">
+            <text class="input-hint">enterkeytype = next search [go] done send default</text>
+            <input class="input-text" enterkeytype="go" onenterkeyclick="enterkeyclicked" placeholder="enterkeytype = go"
+                onchange="showChangePrompt" style="background-color:#fafafa;">
+            </input>
+        </div>
+        <div class="input-item">
+            <text class="input-hint">enterkeytype = next search go [done] send default</text>
+            <input class="input-text" enterkeytype="done" onenterkeyclick="enterkeyclicked" placeholder="enterkeytype = done"
+                onchange="showChangePrompt" style="background-color:#fafafa;">
+            </input>
+        </div>
+        <div class="input-item">
+            <text class="input-hint">enterkeytype = next search go done [send] default</text>
+            <input class="input-text" enterkeytype="send" onenterkeyclick="enterkeyclicked" placeholder="enterkeytype = send"
+                onchange="showChangePrompt" style="background-color:#fafafa;">
+            </input>
+        </div>
+        <div class="input-item">
+            <text class="input-hint">enterkeytype = next search go done send [default]</text>
+            <input class="input-text" onenterkeyclick="enterkeyclicked" placeholder="enterkeytype = default" onchange="showChangePrompt"
+                style="background-color:#fafafa;">
+            </input>
+        </div>
+
+        <!-- maxlength -->
+        <div class="input-item">
+            <text class="input-hint">maxlength</text>
+            <input class="input-text" placeholder="maxlength = 3" maxlength="3" style="background-color:#fafafa;">
+            </input>
+        </div>
+
+        <!-- selection -->
+        <div class="input-item">
+            <text class="input-hint">selection</text>
+            <input class="input-text" id="selectionInput" value="selection demo" style="background-color:#fafafa;margin-bottom:30px;"
+                @selectionchange="selectionchange">
+            </input>
+            <div class="doc-row">
+                <input class="select-button color-3" type="button" value="select all" onclick="selectAll"></input>
+                <input class="select-button color-3" type="button" value="select [0-2]" onclick="setSelectionRange"></input>
+                <input class="select-button color-3" type="button" value="get select []" onclick="getSelectionRange"></input>
+            </div>
+        </div>
+        <div class="input-item">
+            <text class="input-hint">change test</text>
+            <input class="input-text" id="change" type={{mytype}} placeholder={{myholder}} style="background-color:{{mystyle1}};placeholder-color:{{mystyle2}};flex-grow:{{myflex}};"
+                name={{myname}} value={{myvalue}} onchange="showChangePrompt"></input>
+            <div class="doc-row">
+                <input class="select-button color-3" type="button" value="{{$t('message.component.input.switch')+'button'}}" onclick="changetype0"></input>
+                <input class="select-button color-3" type="button" value="{{$t('message.component.input.switch')+'radio'}}" onclick="changetype1"></input>
+                <input class="select-button color-3" type="button" value="{{$t('message.component.input.switch')+'checkbox'}}" onclick="changetype2"></input>
+            </div>
+        </div>
+        <div class="input-item">
+            <div class="doc-row">
+                <input class="select-button color-3" type="button" value="{{$t('message.component.input.switch')+'text'}}" onclick="changetype3"></input>
+                <input class="select-button color-3" type="button" value="{{$t('message.component.input.switch')+'password'}}" onclick="changetype4"></input>
+                <input class="select-button color-3" type="button" value="{{$t('message.component.input.switch')+'date'}}" onclick="changetype5"></input>
+            </div>
+        </div>
+        <div class="input-item">
+            <div class="doc-row">
+                <input class="select-button color-3" type="button" value="{{$t('message.component.input.switch')+'email'}}" onclick="changetype6"></input>
+                <input class="select-button color-3" type="button" value="{{$t('message.component.input.switch')+'number'}}" onclick="changetype7"></input>
+                <input class="select-button color-3" type="button" value="{{$t('message.component.input.switch')+'time'}}" onclick="changetype8"></input>
+            </div>
+        </div>
+        <!-- font-family -->
+        <div class="input-item">
+            <input class="input-text input-fontfamily" value="this input font-family is serif" style="background-color:#fafafa;margin-bottom:30px;"></input>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .input-item {
+        margin-bottom: 80px;
+        flex-direction: column;
+    }
+
+    .input-item1 {
+        margin-bottom: 80px;
+        margin-right: 20px;
+    }
+
+    .input-hint {
+        margin-left: 30px;
+        margin-bottom: 30px;
+        margin-right: 30px;
+    }
+
+    .doc-row {
+        justify-content: center;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    .flex-grow {
+        flex-grow: 1;
+    }
+
+    .input-text {
+        height: 80px;
+        line-height: 80px;
+        padding-left: 30px;
+        padding-right: 30px;
+        margin-left: 30px;
+        margin-right: 30px;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-color: #999999;
+        font-size: 30px;
+        background-color: #ffffff;
+    }
+
+    .input-text:focus {
+        border-color: #f76160;
+    }
+
+    .input-button {
+        flex: 1;
+        padding-top: 10px;
+        padding-right: 30px;
+        padding-bottom: 10px;
+        padding-left: 30px;
+        margin-left: 30px;
+        font-size: 30px;
+        color: #ffffff;
+    }
+
+    .input-fontfamily {
+        font-family: serif;
+    }
+
+    .select-button {
+        flex: 1;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 30px;
+        color: #ffffff;
+    }
+
+    .color-1 {
+        background-color: #09ba07;
+    }
+
+    .color-2 {
+        background-color: #f76160;
+    }
+
+    .color-3 {
+        background-color: #0faeff;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'input',
+            myflex: '',
+            myholder: '',
+            myname: '',
+            mystyle1: "#ffffff",
+            mystyle2: "#ff0000",
+            mytype: 'text',
+            myvalue: '',
+            inputValue: ''
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'input1' });
+            this.myholder = this.$t('message.component.input.pleaseEnter') + "text";
+        },
+        changetype() {
+            prompt.showToast({
+                message: this.$t('message.component.input.clicked')+'change'
+            })
+        },
+        changetype0() {
+            this.myflex = '';
+            this.myholder = '';
+            this.myname = '';
+            this.mystyle1 = "#0faeff";
+            this.mystyle2 = "#ff0000";
+            this.mytype = 'button';
+            this.myvalue = this.$t('message.component.input').ok;
+        },
+        changetype1() {
+            this.myflex = 1;
+            this.myholder = '';
+            this.myname = 'radio';
+            this.mystyle1 = "#ffffff";
+            this.mystyle2 = "#ff0000";
+            this.mytype = 'radio';
+            this.myvalue = 'radio';
+        },
+        changetype2() {
+            this.myflex = 1;
+            this.myholder = '';
+            this.myname = '';
+            this.mystyle1 = "#ffffff";
+            this.mystyle2 = "#ff0000";
+            this.mytype = 'checkbox';
+            this.myvalue = '';
+        },
+        changetype3() {
+            this.myflex = '';
+            this.myholder = this.$t('message.component.input.pleaseEnter')+'text';
+            this.myname = '';
+            this.mystyle1 = "#ffffff";
+            this.mystyle2 = "#FF0000";
+            this.mytype = 'text';
+            this.myvalue = '';
+        },
+        changetype4() {
+            this.mytype = 'password';
+            this.myflex = '';
+            this.myholder = this.$t('message.component.input.pleaseEnter')+'text';
+            this.myname = '';
+            this.mystyle1 = "#ffffff";
+            this.mystyle2 = "#FF0000";
+            this.myvalue = '';
+        },
+        changetype5() {
+            this.myflex = '';
+            this.myholder = this.$t('message.component.input.pleaseEnter')+'text';
+            this.myname = '';
+            this.mystyle1 = "#ffffff";
+            this.mystyle2 = "#FF0000";
+            this.mytype = 'date';
+            this.myvalue = '';
+        },
+        changetype6() {
+            this.myflex = '';
+            this.myholder = this.$t('message.component.input.pleaseEnter')+'text';
+            this.myname = '';
+            this.mystyle1 = "#ffffff";
+            this.mystyle2 = "#FF0000";
+            this.mytype = 'email';
+            this.myvalue = '';
+        },
+        changetype7() {
+            this.myflex = '';
+            this.myholder = this.$t('message.component.input.pleaseEnter')+'text';
+            this.myname = '';
+            this.mystyle1 = "#ffffff";
+            this.mystyle2 = "#FF0000";
+            this.mytype = 'number';
+            this.myvalue = '';
+        },
+        changetype8() {
+            this.myflex = '';
+            this.myholder = this.$t('message.component.input.pleaseEnter')+'text';
+            this.myname = '';
+            this.mystyle1 = "#ffffff";
+            this.mystyle2 = "#FF0000";
+            this.mytype = 'time';
+            this.myvalue = '';
+        },
+        updateValue(e) {
+            this.inputValue = e.text;
+        },
+        setValue() {
+            this.inputValue = this.$t('message.component.input.welcomeInstall');
+        },
+        resetValue() {
+            this.inputValue = ''
+        },
+        showChangePrompt(e) {
+            prompt.showToast({
+                message: (e.name === undefined ? '' : '---name: ' + e.name)
+                    + (e.value === undefined ? '' : '---value: ' + e.value)
+                    + (e.checked === undefined ? '' : '---checked: ' + e.checked)
+                    + (e.text === undefined ? '' : '---text: ' + e.text)
+            })
+        },
+        enterkeyclicked(e) {
+            let msg = "enterkeyclicked-->" + "value:" + e.value;
+            console.log(msg);
+            prompt.showToast({ message: msg });
+        },
+        truefocus(e) {
+            this.$element('text1').focus({ focus: true })
+            prompt.showToast({
+                message: this.$t('message.component.input.focus')
+            })
+        },
+        falsefocus(e) {
+            this.$element('text1').focus({ focus: false })
+            prompt.showToast({
+                message: this.$t('message.component.input.blur')
+            })
+        },
+        showClickPrompt(msg) {
+            prompt.showToast({
+                message: msg
+            })
+        },
+        selectAll() {
+            this.$element('selectionInput').select();
+        },
+        setSelectionRange() {
+            this.$element('selectionInput').setSelectionRange({ start: 0, end: 3 });
+            //start=3 end=3 Can move the cursor to index=3
+            //this.$element('selectionInput').setSelectionRange({start : 3, end : 3});  
+        },
+        getSelectionRange() {
+            this.$element('selectionInput').getSelectionRange({
+                callback: function (start, end) {
+                    let msg = "getSelectionRange start:" + start + " end:" + end;
+                    prompt.showToast({
+                        message: msg
+                    })
+                }
+            })
+        },
+        selectionchange() {
+            console.log("selectionchange");
+        }
+    }
+</script>

@@ -1,0 +1,99 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="content">
+            <div class="item">
+                <text>{{$t('message.interface.system.message.receiver')}}</text>
+                <input class="item-input" value="{{receiver}}" placeholder="{{$t('message.interface.system.message.receiverNumber')}}" onchange="updateData('receiver')"></input>
+            </div>
+            <div class="item">
+                <text>{{$t('message.interface.system.message').content}}</text>
+                <input class="item-input" value="{{content}}" placeholder="{{$t('message.interface.system.message.smsContent')}}" onchange="updateData('content')"></input>
+            </div>
+            <input class="btn margin-50" type="button" value="{{$t('message.interface.system.message.send')}}" onclick="insertEvent"></input>
+            <input class="btn margin-50" type="button" value="{{$t('message.interface.system.message.readSafely')}}" onclick="readSafely"></input>
+        </div>
+    </div>
+</template>
+<style>
+    @import "../../../common/css/common.css";
+
+    .content {
+        flex-direction: column;
+        padding: 0px 30px 30px 30px;
+    }
+
+    .item {
+        height: 100px;
+        border-bottom-width: 1px;
+        border-bottom-color: #cccccc;
+    }
+
+    .item-input {
+        flex: 1;
+        margin-left: 10px;
+        font-size: 30px;
+    }
+
+    .margin-50 {
+        margin-top: 50px;
+    }
+</style>
+<script>
+    import message from '@system.sms'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'message',
+            receiver: '',
+            content: ''
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'message' })
+        },
+
+        updateData(name, e) {
+            this[name] = e.text
+        },
+        insertEvent() {
+            var that = this;
+            message.send({
+                address: that.receiver,
+                content: that.content,
+                success: function () {
+                    console.log("WXSendMessageModule ux send successly")
+                },
+                fail: function (desc, code) {
+                    console.log('WXSendMessageModule ux handling fail, desc:' + desc + ",code:" + code)
+                    prompt.showToast({
+                        message: desc + "," + code
+                    })
+                },
+                complete: function () {
+                    console.log("  ux complete")
+                }
+            })
+        },
+        readSafely() {
+            var that = this;
+            message.readSafely({
+                success: function () {
+                    console.log("WXSendMessageModule ux readSafely successly")
+                },
+                fail: function (desc, code) {
+                    console.log('WXSendMessageModule ux readSafely fail, desc:' + desc + ",code:" + code)
+                    prompt.showToast({
+                        message: desc + "," + code
+                    })
+                },
+                complete: function () {
+                    console.log(" ux complete")
+                }
+            })
+        },
+
+    }
+</script>

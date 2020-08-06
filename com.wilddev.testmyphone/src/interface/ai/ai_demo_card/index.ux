@@ -1,0 +1,101 @@
+<template>
+  <div class="card_box" onclick="openApp">
+    <div class="title_box">
+      <text class="title_text">{{$t('message.interface.ai.ai_demo_card.littleApp')}}</text>
+    </div>'
+
+    <div class="content_box">
+      <text class="content_text">{{$t('message.interface.ai.ai_demo_card.aiLittleApp')}}</text>
+    </div>
+    <!-- <div class="menu_box">
+            <text class="menu_item menu_item_left" onclick="close1">Ok</text>
+            <text class="menu_item menu_item_right" onclick="close2">Cancel</text>
+        </div> -->
+  </div>
+
+</template>
+<style>
+  .card_box {
+    flex-direction: column;
+    background-color: #e6f7ff;
+  }
+
+  .title_box {
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    height: 72px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .title_text {
+    flex-direction: column;
+    color: #000000;
+    font-size: 30px;
+    margin-left: 24px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    line-height: 30px;
+  }
+
+  .content_box {
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    height: 190px;
+    padding: 20px 12px 20px 15px;
+    font-size: 30px;
+  }
+
+  .content_text {
+    font-size: 30px;
+  }
+
+  /* .menu_box {
+            width: 100%;
+            opacity: 100;
+            background-color: #efefef;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .menu_item {
+            width: 50%;
+            text-align: center;
+            flex-direction: column;
+            line-height: 72px;
+            font-size: 30px;
+            color: #007dff;
+            background-color: transparent;
+        } */
+
+  /* .menu_item_left {
+            border-bottom-left-radius: 12px;
+        }
+
+        .menu_item_right {
+            border-bottom-right-radius: 12px;
+        } */
+</style>
+
+<script>
+  import router from '@system.router'
+  module.exports = {
+    props: ['title'],
+    data: {
+      title: 'Word'
+    },
+    onInit: function () {
+    },
+    openApp() {
+      router.push({ 'uri': '/' })
+    }
+    // close1: function () {
+    //     router.clear();
+    // },
+    // close2: function () {
+    //     router.clear();
+    // }
+  }
+</script>

@@ -1,0 +1,59 @@
+<template>
+    <list class="user-container">
+      <list-item type="aiItem" class="item-container" for="aiItem in aiItems">
+        <div class="item-title">
+          <text class="title-text">{{aiItem.title}}</text>
+        </div>
+        <input type="button" class="item-content {{index%2 === 0 ? 'item-border-left' : ''}}"
+          for="(index, item) in aiItem.items"  onclick="clickItem(item.src)"
+          value="{{item.name}}">
+        </input>
+      </list-item>
+    </list>
+</template>
+
+<style>
+  .user-container {
+    width: 750px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .item-container {
+    width: 750px;
+    flex-wrap: wrap;
+  }
+  .item-title {
+    width: 750px;
+    height: 60px;
+    padding-left: 30px;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+  .item-title > .title-text {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 20px;
+  }
+  .item-content {
+    width: 375px;
+    height: 80px;
+    background-color: #ffffff;
+    padding-left: 30px;
+    flex-grow: 1;
+    border-bottom-width: 1px;
+    border-bottom-color: #e8e8e8;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 27px;
+  }
+  .item-border-left {
+    border-right-width: 1px;
+    border-right-color: #e8e8e8;
+  }
+</style>
+
+<script>
+  export default {
+    props: ['aiItems'],
+    clickItem: function (src) {
+      this.$emit('clickItem', src)
+    }
+  }
+</script>

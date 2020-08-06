@@ -1,0 +1,147 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+    <text class="txt" onclick="openWeb">{{$t('message.component.web.huaweiWeb')}}</text>
+    <text class="txt2" onclick="openFileUploadSupportWeb">{{$t('message.component.web.FileUpload')}}</text>
+    <text class="txt2" onclick="webcommunication">{{$t('message.component.web.communication')}}</text>
+    <text class="txt2" onclick="playvideo">{{$t('message.component.web.video')}}</text>
+    <text class="txt2" onclick="testDeepLink">{{$t('message.component.web.deepLink')}}</text>
+    <text class="txt2" onclick="testExpiredCertificate">{{$t('message.component.web.expiredCertificate')}}</text>
+    <text class="txt2" onclick="testUntrustedCertificate">{{$t('message.component.web.untrustedCertificate')}}</text>
+    <text class="txt2" onclick="customeUADefault">{{$t('message.component.web.customeUADefault')}}</text>
+    <text class="txt2" onclick="customeUASystem">{{$t('message.component.web.customeUASystem')}}</text>
+    <text class="txt2" onclick="customeUAother">{{$t('message.component.web.customeUAother')}}</text>
+    <text class="txt2" onclick="customeUAotherNewWindow">{{$t('message.component.web.customeUAotherNewWindow')}}</text>
+    <text class="txt2" onclick="openWindowjumpPolicy">{{$t('message.component.web.openWindowjumpPolicy')}}</text>
+  </div>
+</template>
+<style>
+  @import "../../../common/css/common.css";
+  .txt {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: #fafafa;
+    text-decoration: underline;
+    text-align: center;
+  }
+
+  .txt2 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 50px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: #fafafa;
+    text-decoration: underline;
+    text-align: center;
+  }
+</style>
+<script>
+  import router from "@system.router"
+  export default {
+    data: {
+      componentName: 'web',
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: 'web' });
+    },
+    openWeb() {
+      var url = "http://www.huawei.com/";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url }
+      })
+    },
+    openFileUploadSupportWeb() {
+      var url = "http://117.78.34.30:9094//fastapp/download/webview/file_chooser_demo_3.html";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url }
+      })
+    },
+    webcommunication() {
+      var url = "http://lfmemberdev.hwcloudtest.cn:9094/fastapp/download/webview/webcommunication.html";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url }
+      })
+    },
+    allowthirdcookie() {
+      var url = "https://page.cainiao.com/mcn/publichome/pkg.html";
+      //  var url = "https://www.hao123.com/"
+
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url },
+
+      })
+    },
+    playvideo() {
+      var url = "http://wapv.sogou.com/teleplay/orswyzlqnrqxsxzwgi3denztbhol7t5lwsvq.html";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url }
+      })
+    },
+    testDeepLink() {
+      var url = "http://117.78.34.30:9094//fastapp/download/webview/deepLink_test.html";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url }
+      })
+    },
+    testExpiredCertificate() {
+      var url = "https://expired.badssl.com";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url }
+      })
+    },
+    testUntrustedCertificate() {
+      var url = "https://untrusted-root.badssl.com";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url }
+      })
+    },
+    customeUADefault: function () {
+      var url = "http://www.ip138.com/useragent/";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url, ua: 'default' }
+      })
+    },
+    customeUASystem: function () {
+      var url = "http://www.ip138.com/useragent/";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url, ua: 'system' }
+      })
+    },
+    customeUAother: function () {
+      var url = "http://www.ip138.com/useragent/";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url, ua: '12345' }
+      })
+    },
+    customeUAotherNewWindow: function () {
+      var url = "https://www.w3school.com.cn/tiy/t.asp?f=hdom_openwindow";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url, ua: 'a quickapp useragent' }
+      })
+    },
+    openWindowjumpPolicy: function() {
+      var url = "https://www.w3school.com.cn/htmldom/met_win_open.asp";
+      router.push({
+        uri: 'component/basic/web/detail',
+        params: { websrc: url, jumppolicy: 'browser' }
+      })
+    }
+  }
+</script>

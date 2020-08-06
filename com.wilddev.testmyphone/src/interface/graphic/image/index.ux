@@ -1,0 +1,244 @@
+<template>
+    <div class="container">
+
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <input class="btn" type="button" value="compressImage" onclick="compressImage" />
+        <input class="btn" type="button" value="getImageInfo" onclick="getImageInfo" />
+        <input class="btn" type="button" value="editImage" onclick="editImage" />
+        <input class="btn" type="button" value="applyOperations" onclick="applyOperations" />
+        <input type="button" class="btn" onclick="pickPhoto" value="{{$t('message.interface.graphic.image.pickPhoto')}}" />
+        <input class="btn" type="button" value="pickColor" onclick="pickColor" />
+        <input class="btn" type="button" value="{{$t('message.interface.graphic.image.getExif')}}" onclick="getExifAttributes" />
+        <input class="btn" type="button" value="{{$t('message.interface.graphic.image.setExif')}}" onclick="setExifAttributes" />
+        <image src="{{editimageimage}}"></image>
+        <image src="{{applyOperationsimage}}"></image>
+        <image style="margin-left: 60px; margin-right: 60px;" src="{{pickColorSrc}}"></image>
+        <text class="pickColor" style="background-color: {{pickedColor}}"> pickedColor</text>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+    .pickColor {
+        height: 80px;
+        text-align: center;
+        border-radius: 5px;
+        margin-right: 60px;
+        margin-left: 60px;
+        margin-bottom: 50px;
+        color: #ffffff;
+        font-size: 30px;
+    }
+</style>
+
+<script>
+    import media from '@system.media'
+    import image from '@system.image'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'image',
+            componentData: {},
+            compressImageUri: "",
+            editimageimage: "",
+            applyOperationsimage: "",
+            pickColorSrc: "",
+            pickedColor: "#ffffff",
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'image' })
+            this.componentData = this.$t('message.interface.graphic.image');
+        },
+        compressImage: function () {
+            var that = this;
+            image.compressImage({
+                uri: "/common/img/compress.jpg",
+                ratio: 2,
+                format: "JPEG",
+                success: function (data) {
+                    console.log(data.uri);
+                    prompt.showToast({
+                        message: "success:" + data.uri
+
+                    });
+                    that.compressImageUri = data.uri
+                },
+                fail: function (data, code) {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, code=" + code + "----data" + data
+                    })
+                }
+            })
+
+        },
+        pickPhoto: function () {
+            var that = this;
+            media.pickImage({
+                success: function (ret) {
+                    that.pathPhotoPick = ret.uri;
+                    that.photoUri = ret.uri;
+                    console.log(ret.uri)
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "pickImage fail------" + errocode + ': ' + erromsg });
+                    console.log('media.pickImage----------' + errocode + ': ' + erromsg)
+                },
+                cancel: function () {
+                    console.log('media.pickImage----------cancel')
+                },
+                complete: function () {
+                    console.log('media.pickImage----------complete')
+                }
+            })
+        },
+        pickColor: function () {
+            var that = this;
+            that.pickColorSrc = that.photoUri;
+            // that.pickColorSrc = "/common/img/pickcolor1.jpg",
+            // that.pickColorSrc = "https://www-file.huawei.com/-/media/corporate/images/home/video/fully_connecte_world_960.jpg",
+            image.pickColor({
+                uri: that.photoUri,
+                // uri: "/common/img/pickcolor1.jpg",
+                // uri: "https://www-file.huawei.com/-/media/corporate/images/home/video/fully_connecte_world_960.jpg",
+                success: function (data) {
+                    console.log(data.color);
+                    that.pickedColor = data.color;
+                },
+                fail: function (data, code) {
+                    console.log("handling fail, code=" + code);
+                }
+            });
+
+            image.pickColor({
+                version: 1, // Can take 0: monochrome; 1:multi-color. Default 0
+                uri: "/common/img/pickcolor1.jpg",
+                // uri: "https://www-file.huawei.com/-/media/corporate/images/home/video/fully_connecte_world_960.jpg",
+                success: function (data) {
+                    console.log(data.colorMap);
+                },
+                fail: function (data, code) {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        getImageInfo: function () {
+            var that = this;
+            image.getImageInfo({
+                uri: that.compressImageUri,
+                success: function (data) {
+                    console.log("uri:" + data.uri + "\n" + "width:" + data.width + "\n" + "height:" + data.height + "\n" + "size:" + data.size)
+                    prompt.showToast({
+                        message: "uri:" + data.uri + "\n" + "width:" + data.width + "\n" + "height:" + data.height + "\n" + "size:" + data.size
+                    })
+                },
+                fail: function (data, code) {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "code=" + code
+                    })
+                }
+            })
+
+        },
+        editImage: function () {
+            var that = this;
+            image.editImage({
+                uri: "/common/img/compress.jpg",
+                success: function (data) {
+                    console.log(data.uri);
+                    that.editimageimage = data.uri;
+                },
+                cancel: function () {
+                    console.log("edit cancel");
+                    prompt.showToast({
+                        message: "edit cancel"
+                    })
+                },
+                fail: function (data, code) {
+                    console.log("edit fail, code=" + code);
+                    prompt.showToast({
+                        message: "edit fail, code=" + code
+                    })
+                }
+            })
+
+        },
+        applyOperations() {
+            var that = this;
+            image.applyOperations({
+                uri: "/common/img/compress.jpg",
+                operations: [
+                    {
+                        action: 'scale',
+                        scaleX: 0.5,
+                        scaleY: 0.5
+                    },
+                    {
+                        action: 'crop',
+                        width: 200,
+                        height: 200
+                    },
+                    {
+                        action: 'rotate',
+                        degree: 90,
+                    }
+                ],
+                quality: 90,
+                format: 'webp',
+                success: function (data) {
+                    console.log(data.uri);
+                    that.applyOperationsimage = data.uri;
+                },
+                fail: function (data, code) {
+                    console.log("applyOperation fail, code=" + code);
+                    prompt.showToast({
+                        message: "applyOperation fail, code=" + code
+                    })
+                }
+            })
+        },
+        getExifAttributes() {
+            image.getExifAttributes({
+                uri: "/common/img/xmad.jpg",
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    prompt.showToast({
+                        message: JSON.stringify(data)
+                    })
+                },
+                fail: function (data, code) {
+                    console.log("applyOperation fail, code=" + code);
+                    prompt.showToast({
+                        message: "applyOperation fail, code=" + code
+                    })
+                }
+            });
+        },
+        setExifAttributes() {
+            let that=this;
+            image.setExifAttributes({
+                uri: "/common/img/xmad.jpg",
+                attributes: {
+                    Model: "iphone"
+                },
+                success: function (data) {
+                    console.log("success");
+                    prompt.showToast({
+                        message: that.componentData.setSuccess
+                    })
+                },
+                fail: function (data, code) {
+                    console.log("applyOperation fail, code=" + code);
+                    prompt.showToast({
+                        message: "applyOperation fail, code=" + code
+                    })
+                }
+            });
+        }
+    }
+</script>

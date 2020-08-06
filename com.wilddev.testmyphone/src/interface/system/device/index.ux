@@ -1,0 +1,454 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.pageGetInfo')}}</text>
+                <text>{{pageInfo}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getPageInfo" value="{{$t('message.interface.system.device.getInfoByPage')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.themeInfo')}}</text>
+                <text>{{themeInfo}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getThemeInfo" value="{{$t('message.interface.system.device.getThemeInfo')}}" />
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.themeInfoSync')}}</text>
+                <text>{{themeInfoSync}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getThemeSync" value="{{$t('message.interface.system.device.getThemeInfo')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.deviceInfo')}}</text>
+                <text>{{deviceInfo}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getDeviceInfo" value="{{$t('message.interface.system.device.getDeviceInfo')}}" />
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.deviceInfoSync')}}</text>
+                <text>{{deviceInfoSync}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getDeviceInfoSync" value="{{$t('message.interface.system.device.getDeviceInfo')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.id')}}</text>
+                <text>{{id}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getId" value="{{$t('message.interface.system.device.getId')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device'.deviceId)}}</text>
+                <text>{{deviceId}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getDeviceId" value="{{$t('message.interface.system.device.getDeviceId')}}" />
+        </div>
+
+         <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.deviceUDID')}}</text>
+                <text>{{UDID}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getUDID" value="{{$t('message.interface.system.device.getDeviceUDID')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.deviceOAID')}}</text>
+                <text>{{OAID}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getOAID" value="{{$t('message.interface.system.device.getDeviceOAID')}}<" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.serviceCountry')}}</text>
+                <text>{{serviceCountryCode}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getServiceCountryCode" value="{{$t('message.interface.system.device.getServiceCountry')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">deviceUserId
+                <text>$t('message.interface.system.device.deviceUserId')}}</text>
+                <text>{{userId}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getUserId" value="{{$t('message.interface.system.device.getUserId')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.advertisingId')}}</text>
+                <text>{{advertisingId}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getAdvertisingId" value="{{$t('message.interface.system.device.getAdvertisingId')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.totalStorage')}}</text>
+                <text>{{totalStorage}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getTotalStorage" value="{{$t('message.interface.system.device.getTotalStorage')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.availableStorage')}}</text>
+                <text>{{availableStorage}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getAvailableStorage" value="{{$t('message.interface.system.device.getAvailableStorage')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.cpuInfo')}}</text>
+                <text>{{cpuInfo}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getCpuInfo" value="{{$t('message.interface.system.device.getCpuInfo')}}" />
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.sn')}}</text>
+                <text>{{SNinfo}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getSN" value="{{$t('message.interface.system.device.getSNInfo')}}" />
+        </div>
+
+         <div class="item-container">
+            <div class="item-content">
+                <text>{{$t('message.interface.system.device.hostinfo')}}</text>
+                <text>{{hostInfo}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getHost" value="{{$t('message.interface.system.device.getHostinfo')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+        margin-bottom: 50px;
+        align-items: flex-start;
+    }
+</style>
+
+<script>
+    import device from '@system.device'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'device',
+            componentData: {},
+            deviceInfo: '',
+            themeInfo: '',
+            deviceInfoSync: '',
+            themeInfoSync: '',
+            id: '',
+            deviceId: "",
+            UDID: "",
+            OAID: "",
+            userId: "",
+            serviceCountryCode:"",
+            advertisingId: "",
+            totalStorage: "",
+            availableStorage: "",
+            cpuInfo: "",
+            SNinfo: "",
+            pageInfo: "",
+            hostInfo: ""
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'device' })
+            this.componentData = this.$t('message.interface.system.device');
+            device.onFontScaleChange({
+                callback: function (ret) {
+                    console.log("fontScale ==" + ret.fontScale);
+                    prompt.showToast({
+                        message: "fontScale ==" + ret.fontScale
+                    })
+                }
+            });
+        },
+        getPageInfo: function () {
+            this.pageInfo = "windowHeight = " + this.$page.windowHeight
+                + " windowWidth = " + this.$page.windowWidth
+                + " statusBarHeight = " + this.$page.statusBarHeight
+
+        },
+        getDeviceInfo: function () {
+            var that = this;
+            device.getInfo({
+                success: function (ret) {
+                    that.deviceInfo = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.deviceInfo = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+
+        },
+        getDeviceInfoSync: function () {
+
+            try {
+                var info = device.getInfoSync()
+                this.deviceInfoSync = JSON.stringify(info);
+            } catch (e) {
+
+            }
+
+        },
+        getThemeInfo: function () {
+            var that = this;
+            device.getTheme({
+                success: function (ret) {
+                    that.themeInfo = JSON.stringify(ret);
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        },
+        getThemeSync: function () {
+
+            try {
+                var theme = device.getThemeSync()
+                this.themeInfoSync = JSON.stringify(theme);
+            } catch (e) {
+
+            }
+
+        },
+        getId: function () {
+            var that = this;
+            device.getId({
+                type: ["device", "mac", "user", "oaid"],
+                success: function (ret) {
+                    that.id = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.id = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        },
+        getDeviceId: function () {
+            var that = this;
+            device.getDeviceId({
+                success: function (ret) {
+                    that.deviceId = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.deviceId = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        },
+
+        getUDID: function(){
+            var that = this;
+            device.getUDID({
+                success: function (ret){
+                    that.UDID = JSON.stringify(ret);
+                },
+                fail: function(erromsg, errocode){
+                     that.UDID = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: "getUDID sucess "
+                    })
+                }
+            })
+        },
+        getServiceCountryCode: function(){
+            var that = this;
+            device.getServiceCountryCode({
+                success: function (ret){
+                    that.serviceCountryCode = ret.serviceCountryCode;
+                },
+                fail: function(erromsg, errocode){
+                    that.serviceCountryCode = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: "getServiceCountryCode success"
+                    })
+                }
+            })
+        },
+        getOAID: function(){
+            var that = this;
+            device.getOAID({
+                success: function (ret){
+                    that.OAID = JSON.stringify(ret);
+                },
+                fail: function(erromsg, errocode){
+                     that.OAID = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: "getOAID "+device.allowTrackOAID
+                    })
+                }
+            })
+        },
+        getUserId: function () {
+            var that = this;
+            device.getUserId({
+                success: function (ret) {
+                    that.userId = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.userId = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        },
+        getAdvertisingId: function () {
+            var that = this;
+            device.getAdvertisingId({
+                success: function (ret) {
+                    that.advertisingId = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.advertisingId = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        },
+        getTotalStorage: function () {
+            var that = this;
+            device.getTotalStorage({
+                success: function (ret) {
+                    that.totalStorage = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.totalStorage = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        },
+        getAvailableStorage: function () {
+            var that = this;
+            device.getAvailableStorage({
+                success: function (ret) {
+                    that.availableStorage = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.availableStorage = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        },
+        getCpuInfo: function () {
+            var that = this;
+            device.getCpuInfo({
+                success: function (ret) {
+                    that.cpuInfo = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.cpuInfo = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        },
+        getSN: function () {
+            var that = this;
+            device.getSerial({
+                success: function (ret) {
+                    that.SNinfo = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.SNinfo = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        },
+
+        getHost: function () {
+            var that = this;
+            device.host({
+                success: function (ret) {
+                    console.log("host succ data:" + JSON.stringify(ret));
+                    that.hostInfo = JSON.stringify(ret);
+                },
+                fail: function (erromsg, errocode) {
+                    that.hostInfo = errocode + ': ' + erromsg
+                },
+                complete: function () {
+                    prompt.showToast({
+                        message: that.componentData.requestSuccess
+                    })
+                }
+            })
+        }
+
+    }
+</script>

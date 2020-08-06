@@ -1,0 +1,164 @@
+<import name="image-container" src="../Common/ImageContainer.ux"></import>
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="photo-selector" src="../Common/PhotoSelector.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <image-container photo-uri={{photoUri}} info="{{$t('message.interface.ai.simple_background_ocr.info')}}"></image-container>
+    <text class="container-txt">{{text}}</text>
+    <main-btn onclick-main="openPhotoSelector" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.simple_background_ocr.btnText')}}" btn-text-err="{{$t('message.interface.ai.simple_background_ocr.btnTextErr')}}"
+      complete={{complete}} back-result={{backResult}} back-data={{backData}}></main-btn>
+    <photo-selector if="{{isPSshow}}" onhide="hidePhotoSelector"></photo-selector>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+
+  .container-txt {
+    line-height: 30px;
+    font-size: 26px;
+  }
+</style>
+
+<script>
+  import ai from '@system.ai';
+  import prompt from '@system.prompt';
+
+  export default {
+    data: {
+      componentData: {},
+      text: '',
+      photoUri: '../Common/images/testScreen.png',
+      isPSshow: false,
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: '',
+      roi: { left: 0, top: 100, right: 300, bottom: 400 },
+      level: 1
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openErrorUse(e) {
+      var a = e.detail.split(';')[0], b = e.detail.split(';')[1], c = e.detail.split(';')[2];
+      this.photoUri = this.changeMsg(a);
+      let objTest = this.changeMsg(b);
+      if (typeof objTest === 'string') {
+        let arr = objTest.split(',');
+        objTest = { left: 0, top: 100, right: 300, bottom: 400 };
+        for (var i = 0, len = arr.length; i < len; i++) {
+          arr[i] = this.changeMsg(arr[i], true);
+        }
+        objTest.left = arr[0];
+        objTest.top = arr[1];
+        objTest.right = arr[2];
+        objTest.bottom = arr[3];
+      }
+      this.roi = objTest;
+      this.level = this.changeMsg(c, true);
+      this.test();
+    },
+    openPhotoSelector() {
+      this.isPSshow = true
+    },
+    hidePhotoSelector() {
+      this.isPSshow = false
+    },
+    getPhotoUri(obj) {
+      this.photoUri = obj.detail;
+      this.isLoadingShow = true;
+      this.test();
+    },
+    test() {
+      this.text = '';
+      this.complete = '';
+      let uri = this.photoUri;
+      console.log(this.roi);
+      console.log('start test score, uri: ' + uri);
+
+      let self = this;
+      ai.detectText({
+        uri: uri,
+        roi: self.roi,
+        level: self.level,
+        success: (res) => {
+          setTimeout(() => {
+            self.text = res.value;
+            self.isLoadingShow = false;
+          }, 1000)
+          console.log('test textdetector success: ' + res.value);
+          self.backResult = 'success';
+          self.backData = JSON.stringify(res && res.value);
+        },
+        fail: (erromsg, errocode) => {
+          setTimeout(() => {
+            prompt.showToast({ message: self.componentData.error });
+            self.isLoadingShow = false;
+          }, 1000)
+          console.log('test textdetector error ' + errocode + ': ' + erromsg);
+          self.backResult = 'fail';
+          self.backData = 'code:' + errocode + ' msg:' + erromsg;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.simple_background_ocr');
+      this.$page.setTitleBar({ text: this.componentData.title });
+      this.$on('getPhotoUri', this.getPhotoUri);
+      this.isLoadingShow = true;
+    },
+    onReady() {
+      this.test()
+    }
+  }
+</script>

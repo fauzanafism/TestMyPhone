@@ -1,0 +1,276 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <div class="item-content-detail">
+                    <text class="txt">key:</text>
+                    <input class="input" placeholder="{{ $t('message.interface.fileData.exchange.keyPlaceholder') }}" value="{{exchangeKey}}" onchange="keyFn" />
+                </div>
+                <div class="item-content-detail">
+                    <text class="txt">value:</text>
+                    <input class="input" placeholder="{{ $t('message.interface.fileData.exchange.valuePlaceholder') }}" value="{{exchangeValue}}" onchange="valueFn" />
+                </div>
+
+            </div>
+            <!-- Set data -->
+            <input type="button" class="btn" onclick="setAppExchange" value="{{ $t('message.interface.fileData.exchange.setAppExchange') }}" />
+            <input type="button" class="btn" onclick="setGlobalExchange" value="{{ $t('message.interface.fileData.exchange.setGlobalExchange') }}" />
+            <!-- Read data -->
+            <input type="button" class="btn" onclick="getAppExchange" value="{{ $t('message.interface.fileData.exchange.getAppExchange') }} key:{{exchangeKey}}" />
+            <input type="button" class="btn" onclick="getGlobalExchange" value="{{ $t('message.interface.fileData.exchange.getGlobalExchange') }} key:{{exchangeKey}}" />>
+            <!-- To grant authorization -->
+            <input type="button" class="btn" onclick="grantPermission" value="{{ $t('message.interface.fileData.exchange.grantPermission') }}" />
+            <input type="button" class="btn" onclick="revokePermission" value="{{ $t('message.interface.fileData.exchange.revokePermission') }}" />
+            <!-- Delete operation -->
+            <input type="button" class="btn" onclick="clearExchange" value="{{ $t('message.interface.fileData.exchange.clearExchange') }}" />
+            <input type="button" class="btn" onclick="removeExchange" value="{{ $t('message.interface.fileData.exchange.removeExchange') }}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-bottom: 100px;
+    }
+
+    .item-content-detail {
+        align-items: center;
+    }
+
+    .input {
+        flex: 1;
+        font-size: 30px;
+        padding-left: 20px;
+    }
+
+    .txt {
+        width: 100px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: right;
+    }
+</style>
+
+<script>
+    import exchange from '@service.exchange'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'exchange',
+            exchangeKey: '',
+            exchangeValue: '',
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'exchange' })
+        },
+        keyFn: function (e) {
+            this.exchangeKey = e.text;
+        },
+        valueFn: function (e) {
+            this.exchangeValue = e.text;
+        },
+        setAppExchange: function () {
+            var that = this;
+            if (this.exchangeKey && this.exchangeValue) {
+                exchange.set({
+                    key: this.exchangeKey,
+                    value: this.exchangeValue,
+                    scope: 'application',
+                    success: function (ret) {
+                        prompt.showToast({
+                            message: "{key:" + that.exchangeKey + ",value:" + that.exchangeValue + "}",
+                        })
+                    },
+                    fail: function (erromsg, errocode) {
+                        prompt.showToast({ message: 'set fail --- ' + errocode + ':' + erromsg });
+                        console.info('set fail --- ' + errocode + ':' + erromsg)
+                    },
+                    complete: function () {
+                        prompt.showToast({ message: "set complete" });
+                        console.info('set complete  ')
+                    }
+                })
+            } else {
+                prompt.showToast({
+                    message: "Please enter the key and value values"
+                })
+            }
+        },
+        setGlobalExchange: function () {
+            var that = this;
+            if (this.exchangeKey && this.exchangeValue) {
+                exchange.set({
+                    key: this.exchangeKey,
+                    value: this.exchangeValue,
+                    scope: 'global',
+                    success: function (ret) {
+                        prompt.showToast({
+                            message: "{key:" + that.exchangeKey + ",value:" + that.exchangeValue + "}",
+                        })
+                    },
+                    fail: function (erromsg, errocode) {
+                        prompt.showToast({ message: 'set fail --- ' + errocode + ':' + erromsg });
+                        console.info('set fail --- ' + errocode + ':' + erromsg)
+                    },
+                    complete: function () {
+                        prompt.showToast({ message: "set complete" });
+                        console.info('set complete  ')
+                    }
+                })
+            } else {
+                prompt.showToast({
+                    message: "Please enter the key and value values"
+                })
+            }
+        },
+        getAppExchange: function () {
+            var that = this;
+            exchange.get({
+                package: 'com.fastapp.sample',
+                scope: 'application',
+                sign: '6d3e6a3dcbdadb0aa94f64e33a36b01254cb6ef7e14be282d885cd95aeb952e0',
+                key: this.exchangeKey,
+                success: function (ret) {
+                    console.info('exchange.get(): ', JSON.stringify(ret))
+                    prompt.showToast({
+                        message: 'value: ' + ret,
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'get fail --- ' + errocode + ':' + erromsg });
+                    console.info('get fail --- ' + errocode + ':' + erromsg)
+                },
+                complete: function () {
+                    console.info('get complete  ')
+                }
+            })
+        },
+        getGlobalExchange: function () {
+            var that = this;
+            exchange.get({
+                package: '',
+                sign: '',
+                scope: 'global',
+                key: this.exchangeKey,
+                success: function (ret) {
+                    console.info('storage.get(): ', JSON.stringify(ret))
+                    that.storageShow = ret;
+                    prompt.showToast({
+                        message: 'value: ' + ret,
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'get fail --- ' + errocode + ':' + erromsg });
+                    console.info('get fail --- ' + errocode + ':' + erromsg)
+                },
+                complete: function () {
+                    console.info('get complete  ')
+                }
+            })
+        },
+        grantPermission: function () {
+            var that = this;
+            exchange.grantPermission({
+                package: 'com.fastapp.sample',
+                sign: '6d3e6a3dcbdadb0aa94f64e33a36b01254cb6ef7e14be282d885cd95aeb952e0',
+                key: this.exchangeKey,
+                success: function (ret) {
+                    console.info('exchange.grantPermission(): ', JSON.stringify(ret))
+                    prompt.showToast({
+                        message: 'value: ' + ret,
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'grantPermission fail --- ' + errocode + ':' + erromsg });
+                    console.info('grantPermission fail --- ' + errocode + ':' + erromsg)
+                },
+                complete: function () {
+                    console.info('grantPermission complete  ')
+                }
+            })
+        },
+        revokePermission: function () {
+            var that = this;
+            exchange.revokePermission({
+                package: 'com.fastapp.sample',
+                key: this.exchangeKey,
+                success: function (ret) {
+                    console.info('exchange.revokePermission(): ', JSON.stringify(ret))
+                    prompt.showToast({
+                        message: 'value: ' + ret,
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'revokePermission fail --- ' + errocode + ':' + erromsg });
+                    console.info('revokePermission fail --- ' + errocode + ':' + erromsg)
+                },
+                complete: function () {
+                    console.info('revokePermission complete  ')
+                }
+
+            })
+        },
+
+        clearExchange: function () {
+            var that = this;
+            exchange.clear({
+                success: function () {
+                    prompt.showToast({
+                        message: "success",
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'clear fail --- ' + errocode + ':' + erromsg });
+                    console.info('clear fail --- ' + errocode + ':' + erromsg)
+                },
+                complete: function () {
+                    prompt.showToast({ message: "clear complete" })
+                    console.info('clear complete  ')
+                }
+            })
+        },
+        removeExchange: function () {
+            var that = this;
+            if (this.exchangeKey) {
+                exchange.remove({
+                    key: this.exchangeKey,
+                    success: function () {
+                        prompt.showToast({
+                            message: "success",
+                        })
+                    },
+                    fail: function (erromsg, errocode) {
+                        prompt.showToast({ message: 'get fail --- ' + errocode + ':' + erromsg });
+                        console.info('get fail --- ' + errocode + ':' + erromsg)
+                    },
+                    complete: function () {
+                        console.info('get complete  ')
+                    }
+                })
+            } else {
+                prompt.showToast({ message: 'key is null' });
+            }
+
+        }
+    }
+</script>

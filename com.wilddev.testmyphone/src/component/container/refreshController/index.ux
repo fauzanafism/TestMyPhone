@@ -1,0 +1,54 @@
+<template>
+    <div class="containerd">
+        <div class="item-container">
+            <input class="btn" type="button" value="refresh-auto" onclick="detail('component/container/refreshAuto')" />
+        </div>
+        <div class="item-container">
+            <input class="btn" type="button" value="refresh-pulldown" onclick="detail('component/container/refresh')" />
+        </div>
+        <div class="item-container">
+            <input class="btn" type="button" value="refresh-auto-withList" onclick="detail('component/container/refreshAutoWithList')"
+            />
+        </div>
+        <div class="item-container">
+            <input class="btn" type="button" value="refresh-pulldown-withList" onclick="detail('component/container/refreshPullDownWithList')"
+            />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import '../../../common/css/common.css';
+    .containerd {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+    import router from '@system.router'
+
+    module.exports = {
+        data: {
+            componentName: 'refresh_controller'
+        },
+        onInit() {
+            this.$page.setTitleBar({
+                textColor: '#ffffff',
+                backgroundColor: '#007DFF',
+                backgroundOpacity: 0.5,
+            })
+        },
+        detail: function (src) {
+            router.push({ uri: src });
+        }
+    }
+</script>

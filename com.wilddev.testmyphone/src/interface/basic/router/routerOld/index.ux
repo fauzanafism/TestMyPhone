@@ -1,0 +1,129 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+      <input type="button" class="btn" onclick="routeHome" value="{{$t('message.interface.basic.router.routerOld.router1')}}" />
+      <input type="button" class="btn" onclick="route" value="{{$t('message.interface.basic.router.routerOld.router2')}}" />
+      <input type="button" class="btn" onclick="routeData" value="{{$t('message.interface.basic.router.routerOld.router3')}}" />
+      <input type="button" class="btn" onclick="routeQuery" value="{{$t('message.interface.basic.router.routerOld.router4')}}" />
+      <input type="button" class="btn" onclick="routeDataParams" value="{{$t('message.interface.basic.router.routerOld.router5')}}" />
+      <input type="button" class="btn" onclick="routeTel" value="{{$t('message.interface.basic.router.routerOld.router6')}}" />
+      <input type="button" class="btn" onclick="routeSms" value="{{$t('message.interface.basic.router.routerOld.router7')}}" />
+      <input type="button" class="btn" onclick="routeMailto" value="{{$t('message.interface.basic.router.routerOld.router8')}}" />
+      <input type="button" class="btn" onclick="routeBack" value="{{$t('message.interface.basic.router.routerOld.router9')}}" />
+      <input type="button" class="btn" onclick="routeBackDest" value="{{$t('message.interface.basic.router.routerOld.router10')}}" />
+      <input type="button" class="btn" onclick="routeReplace" value="{{$t('message.interface.basic.router.routerOld.router11')}}" />
+      <input type="button" class="btn" onclick="routeDetail" value="{{$t('message.interface.basic.router.routerOld.router12')}}" />
+      <input type="button" class="btn" onclick="routeOtherQuickapp" value="{{$t('message.interface.basic.router.routerOld.router13')}}" />
+      <input type="button" class="btn" onclick="routeSystemLocation" value="{{$t('message.interface.basic.router.routerOld.router14')}}" />
+      <input type="button" class="btn" onclick="routeQuickappInfo" value="{{$t('message.interface.basic.router.routerOld.router15')}}" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../../common/css/common.css";
+
+  .item-container {
+    margin-bottom: 20px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+</style>
+
+<script>
+  import router from '@system.router'
+
+  export default {
+    data: {
+      show: true,
+      componentName: 'router',
+      componentData: {},
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'router' })
+      this.componentData = this.$t('message.interface.basic.router.routerOld');
+    },
+    routeHome: function () {
+      router.push({
+        uri: '/main'
+      });
+    },
+    route: function () {
+      router.push({
+        uri: '/'
+      });
+    },
+    routeTel: function () {
+      router.push({
+        uri: 'tel:10086'
+      });
+    },
+    routeSms: function () {
+      router.push({
+        uri: 'sms:',
+        params: {
+          body: "test send message"
+        }
+      });
+    },
+    routeMailto: function () {
+      router.push({
+        uri: 'mailto:'
+      });
+    },
+    routeBack: function () {
+      router.back();
+    },
+    routeBackDest: function () {
+      router.back({ path: "/main" });
+    },
+    routeReplace: function () {
+      router.replace({
+        uri: '/main'
+      })
+    },
+    routeData: function () {
+      router.push({
+        uri: '/interface/basic/router/detail',
+        params: { privateData: this.componentData.privateData, protectedData: this.componentData.protectedData, publicData: this.componentData.publicData }
+      })
+    },
+    routeQuery: function () {
+      router.push({
+        uri: `/interface/basic/router/detail?privateData=${this.componentData.privateData}&protectedData=${this.componentData.protectedData}&publicData=${this.componentData.publicData}`,
+      })
+    },
+    routeDataParams: function () {
+      router.push({
+        uri: `/interface/basic/router/detail?privateData=${this.componentData.privateData}&protectedData=${this.componentData.protectedData}&publicData=${this.componentData.publicData}`,
+        params: { privateData: this.componentData.privateData, publicData: this.componentData.publicData }
+      })
+    },
+    routeDetail: function () {
+      router.replace({
+        uri: 'interface/basic/router/detail',
+        params: { privateData: this.componentData.privateData, protectedData: this.componentData.protectedData, publicData: this.componentData.publicData }
+      })
+    },
+    routeOtherQuickapp: function () {
+      router.push({
+        uri: 'hap://app/com.ctrip.app?key=value'
+      })
+    },
+    routeSystemLocation: function () {
+      router.push({
+        uri: 'hap://settings/location_source_manager'
+      })
+    },
+    routeQuickappInfo: function () {
+      router.push({
+        uri: 'hap://settings/permission_manager'
+      })
+    }
+  }
+</script>

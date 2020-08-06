@@ -1,0 +1,161 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">{{$t('message.component.video.title')}}</text>
+            <stack id="stackDemo01">
+                <div class="item-content">
+                    <video id="video" poster="https://www.quickapp.cn/assets/images/home/video.png"
+                        orientation="portrait" onprepared="prepared" onstart="start" onpause="pause" onfinish="finish"
+                        onerror="error" onseeking="eventSeeking" onseeked="eventSeeked" ontimeupdate="eventTimeupdate"
+                        src="https://swsdl.vivo.com.cn/appstore/developer/uploadfile/20180323/20180323183010837.mp4"
+                        @fullscreenchange="onFullscreenchange" controls="{{showControls}}" muted="{{muted}}"></video>
+                </div>
+                <div style="position:fixed;align-items:center;width:100%;">
+                    <text style="color:#7fffd4;flex:1">{{$t('message.component.video.addOverlay')}}</text>
+                </div>
+            </stack>
+        </div>
+        <!-- List component method -->
+        <div class="btn-wrap-column ">
+            <input type="button" class="btn" value="{{$t('message.component.video.play')}}" onclick="btnstart" />
+            <input type="button" class="btn" value="{{$t('message.component.video.pause')}}" onclick="btnpause" />
+        </div>
+        <div class="btn-wrap-column ">
+            <input type="button" class="btn" value="{{$t('message.component.video.seek')}}" onclick="btnSeek" />
+            <input type="button" class="btn" value="{{$t('message.component.video.fullScreen')}}" onclick="btnEnterFull" />
+            <input type="button" class="btn" value="{{$t('message.component.video.exitFullScreen')}}" onclick="btnExitFull" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-title {
+        padding-left: 30px;
+        padding-bottom: 20px;
+    }
+
+    .item-content {
+        height: 350px;
+        justify-content: center;
+    }
+
+    .btn-wrap-column {
+        margin-left: 60px;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: "video",
+            showmask: true,
+            showicon: true,
+            ignorenet: false,
+            showControls: true,
+            muted: false,
+            objectFitValues: [
+                "cover", "contain", "fill", "none", "scale-down"
+            ],
+            objectFitClass: '',
+            fullScreen: false
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'video' });
+        },
+        prepared: function () {
+            console.log(this.$t('message.component.video.startPlay'));
+            prompt.showToast({ message: this.$t('message.component.video.videoConnectSuccess') })
+        },
+        start: function () {
+            console.log(this.$t('message.component.video.startPlay'));
+            prompt.showToast({ message: this.$t('message.component.video.startPlay') })
+        },
+        pause: function () {
+            console.log(this.$t('message.component.video.pausePlay'));
+            prompt.showToast({ message: this.$t('message.component.video.pausePlay')})
+        },
+        finish: function () {
+            console.log(this.$t('message.component.video.finishPlay'));
+            prompt.showToast({ message: this.$t('message.component.video.finishPlay') })
+        },
+        error: function () {
+            console.log(this.$t('message.component.video.playError'));
+            prompt.showToast({ message: this.$t('message.component.video.playError') })
+        },
+        eventSeeking: function (e) {
+            let msg = this.$t('message.component.video.event') + 'Seeking to ' + e.currenttime;
+            console.log(msg);
+            prompt.showToast({ message: msg });
+        },
+        eventSeeked: function (e) {
+            let msg = this.$t('message.component.video.event') + 'Seeked to ' + e.currenttime;
+            console.log(msg);
+            prompt.showToast({ message: msg });
+        },
+        eventTimeupdate: function (e) {
+            let msg = this.$t('message.component.video.event') + 'Timeupdate : ' + e.currenttime;
+            console.log(msg);
+            if (e.currenttime === 10) {
+                this.$element('video').requestFullscreen();
+            } else if (e.currenttime === 20) {
+                this.$element('video').exitFullscreen();
+            }
+        },
+        eventFullscreenchange: function (e) {
+            let msg = this.$t('message.component.video.event') + 'Fullscreenchange : ' + e.fullscreen;
+            console.log(msg);
+            prompt.showToast({ message: msg });
+        },
+        btnstart: function () {
+            this.$element('video').start();
+            prompt.showToast({ message: this.$t('message.component.video.btnstart')})
+        },
+        btnpause: function () {
+            this.$element('video').pause();
+            prompt.showToast({ message: this.$t('message.component.video.btnpause') })
+        },
+        btnSeek: function () {
+            this.$element('video').setCurrentTime({ currenttime: 60 });
+            prompt.showToast({ message: this.$t('message.component.video.btnSeek') })
+        },
+        btnEnterFull: function () {
+            this.$element('video').requestFullscreen();
+            prompt.showToast({ message: 'requestFullscreen' })
+        },
+        btnExitFull: function () {
+            this.$element('video').exitFullscreen();
+            prompt.showToast({ message: 'exitFullscreen' })
+        },
+        onFullscreenchange(data) {
+            this.fullScreen = data.fullscreen
+        },
+        switchShowControls(e) {
+            this.showControls = e.checked
+        },
+        onMutedSwitched(e) {
+            this.muted = e.checked
+        },
+        onMulchSwitched(e) {
+            this.$element('stackDemo01').requestFullscreen({ screenOrientation: "landscape" })
+        },
+        changeOption(e) {
+            this.objectFitClass = e.newValue
+            prompt.showToast({ message: 'object-fit Successfully switched' })
+        }
+    }
+</script>

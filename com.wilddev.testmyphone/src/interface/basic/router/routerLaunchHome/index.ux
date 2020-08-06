@@ -1,0 +1,119 @@
+<template>
+  <!-- There can only be one root node in the template -->
+  <div class="demo-page">
+    <text class="title">{{ $t('message.interface.basic.routerLaunchHome.title') }}{{title}}</text>
+
+    <!-- Click to jump to the details page -->
+    <div class="label-item">
+      <input name="radio" type="radio" id="radio1" style="width: 80px;" onclick="checkDefault" /><text>default</text>
+      <input name="radio" type="radio" id="radio2" style="width: 80px;" onclick="checkClearTask" /><text>clearTask</text>
+    </div>
+    <input class="ipt" type="number" placeholder="{{ $t('message.interface.basic.routerLaunchHome.placeholder') }}" onchange="getInputValue" />
+
+    <input class="btn" type="button" value="{{ $t('message.interface.basic.routerLaunchHome.pageAValue') }}" onclick="routePageA" />
+    <input class="btn" type="button" value="{{ $t('message.interface.basic.routerLaunchHome.pageBValue') }}" onclick="routePageB" />
+    <input class="btn" type="button" value="{{ $t('message.interface.basic.routerLaunchHome.pageCValue') }}" onclick="routePageC" />
+    <input class="btn" type="button" value="{{ $t('message.interface.basic.routerLaunchHome.homeValue') }}" onclick="routeHome" />
+    <input class="btn" type="button" value="{{ $t('message.interface.basic.routerLaunchHome.externalValue') }}" onclick="routeOuterPage" />
+  </div>
+</template>
+
+<style>
+  .demo-page {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .label-item {
+    align-items: center;
+    border-bottom-width: 1px;
+    border-color: #dddddd;
+  }
+
+  .btn {
+    width: 550px;
+    height: 86px;
+    margin-top: 75px;
+    border-radius: 43px;
+    background-color: #007dff;
+    font-size: 30px;
+    color: #ffffff;
+  }
+
+  .ipt {
+    font-size: 20px;
+  }
+</style>
+
+<script>
+  import router from '@system.router'
+
+  export default {
+    // The data model of page level components, which affects the coverage mechanism of incoming data: properties defined in private are not allowed to be overwritten
+    private: {
+      title: 'Home Page',
+      flag: '',
+      input: "",
+      mode: 'default'
+    },
+    onRefresh(data) {
+      console.log('home page on refresh' + JSON.stringify(data))
+    },
+    routePageA() {
+      router.push({
+        params: {
+          ___PARAM_LAUNCH_FLAG___: this.flag
+        },
+        uri: 'interface/basic/router/routerPageA'
+      })
+    },
+    routePageB() {
+      router.push({
+        params: {
+          ___PARAM_LAUNCH_FLAG___: this.flag
+        },
+        uri: 'interface/basic/router/routerPageB'
+      })
+    },
+    routePageC() {
+      router.push({
+        params: {
+          ___PARAM_LAUNCH_FLAG___: this.flag
+        },
+        uri: 'interface/basic/router/routerPageC'
+      })
+    },
+    routeHome() {
+      router.push({
+        params: {
+          ___PARAM_LAUNCH_FLAG___: this.flag
+        },
+        uri: 'interface/basic/router/routerLaunchHome'
+      })
+    },
+    routeOuterPage() {
+      router.push({
+        params: {
+          index: this.input,
+          ___PARAM_LAUNCH_FLAG___: this.flag
+        },
+        uri: 'hap://app/org.hap.launchmode/DemoDetail?___PARAM_LAUNCH_FLAG___=clearTask'
+      })
+    },
+    checkDefault() {
+      this.flag = ""
+    },
+    checkClearTask() {
+      this.flag = "clearTask"
+    },
+    getInputValue(e) {
+      this.input = e.value;
+    }
+  }
+</script>

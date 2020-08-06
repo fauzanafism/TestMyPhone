@@ -1,0 +1,36 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+      <input type="button" class="btn" onclick="postChannel" value="{{$t('message.interface.interaction.messageChannel.detail.sendMessage')}}" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../../common/css/common.css";
+
+  .item-container {
+    margin-bottom: 50px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+</style>
+<script>
+  export default {
+    data: {
+      componentName: 'detail',
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'detail' })
+    },
+    postChannel: function () {
+      var channel = new BroadcastChannel('channel1');
+      channel.postMessage("hello world");
+    }
+  }
+</script>

@@ -1,0 +1,5 @@
+<template>
+  <div>
+    <text>{{$t('message.directive.component.compB')}}</text>
+  </div>
+</template>

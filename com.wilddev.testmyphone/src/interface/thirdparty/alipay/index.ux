@@ -1,0 +1,59 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <input type="button" class="btn" onclick="useAlipay" value="{{$t('message.interface.thirdparty.alipay.useAliPay')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-top: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+    import alipay from '@service.alipay'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'alipay',
+            componentData: {},
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'alipay' })
+            this.componentData = this.$t('message.interface.thirdparty.alipay');
+        },
+        useAlipay: function () {
+            let that=this;
+            alipay.pay({
+                orderInfo: that.componentData.orderInfo,
+                callback: function (ret) {
+                    if (ret.resultStatus === "9000") {
+                        prompt.showToast({
+                            message: that.componentData.paySuccess + JSON.stringify(ret)
+                        })
+                    } else if (ret.resultStatus === "6001") {
+                        prompt.showToast({
+                            message: that.componentData.cancelPay
+                        })
+                    } else {
+                        prompt.showToast({
+                            message: that.componentData.payFailed + ret.resultStatus
+                        })
+                    }
+                }
+            })
+        }
+    }
+</script>

@@ -1,0 +1,146 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.wifi.connectWifi')}}{{isSuccess}}</text>
+        </div>
+        <input type="button" class="btn" onclick="connectWifi" value="{{$t('message.interface.system.wifi.connectWifiBtn')}}" />
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.wifi.wifiResult')}}{{wifistate}}</text>
+        </div>
+
+        <input type="button" class="btn" onclick="onconnected" value="{{$t('message.interface.system.wifi.onconnected')}}" />
+        <input type="button" class="btn" onclick="cancelConnect" value="{{$t('message.interface.system.wifi.cancelConnect')}}" />
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.wifi.scan')}}{{scan}}</text>
+        </div>
+        <input type="button" class="btn" onclick="scanWifi" value="{{$t('message.interface.system.wifi.scanWifi')}}" />
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.wifi.scanResult')}}{{scanedresult}}</text>
+        </div>
+        <input type="button" class="btn" onclick="onscaned" value="{{$t('message.interface.system.wifi.onscaned')}}" />
+        <input type="button" class="btn" onclick="cancelonScaned" value="{{$t('message.interface.system.wifi.cancelonScaned')}}" />
+
+        <div class="item-content">
+            <text class="txt">{{$t('message.interface.system.wifi.wifiinfo')}}{{wifiinfo}}</text>
+        </div>
+        <input type="button" class="btn" onclick="getConnectedWifiInfo" value="{{$t('message.interface.system.wifi.getConnectedWifiInfo')}}" />
+
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+    }
+
+    .txt {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<script>
+    import wifi from '@system.wifi'
+
+    export default {
+        data: {
+            componentName: 'Wifi',
+            isSuccess: '',
+            wifistate: '',
+            scan: '',
+            scanedresult: '',
+            wifiinfo: ''
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'Wifi' })
+        },
+
+        connectWifi: function () {
+            var that = this;
+            wifi.connect({
+                SSID: 'pushtest',
+                BSSID: '94:d9:b3:ce:ee:bc',
+                password: 'zxy201805@',
+                success: function () {
+                    console.log('connect wifi success');
+                    that.isSuccess = "Success";
+                },
+                fail: function (errmsg, errorCode) {
+                    console.log('connect---------failed ' + errmsg + ', error = ' + errorCode);
+                    that.isSuccess = "Fail";
+                }
+            })
+        },
+
+        onconnected: function () {
+            var that = this;
+            wifi.onstatechanged = function (ret) {
+                that.wifistate = ret.state + ' ssid = ' + ret.SSID + ', bssid = ' + ret.BSSID + ', secure = ' + ret.secure + ' signalStrength = ' + ret.signalStrength;
+            }
+        },
+
+        cancelConnect: function () {
+            wifi.onstatechanged = null;
+        },
+
+
+        scanWifi: function () {
+            var that = this;
+            wifi.scan({
+                success: function () {
+                    that.scan = "success";
+                    console.log('scan wifi success');
+                },
+                fail: function (errmsg, errorCode) {
+                    console.log('scan failed ' + errmsg + ', error = ' + errorCode);
+                    that.scan = "fail";
+                }
+            })
+
+        },
+
+        onscaned: function () {
+            var that = this;
+            wifi.onscanned = function (ret) {
+                that.scanedresult = JSON.stringify(ret);
+                console.log('scaned result success ret = ' + JSON.stringify(ret));
+            }
+        },
+        cancelonScaned: function () {
+            wifi.onscanned = null;
+        },
+        getConnectedWifiInfo: function () {
+            var that = this;
+            wifi.getConnectedWifi({
+                success: function (ret) {
+                    that.wifiinfo = ret.SSID + ': BSSID' + ret.BSSID + ', secure = ' + ret.secure + ', signalStrength = ' + ret.signalStrength;
+                },
+                fail: function (data, code) {
+                    console.log('getConnectedWifi failed ' + data);
+                    that.wifiinfo = "fail"
+                }
+            });
+        }
+
+    }
+</script>

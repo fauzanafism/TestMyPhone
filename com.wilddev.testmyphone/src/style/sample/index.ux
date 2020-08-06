@@ -1,0 +1,123 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="tutorial-page">
+            <!-- 内联样式 -->
+            <text style="color: #FF0000;">{{$t('message.style.sample.inlineStyle')}}</text>
+            <text id="title">{{$t('message.style.sample.idSelector')}}</text>
+            <text class="title">{{$t('message.style.sample.classSelector')}}</text>
+            <text>{{$t('message.style.sample.tagSelector')}}</text>
+        </div>
+        <div class="item">
+            <div class="item-content">
+                <text>{{$t('message.style.sample.example1')}}</text>
+                <text id="content">{{$t('message.style.sample.example2')}}</text>
+            </div>
+        </div>
+        <div class="item">
+            <text id="textId" class="textClass">{{$t('message.style.sample.selectorPriority')}}</text>
+        </div>
+        <div class="{{docBody}}" style="justify-content:center">
+            <text class="{{rowDesc}}">{{$t('message.style.sample.description')}}</text>
+        </div>
+        <input class="btn margin-50" type="button" value="{{$t('message.style.sample.changeSelector')}}" onclick="changeStyle" />
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .tutorial-page {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .item-content {
+        flex-direction: column;
+    }
+
+    /* tag selector */
+    text {
+        color: #0000ff;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    /* class selector（recommend） */
+    .title {
+        color: #00ff00;
+        font-size: 30px;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    /* ID selector */
+    #title {
+        color: #00a000;
+        font-size: 30px;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    /* Descendant selector */
+    .item div text {
+        font-size: 40px;
+        color: #0faeff;
+    }
+
+    /* Descendant selector */
+    .item .item-content #content {
+        color: #e066ff;
+    }
+
+    /* Direct descendant selector */
+    .tutorial-page > text {
+        text-decoration: underline;
+    }
+
+    .item #textId {
+        align-items: center;
+        color: #ff0000;
+    }
+
+    .item .textClass {
+        align-items: center;
+        color: #0000ff;
+    }
+
+    .doc-body .row-desc1 {
+        color: #ff0000;
+    }
+
+    .doc-body .row-desc2 {
+        color: #0000ff;
+    }
+
+    .doc-body2 .row-desc1 {
+        color: #00ff00;
+    }
+</style>
+
+<script>
+    export default {
+        onInit() {
+            this.$page.setTitleBar({ text: 'styleSample' });
+        },
+        data: {
+            componentName: 'styleSample',
+            rowDesc: "row-desc1",
+            docBody: "doc-body"
+        },
+        changeStyle: function () {
+            var that = this;
+            that.rowDesc = "row-desc2";
+        }
+    }
+</script>

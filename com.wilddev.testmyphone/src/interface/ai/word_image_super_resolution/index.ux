@@ -1,0 +1,163 @@
+<import name="image-container" src="../Common/ImageContainer.ux"></import>
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="photo-selector" src="../Common/PhotoSelector.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <image-container photo-uri={{photoUri}}></image-container>
+    <div class="result-container">
+      <div class="result-title" if="resultUri">
+        <text class="result-title-text">{{$t('message.interface.ai.word_image_super_resolution.text')}}</text>
+      </div>
+      <image-container if="resultUri" photo-uri={{resultUri}}></image-container>
+    </div>
+    <main-btn onclick-main="openPhotoSelector" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.word_image_super_resolution.btnText')}}" btn-text-err="{{$t('message.interface.ai.word_image_super_resolution.btnTextErr')}}" 
+      complete={{complete}} back-result={{backResult}} back-data={{backData}}></main-btn>
+    <photo-selector if="{{isPSshow}}" onhide="hidePhotoSelector"></photo-selector>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+
+  .result-container {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .result-title {
+    width: 100%;
+    height: 90px;
+    background-color: #ffffff;
+    justify-content: center;
+  }
+
+  .result-title-text {
+    color: #000000;
+    font-size: 28px;
+  }
+</style>
+
+<script>
+  import prompt from '@system.prompt';
+  import ai from '@system.ai';
+
+  export default {
+    data: {
+      componentData: {},
+      photoUri: '../Common/images/doca.jpg',
+      resultUri: '',
+      isPSshow: false,
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: '',
+      scale: 1.0
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openErrorUse(e) {
+      var a = e.detail.split(';')[0], b = e.detail.split(';')[1];
+      this.photoUri = this.changeMsg(a);
+      this.scale = this.changeMsg(b, true);
+      this.test();
+    },
+    openPhotoSelector() {
+      this.isPSshow = true
+    },
+    hidePhotoSelector() {
+      this.isPSshow = false
+    },
+    test() {
+      let uri = this.photoUri;
+      let scale = this.scale;
+      this.resultUri = '';
+      this.complete = '';
+      console.log('start test, uri: ' + uri);
+      let self = this;
+      ai.superTextImageResolution({
+        uri: uri,
+        scale: scale,
+        success: function (data) {
+          setTimeout(() => {
+            self.isLoadingShow = false;
+            self.resultUri = data.uri;
+          }, 1000)
+          console.log("test success: " + data.uri);
+          self.backResult = 'success';
+          self.backData = JSON.stringify(data);
+        },
+        fail: function (data, code) {
+          setTimeout(() => {
+            self.isLoadingShow = false;
+            prompt.showToast({ message: self.componentData.toast });
+          }, 1000)
+          console.log("test fail, code: " + code);
+          self.backResult = 'fail';
+          self.backData = 'code:' + code + ' msg:' + data;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    getPhotoUri(obj) {
+      this.photoUri = obj.detail;
+      this.isLoadingShow = true;
+      this.test();
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.word_image_super_resolution');
+      this.$page.setTitleBar({ text: this.componentData.title });
+      this.$on('getPhotoUri', this.getPhotoUri);
+      this.isLoadingShow = true;
+    },
+    onReady() {
+      this.test()
+    }
+  }
+</script>

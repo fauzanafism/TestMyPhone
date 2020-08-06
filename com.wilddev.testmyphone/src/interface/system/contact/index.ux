@@ -1,0 +1,83 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.system.contact.name')}}：{{displayName}}</text>
+            </div>
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.system.contact.number')}}：{{number}}</text>
+            </div>
+            <input type="button" class="btn" onclick="pickContact" value="{{$t('message.interface.system.contact.pickName')}}" />
+            <input type="button" class="btn" onclick="pickContactList" value="{{$t('message.interface.system.contact.getContactList')}}" />
+
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+    }
+
+    .txt {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<script>
+    import contact from '@system.contact'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'Contact',
+            displayName: '',
+            number: ''
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'Contact' })
+        },
+        pickContact: function () {
+            var that = this;
+            contact.pick({
+                success: function (ret) {
+                    that.displayName = ret.displayName;
+                    that.number = ret.number;
+                },
+                fail: function (errmsg, errcode) {
+                    console.log('pickContact---------failed ' + errmsg + " errcode = " + errcode);
+                }
+            })
+        },
+        pickContactList: function () {
+            contact.list({
+                fail: function (errmsg, errcode) {
+                    console.log('pickContactList---------failed ' + errmsg + " errcode = " + errcode);
+                    prompt.showToast({
+                        message: errmsg + "," + errcode
+                    })
+                }
+            })
+        }
+    }
+</script>

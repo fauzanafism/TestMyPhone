@@ -1,0 +1,99 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <text>
+                    {{$t('message.component.menu.text1')}}
+                </text>
+            </div>
+            <div class="item-content">
+                <text>
+                    {{$t('message.component.menu.text2')}}
+                </text>
+            </div>
+            <div class="item-content">
+                <text>
+                    {{$t('message.component.menu.text3')}}
+                </text>
+            </div>
+            <div class="item-content">
+                <text class="center_dialog_text">
+                    {{$t('message.component.menu.addToDesk')}}
+                </text>
+            </div>
+            <div class="item-content">
+                <text class="center_dialog_text">
+                    {{$t('message.component.menu.share')}}
+                </text>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+    .item-container {
+        margin: 40px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        margin-top: 20px;
+        flex-direction: column;
+    }
+
+    .center_dialog_text {
+        text-align: center;
+        margin-top: 30px;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    import shortcut from '@system.shortcut'
+    export default {
+        data: {
+            componentName: 'menu'
+        },
+        onInit() {
+            this.$page.setTitleBar({
+                text: 'menu', textColor: '#007DFF', backgroundColor: '#007DFF',
+                backgroundOpacity: 0.5,
+                menu: true
+            });
+        },
+        onMenuPress() {
+            prompt.showContextMenu({
+                itemList: [this.$t('message.component.menu.addToDesk')],
+                success: function (data) {
+                    shortcut.install({
+                        success: function () {
+                            // When using the app loader, first open the apploader's desktop shortcut in Settings
+                            prompt.showToast({
+                                message: this.$t('message.component.menu.createSuccess')
+                            })
+                        },
+                        fail: function (erromsg, errocode) {
+                            prompt.showToast({ message: this.$t('message.component.menu.createFailed') + errocode + ': ' + erromsg })
+                        },
+                        complete: function () {
+                            console.log('shortcut complete');
+                        }
+                    })
+                },
+                fail: function (data, code) {
+                    console.log("handling fail, code=" + code);
+                },
+                cancel: function (data) {
+                    console.log("handling cancel");
+                },
+                complete: function () {
+                    console.log("handling complete");
+                },
+            })
+        }
+    }
+</script>

@@ -1,0 +1,115 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+      <input type="button" class="btn" onclick="useAuthor" value="{{$t('message.interface.service.account.login')}}" />
+    </div>
+    <div class="item-container">
+      <input type="button" class="btn" onclick="getsign" value="{{$t('message.interface.service.account.getAccountInfo')}}" />
+    </div>
+    <div class="item-container">
+      <input type="button" class="btn" onclick="loginByCodeMode" value="{{$t('message.interface.service.account.codelogin')}}" />
+    </div>
+     <div class="item-container">
+      <input type="button" class="btn" onclick="checkUserSession" value="checkUserSession" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .item-container {
+    margin-top: 50px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+</style>
+
+<script>
+  import account from '@service.account'
+  import prompt from '@system.prompt'
+
+  export default {
+    data: {
+      componentName: 'account',
+      componentData: {},
+      fetchData: '',
+      attoken: '',
+      accode:'',
+      sign: '',
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: 'account' })
+      this.componentData = this.$t('message.interface.service.account');
+    },
+    getsign: function () {
+      var that = this;
+      account.getProfile({
+        appid: "100332803",
+        token: that.attoken,
+        success: function (ret) {
+          prompt.showToast({ message: 'getprofile --- ' + JSON.stringify(ret) });
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({ message: 'getprofile fail --- ' + errocode + ':' + erromsg });
+        }
+      })
+    },
+    useAuthor: function () {
+      var that = this;
+      account.authorize({
+        appid: "100332803",
+        type: "token",
+        scope: "scope.baseProfile scope.mobileNumber",
+        state: 5,
+        redirectUri: "http://www.example.com/",
+        success: function (ret) {
+          that.attoken = ret.accessToken;
+          prompt.showToast({ message: 'accessToken --- ' + ret.accessToken });
+          prompt.showToast({
+            message: that.componentData.result + JSON.stringify(ret)
+          })
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({ message: 'authorize fail --- ' + errocode + ':' + erromsg });
+        }
+      })
+    },
+    //this method used in case that login by Authorization Code 
+    checkUserSession: function () {
+      account.checkUserSession({
+        success: function (data2) {
+          console.log('handling success profile: ' + JSON.stringify(data2));
+        },
+        fail: function (data, code) {
+          console.log('handling fail, code =' + code);
+        }
+      });
+    },
+		loginByCodeMode: function() {
+          var that = this;
+      account.authorize({
+        appid: "100332803",
+        type: "code",
+        scope: "scope.baseProfile",
+        state:5,
+        redirectUri: "http://www.example.com/",
+        success: function (ret) {
+          that.atcode = ret.code;
+          prompt.showToast({ message: 'code --- ' + ret.code });
+          prompt.showToast({
+            message: that.componentData.result + JSON.stringify(ret)
+          })
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({ message: 'authorize fail --- ' + errocode + ':' + erromsg });
+        }
+      })
+    }
+  }
+</script>

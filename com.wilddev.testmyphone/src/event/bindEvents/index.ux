@@ -1,0 +1,107 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="tutorial-page">
+            <input type="button" class="btn btn1" onclick="emitEvent" value="{{$t('message.event.bindEvents.emitEvent')+'customEvtType1'}}"
+                ontouchstart="ontouchstart" ontouchmove="ontouchmove" ontouchcancel="ontouchcancel" ontouchend="ontouchend" />
+            <input type="button" class="btn btn1" onclick="removeEventHandler" value="{{$t('message.event.bindEvents.remove')+'customEvtType1'}}" />
+            <input type="button" class="btn btn1" onclick="emitElement" value="{{$t('message.event.bindEvents.emitElement')+'click'}}" />
+            <input type="button" id="elNode1" class="btn btn1" onclick="onClickHandler" value="{{$t('message.event.bindEvents.emitEvent')+'customEvtType1'}}" />
+        </div>
+        <div class="tutorial-page" ontouchstart="ontouchstart_up" ontouchmove="ontouchmove_up" ontouchcancel="ontouchcancel_up"
+            ontouchend="ontouchend_up" style="background-color: #A020F0">
+            <text id="text_ref" ontouchstart="ontouchstart" ontouchmove="ontouchmove" ontouchcancel="ontouchcancel"
+                ontouchend="ontouchend" class="page-title-wrap" style="text-align: center; margin-left: 60px;margin-top:50px;width:300px;height:200px;background-color:#7FFFD4">
+                {{$t('message.event.bindEvents.touchTest')}}
+            </text>
+            <text id="text_ref2" class="page-title-wrap" style="text-align: center; margin-left: 60px;margin-top:-80px;width:300px;height:200px;background-color:#FFFF00">
+                {{$t('message.event.bindEvents.touchTest')}}
+            </text>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .tutorial-page {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tutorial-page:active {
+        background-color: #0faeff;
+    }
+
+    .btn1 {
+        height: 80px;
+        text-align: center;
+        border-radius: 20px;
+        margin-right: 60px;
+        margin-top: 30px;
+        margin-left: 60px;
+        margin-bottom: 30px;
+        color: #2bff00;
+        font-size: 30px;
+        background-color: #0faeff;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'bindevents'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'bindevents' })
+
+            this.$on('customEvtType1', this.customEvtType1Handler);
+        },
+        customEvtType1Handler(evt) {
+            // Event type, event parameter
+            console.log(this.$t('message.event.bindEvents.emitEvent')+'type:${evt.type}, parameter: ${JSON.stringify(evt.detail)}');
+        },
+        emitEvent() {
+            this.$emit('customEvtType1', { params: this.$t('message.event.bindEvents.params') })
+        },
+        removeEventHandler() {
+            // Do not pass fnHandler: remove all listeners
+            this.$off('customEvtType1')
+            // Pass fnHandler: remove the specified listener function
+            this.$off('customEvtType1', this.customEvtType1Handler)
+        },
+        onClickHandler(evt) {
+            // Event type, event parameter,target
+            console.log(this.$t('message.event.bindEvents.emitEvent')+'type:${evt.type}, parameter: ${JSON.stringify(evt.detail)}, component node:${evt.target && evt.target.id}');
+        },
+        emitElement() {
+            this.$emitElement('click', { params: this.$t('message.event.bindEvents.params') }, 'elNode1')
+        },
+        ontouchstart(e) {
+            console.log('1 ontouchstart', e)
+        },
+        ontouchmove(e) {
+            console.log('1 ontouchmove', e)
+        },
+        ontouchcancel(e) {
+            console.log('1 ontouchcancel', e)
+        },
+        ontouchend(e) {
+            console.log('1 ontouchend', e)
+        },
+        ontouchstart_up(e) {
+            console.log('2 ontouchstart_up', e)
+        },
+        ontouchmove_up(e) {
+            console.log('2 ontouchmove_up', e)
+        },
+        ontouchcancel_up(e) {
+            console.log('2 ontouchcancel_up', e)
+        },
+        ontouchend_up(e) {
+            console.log('2 ontouchend_up', e)
+        }
+    }
+</script>

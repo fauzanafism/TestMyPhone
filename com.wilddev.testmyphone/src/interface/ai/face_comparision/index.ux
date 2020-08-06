@@ -1,0 +1,157 @@
+<import name="two-image-container" src="../Common/TwoImageContainer.ux"></import>
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="photo-selector" src="../Common/PhotoSelector.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <two-image-container onupload="openPhotoSelector" first-uri={{firstUri}} second-uri={{secondUri}} info="{{$t('message.interface.ai.face_comparision.info')}}"
+      score={{score}}></two-image-container>
+    <main-btn onclick-main="openUse" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.face_comparision.btnText')}}" btn-text-err="{{$t('message.interface.ai.face_comparision.btnTextErr')}}"
+      back-result={{backResult}} back-data={{backData}} complete={{complete}}></main-btn>
+    <photo-selector if="isPSshow" onhide="hidePhotoSelector"></photo-selector>
+    <loading-wrapper if="isLoadingShow"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+</style>
+
+<script>
+  import prompt from '@system.prompt';
+  import ai from '@system.ai';
+
+  export default {
+    data: {
+      componentData: {},
+      isPSshow: false,
+      firstUri: '../Common/images/compare1.jpg',
+      secondUri: '../Common/images/compare2.jpg',
+      uploadPhotoTo: '',
+      score: '',
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: ''
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openErrorUse(e) {
+      var a = e.detail.split(';')[0], b = e.detail.split(';')[1];
+      this.firstUri = this.changeMsg(a);
+      this.secondUri = this.changeMsg(b);
+      this.isLoadingShow = true;
+      this.compare();
+    },
+    openUse() {
+      this.test()
+    },
+    test() {
+      if (this.firstUri === '') {
+        prompt.showToast({ message: this.componentData.image1 });
+        return
+      }
+      if (this.secondUri === '') {
+        prompt.showToast({ message: this.componentData.image2 });
+        return
+      }
+      this.isLoadingShow = true;
+      this.compare()
+    },
+    compare() {
+      let self = this;
+      this.complete = '';
+      ai.faceCompare({
+        uri1: self.firstUri,
+        uri2: self.secondUri,
+        success: (res) => {
+          setTimeout(() => {
+            self.score = (res.score * 100).toFixed(2) + '%';
+            self.isLoadingShow = false;
+          }, 1000);
+          self.backResult = 'success';
+          self.backData = JSON.stringify(res);
+        },
+        fail: (erromsg, errocode) => {
+          setTimeout(() => {
+            prompt.showToast({ message: self.componentData.error });
+            self.isLoadingShow = false;
+          }, 1000)
+          console.log('test error ' + errocode + ': ' + erromsg);
+          self.backResult = 'fail';
+          self.backData = 'code:' + errocode + ' msg:' + erromsg;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    openPhotoSelector(obj) {
+      this.isPSshow = true;
+      this.uploadPhotoTo = obj.detail;
+    },
+    hidePhotoSelector() {
+      this.isPSshow = false
+    },
+    getPhotoUri(obj) {
+      if (this.uploadPhotoTo === 'first') {
+        this.firstUri = obj.detail
+      } else {
+        this.secondUri = obj.detail
+      }
+      this.score = ''
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.face_comparision');
+      this.$page.setTitleBar({ text: this.componentData.title });
+      this.$on('getPhotoUri', this.getPhotoUri);
+      this.isLoadingShow = true;
+    },
+    onReady() {
+      this.test()
+    }
+  }
+</script>

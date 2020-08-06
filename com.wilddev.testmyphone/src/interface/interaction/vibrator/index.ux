@@ -1,0 +1,50 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text class="txt">"{{$t('message.interface.interaction.vibrator.triggerVibrator')}}"</text>
+            </div>
+            <input type="button" class="btn" onclick="vibrator" value="{{$t('message.interface.interaction.vibrator.openVibrator')}}"/>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+        margin-bottom: 100px;
+        align-items: center;
+    }
+</style>
+
+<script>
+    import vibrator from '@system.vibrator'
+
+    export default {
+        data: {
+            componentName: 'vibrator'
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'vibrator' })
+        },
+        vibrator: function () {
+            // while mode is short,it will be 35ms;and mode is long,will be 1000ms；default mode is long
+            vibrator.vibrate({ mode: "short" });
+        }
+    }
+</script>

@@ -1,0 +1,83 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+      <input type="button" class="btn" onclick="routeHttps" value="{{$t('message.interface.basic.router.routerNew.https')}}" />
+      <input type="button" class="btn" onclick="routeHttp" value="{{$t('message.interface.basic.router.routerNew.http')}}" />
+      <div class="item-content">
+        <text class="txt">{{$t('message.interface.basic.router.routerNew').downloadPath}}{{fileDownloadData}}</text>
+      </div>
+      <input type="button" class="btn" onclick="downUri" value="{{$t('message.interface.basic.router.routerNew.downloadFile')}}" />
+      <input type="button" class="btn" onclick="routeInternal" value="{{$t('message.interface.basic.router.routerNew.openInternalFile')}}" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../../common/css/common.css";
+
+  .item-container {
+    margin-bottom: 20px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+</style>
+
+<script>
+  import router from '@system.router'
+  import fetch from '@system.fetch'
+  import prompt from '@system.prompt'
+
+  export default {
+    data: {
+      show: true,
+      componentName: 'router_New',
+      componentData: {},
+      fileDownloadData: ""
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'router_New' })
+      this.componentData = this.$t('message.interface.basic.router.routerNew');
+    },
+    routeHttps: function () {
+      router.push({
+        uri: 'https://www.vmall.com'
+      });
+    },
+    routeHttp: function () {
+      router.push({
+        uri: 'http://www.huawei.com/Assets/CBG/img/logo.png'
+
+
+      });
+    },
+    downUri: function () {
+      var that = this;
+      fetch.fetch({
+        url: "http://www.huawei.com/Assets/CBG/img/logo.png",
+        success: function (ret) {
+          that.fileDownloadData = ret.data;
+          prompt.showToast({
+            message: "success"
+          })
+        },
+        fail: function (errmsg, errcode) {
+          prompt.showToast({
+            message: this.componentData.downloadFailed + errcode + ': ' + errmsg
+          })
+        }
+      })
+    },
+    routeInternal: function () {
+      var that = this;
+      router.push({
+        uri: that.fileDownloadData
+      });
+    }
+
+  }
+</script>

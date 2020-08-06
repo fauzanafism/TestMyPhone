@@ -1,0 +1,120 @@
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <main-btn onclick-main="openUse" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.segmented_vocabulary.btnText')}}" btn-text-err="{{$t('message.interface.ai.segmented_vocabulary.btnTextErr')}}"
+      complete={{complete}} back-result={{backResult}} back-data={{backData}}></main-btn>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+</style>
+
+<script>
+  import ai from '@system.ai';
+  import prompt from '@system.prompt';
+
+  export default {
+    data: {
+      componentData: {},
+      testtxt: '',
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: '',
+      type: 0
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openUse(e) {
+      var a = e.detail.split(';')[0], b = e.detail.split(';')[1];
+      this.testtxt = this.changeMsg(a);
+      this.type = this.changeMsg(b, true);
+      this.test();
+    },
+    openErrorUse(e) {
+      var a = e.detail.split(';')[0], b = e.detail.split(';')[1];
+      this.testtxt = this.changeMsg(a);
+      this.type = this.changeMsg(b, true);
+      this.test();
+    },
+    test() {
+      console.log('text: ' + this.testtxt);
+      let self = this;
+      this.complete = '';
+      ai.getWordSegment({
+        text: self.testtxt,
+        type: self.type,
+        success: (res) => {
+          console.log(JSON.stringify(res));
+          self.backResult = 'success';
+          self.backData = JSON.stringify(res);
+          if (res && res.words && res.words) {
+            setTimeout(() => {
+              prompt.showToast({ message: self.componentData.toast + JSON.stringify(res.words) });
+            }, 1000)
+          }
+        },
+        fail: (errMsg, errcode) => {
+          console.log("fail msg:" + errMsg);
+          self.backResult = 'fail';
+          self.backData = 'code:' + errcode + ' msg:' + errMsg;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.segmented_vocabulary');
+      this.$page.setTitleBar({ text: this.componentData.title });
+    }
+  }
+</script>

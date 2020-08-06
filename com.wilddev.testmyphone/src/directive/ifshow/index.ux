@@ -1,0 +1,69 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="tutorial-page">
+            <div class="item-content">
+                <text show="{{showVar}}">{{$t('message.directive.ifshow.show')}}</text>
+            </div>
+            <input type="button" class="btnifShow" onclick="onClickShow" value="{{$t('message.directive.ifshow.toggle')}}" />
+
+            <div class="item-content">
+                <text if="{{conditionVar === 1}}">{{$t('message.directive.ifshow.if')}}</text>
+                <text elif="{{conditionVar === 2}}">{{$t('message.directive.ifshow.elif')}}</text>
+                <text else>{{$t('message.directive.ifshow.else')}}</text>
+            </div>
+
+            <input type="button" class="btnifShow" onclick="onClickCondition" value="{{$t('message.directive.ifshow.conditionDirective')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .tutorial-page {
+        flex-direction: column;
+    }
+
+    .btnifShow {
+        height: 80px;
+        text-align: center;
+        border-radius: 5px;
+        margin-right: 60px;
+        margin-top: 60px;
+        margin-left: 60px;
+        margin-bottom: 50px;
+        color: #ffffff;
+        font-size: 30px;
+        background-color: #0faeff;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+
+        align-items: center;
+    }
+</style>
+
+<script>
+    export default {
+        onInit() {
+            this.$page.setTitleBar({ text: 'if&show' });
+        },
+        data: {
+            componentName: 'if&show',
+            showVar: true,
+            conditionVar: 1
+        },
+        onClickShow() {
+            this.showVar = !this.showVar
+        },
+        onClickCondition() {
+            this.conditionVar = ++this.conditionVar % 3
+        }
+    }
+</script>

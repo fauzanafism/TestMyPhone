@@ -1,0 +1,29 @@
+<template>
+    <div class="doc-page">
+
+        <web class="web-page" src="https://pasha.rakuten.co.jp/"></web>
+        <web class="web-page" src="https://pasha.rakuten.co.jp/" algorithmsforlayout="onecolumn" wideviewport="true" overviewmodeinload="true"></web>
+
+    </div>
+</template>
+
+<style>
+    .doc-page {
+        flex-direction: column;
+    }
+
+    .web-page {
+        width: 750px;
+        height: 50%;
+    }
+
+    
+</style>
+<script>
+    export default {
+        data: {
+        },
+        onInit() {
+        }
+    }
+</script>

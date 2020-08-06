@@ -1,0 +1,217 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <!-- flex-wrap -->
+        <text class="color">border-style="dotted" border-color="#FF0000" border-width="1px"</text>
+
+        <div class="item-container1">
+        </div>
+
+        <text class="color">border-style="dashed" border-color="#FF00FF" border-width="5px" border-radius="30px"</text>
+
+        <div class="item-container2">
+        </div>
+
+        <text class="color">border-style="solid" border-color="#B23AEE" border-width="10px"</text>
+
+        <div class="item-container3">
+        </div>
+
+        <!-- justify-content -->
+        <text class="color">{{$t('message.component.border.border1')}}</text>
+        <div class="item-container4">
+        </div>
+
+        <text class="color">{{$t('message.component.border.border2')}}
+        </text>
+        <div class="item-container5">
+        </div>
+
+
+        <text class="colo"> border-style="solid" border-color="#FF0000 #FFFF00" border-width="1px 3px"</text>
+        <div class="item-container6">
+        </div>
+
+        <text class="color">border-[left|top|right|bottom]-width 1px 3px 5px 7px</text>
+        <div class="item-container7">
+        </div>
+
+        <text class="color">{{$t('message.component.border.border3')}}</text>
+        <div class="item-container8">
+        </div>
+
+        <text class="color">border-[top|bottom]-[left|right]-radius 10px 20px 30px 40px</text>
+        <div class="item-container9">
+        </div>
+
+        <text class="color">border-radius 40px</text>
+        <div class="item-container10">
+        </div>
+
+        <text class="color">background-image</text>
+        <div class="item-container14">
+        </div>
+        <text class="color">border-left:5px dashed red border-right:5px solid red border-top:5px dotted
+            green;border-bottom:5px dashed E066FF</text>
+        <div class="item-container15">
+        </div>
+
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container1 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-style: dotted;
+        border-color: #ff0000;
+        border-width: 1px;
+    }
+
+    .item-container2 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-style: dashed;
+        border-color: #ff0000;
+        border-width: 5px;
+        border-radius: 30px;
+    }
+
+    .item-container3 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-color: #ff0000;
+        border-width: 10px;
+    }
+
+    .item-container4 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-color: #ff0000 #ffff00 #e066ff #adff2f;
+        border-width: 1px 3px 5px 7px;
+    }
+
+    .item-container5 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-color: #ff0000 #ffff00 #e066ff;
+        border-width: 1px 3px 5px;
+    }
+
+    .item-container6 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-color: #ff0000 #ffff00;
+        border-width: 1px 3px;
+    }
+
+    .item-container7 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-left-width: 1px;
+        border-top-width: 3px;
+        border-right-width: 5px;
+        border-bottom-width: 7px;
+    }
+
+    .item-container8 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-width: 3px;
+        border-left-color: #ff0000;
+        border-top-color: #ffff00;
+        border-right-color: #e066ff;
+        border-bottom-color: #adff2f;
+    }
+
+    .item-container9 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-width: 3px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 40px;
+    }
+
+    .item-container10 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-width: 3px;
+        border-radius: 40px;
+    }
+
+    .item-container14 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 240px;
+        height: 40px;
+        background-image: url(/common/img/img_240x40.jpg);
+    }
+    .item-container15 {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+        width: 600px;
+        height: 100px;
+        border-left: 5px dashed rgb(245, 80, 15);
+        border-right: 5px solid blue;
+        border-top: 5px dotted green;
+        border-bottom: 5px dashed #e066ff;
+    }
+
+    .item-container {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+    }
+
+    .item-title {
+        line-height: 100px;
+        background-color: #fbf9fe;
+    }
+
+    .item {
+        height: 150px;
+        width: 150px;
+        text-align: center;
+    }
+
+    .color {
+        background-color: #8ee5ee;
+        margin-bottom: 50px;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'border'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'border' });
+        }
+    }
+</script>

@@ -1,0 +1,52 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div style="flex-direction: column;  align-items: center;">
+            <!--  change class -->
+            <text class="normal-text {{className}}" onclick="changeClassName">{{$t('message.style.update.text')}}</text>
+            <!-- change inline syle -->
+            <text style="color: {{textColor}}" onclick="changeInlineStyle">{{$t('message.style.update.text')}}</text>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .normal-text {
+        font-weight: bold;
+        font-size: 40px;
+
+        margin-bottom: 60px;
+    }
+
+    .text-blue {
+        color: #0faeff;
+    }
+
+    .text-red {
+        color: #f76160;
+    }
+</style>
+
+<script>
+
+    export default {
+        data: {
+            componentName: 'styleUpdate',
+            className: 'text-blue',
+            textColor: '#0faeff'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'styleUpdate' });
+        },
+        changeClassName() {
+            this.className = 'text-red'
+        },
+        changeInlineStyle() {
+            this.textColor = '#f76160'
+        }
+    }
+</script>

@@ -1,0 +1,88 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <!-- unzip files -->
+            <div class="item-content">
+                <text class="txt">解压文件：{{fileZipData}}</text>
+                <text class="txt">文件信息：{{fileGetData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="unzipFile" value="解压文件" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+    }
+
+    .txt {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+
+<script>
+    import zip from '@system.zip'
+    import file from '@system.file'
+
+    export default {
+        data: {
+            componentName: 'file',
+            fileZipData: '',
+            fileGetData: ''
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'zip' })
+        },
+        unzipFile: function () {
+            var that = this;
+            zip.decompress({
+                srcUri: 'internal://cache/ziptest.zip',
+                dstUri: 'internal://files/testfile/',
+                topSize: 104857600,
+                topFileNumbers: 100,
+                success: function (ret) {
+                    that.fileZipData = 'success';
+                    console.log('zip_decompress--------success ' + JSON.stringify(ret));
+                    file.get({
+                        uri: 'internal://files/testfile/',
+                        recursive: true,
+                        success: function (ret) {
+                            that.fileGetData = JSON.stringify(ret);
+                            console.log('file_get_data---------success ' + JSON.stringify(ret));
+                        },
+                        fail: function (errmsg, errcode) {
+                            that.fileGetData = errcode + '---' + errmsg;
+                            console.log('file_get_data---------fail ' + errcode + ': ' + errmsg);
+                        }
+                    })
+                },
+                fail: function (errmsg, errcode) {
+                    that.fileZipData = errcode + '---' + errmsg;
+                    console.log('zip_decompress--------fail ' + errcode + ': ' + errmsg);
+                }
+            })
+        }
+    }
+</script>

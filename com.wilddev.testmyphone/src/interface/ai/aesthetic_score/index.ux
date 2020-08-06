@@ -1,0 +1,145 @@
+<import name="image-container" src="../Common/ImageContainer.ux"></import>
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="photo-selector" src="../Common/PhotoSelector.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <image-container photo-uri={{photoUri}} info={{info}} score={{score}}></image-container>
+    <main-btn onclick-main="openPhotoSelector" onclick-main-err="openErrorUse" btn-text={{btnText}} btn-text-err={{btnTextErr}}
+      complete={{complete}} back-result={{backResult}} back-data={{backData}}></main-btn>
+    <photo-selector if="{{isPSshow}}" onhide="hidePhotoSelector"></photo-selector>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+</style>
+
+<script>
+  import ai from '@system.ai';
+  import prompt from '@system.prompt';
+
+  export default {
+    data: {
+      score: '',
+      info: '',
+      btnText: '',
+      photoUri: '../Common/images/scene.jpg',
+      isPSshow: false,
+      isLoadingShow: false,
+      btnTextErr: '',
+      backResult: '',
+      backData: '',
+      complete: ''
+    },
+    onInit() {
+      this.info = this.$t('message.interface.ai.aestheic_score.info');
+      this.btnText = this.$t('message.interface.ai.aestheic_score.btnText');
+      this.btnTextErr = this.$t('message.interface.ai.aestheic_score.btnTextErr');
+      this.$page.setTitleBar({ text: this.$t('message.interface.ai.aestheic_score.titleBar ')});
+      this.$on('getPhotoUri', this.getPhotoUri);
+      this.isLoadingShow = true;
+    },
+    onReady() {
+      this.test()
+    },
+    openPhotoSelector() {
+      this.isPSshow = true
+    },
+    hidePhotoSelector() {
+      this.isPSshow = false
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openErrorUse(e) {
+      console.log(e);
+      let sliceUri = e.detail.split(';')[0];
+      sliceUri = this.changeMsg(sliceUri);
+      this.photoUri = sliceUri;
+      console.log(this.photoUri);
+      this.test();
+    },
+    getPhotoUri(obj) {
+      this.photoUri = obj.detail;
+      this.isLoadingShow = true;
+      this.test();
+    },
+    test() {
+      this.score = '';
+      this.complete = '';
+      let uri = this.photoUri;
+      console.log('start test aesthetic score, uri: ' + uri);
+
+      let self = this;
+      ai.detectAestheticsScore({
+        uri: uri,
+        success: (res) => {
+          setTimeout(() => {
+            self.score = res.score.toFixed(2);
+            self.isLoadingShow = false;
+          }, 1000)
+          console.log('test success: ' + res);
+          self.backResult = 'success';
+          self.backData = JSON.stringify(res);
+        },
+        fail: (erromsg, errocode) => {
+          setTimeout(() => {
+            prompt.showToast({ message: self.$t('message.interface.ai.aestheic_score').error });
+            self.isLoadingShow = false;
+          }, 1000)
+          self.backResult = 'fail';
+          self.backData = 'code:' + errocode + ' msg:' + erromsg;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    }
+  }
+</script>

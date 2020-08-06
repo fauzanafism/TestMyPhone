@@ -1,0 +1,39 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <rating class="ratingStyle" numstars="4" rating="2" @change="showChangePrompt">
+
+        </rating>
+
+    </div>
+</template>
+
+<style>
+    @import '../../../common/css/common.css';
+
+    .ratingStyle {
+        star-background: url(/common/img/ic_stars_gray_mid.png);
+        star-foreground: url(/common/img/ic_stars_blue_mid.png);
+        star-secondary: url(/common/img/ic_stars_blue_half_mid.png);
+        height: 150px;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    export default {
+        data: {
+            componentName: 'rating'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'rating' })
+        },
+        showChangePrompt(ret) {
+            prompt.showToast({
+                message: JSON.stringify(ret.rating)
+            })
+        }
+    }
+</script>

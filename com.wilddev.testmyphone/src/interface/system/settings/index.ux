@@ -1,0 +1,75 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{componentName}}</text>
+    </div>
+
+    <div class="item-container">
+      <div class="item-content">
+        <text class="txt">{{$t('message.interface.system.settings.getSettings')}}</text>
+        <input class="input" placeholder="{{$t('message.interface.system.settings.inputKey')}}" value="{{settingsKey}}" onchange="inputKey" />
+      </div>
+      <input type="button" class="btn" onclick="getSettings" value="{{$t('message.interface.system.settings.get')}}" />
+    </div>
+  </div>
+</template>
+
+<style>
+  @import "../../../common/css/common.css";
+
+  .item-container {
+    margin-top: 50px;
+    margin-right: 60px;
+    margin-left: 60px;
+    flex-direction: column;
+  }
+
+  .item-content {
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 30px;
+  }
+
+  .input {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: 60px;
+    border-width: 1px;
+    border-color: #eeeeee;
+  }
+</style>
+
+<script>
+  import settings from '@android.settings'
+  import prompt from '@system.prompt'
+
+  export default {
+    data: {
+      componentName: 'settings',
+      settingsKey: null
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'settings' })
+    },
+    inputKey({ value }) {
+      this.settingsKey = value
+    },
+    getSettings: function () {
+      var that = this;
+      settings.getString({
+        key: this.settingsKey,
+        success: function (ret) {
+          prompt.showToast({ message: "key: " + that.settingsKey + "\nvalue: " + ret.value })
+          console.log('settings.getString----------success' + ret.value);
+        },
+        fail: function (erromsg, errocode) {
+          prompt.showToast({ message: "settings.getString fail------" + errocode + ': ' + erromsg })
+          console.log('settings.getString----------' + errocode + ': ' + erromsg)
+        },
+        complete: function () {
+          console.log('settings.getString----------complete')
+        }
+      })
+    }
+  }
+</script>

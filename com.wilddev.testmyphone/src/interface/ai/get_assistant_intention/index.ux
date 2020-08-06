@@ -1,0 +1,126 @@
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <main-btn onclick-main="openUse" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.get_assistant_intention.btnText')}}" btn-text-err="{{$t('message.interface.ai.get_assistant_intention.btnTextErr')}}"
+      back-result={{backResult}} back-data={{backData}} complete={{complete}}></main-btn>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+</style>
+
+<script>
+  import ai from '@system.ai';
+  import prompt from '@system.prompt';
+
+  export default {
+    data: {
+      componentData: {},
+      testtxt: '',
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: '',
+      category: '',
+      module: ''
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openUse(e) {
+      var a = e.detail.split(';')[0], b = e.detail.split(';')[1], c = e.detail.split(';')[2];
+      this.testtxt = this.changeMsg(a);
+      this.category = this.changeMsg(b, true);
+      this.module = this.changeMsg(c, true);
+      this.test();
+    },
+    openErrorUse(e) {
+      var a = e.detail.split(';')[0], b = e.detail.split(';')[1], c = e.detail.split(';')[2];
+      this.testtxt = this.changeMsg(a);
+      this.category = this.changeMsg(b, true);
+      this.module = this.changeMsg(c, true);
+      this.test();
+    },
+    test() {
+      console.log('text: ' + this.testtxt);
+      this.complete = '';
+      let self = this;
+
+      ai.getAssistantIntention({
+        text: self.testtxt,
+        category: self.category,
+        module: self.module,
+        success: (res) => {
+          console.log(res);
+          self.backResult = 'success';
+          self.backData = '';
+          self.backData = res.intentions && res.intentions[0].name;
+          if (res.intentions && res.intentions[0].name) {
+            setTimeout(() => {
+              prompt.showToast({ message: self.componentData.result + res.intentions[0].name });
+            }, 1000)
+          }
+        },
+        fail: (errMsg, errcode) => {
+          console.log("fail msg:" + errMsg);
+          self.backResult = 'fail';
+          self.backData = 'code:' + errcode + ' msg:' + errMsg;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.get_assistant_intention');
+      this.$page.setTitleBar({ text: this.componentData.title });
+    }
+  }
+</script>

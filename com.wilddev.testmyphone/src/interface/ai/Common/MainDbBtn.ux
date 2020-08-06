@@ -1,0 +1,87 @@
+<template>
+  <div class="wrapper">
+    <input placeholder="{{componentData.placeholder1}}" onchange="uriChangeOne" class="content-res change-input" name="uriChangeOne"></input>
+    <input placeholder={{componentData.placeholder2}} onchange="uriChangeTwo" class="content-res change-input" name="uriChangeTwo"></input>
+    <div class="main-btn-container">
+      <input type="button" class="main-btn" onclick="clickBtn" value="{{btnText}}"></input>
+      <input type="button" class="main-btn" onclick="clickBtnErr" value="{{btnTextErr}}"></input>
+      <input type="button" class="main-btn" onclick="clickBtnOther" value="{{btnTextOther}}"></input>
+    </div>
+    <input value="{{componentData.result}}{{backResult}}" class="content-result change-input" name="backResult"></input>
+    <input value="{{componentData.data}}{{backData}}" class="content-data change-input" name="backData"></input>
+  </div>
+</template>
+
+<style>
+  .wrapper {
+    flex-direction: column;
+    width: 750px;
+  }
+
+  .change-input {
+    border-radius: 16px;
+    line-height: 80px;
+    height: 80px;
+    font-size: 26px;
+    background-color: #dfdfdf;
+  }
+
+  .main-btn-container {
+    width: 710px;
+    margin: 10px 20px;
+    height: 180px;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-btn {
+    width: 310px;
+    margin: 10px 20px;
+    height: 80px;
+    background-color: #096dd9;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 35px;
+    color: #ffffff;
+  }
+
+  .content-res,
+  .content-result,
+  .content-data {
+    width: 710px;
+    margin: 10px 20px;
+  }
+</style>
+
+<script>
+  export default {
+    props: ['btnText', 'btnTextErr', 'btnTextOther', 'backResult', 'backData'],
+    data() {
+      return {
+        componentData: {},
+        uriChangeData: '',
+        option: ''
+      }
+    },
+    onInit: function () {
+      this.componentData = this.$t('message.interface.ai.common.mainDbBtn');
+    },
+    uriChangeOne(e) {
+      this.uriChangeData = e.value;
+    },
+    uriChangeTwo(e) {
+      this.option = e.value;
+    },
+    clickBtn() {
+      this.$emit('clickMain', this.uriChangeData);
+    },
+    clickBtnErr() {
+      this.$emit('clickMainErr', this.uriChangeData);
+    },
+    clickBtnOther() {
+      this.$emit('clickMainOther', this.option);
+    }
+  }
+</script>

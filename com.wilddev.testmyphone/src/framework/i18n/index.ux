@@ -1,0 +1,77 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">{{ pageTitle }}</text>
+    </div>
+
+    <div class="item-container">
+      <text>{{$t('message.framework.pageI18n.label1')}}{{ $t('message.framework.pageI18n.text') }}</text>
+    </div>
+
+    <div class="item-container">
+      <text>{{$t('message.framework.pageI18n.label2')}}{{ localeObject.language }}</text>
+      <text>{{$t('message.framework.pageI18n.label3')}}{{ localeObject.countryOrRegion }}</text>
+    </div>
+
+    <div class="item-container">
+      <text>{{ messageTip }}</text>
+    </div>
+
+    <div class="item-container">
+      <input class="btn" type="button" value="{{$t('message.framework.pageI18n.switchLocale')}}" onclick="changeLocaleConfiguration" />
+    </div>
+  </div>
+</template>
+
+<style>
+    @import '../../common/css/common.css';
+    .item-container {
+      margin-bottom: 50px;
+      margin-right: 60px;
+      margin-left: 60px;
+      flex-direction: column;
+    }
+</style>
+
+<script>
+  import configuration from '@system.configuration'
+
+  export default {
+    private: {
+      pageTitle: 'i18n',
+      localeObject: {},
+      messageTip: ''
+    },
+    onInit () {
+      this.$page.setTitleBar({ text: this.$t("message.framework.pageI18n.title") });
+      this.$page.setTitleBar({ text: this.$t('message.framework.pageI18n.title') });
+    },
+    onReady () {
+      this.localeObject = configuration.getLocale()
+    },
+    onConfigurationChanged (evt) {
+      console.info(`${this.$t('message.framework.pageI18n.console1')}${evt.type}`)
+      this.messageTip = `${this.$t('message.framework.pageI18n.messageTip')}${(new Date()).toTimeString().split(' ')[0]}`
+      this.localeObject = configuration.getLocale();
+      this.$page.setTitleBar({ text: this.$t("message.framework.pageI18n.title") })
+    },
+    changeLocaleConfiguration () {
+      if (this.localeObject.language === 'zh') {
+        console.info(this.$t('message.framework.pageI18n.console2'));
+
+        configuration.setLocale({
+          language: 'en',
+          countryOrRegion: 'US'
+        })
+      }
+      else {
+        console.info(this.$t('message.framework.pageI18n.console3'));
+
+        configuration.setLocale({
+          language: 'zh',
+          countryOrRegion: 'CN'
+        })
+      }
+    }
+  }
+</script>

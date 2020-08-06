@@ -1,0 +1,215 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <div class="item-content-detail">
+                    <text class="txt">key:</text>
+                    <input class="input" placeholder="{{$t('message.interface.fileData.storage.inputKey')}}" value="{{storageKey}}" onchange="keyFn" />
+                </div>
+
+                <div class="item-content-detail">
+                    <text class="txt">value:</text>
+                    <input class="input" placeholder="{{$t('message.interface.fileData.storage.inputValue')}}" value="{{storageValue}}" onchange="valueFn" />
+                </div>
+                <div class="item-content-detail">
+                    <text class="txt">index:</text>
+                    <input class="input" placeholder="{{$t('message.interface.fileData.storage.inputIndex')}}"value="{{index}}" onchange="indexFn" />
+                </div>
+            </div>
+            <input type="button" class="btn" onclick="setStorage" value="{{$t('message.interface.fileData.storage.setStorage')}}" />
+            <input type="button" class="btn" onclick="getStorage" value="{{$t('message.interface.fileData.storage.getStorage')}}{{storageKey}}" />
+            <input type="button" class="btn" onclick="getKey" value="{{$t('message.interface.fileData.storage.getKey')}}" />
+            <input type="button" class="btn" onclick="getLength" value="{{$t('message.interface.fileData.storage.getLength')}}" />
+            <input type="button" class="btn" onclick="clearStorage" value="{{$t('message.interface.fileData.storage.clearStorage')}}" />
+            <input type="button" class="btn" onclick="deleteStorage" value="{{$t('message.interface.fileData.storage.deleteStorage')}}{{storageKey}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-bottom: 100px;
+    }
+
+    .item-content-detail {
+        align-items: center;
+    }
+
+    .input {
+        flex: 1;
+        font-size: 30px;
+        padding-left: 20px;
+    }
+
+    .txt {
+        width: 100px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: right;
+    }
+</style>
+
+<script>
+    import storage from '@system.storage'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'storage',
+            componentData: {},
+            storageKey: '',
+            storageValue: '',
+            storageShow: '',
+            inputKey: '',
+            inputValue: '',
+            index: 0,
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'storage' })
+            this.componentData = this.$t('message.interface.fileData.storage');
+        },
+        keyFn: function (e) {
+            this.storageKey = e.text;
+        },
+        valueFn: function (e) {
+            this.storageValue = e.text;
+        },
+        indexFn: function (e) {
+            this.index = e.text;
+        },
+        setStorage: function () {
+            var that = this;
+            if (this.storageKey && this.storageValue) {
+                storage.set({
+                    key: this.storageKey,
+                    value: this.storageValue,
+                    success: function (ret) {
+                        prompt.showToast({
+                            message: "{key:" + that.storageKey + ",value:" + that.storageValue + "}",
+                        })
+                    },
+                    fail: function (erromsg, errocode) {
+                        prompt.showToast({ message: 'set fail --- ' + errocode + ':' + erromsg });
+                        console.info('set fail --- ' + errocode + ':' + erromsg)
+                    },
+                    complete: function () {
+                        prompt.showToast({ message: "set complete" });
+                        console.info('set complete  ')
+                    }
+                })
+            } else {
+                prompt.showToast({
+                    message: this.componentData.inputKeyAndValue
+                })
+            }
+        },
+        getStorage: function () {
+            var that = this;
+            storage.get({
+                key: this.storageKey,
+                default: 'default value',
+                success: function (ret) {
+                    console.info('storage.get(): ', JSON.stringify(ret))
+                    that.storageShow = ret;
+                    prompt.showToast({
+                        message: 'value: ' + ret,
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'get fail --- ' + errocode + ':' + erromsg });
+                    console.info('get fail --- ' + errocode + ':' + erromsg)
+                },
+                complete: function () {
+                    console.info('get complete  ')
+                }
+            })
+        },
+        getKey: function () {
+            var that = this;
+            const parseIndex = that.index;
+
+            storage.key({
+                index: parseIndex,
+                success: function (ret) {
+                    console.info('storage.key(): ', JSON.stringify(ret))
+                    prompt.showToast({ message: 'key: ' + ret, })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'get fail --- ' + errocode + ':' + erromsg });
+                    console.info('get fail --- ' + errocode + ':' + erromsg)
+                },
+                complete: function () {
+                    console.info('get complete  ')
+                }
+            })
+        },
+        getLength: function () {
+            const length = storage.length;
+            console.log('storage.length = ' + length);
+            prompt.showToast({ message: 'storage.length : ' + length });
+        },
+        deleteStorage: function () {
+            var that = this;
+            storage.delete({
+                key: this.storageKey,
+                success: function () {
+                    that.storageKey = ""; //Delete the value in the variable
+                    that.storageValue = "";//Delete the value in the variable
+                    that.inputKey = "";//Delete the value displayed by input
+                    that.inputValue = "";  //Delete the value displayed by input
+                    prompt.showToast({
+                        message: "success",
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'get fail --- ' + errocode + ':' + erromsg });
+                    console.info('get fail --- ' + errocode + ':' + erromsg)
+                },
+                complete: function () {
+                    console.info('get complete  ')
+                }
+            })
+        },
+        clearStorage: function () {
+            var that = this;
+            storage.clear({
+                success: function () {
+                    that.storageKey = ""; //Delete the value in the variable
+                    that.storageValue = "";//Delete the value in the variable
+                    that.inputKey = "";//Delete the value displayed by input
+                    that.inputValue = "";  //Delete the value displayed by input
+                    prompt.showToast({
+                        message: "success",
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'clear fail --- ' + errocode + ':' + erromsg });
+                    console.info('clear fail --- ' + errocode + ':' + erromsg)
+                },
+                complete: function () {
+                    prompt.showToast({ message: "clear complete" })
+                    console.info('clear complete  ')
+                }
+            })
+        }
+    }
+</script>

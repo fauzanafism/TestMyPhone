@@ -1,0 +1,95 @@
+<template>
+  <div class="container">
+    <div class="page-title-wrap">
+      <text class="page-title">computed</text>
+    </div>
+    <text class="title">{{$t('message.directive.computed.basicSample')}}</text>
+    <text>{{$t('message.directive.computed.initially')}} message: "{{ message }}"</text>
+    <text>{{$t('message.directive.computed.reversed')}} message: "{{ reversedMessage }}"</text>
+    <input class="btn" type="button" value="{{$t('message.directive.computed.changeMessage')}}" onclick="changeMessage" />
+    <text class="title">{{$t('message.directive.computed.computedSetter')}}</text>
+    <text>{{fullName}}</text>
+    <input class="btn" type="button" value="{{$t('message.directive.computed.changeFullName')}}" onclick="changeFullName" />
+    <text class="title">{{$t('message.directive.computed.computedCache')}}</text>
+    <text>{{initialValueOfNow}}{{now}}</text>
+    <text>{{initialValueOfNow}}{{currentNow}}</text>
+    <input class="btn" type="button" value="{{$t('message.directive.computed.getCurrentValueOfNow')}}" onclick="changeCurrentNow" />
+  </div>
+</template>
+<style>
+  @import "../../common/css/common.css";
+
+  .container {
+    flex-direction: column;
+    padding: 20px 100px 20px 50px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+
+  text {
+    font-size: 32px;
+  }
+
+  .btn {
+    height: 80px;
+    text-align: center;
+    border-radius: 5px;
+    margin-right: 60px;
+    margin-top: 60px;
+    margin-left: 60px;
+    margin-bottom: 50px;
+    color: #ffffff;
+    font-size: 30px;
+    background-color: #0faeff;
+  }
+</style>
+<script>
+  export default {
+    private: {
+      message: 'Hello',
+      firstName: 'Foo',
+      lastName: 'Bar',
+      currentNow: ''
+    },
+    public: {
+    },
+    onInit: function () {
+    },
+    computed: {
+      // computed getter
+      reversedMessage: function () {
+        return this.message.split('').reverse().join('')
+      },
+      fullName: {
+        // getter
+        get: function () {
+          return this.firstName + ' ' + this.lastName
+        },
+        // setter
+        set: function (newValue) {
+          var names = newValue.split(' ')
+          this.firstName = names[0]
+          this.lastName = names[names.length - 1]
+        }
+      },
+      now: function () {
+        return Date.now()
+      }
+    },
+    changeMessage() {
+      this.message = 'Goodbye'
+      console.log(this.reversedMessage)
+    },
+    changeFullName() {
+      this.fullName = 'John Doe'
+    },
+    changeCurrentNow() {
+      this.currentNow = this.now
+    }
+  }
+</script>

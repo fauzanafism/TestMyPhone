@@ -1,0 +1,123 @@
+<template>
+    <div class="containerPseudoClass">
+        <div class="containerPseudoClass">
+            <div class="page-title-wrap">
+                <text class="page-title">{{componentName}}</text>
+            </div>
+
+
+            <text class="atext">{{$t('message.style.pseudoclass.text1')}}</text>
+
+            <text class="distext" disabled="true">{{$t('message.style.pseudoclass.text2')}}</text>
+
+            <input class="input-text" placeholder="{{$t('message.style.pseudoclass.placeholder1')}}" style="placeholder-color:#FF0000;"></input>
+            <textarea placeholder="{{$t('message.style.pseudoclass.placeholder2')}}" class="textarea"></textarea>
+
+            <div>
+                <input class="input_checkbox" type="checkbox" checked="true"></input>
+                <switch class="switch" />
+
+            </div>
+
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .containerPseudoClass {
+        align-items: center;
+        flex: 1;
+        flex-direction: column;
+    }
+
+    .atext {
+        color: #00ff00;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    .atext:active {
+        color: #0000ff;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    .distext {
+        color: #00ff00;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    .distext:disabled {
+        color: #0000ff;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    .input_checkbox {
+        background-color: #0faeff;
+    }
+
+    .input_checkbox:checked {
+        background-color: #0000ff;
+    }
+
+    .switch {
+        margin-left: 10px;
+    }
+
+    .switch:checked {
+        margin-left: 100px;
+    }
+
+    .input-text {
+        height: 80px;
+        line-height: 80px;
+        margin-left: 30px;
+        margin-right: 30px;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-color: #999999;
+        font-size: 30px;
+        background-color: #ffffff;
+        margin-bottom: 30px;
+    }
+
+    .input-text:focus {
+        border-color: #f76160;
+    }
+
+    .textarea {
+        border-color: #bbbbbb;
+        border-width: 1px;
+        height: 50px;
+        font-size: 30px;
+        color: #ff6347;
+        placeholder-color: #8a2be2;
+        margin-left: 80px;
+        margin-right: 80px;
+        margin-bottom: 30px;
+    }
+
+    .textarea:focus {
+        border-color: #f76160;
+    }
+</style>
+
+<script>
+    module.exports = {
+        data: {
+            componentName: 'pseudoclass',
+            btndisabled: true
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'pseudoclass' })
+        },
+        btnclick: function () {
+            var that = this;
+            that.btndisabled = false;
+        }
+    }
+</script>

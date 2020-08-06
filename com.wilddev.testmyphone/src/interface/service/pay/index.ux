@@ -1,0 +1,254 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="item-container">
+            <input type="button" class="btn" onclick="useAlipay" value="{{$t('message.interface.service.pay.huaweiPay')}}" />
+            <input type="button" class="btn" onclick="getProductDetails" value="{{$t('message.interface.service.pay.getProductDetail')}}" />
+            <input type="button" class="btn" onclick="productPay" value="{{$t('message.interface.service.pay.productPay')}}" />
+            <input type="button" class="btn" onclick="getPurchaseInfo" value="{{$t('message.interface.service.pay.queryUncosumeOrder')}}" />
+            <input type="button" class="btn" onclick="getOrderDetail" value="{{$t('message.interface.service.pay.checkOrder')}}" />
+	</div>
+        <div class="item-container">
+            <input type="button" class="btn" onclick="getsign" value="{{$t('message.interface.service.pay.getSign')}}" />
+            <input type="button" class="btn" onclick="getProductSign" value="{{$t('message.interface.service.pay.getProductPaySign')}}" />
+            <input type="button" class="btn" onclick="getPurchaseInfoSign" value="{{$t('message.interface.service.pay.getUncosumeOrderSign')}}" />
+            <input type="button" class="btn" onclick="getOrderDetailSign" value="{{$t('message.interface.service.pay.getCheckOrderSign')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-top: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+    import pay from '@service.pay'
+    import fetch from '@system.fetch'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'pay',
+            componentData: {},
+            fetchData: '',
+            requestid: '',
+            sign: '',
+            ts: Date.now(),
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'pay' })
+            this.componentData = this.$t('message.interface.service.pay');
+        },
+        getsign: function () {
+            var provider = pay.getProvider();
+            var that = this;
+            fetch.fetch({
+                url: "http://117.78.37.42:19191/demo/getPaySign?merchantId=900086000010001817&applicationID=300017353&amount=" + 0.01 + "&productName=" + "沙县小吃" + "&productDesc=" + "沙县小吃" + "&sdkChannel=1&urlver=2&privateKey=fastappdev",
+                success: function (ret) {
+                    that.fetchData = that.componentData.result + ret.data;
+                    var myStr = "" + ret.data;
+                    var n = myStr.length;
+                    var subStr = myStr.substring(5, n - 1);
+                    var obj = JSON.parse(subStr);
+                    that.requestid = obj.requestId;
+                    that.sign = obj.sign;
+                    prompt.showToast({
+                        message: provider + that.requestid + that.sign
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'getsign --- ' + errocode + ':' + erromsg });
+                }
+            })
+        },
+        getProductSign: function () {
+            var provider = pay.getProvider();
+            var that = this;
+            fetch.fetch({
+                url: "http://117.78.37.42:19191/demo/getPaySign?merchantId=890086000000002287&applicationID=101247199&urlver=2&productNo=1234&serviceCatalog=1" + "&sdkChannel="+1+"&privateKey=aa&ProductSign=yes&Chunyu=yes",
+                success: function (ret) {
+                    console.error(JSON.stringify(ret));
+                    that.fetchData = "获取数据：" + ret.data;
+                    var myStr = "" + ret.data;
+                    var n = myStr.length;
+                    var subStr = myStr.substring(5, n - 1);
+                    var obj = JSON.parse(subStr);
+                    that.requestid = obj.requestId;
+                    that.sign = obj.sign;
+                    prompt.showToast({
+                        message: provider + that.requestid + that.sign
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                     console.error(JSON.stringify(erromsg));
+                    prompt.showToast({ message: 'getsign --- ' + errocode + ':' + erromsg });
+                }
+            })
+        },
+        getPurchaseInfoSign: function () {
+            var provider = pay.getProvider();
+            var that = this;
+            fetch.fetch({
+                url: "http://117.78.37.42:19191/demo/getPaySign?merchantId=890086000000002287&appId=101247199&priceType=3&pageNo=1&productId=12"+ "&ts=" +this.ts + "&privateKey=fastappNewPay&PurchaseInfoSign=yes&Chunyu=yes",
+                success: function (ret) {
+                    console.error(JSON.stringify(ret));
+                    that.fetchData = "获取数据：" + ret.data;
+                     console.error("ts ="+that.ts);
+                    var myStr = "" + ret.data;
+                    var n = myStr.length;
+                    var subStr = myStr.substring(5, n - 1);
+                    var obj = JSON.parse(subStr);
+                    that.requestid = obj.requestId;
+                    that.sign = obj.sign;
+                    prompt.showToast({
+                        message: provider + that.requestid + that.sign
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                     console.error(JSON.stringify(erromsg));
+                    prompt.showToast({ message: 'getsign --- ' + errocode + ':' + erromsg });
+                }
+            })
+        },
+        getOrderDetailSign: function () {
+            var provider = pay.getProvider();
+            var that = this;
+
+            fetch.fetch({
+                url: "http://117.78.37.42:19191/demo/getPaySign?merchantId=890086000000002287&keyType=1&requestId=20191021073603003"  + "&time=" + "100" + "&privateKey=fastappNewPay&OrderDetailSign=yes&Chunyu=yes",
+                success: function (ret) {
+                    console.error(JSON.stringify(ret));
+                    that.fetchData = "获取数据：" + ret.data;
+                    console.error("ts ="+that.ts);
+                    var myStr = "" + ret.data;
+                    var n = myStr.length;
+                    var subStr = myStr.substring(5, n - 1);
+                    var obj = JSON.parse(subStr);
+                    that.requestid = obj.requestId;
+                    that.sign = obj.sign;
+                    prompt.showToast({
+                        message: provider + that.requestid + that.sign
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'getsign --- ' + errocode + ':' + erromsg });
+                }
+            })
+        },
+        useAlipay: function () {
+            pay.pay({
+                orderInfo: {
+                    "amount": 0.01,
+                    "applicationID": "300017353",
+                    "productDesc": "product description",
+                    "productName": "product name",
+                    "serviceCatalog": "1",
+                    "merchantId": "900086000010001817",//merchant ID
+                    "merchantName": "merchant name",//marchant name
+                    "sign": this.sign,//sign
+                    "requestId": this.requestid,
+                    "urlver": "2",
+                    "sdkChannel": 1,
+                    "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiNcKr0G0RCzbFjSSR4hhaj+c2HLEpqQ/VYmxTGpIYCPSWWZvXGxMHk98z1lRcfnNmNRsdqRFjTC2YYxeu4F80V3qxBjPDm79+1sZrnjsPyny039/EeRVBUNGhk3ixxzWOHZV4Rpt94def7LKVlF6G9dkJ66rn8GH7VcaJFVxEjZg7cRfDVLOKBElsOcJesNyBH5qgkLURvVM8I3LjfFuVxmaVCxaTWAxbF409YMEX4XFs0kK6McrlBTDGvh1WgM+wlrqXykAl/9tHiFK5DbTJ24Y7fFIYZtv2OWS5NvP1E4g7GyNeXLIA7fSl6FW2kULZX6BDSopDwnZZJgtNpEi0wIDAQAB"
+                },
+                success: function (ret) {
+                    prompt.showToast({
+                        message: "pay result: " + JSON.stringify(ret)
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'pay fail --- ' + errocode + ':' + erromsg });
+                }
+            })
+        },
+        getProductDetails:function(){
+             pay.getProductDetails({
+                "merchantId": "890086000000002287",
+                "applicationID": "101247199",
+                "requestId": "123",
+                "productNos": "pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01|pms01",
+                success: function (ret) {
+                    var list = ret.productList.length;
+                    console.log("list ="+list);
+                    prompt.showToast({
+                        message: "getProductDetails" + JSON.stringify(ret)
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'getProductDetails fail --- ' + errocode + ':' + erromsg });
+                }
+            })
+        },
+        productPay:function(){
+             pay.productPay({
+                "merchantId": "890086000000002287",
+                "applicationID": "101247199",
+                "requestId":this.requestid,
+                "productNo": "1234",
+                "serviceCatalog":"1",
+                "merchantName":"123",
+                "sdkChannel":1,
+                "urlver":2,
+                "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkMcvapcWWD7HGNV/KVF7cGE4EhhZ0J0UaHDGWPYC0w+dZdMRJOXWzeGkgsC8CMsP8H8Dqnhdhy9bH37g70OCb1pKUhfgv6UlSXE5oU6+H2TJhXRt1ZrceAKEe8+mt8eINaF1HD9EHPESz6U4+aCWUtJ0WFeevG+4FbPQ4o2Mb+LmaS+LW5NlKaTpqwnhqFsCvJ6JWSSVGBuFo2+8t0IMC5pscropffd/ySEO9s4u5HjDb76ZUHpILN5h+LcR+CfFpXNoQAPoRTSo/CvdROPpVwvS5RP3tGVYkOa05fwuxxsSF3RvuK5TUcdtnn9oKJ/ENo9hwGht9UbIJy7D3wVbuQIDAQAB",
+                "sign": this.sign,//签名
+                success: function (ret) {
+                    prompt.showToast({
+                        message: "productPay" + JSON.stringify(ret)
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'productPay fail --- ' + errocode + ':' + erromsg });
+                }
+            })
+        },
+        getPurchaseInfo:function(){
+            var that = this;
+             pay.getPurchaseInfo({
+                "merchantId": "890086000000002287",
+                "appId": "101247199",
+                "priceType": 3,
+                "ts": that.ts,
+                "productId":"12",
+                "pageNo":1,
+                "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkMcvapcWWD7HGNV/KVF7cGE4EhhZ0J0UaHDGWPYC0w+dZdMRJOXWzeGkgsC8CMsP8H8Dqnhdhy9bH37g70OCb1pKUhfgv6UlSXE5oU6+H2TJhXRt1ZrceAKEe8+mt8eINaF1HD9EHPESz6U4+aCWUtJ0WFeevG+4FbPQ4o2Mb+LmaS+LW5NlKaTpqwnhqFsCvJ6JWSSVGBuFo2+8t0IMC5pscropffd/ySEO9s4u5HjDb76ZUHpILN5h+LcR+CfFpXNoQAPoRTSo/CvdROPpVwvS5RP3tGVYkOa05fwuxxsSF3RvuK5TUcdtnn9oKJ/ENo9hwGht9UbIJy7D3wVbuQIDAQAB",
+                "sign": this.sign,//签名
+                success: function (ret) {
+                    prompt.showToast({
+                        message: "getPurchaseInfo" + JSON.stringify(ret)
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'getPurchaseInfo fail --- ' + errocode + ':' + erromsg });
+                }
+            })
+        },
+         getOrderDetail:function(){
+             var that = this;
+             pay.getOrderDetail({
+                "merchantId": "890086000000002287",
+                "keyType": 1,
+                "time":"100",
+                "requestId":"20191021073603003",
+                "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkMcvapcWWD7HGNV/KVF7cGE4EhhZ0J0UaHDGWPYC0w+dZdMRJOXWzeGkgsC8CMsP8H8Dqnhdhy9bH37g70OCb1pKUhfgv6UlSXE5oU6+H2TJhXRt1ZrceAKEe8+mt8eINaF1HD9EHPESz6U4+aCWUtJ0WFeevG+4FbPQ4o2Mb+LmaS+LW5NlKaTpqwnhqFsCvJ6JWSSVGBuFo2+8t0IMC5pscropffd/ySEO9s4u5HjDb76ZUHpILN5h+LcR+CfFpXNoQAPoRTSo/CvdROPpVwvS5RP3tGVYkOa05fwuxxsSF3RvuK5TUcdtnn9oKJ/ENo9hwGht9UbIJy7D3wVbuQIDAQAB",
+                "sign": this.sign,//签名
+                success: function (ret) {
+                    prompt.showToast({
+                        message: "getOrderDetail" + JSON.stringify(ret)
+                    })
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: 'getOrderDetail fail --- ' + errocode + ':' + erromsg });
+                }
+            })
+        }
+    }
+</script>

@@ -1,0 +1,78 @@
+<template>
+  <div class="wrapper">
+    <input placeholder="{{$t('message.interface.ai.common.mainBtn.placeholder')}}" onchange="uriChange" class="content-res change-input" name="uriChange"></input>
+    <div class="main-btn-container">
+      <input type="button" class="main-btn" onclick="clickBtn" value="{{btnText}}"></input>
+      <input type="button" class="main-btn" onclick="clickBtnErr" value="{{btnTextErr}}"></input>
+    </div>
+    <input value="{{$t('message.interface.ai.common.mainBtn.result')}}{{backResult}}" class="content-result change-input" name="backResult"></input>
+    <input value="{{$t('message.interface.ai.common.mainBtn.data')}}{{backData}}" class="content-data change-input" name="backData"></input>
+    <input value="{{$t('message.interface.ai.common.mainBtn.complete')}}{{complete}}" class="content-data change-input" name="complete"></input>
+  </div>
+</template>
+
+<style>
+  .wrapper {
+    flex-direction: column;
+    width: 750px;
+  }
+
+  .change-input {
+    border-radius: 16px;
+    line-height: 80px;
+    height: 80px;
+    font-size: 26px;
+    background-color: #dfdfdf;
+  }
+
+  .main-btn-container {
+    width: 710px;
+    margin: 10px 20px;
+    height: 180px;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-btn {
+    width: 310px;
+    margin: 10px 20px;
+    height: 80px;
+    background-color: #096dd9;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 35px;
+    color: #ffffff;
+  }
+
+  .content-res,
+  .content-result,
+  .content-data {
+    width: 710px;
+    margin: 10px 20px;
+  }
+</style>
+
+<script>
+  export default {
+    props: ['btnText', 'btnTextErr', 'backResult', 'backData', 'complete'],
+    data() {
+      return {
+        uriChangeData: ''
+      }
+    },
+    onInit: function () {
+    },
+    uriChange(e) {
+      // console.log(JSON.stringify(e));
+      this.uriChangeData = e.value;
+    },
+    clickBtn() {
+      this.$emit('clickMain', this.uriChangeData);
+    },
+    clickBtnErr() {
+      this.$emit('clickMainErr', this.uriChangeData);
+    }
+  }
+</script>

@@ -1,0 +1,56 @@
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+
+<template>
+  <div class="container">
+    <main-btn onclick-main="checkAI" btn-text={{btnText}} btn-text-err={{btnTextErr}} complete={{complete}} back-result={{backResult}}
+      back-data={{backData}}></main-btn>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+</style>
+
+<script>
+  import prompt from '@system.prompt';
+  import ai from '@system.ai';
+
+  export default {
+    data: {
+      btnText: '',
+      btnTextErr: '',
+      backResult: '',
+      backData: '',
+      complete: ''
+    },
+    checkAI() {
+      this.complete = '';
+      let self = this;
+      self.backResult = 'fail';
+      ai.canIUse({
+        success: function (res) {
+          setTimeout(() => {
+            prompt.showToast({ message: self.$t('message.interface.ai.can_use.canUse') });
+          }, 1000)
+          self.backResult = 'success';
+          self.backData = JSON.stringify(res);
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      });
+    },
+    onInit() {
+      this.btnText=this.$t('message.interface.ai.can_use.btnText');
+      this.btnTextErr=this.$t('message.interface.ai.can_use.btnTextErr');
+      this.$page.setTitleBar({ text: this.$t('message.interface.ai.can_use.btnText') });
+    }
+  }
+</script>

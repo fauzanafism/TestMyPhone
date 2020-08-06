@@ -1,0 +1,192 @@
+<import name="image-container" src="../Common/ImageContainer.ux"></import>
+<import name="main-btn" src="../Common/MainBtn.ux"></import>
+<import name="photo-selector" src="../Common/PhotoSelector.ux"></import>
+<import name="loading-wrapper" src="../Common/LoadingWrapper.ux"></import>
+
+<template>
+  <div class="container">
+    <image-container photo-uri={{photoUri}} info="{{$t('message.interface.ai.detect_barcode.info')}}" score={{score}}></image-container>
+    <main-btn onclick-main="openPhotoSelector" onclick-main-err="openErrorUse" btn-text="{{$t('message.interface.ai.detect_barcode.btnText')}}" btn-text-err="{{$t('message.interface.ai.detect_barcode.btnTextErr')}}"
+      back-result={{backResult}} back-data={{backData}} complete={{complete}}></main-btn>
+    <photo-selector if="{{isPSshow}}" onhide="hidePhotoSelector"></photo-selector>
+    <loading-wrapper if="{{isLoadingShow}}"></loading-wrapper>
+    <list class="item-box">
+      <list-item type="item-content" for="item in resArr">
+        <text class="item-content">{{item}}</text>
+      </list-item>
+    </list>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+  }
+
+  .item-box {
+    flex-direction: column;
+  }
+
+  .item-content {
+    width: 710px;
+    margin: 10px 20px;
+    font-size: 28px;
+    line-height: 36px;
+  }
+</style>
+
+<script>
+  import ai from '@system.ai';
+  import prompt from '@system.prompt';
+
+  export default {
+    data: {
+      score: '',
+      photoUri: '../Common/images/QRcode.jpg',
+      isPSshow: false,
+      isLoadingShow: false,
+      backResult: '',
+      backData: '',
+      complete: '',
+      resArr: []
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: this.$t('message.interface.ai.detect_barcode.checkCode') });
+      this.$on('getPhotoUri', this.getPhotoUri);
+      this.isLoadingShow = true;
+    },
+    onReady() {
+      this.test()
+    },
+    openPhotoSelector() {
+      this.isPSshow = true
+    },
+    hidePhotoSelector() {
+      this.isPSshow = false
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    openErrorUse(e) {
+      let sliceUri = e.detail.split(';')[0];
+      sliceUri = this.changeMsg(sliceUri);
+      this.photoUri = sliceUri;
+      this.test();
+    },
+    getPhotoUri(obj) {
+      this.photoUri = obj.detail;
+      this.isLoadingShow = true;
+      this.test();
+    },
+    typeIndex(id) {
+      let index = id - 0 || 0;
+      const arr = this.$t('message.interface.ai.detect_barcode.arr');
+      return arr[index];
+    },
+    test() {
+      this.score = '';
+      this.complete = '';
+      this.resArr = [];
+      let uri = this.photoUri;
+      console.info(uri);
+
+      let self = this;
+      ai.detectBarcode({
+        uri: uri,
+        success: (res) => {
+          setTimeout(() => {
+            self.score = res.uri;
+            self.isLoadingShow = false;
+          }, 1000)
+          self.backResult = 'success';
+          self.backData = JSON.stringify(res);
+          self.resArr = [];
+          if (res && res.barcode && res.barcode.length > 0) {
+            const obj = res.barcode[0];
+            self.resArr.push(self.$t('message.interface.ai.detect_barcode.messageTypeInCode') + self.typeIndex(obj.contentTypes));
+            if (obj.personName) {
+              self.resArr.push(self.$t('message.interface.ai.detect_barcode.personName') + (obj.personName && obj.personName.name))
+            }
+            if (obj.phone) {
+              self.resArr.push(self.$t('message.interface.ai.detect_barcode.phoneNumber') + (obj.phone && obj.phone.number))
+            }
+            if (obj.emailAddress) {
+              self.resArr.push(self.$t('message.interface.ai.detect_barcode.emailAddress') + (obj.emailAddress && obj.emailAddress.address))
+            }
+            if (obj.calendarDateTime) {
+              self.resArr.push(self.$t('message.interface.ai.detect_barcode.time') + (obj.calendarDateTime && obj.calendarDateTime.utcTime))
+            }
+            if (obj.address) {
+              self.resArr.push(self.$t('message.interface.ai.detect_barcode.address') + (obj.address && obj.address.address))
+            }
+            if (obj.geolocation) {
+              self.resArr.push(
+                this.$t('message.interface.ai.detect_barcode.geolocation') + (
+                  obj.geolocation && obj.geolocation.latitude + ',' + obj.geolocation.longitude
+                )
+              )
+            }
+            if (obj.url) {
+              self.resArr.push(self.$t('message.interface.ai.detect_barcode.website') + (obj.url && obj.url.url))
+            }
+            if (obj.text) {
+              self.resArr.push(self.$t('message.interface.ai.detect_barcode.textContent') + (obj.text && obj.text.text))
+            }
+          }
+        },
+        fail: (erromsg, errocode) => {
+          setTimeout(() => {
+            prompt.showToast({ message: self.$t('message.interface.ai.detect_barcode.error') });
+            self.isLoadingShow = false;
+          }, 1000)
+          self.backResult = 'fail';
+          self.backData = 'code:' + errocode + ' msg:' + erromsg;
+        },
+        complete: (e) => {
+          self.complete = 'completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    }
+  }
+</script>

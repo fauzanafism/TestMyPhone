@@ -1,0 +1,118 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="item-container">
+            <text>{{$t('message.component.componentMethods.getBoundingClientRect')}}</text>>
+            <input id="btnid" type="button" style="width:600px" value="queryBounds" onclick="queryBounds" />
+            <text>{{rect}}</text>
+        </div>
+
+        <div class="item-container">
+            <text>{{$t('message.component.componentMethods.toTempFilePath')}}</text>>
+            <div class="item-content">
+                <text>{{tempFilePath}}</text>>
+                <image src="{{tempFilePath}}" class="image"></image>
+                <input class="btn" type="button" value="分享" onclick="shareToOthers"></input>
+            </div>
+            <!-- 地图 -->
+            <div class="item-content">
+                <map class="map lc2" id='mapid' latitude=39.906901 longitude=116.397972 showmylocation='true'></map>
+                <input class="btn" type="button" value="生成map组件的截图" onclick="createSnapShot('mapid')"></input>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+    .item-container {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        flex-direction: column;
+        border-top-color: #696969;
+        border-top-width: 1px;
+        align-items: center;
+    }
+    .item-content {
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+    .image {
+        justify-content: center;
+        border-color: #ff0000;
+        border-width: 5px;
+        width: 500px;
+        height: 400px;
+    }
+    .map {
+        border-color: #ff0000;
+        border-width: 5px;
+        height: 500px;
+        width: 80%;
+    }
+    .lc2 {
+        mylocation-fill-color: rgba(255, 0, 255, 0.5);
+        mylocation-stroke-color: rgba(255, 255, 0, 1);
+        mylocation-icon-path: url(/common/logo.png);
+    }
+</style>
+
+<script>
+    import share from '@system.share'
+
+    export default {
+        data: {
+            rect: 'click button to query bounds',
+            componentName: 'componentMethods',
+            tempFilePath: ''
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'componentMethods' })
+        },
+        queryBounds: function () {
+            var that = this;
+            this.$element('btnid').getBoundingClientRect({
+                success: function (data) {
+                    that.rect = data;
+                    console.log('getBoundingClientRect succeeded, result data =' + JSON.stringify(data));
+                },
+                fail() {
+                    console.log('getBoundingClientRect failed');
+                },
+                complete: function () {
+                    console.log('getBoundingClientRect completed');
+                }
+            });
+        },
+        createSnapShot: function (id) {
+            console.log('toTempFilePath: id =' + id);
+            var that = this;
+            this.$element(id).toTempFilePath({
+                fileType: 'jpg', quality: 1.0, success: function (ret) {
+                    console.debug('toTempFilePath success:' + ret.tempFilePath)
+                    that.tempFilePath = ret.tempFilePath
+                }, fail: function (msg, code) {
+                    console.log('toTempFilePath failed:code=' + code + '; msg=' + msg);
+                }, complete: function (params) {
+                    console.log('toTempFilePath complete');
+                }
+            }
+            )
+        },
+        shareToOthers: function () {
+            share.share({
+                type: 'image/jpeg',
+                data: this.tempFilePath,
+                success: function (data) { console.log('handling success'); },
+                fail: function (data, code) {
+                    console.log('handling fail, code=' + code);
+                }
+            });
+
+        }
+
+    }
+</script>

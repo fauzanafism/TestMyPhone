@@ -1,0 +1,347 @@
+<template>
+  <div class="container">
+    <div class="option-box">
+      <input class="option-item" placeholder="fontTime" onchange="fontTimeFn"></input>
+      <input class="option-item" placeholder="backTime" onchange="backTimeFn"></input>
+      <input class="option-item" placeholder="totalTime" onchange="totalTimeFn"></input>
+    </div>
+    <div class="main-btn-container">
+      <input type="button" class="main-btn" onclick="startRecord" value="{{$t('message.interface.ai.speech_recognition.startTxt')}}"></input>
+      <input type="button" class="main-btn" onclick="stopRecord" value="{{$t('message.interface.ai.speech_recognition.stopTxt')}}"></input>
+      <input type="button" class="main-btn" onclick="cancelRecord" value="{{$t('message.interface.ai.speech_recognition.cancelTxt')}}"></input>
+    </div>
+    <div class="result-box">
+      <text class="result-info">{{$t('message.interface.ai.speech_recognition.currentStatus')}}{{aiState}}</text>
+    </div>
+    <div class="result-box wave-box">
+      <text class="result-wave" style="height: 0"></text>
+      <text class="result-wave" style="height: {{volume*1/10}}"></text>
+      <text class="result-wave" style="height: {{volume/4}}"></text>
+      <text class="result-wave" style="height: {{volume*3/10}}"></text>
+      <text class="result-wave" style="height: {{volume/2}}"></text>
+      <text class="result-wave" style="height: {{volume*3/10}}"></text>
+      <text class="result-wave" style="height: {{volume/4}}"></text>
+      <text class="result-wave" style="height: {{volume*1/10}}"></text>
+      <text class="result-wave" style="height: 0"></text>
+    </div>
+    <div class="result-box">
+      <text class="result-info">{{$t('message.interface.ai.speech_recognition.currentVolume')}}{{volume}}</text>
+    </div>
+    <list class="result-box list-box">
+      <list-item class="list-items" type="partialResult">
+        <text class="result-text">onPartialResult: {{aiResult}}</text>
+      </list-item>
+    </list>
+    <list class="result-box list-box">
+      <list-item class="list-items" type="success">
+        <text class="result-text">success: {{aiResultAll}}</text>
+      </list-item>
+    </list>
+    <div class="result-box">
+      <text class="result-text">onBeginningOfSpeech: {{onBeginningOfSpeechTxt}}</text>
+    </div>
+    <div class="result-box">
+      <text class="result-text">onEndOfSpeech: {{onEndOfSpeechTxt}}</text>
+    </div>
+    <div class="result-box">
+      <text class="result-text">onEnd: {{onEndTxt}}</text>
+    </div>
+    <div class="result-box">
+      <text class="result-text">complete: {{complete}}</text>
+    </div>
+    <div class="result-box">
+      <text class="result-text">Success/Fail: {{resultBot}}</text>
+    </div>
+  </div>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(182, 192, 194, 0.2);
+    color: #242424;
+  }
+
+  .option-box {
+    width: 750px;
+    height: 90px;
+    justify-content: space-between;
+  }
+
+  .option-item {
+    width: 30%;
+    margin: 10px 14px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 12px;
+  }
+
+  .main-btn-container {
+    width: 750px;
+    margin: 10px 20px;
+    height: 120px;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-btn {
+    width: 310px;
+    margin: 10px 20px;
+    height: 80px;
+    background-color: #096dd9;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 35px;
+    color: #ffffff;
+  }
+
+  .result-box {
+    background-color: #ffffff;
+    width: 750px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .list-box {
+    height: 120px;
+    width: 750px;
+    align-items: center;
+  }
+
+  .list-items {
+    width: 750px;
+    flex-wrap: wrap;
+  }
+
+  .result-info {
+    width: 730px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  .result-text {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .wave-box {
+    height: 180px;
+    align-items: flex-end;
+  }
+
+  .result-wave {
+    width: 60px;
+    height: 180px;
+    background-color: #096dd9;
+    margin: 10px;
+  }
+</style>
+
+<script>
+  import ai from '@system.ai';
+
+  export default {
+    data: {
+      componentData: {},
+      startTxt: '',
+      stopTxt: '',
+      backResult: '',
+      backData: '',
+      volume: 0,
+      aiState: '',
+      aiResult: '',
+      aiResultAll: '',
+      fontTime: 3000,
+      backTime: 4000,
+      totalTime: 20000,
+      onBeginningOfSpeechTxt: '',
+      onEndOfSpeechTxt: '',
+      onEndTxt: '',
+      complete: '',
+      resultBot: ''
+    },
+    clearAll() {
+      this.volume = 0;
+      this.onBeginningOfSpeechTxt = '';
+      this.onEndOfSpeechTxt = '';
+      this.onEndTxt = '';
+      this.aiResult = '';
+      this.aiResultAll = ''
+    },
+    changeMsg(e, twoT) {
+      let msg = e;
+      switch (msg) {
+        case 'Null':
+          msg = null;
+          break;
+        case 'Undefined':
+          msg = undefined;
+          break;
+        case 'Boolean':
+          msg = true;
+          break;
+        case 'Number':
+          msg = 123;
+          break;
+        case 'Object':
+          msg = { a: 1 };
+          break;
+        case 'Array':
+          msg = [1, 2, 3];
+          break;
+        case undefined:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (typeof msg === 'string') {
+        if (msg.indexOf(".") !== -1 && twoT) {
+          msg = parseFloat(msg);
+        }
+        if (parseInt(msg) === msg - 0) {
+          msg = parseInt(msg);
+        }
+      }
+      console.log(msg);
+      console.log(typeof msg);
+      return msg;
+    },
+    fontTimeFn(e) {
+      this.fontTime = this.changeMsg(e.value, true);
+    },
+    backTimeFn(e) {
+      this.backTime = this.changeMsg(e.value, true);
+    },
+    totalTimeFn(e) {
+      this.totalTime = this.changeMsg(e.value, true);
+    },
+    startRecord() {
+      this.clearAll();
+      this.checkAI();
+    },
+    cancelRecord() {
+      var self = this;
+      this.complete = '';
+      ai.cancelRecognize({
+        success: function () {
+          console.log("cancel voice recognization success");
+          self.aiState = self.componentData.speechCanceled;
+          self.resultBot = 'cancelRecord success';
+        },
+        fail: function (data, code) {
+          console.log("test fail, code:" + code);
+          console.log("test fail, data:" + data);
+          self.aiState = 'code:' + code + ' msg:' + JSON.stringify(data);
+          self.resultBot = 'cancelRecord fail';
+        },
+        complete: (e) => {
+          self.complete = 'cancelRecord completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    stopRecord() {
+      var self = this;
+      this.complete = '';
+      self.aiState = this.componentData.stopTxt;
+      ai.stopRecognize({
+        success: function (e) {
+          console.log("stop voice recognization success");
+          self.aiState = self.componentData.speechStopped;
+          self.resultBot = 'stopRecord success';
+        },
+        fail: function (data, code) {
+          console.log("test fail, code:" + code);
+          console.log("test fail, data:" + data);
+          self.aiState = 'code:' + code + ' msg:' + JSON.stringify(data);
+          self.resultBot = 'stopRecord fail';
+        },
+        complete: (e) => {
+          self.complete = 'stopRecord completed';
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    checkAI() {
+      let self = this;
+      ai.startRecognize({
+        fontTime: self.fontTime,
+        backTime: self.backTime,
+        totalTime: self.totalTime,
+        onBeginningOfSpeech: function (e) {
+          console.log("begin speech");
+          self.aiState = self.componentData.startTxt;
+          self.onBeginningOfSpeechTxt = e
+        },
+        onRmsChanged: function (res) {
+          if (!res) {
+            return;
+          }
+          console.log("rms is" + res.rms);
+          self.aiState = self.componentData.speeching;
+          self.volume = res.rms;
+        },
+        onEndOfSpeech: function (e) {
+          console.log("end of speech");
+          self.aiState = self.componentData.completeSpeech;
+          self.volume = 0;
+          self.onEndOfSpeechTxt = e
+        },
+        onPartialResult: function (res) {
+          if (!res) {
+            return;
+          }
+          let arr = res.result, wordAdd = '';
+          for (var i = 0, len = arr.length; i < len; i++) {
+            wordAdd += arr[i].word;
+          }
+          console.log("PartialResult is" + wordAdd);
+          self.aiResult = wordAdd;
+          self.aiResult = JSON.stringify(arr);
+        },
+        success: function (data) {
+          let arr = data.result, wordAdd = '';
+          for (var i = 0, len = arr.length; i < len; i++) {
+            wordAdd += arr[i].word;
+          }
+          console.log("test success: " + wordAdd);
+          self.aiResultAll = wordAdd;
+          self.aiResultAll = JSON.stringify(arr);
+          self.volume = 0;
+          self.resultBot = 'startRecognize success';
+        },
+        onEnd: function (e) {
+          console.log("voice recognization end");
+          self.aiState = self.componentData.completeSpeech;
+          self.volume = 0;
+          self.onEndTxt = e;
+        },
+        fail: function (data, code) {
+          console.log("test fail, code: " + code);
+          self.aiState = 'code:' + code + ' msg: ' + JSON.stringify(data);
+          self.volume = 0;
+          self.resultBot = 'startRecognize fail';
+        },
+        complete: (e) => {
+          self.complete = e;
+          console.log(JSON.stringify(e));
+        }
+      })
+    },
+    onInit() {
+      this.componentData = this.$t('message.interface.ai.speech_recognition');
+      this.startTxt = this.componentData.startTxt;
+      this.stopTxt = this.componentData.stopTxt;
+      this.$page.setTitleBar({ text: this.componentData.title });
+    }
+  }
+</script>

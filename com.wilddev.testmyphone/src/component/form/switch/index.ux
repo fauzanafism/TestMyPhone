@@ -1,0 +1,109 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">{{$t('message.component.switch.defaultStyle')}}</text>
+            <div class="item-content">
+                <switch checked="true" class="switch" onchange="change"></switch>
+                <switch class="switch"></switch>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title ">{{$t('message.component.switch.recommendStyle')}}</text>
+            <div class="switch-wrap">
+                <div class="switch-content border-bottom">
+                    <text class="label">{{$t('message.component.switch.on')}}</text>
+                    <switch checked="true" class="switch"></switch>
+                </div>
+                <div class="switch-content">
+                    <text class="label">{{$t('message.component.switch.off')}}</text>
+                    <switch class="switch"></switch>
+                </div>
+            </div>
+            <text class="item-title ">{{$t('message.component.switch.customSwitch')}}</text>
+            <div class="switch-wrap">
+                <div class="switch-content border-bottom">
+                    <text class="label">{{$t('message.component.switch.modifyThumbColor')}}</text>
+                    <switch checked="true" style="thumb-color:#ff0000" class="switch"></switch>
+                </div>
+                <div class="switch-content">
+                    <text class="label">{{$t('message.component.switch.modifyTrackColor')}}</text>
+                    <switch class="switch" style="track-color:#00FF00"></switch>
+                </div>
+                <div class="switch-content">
+                    <text class="label">{{$t('message.component.switch.modifySlideAndBall')}}</text>
+                    <switch class="switch" style="thumb-color:#13ca22;track-color:#ff00ff"></switch>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-top: 20px;
+        margin-bottom: 30px;
+        flex-direction: column;
+    }
+
+    .item-title {
+        padding-left: 30px;
+        padding-bottom: 20px;
+        color: #aaaaaa;
+    }
+
+    .item-content {
+        padding-left: 30px;
+    }
+
+    .switch-wrap {
+        border-color: #bbbbbb;
+        padding-left: 40px;
+        border-bottom-width: 1px;
+        border-top-width: 1px;
+        background-color: #ffffff;
+        flex-direction: column;
+    }
+
+    .switch {
+        margin-right: 30px;
+    }
+
+    .switch-content {
+        padding-right: 50px;
+    }
+
+    .label {
+        flex: 1;
+        height: 100px;
+    }
+
+    .border-bottom {
+        border-color: #bbbbbb;
+        border-bottom-width: 1px;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            componentName: 'switch'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'switch' });
+        },
+        change: function () {
+            prompt.showToast({
+                message: this.$t('message.component.switch.statusChanged')
+            })
+        }
+    }
+</script>

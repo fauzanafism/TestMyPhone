@@ -1,0 +1,36 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <input type="button" class="btn" onclick="scrollBy(500)" value="{{$t('message.interface.interaction.pageScroll.swipedown')}}" />
+        <div class="temp"></div>
+        <input type="button" class="btn" onclick="scrollTo(0)" value="{{$t('message.interface.interaction.pageScroll.swipeToTop')}}" />
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+    .temp {
+        height: 1550px;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'pageScroll',
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'pageScroll' })
+        },
+        scrollTo: function (dy) {
+            console.log("this.$page.scrollTo: top=" + dy + ", behavior=intent");
+            this.$page.scrollTo({ top: dy })
+        },
+        scrollBy: function (dy) {
+            console.log("this.$page.scrollBy: top=" + dy + ", behavior=smooth");
+            this.$page.scrollBy({ top: dy, behavior: "smooth" })
+        }
+    }
+</script>

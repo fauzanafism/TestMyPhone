@@ -1,0 +1,217 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <text class="color">background-image</text>
+        <div class="item-container">
+            <div class="item-container-background-image">
+            </div>
+        </div>
+
+        <text class="color">background-image-net</text>
+        <div class="item-container">
+            <div class="item-container-background-image-net">
+            </div>
+        </div>
+
+        <text class="color">background-size:contain</text>
+        <div class="item-container">
+            <div class="item-container-contain">
+            </div>
+        </div>
+
+        <text class="color">background-size:cover</text>
+        <div class="item-container">
+            <div class="item-container-cover">
+            </div>
+        </div>
+
+        <text class="color">background-size:auto</text>
+        <div class="item-container">
+            <div class="item-container-auto">
+            </div>
+        </div>
+
+        <text class="color">background-size:percentage</text>
+        <div class="item-container">
+            <div class="item-container-percentage">
+            </div>
+        </div>
+
+        <text class="color">background-repeat:repeat</text>
+        <div class="item-container">
+            <div class="item-container-repeat">
+            </div>
+        </div>
+
+        <text class="color">background-repeat:repeat-x</text>
+        <div class="item-container">
+            <div class="item-container-repeat-x">
+            </div>
+        </div>
+
+        <text class="color">background-repeat:repeat-y</text>
+        <div class="item-container">
+            <div class="item-container-repeat-y">
+            </div>
+        </div>
+
+        <text class="color">background-repeat:no-repeat</text>
+        <div class="item-container">
+            <div class="item-container-no-repeat">
+            </div>
+        </div>
+
+        <text>{{$t('message.component.background.title1')}}</text>
+
+        <div class="item-9png" style="width:400px;height:180px;border-width:2px;">
+            <textarea>{{$t('message.component.background.content1')}}</textarea>
+        </div>
+
+        <text>{{$t('message.component.background.title2')}}</text>
+        <div style="border-width:2px;width:400px;height:200px;background-image:url(/common/img/xmad.jpg);
+        background-size:{{other_range_bg_size}};background-repeat:{{other_range_bg_repeat}};background-position:{{other_range_bg_position}};">
+            <text>{{$t('message.component.background.content2')}}</text>
+        </div>
+        <text>{{$t('message.component.background.title3')}}</text>
+        <input style="width:500px;height:70px;border-width:2px;" onchange="onSizeChange" value="{{other_range_bg_size}}"></input>
+
+        <text>{{$t('message.component.background.title4')}}</text>
+        <input style="width:500px;height:70px;border-width:2px;" onchange="onPositionChange" value="{{other_range_bg_position}}"></input>
+
+        <text>{{$t('message.component.background.title5')}}</text>
+        <input style="width:500px;height:70px;border-width:2px;" onchange="onRepeatChange" value="{{other_range_bg_repeat}}"></input>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-9png {
+        background-image: url(/common/img/btn_small_emphasis_normal_mask.9.png);
+        padding: 10px;
+    }
+
+    .item-container {
+        margin: 10px 0px 10px 0px;
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+    }
+
+    .item-container-background-image {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(/common/img/xmad.jpg);
+    }
+
+    .item-container-background-image-net {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(https://www.baidu.com/img/bd_logo1.png);
+    }
+
+    .item-container-contain {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(/common/img/xmad.jpg);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .item-container-cover {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(/common/img/xmad.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .item-container-auto {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(/common/img/xmad.jpg);
+        background-repeat: no-repeat;
+    }
+
+    .item-container-percentage {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(/common/img/xmad.jpg);
+        background-size: 50%;
+        background-repeat: no-repeat;
+    }
+
+    .item-container-repeat {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(/common/img/xmad.jpg);
+        background-size: 100px 100px;
+    }
+
+    .item-container-repeat-x {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(/common/img/xmad.jpg);
+        background-size: 100px 100px;
+        background-repeat: repeat-x;
+    }
+
+    .item-container-repeat-y {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(/common/img/xmad.jpg);
+        background-size: 100px 100px;
+        background-repeat: repeat-y;
+    }
+
+    .item-container-no-repeat {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        background-image: url(/common/img/xmad.jpg);
+        background-size: 100px 100px;
+        background-repeat: no-repeat;
+    }
+
+    .color {
+        background-color: #8ee5ee;
+        margin-bottom: 50px;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'background',
+            other_range_size_w: "400px",
+            other_range_size_h: "200px",
+            other_range_bg_size: "100px 100px",
+            other_range_bg_position: "30px 30px",
+            other_range_bg_repeat: "no-repeat",
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'background' });
+        },
+        onSizeChange(e) {
+            this.other_range_bg_size = e.value
+        },
+        onPositionChange(e) {
+            this.other_range_bg_position = e.value
+        },
+        onRepeatChange(e) {
+            this.other_range_bg_repeat = e.value
+        }
+    }
+</script>

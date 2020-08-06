@@ -1,0 +1,82 @@
+<template>
+    <div class="tutorial-page">
+        <text class="tutorial-title">{{componentData.customComponent}}</text>
+        <text>{{ prop1 }}</text>
+        <text>{{ prop2Object.name }}</text>
+        <text>{{ upperProp1 }}</text>
+        <text>{{ upperProp2 }}</text>
+        <input type="button" class="btn" onclick="evtType2Emit" value={{componentData.emit+"$dispatch()"}} />
+    </div>
+</template>
+
+<style>
+    .tutorial-page {
+        flex-direction: column;
+        padding-top: 20px;
+    }
+
+    .tutorial-title {
+        font-weight: bold;
+        font-size: 35px;
+    }
+
+    .btn {
+        height: 80px;
+        text-align: center;
+        border-radius: 5px;
+        margin-right: 60px;
+        margin-top: 60px;
+        margin-bottom: 50px;
+        color: #ffffff;
+        font-size: 30px;
+        background-color: #0faeff;
+    }
+</style>
+
+<script>
+    export default {
+        props: [
+            'prop1',
+            'prop2Object',
+            'upperProp1',
+            'upperProp2'
+        ],
+        data: {
+            prop1: '',
+            prop2Object: '',
+            upperProp1: '',
+            upperProp2: '',
+            componentData: {},
+        },
+
+        onInit() {
+            this.componentData = this.$t('message.event.interVms');
+            console.log("===componentData===",this.componentData);
+            console.info(this.componentData.outerData, this.prop1, this.prop2Object)
+
+            // watch props change
+            this.$watch('prop1', 'watchPropsChange')
+
+            // Bind a VM's custom event
+            this.$on('evtType1', this.evtTypeHandler)
+            this.$on('evtType2', this.evtTypeHandler)
+        },
+        /**
+         * Listening to data changes, you can set the value to data after processing the data.
+         * @param newV
+         * @param oldV
+         */
+        watchPropsChange(newV, oldV) {
+            console.info(this.componentData.watchDataChange, newV, oldV)
+            this.upperProp1 = newV && newV.toUpperCase()
+        },
+        evtTypeHandler(evt) {
+            console.info(this.componentData.child, evt.type, evt.detail)
+            // End event delivery
+            // evt.stop()
+        },
+        evtType2Emit() {
+            this.$dispatch('evtType2', { params: this.componentData.additionalParameters })
+        }
+    }
+</script>

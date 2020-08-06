@@ -1,0 +1,78 @@
+<import name="comp-part1" src="./part1"></import>
+<import name="comp-part2" src="./part2"></import>
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="tutorial-page">
+            <text class="tutorial-title">{{componentData.pageComponent}}</text>
+            <text>{{ data1 }}</text>
+            <text>{{ data2.name }}</text>
+
+            <input type="button" class="btnsend" onclick="evtType1Emit" value={{componentData.emit+"$broadcast()"}} />
+            <comp-part1 id="child" prop1="{{data1}}" prop2-object="{{data2}}"></comp-part1>
+            <comp-part2 id="child2" prop1="I am prop1"></comp-part2>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .tutorial-page {
+        flex-direction: column;
+        margin-left: 60px;
+    }
+
+    .tutorial-title {
+        font-weight: bold;
+        font-size: 35px;
+    }
+
+    .btnsend {
+        height: 80px;
+        text-align: center;
+        border-radius: 5px;
+        margin-right: 60px;
+        margin-top: 60px;
+        margin-bottom: 50px;
+        color: #ffffff;
+        font-size: 30px;
+        background-color: #0faeff;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'intervms',
+            componentData: {},
+            data1: 'string default',
+            data2: {
+                name: 'object'
+            }
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'intervms' })
+            this.componentData = this.$t('message.event.interVms');
+            // Bind a VM's custom event
+            this.$on('evtType1', this.evtTypeHandler)
+            this.$on('evtType2', this.evtTypeHandler)
+        },
+        evtTypeHandler(evt) {
+            console.info(this.componentData.parent, evt.type, evt.detail)
+            // End event delivery
+            // evt.stop()
+        },
+        evtType1Emit() {
+            this.$broadcast('evtType1', { params: this.componentData.additionalParameters })
+        },
+        onReady() {
+            setTimeout(function () {
+                this.$vm("child").upperProp2 = this.componentData.parentsValue
+                this.data1 = 'string change'
+            }.bind(this), 3000)
+        }
+    }
+</script>

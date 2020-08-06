@@ -1,0 +1,72 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="tutorial-page">
+            <list class="list-height">
+                <block for="city in cities" if="{{showCityList === 1}}">
+                    <list-item type="city">
+                        <text>{{$t('message.directive.block.city')}}{{city.name}}</text>
+                        <block for="{{city.spots}}">
+                            <div show="{{city.showSpots}}">
+                                <text>{{$t('message.directive.block.attractions')}}{{$item.name}}</text>
+                            </div>
+                        </block>
+                    </list-item>
+                </block>
+            </list>
+
+            <input type="button" class="btnBlock" onclick="toggleCityList" value="{{$t('message.directive.block.whetherDisplay')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../common/css/common.css";
+
+    .tutorial-page {
+        flex-direction: column;
+    }
+
+    list,
+    list-item {
+        flex-direction: column;
+        margin-left: 30px;
+    }
+
+    .list-height {
+        height: 200px;
+    }
+
+    .btnBlock {
+        height: 80px;
+        text-align: center;
+        border-radius: 5px;
+        margin-right: 60px;
+        margin-top: 60px;
+        margin-left: 60px;
+        margin-bottom: 50px;
+        color: #ffffff;
+        font-size: 30px;
+        background-color: #0faeff;
+    }
+</style>
+
+<script>
+    export default {
+        onInit() {
+            this.$page.setTitleBar({ text: 'block' });
+            this.cities=this.$t('message.directive.block.cities');
+        },
+        data: {
+            componentName: 'block',
+            'showCityList': 1,
+            'cities': []
+        },
+        toggleCityList() {
+            this.showCityList = this.showCityList === 1 ? 0 : 1
+        }
+    }
+</script>

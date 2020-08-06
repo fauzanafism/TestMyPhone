@@ -1,0 +1,430 @@
+<template>
+    <div class="container container1">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">Local image: "/common/img/xmad.jpg"</text>
+            <div class="item-content">
+                <image src="/common/img/xmad.jpg" class="image"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">Internet image: "http://www.huawei.com/Assets/CBG/img/logo.png"</text>
+            <div class="item-content">
+                <image src="http://www.huawei.com/Assets/CBG/img/logo.png" class="image"></image>
+            </div>
+        </div>
+
+
+        <!-- Slim: Specify the style width of the image: 750px, 250px -->
+        <div class="img-layout-header">
+            <text>{{$t('message.component.image.type1')}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"{{or}}"" (Default)</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="contain"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh" style="object-fit:contain"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="fill"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh" style="object-fit:fill"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh" style="width: 50px;height: 50px;"></image>
+            </div>
+        </div>
+
+
+        <div class="item-container">
+            <text class="item-title">objet-fit="contain"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh" style="object-fit:contain"></image>
+            </div>
+        </div>
+
+
+
+        <div class="item-container">
+            <text class="item-title">objet-fit="fill"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh" style="object-fit:fill"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="none"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh" style="object-fit:none"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="scale-down"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh" style="object-fit:scale-down; object-fit:scale-down"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:none</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-wh" style="width: 50px;height: 50px;object-fit:none;"></image>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- Slim: only specify the style height of the picture: 250px -->
+        <div class="img-layout-header">
+            <text>{{$t('message.component.image.type2')}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"{{or}}"" (Default)</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-h"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="contain"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-h" style="object-fit:contain"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="fill"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-h" style="object-fit:fill"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-h"></image>
+            </div>
+        </div>
+
+        <!-- Slim: only specify the style height of the picture: 250px -->
+        <div class="img-layout-header">
+            <text>{{$t('message.component.image.type2')}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:cover;{{or}}"" (Default)</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-h"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:contain</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-h" style="object-fit:contain;"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:fill</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-h" style="object-fit:fill"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:none;</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-h" style="object-fit:none;"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:scale-down</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x160.jpg" class="fixed-size-h" style="object-fit:scale-down"></image>
+            </div>
+        </div>
+
+        <!-- Fat short: specify the style width of the image: 750px, 250px -->
+        <div class="img-layout-header">
+            <text>{{$t('message.component.image.type3')}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"{{or}}"" (Default)</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="contain"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:contain"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="fill"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:fill"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh"></image>
+            </div>
+        </div>
+
+        <!-- Fat short: specify the style width of the image: 750px, 250px -->
+        <div class="img-layout-header">
+            <text>{{$t('message.component.image.type3')}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:cover{{or}}"" (Default)</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:contain</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:contain"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:fill</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:fill"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:none</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:none"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:scale-down</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:scale-down"></image>
+            </div>
+        </div>
+
+
+
+        <!-- Fat short: only specify the style height of the picture: 250px -->
+        <div class="img-layout-header">
+            <text>{{$t('message.component.image.type4')}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"{{or}}"" (Default)</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="contain"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:contain"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="fill"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:fill"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit="cover"</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh"></image>
+            </div>
+        </div>
+
+        <!-- Fat short: only specify the style height of the picture: 250px -->
+        <div class="img-layout-header">
+            <text>{{$t('message.component.image.type4')}}</text>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:cover{{or}}"" (Default)</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:contain</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:contain"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:none</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:none"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">object-fit:fill</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:fill"></image>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">object-fit:scale-down</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" style="object-fit:scale-down"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">oncomplete</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" oncomplete="onload"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">onerror</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" onerror="onerror"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">onerror</text>
+            <div class="item-content-with-height">
+                <image src="/common/img/img_240x40.jpg" class="fixed-size-wh" onerror="onerror"></image>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <text class="item-title">svg {{imageShow}}</text>
+            <image src="/common/img/test.svg" style="width:200px;height:100px"></image>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .img-layout-header {
+        padding: 20px;
+        border-bottom-width: 1px;
+        border-bottom-color: #808080;
+    }
+
+    .item-container {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        flex-direction: column;
+    }
+
+    .item-title {
+        padding-left: 30px;
+        padding-bottom: 20px;
+        color: #aaaaaa;
+    }
+
+    .item-content {
+        height: 300px;
+        justify-content: center;
+    }
+
+    .image {
+        width: 400px;
+        height: 300px;
+    }
+
+    .item-content-with-height {
+        height: 250px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .fixed-size-wh {
+        width: 750px;
+        height: 250px;
+        background-color: #00ffff;
+    }
+
+    .fixed-size-h {
+        height: 250px;
+        background-color: #00ffff;
+    }
+
+    .container1 {
+        flex: 1;
+        flex-direction: column;
+        background-color: #fffff0;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'image'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'image' });
+        },
+        onload(e) {
+            console.log("image load" + e.width + "-" + e.height);
+        },
+        onerror(e) {
+            console.log("image load error");
+        }
+    }
+</script>

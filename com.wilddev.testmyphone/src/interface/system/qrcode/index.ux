@@ -1,0 +1,65 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.system.qrcode.qrcodeData')}}{{qrCodeData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="qrCode" value="{{$t('message.interface.system.qrcode.openQrcode')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+        margin-bottom: 100px;
+        align-items: flex-start;
+    }
+</style>
+
+<script>
+    import barcode from '@system.barcode'
+
+
+    export default {
+        data: {
+            componentName: 'qrcode',
+            qrCodeData: '',
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'qrcode' })
+        },
+        qrCode: function () {
+            var that = this;
+            barcode.scan({
+                success: function (ret) {
+                    that.qrCodeData = ret.result;
+                },
+                fail: function (erromsg, errocode) {
+                    that.qrCodeData = errocode + ': ' + erromsg;
+                },
+                cancel: function (erromsg, errocode) {
+                    console.info('cancel--- ')
+                },
+                complete: function () {
+                    console.info('complete  ')
+                }
+            })
+        }
+
+    }
+</script>

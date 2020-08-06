@@ -1,0 +1,125 @@
+<template>
+	<!-- 横竖屏切换需要配合响应式布局的适配 designWidth:device-width, 开发者实际适配时要全局配置。
+      这里为了保持整个示例工程的多样性，只配置了这个界面。 -->
+	<div class="container">
+		<text class="subtitle" onclick="switchOrientation">
+			点击我切换横竖屏方式
+		</text>
+		<image class="imgbig" src="/common/img/img1.jpg"></image>
+		<list class="list" id="list">
+			<list-item type="listItem" class="item" for="{{subimgs}}">
+				<image src="/common/img/{{$item}}" class="item"></image>
+			</list-item>
+		</list>
+	</div>
+</template>
+
+<style>
+	.container {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.subtitle {
+		font-size: 28.8px;
+		width: 100%;
+		text-align: center;
+	}
+
+	.list {
+		columns: 2;
+		padding: 9.6px;
+        background-color: #0000cd;
+	}
+
+	.item {
+		width: 144px;
+		height: 144px;
+	}
+
+	.imgbig {
+		width: 360px;
+	}
+
+    @media screen (max-width: 359) {
+        .list {
+        }
+    }
+
+    @media screen and (min-width: 360) and (max-width: 479) {
+        .list {
+            columns: 2;
+        }
+    }
+
+    @media screen and (min-width: 480) and (max-width: 599) {
+        .list {
+            columns: 3;
+        }
+    }
+
+    @media screen and (min-width: 600) and (max-width: 719) {
+        .list {
+            columns: 4;
+        }
+    }
+
+    @media screen and (min-width: 720) and (max-width: 839) {
+        .list {
+            columns: 5;
+        }
+    }
+
+    @media screen and (min-width: 840) and (max-width: 959) {
+        .list {
+            columns: 6;
+        }
+    }
+    @media screen and (min-width: 960) and (max-width: 1079) {
+        .list {
+            columns: 7;
+        }
+    }
+    @media screen and (min-width: 1080) {
+        .list {
+            columns: 8;
+        }
+    }
+}
+	
+</style>
+
+<script>
+    import configuration from '@system.configuration';
+	module.exports = {
+		data: {
+			title: 'World',
+            subimgs: ["img2.jpg", "img3.jpg", "img4.jpg", "img2.jpg", "img3.jpg", "img4.jpg"],
+            orientation:"portrait"
+		},
+		onInit() {
+
+			this.$page.setTitleBar({
+				text: '折叠屏、分屏适配',
+				textColor: '#ffffff',
+				backgroundColor: '#007DFF',
+				backgroundOpacity: 0.5,
+				menu: true
+			})
+		},
+		switchOrientation: function() {
+            if (this.orientation === "portrait") {
+                this.orientation = "landscape"
+            } else if (this.orientation === "landscape") {
+                this.orientation = "auto"
+            } else {
+                this.orientation = "portrait"
+            }
+            var that = this;
+            configuration.setScreenOrientation({
+                orientation:that.orientation
+            })
+        }
+	}
+</script>

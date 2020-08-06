@@ -1,0 +1,254 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="group">
+                <text class="header">rotate</text>
+                <div class="item">
+                    <input type="button" class="button" value="rotate" onclick="rotate"/>
+                    <input type="button" class="button" value="rotateX" onclick="rotateX"/>
+                    <input type="button" class="button" value="rotateY" onclick="rotateY"/>
+                </div>
+                <div class="green-box {{r}} green-box1">
+                    <text class="green-txt txt">rotate</text>
+                </div>
+                <div class="blue-box {{rx}} blue-box1">
+                    <text class="blue-text txt">rotateX</text>
+                </div>
+                <div class="red-box {{ry}} red-box1">
+                    <text class="red-text txt">rotateY</text>
+                </div>
+            </div>
+
+            <div class="group">
+                <text class="header">translate</text>
+                <div class="item">
+                    <input type="button" class="button" value="translate" onclick="translate"/>
+                    <input type="button" class="button" value="translateX" onclick="translateX"/>
+                    <input type="button" class="button" value="translateY" onclick="translateY"/>
+                </div>
+                <div class="green-box {{tx}} green-box1">
+                    <text class="green-txt txt">translateX</text>
+                </div>
+                <div class="red-box {{ty}} red-box1">
+                    <text class="red-text txt">translateY</text>
+                </div>
+            </div>
+
+            <div class="group">
+                <text class="header">scale</text>
+                <div class="item">
+                    <input type="button" class="button" value="scaleX" onclick="scaleX"/>
+                    <input type="button" class="button" value="scaleY" onclick="scaleY"/>
+                </div>
+                <div class="green-box {{sx}} green-box1">
+                    <text class="green-txt txt">scaleX</text>
+                </div>
+                <div class="red-box {{sy}} red-box1">
+                    <text class="red-text txt">scaleY</text>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import '../../../common/css/common.css';
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .group {
+        margin-bottom: 100px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header {
+        margin-bottom: 20px;
+    }
+
+    .txt {
+        text-align: center;
+        width: 200px;
+        height: 100px;
+    }
+
+    .item {
+        align-items: center;
+        margin-bottom: 100px;
+    }
+
+    .button {
+        flex: 1;
+        margin-left: 30px;
+        border-radius: 10px;
+        font-size: 30px;
+        color: #ffffff;
+        text-align: center;
+        background-color: #0faeff;
+    }
+
+    .green-box1, .blue-box1, .red-box1 {
+        margin-bottom: 50px;
+        border-style: dotted;
+        border-width: 2px;
+    }
+
+    .green-box {
+        border-color: #09ba07;
+    }
+
+    .green-txt {
+        color: #09ba07;
+    }
+
+    .blue-box {
+        border-color: #0faeff;
+        color: #0faeff;
+    }
+
+    .blue-text {
+        color: #0faeff;
+    }
+
+    .red-box {
+        border-color: #f76160;
+        color: #f76160;
+    }
+
+    .red-text {
+        color: #f76160;
+    }
+
+    .rotate {
+        transform: rotate(50deg);
+    }
+
+    .rotateX {
+        transform: rotateX(50deg);
+    }
+
+    .rotateY {
+        transform: rotateY(50deg);
+    }
+
+    .rotateRecovery {
+        transform: rotate(0deg);
+    }
+
+    .rotateXRecovery {
+        transform: rotateX(0deg);
+    }
+
+    .rotateYRecovery {
+        transform: rotateY(0deg);
+    }
+    
+    .translateXX {
+        transform: translate(20px,0px);
+    }
+    
+    .translateXXRecovery {
+        transform: translate(0px,0px);
+    }
+    
+    .translateYY {
+        transform: translate(0px,50%);
+    }
+    
+    .translateYYRecovery {
+        transform: translate(0px,0px);
+    }
+
+    .translateX {
+        transform: translateX(20px);
+    }
+
+    .translateY {
+        transform: translateY(50%);
+    }
+
+    .translateXRecovery {
+        transform: translateX(0px);
+    }
+
+    .translateYRecovery {
+        transform: translateY(0px);
+    }
+
+    .scaleX {
+        transform: scaleX(1.5);
+    }
+
+    .scaleY {
+        transform: scaleY(1.5);
+    }
+
+    .scaleXRecovery {
+        transform: scaleX(1);
+    }
+
+    .scaleYRecovery {
+        transform: scaleY(1);
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'transform',
+            r: '',
+            rx: '',
+            ry: '',
+            tx: '',
+            ty: '',
+            sx: '',
+            sy: ''
+        },
+        onInit: function () {
+            this.$page.setTitleBar({text: 'transform'})
+        },
+        rotate: function () {
+            this.setClass('r', 'rotate');
+        },
+        rotateX: function () {
+            this.setClass('rx', 'rotateX');
+        },
+        rotateY: function () {
+            this.setClass('ry', 'rotateY');
+        },
+        translate: function() {
+            this.setClass('tx', 'translateXX');
+            this.setClass('ty', 'translateYY');
+        },
+        translateX: function () {
+            this.setClass('tx', 'translateX');
+        },
+        translateY: function () {
+            this.setClass('ty', 'translateY');
+        },
+        scaleX: function () {
+            this.setClass('sx', 'scaleX');
+        },
+        scaleY: function () {
+            this.setClass('sy', 'scaleY');
+        },
+        setClass: function (key, className) {
+            var that = this;
+            if (that[key] === className) {
+                that[key] += 'Recovery';
+            } else {
+                that[key] = className;
+            }
+        }
+    }
+</script>​

@@ -1,0 +1,44 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <a href="http://www.huawei.com/" value="{{$t('message.component.a.huaweiHrefValue')}}"></a>
+        <a href="/main" value="{{$t('message.component.a.homeHrefValue')}}"></a>
+        <a href="{{$t('message.component.a.carryDataInfo')}}" value="{{$t('message.component.a.carryDataHrefValue')}}"></a>
+        <a href="http://www.huawei.com/" onclick="clickme">{{$t('message.component.a.hrefA')}}</a>
+        <a onclick="clickme">{{$t('message.component.a.aAClick')}}</a>
+        <a href="/main" value="font-family is serif" style="font-family:serif;"></a>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    a {
+        margin-left: 75px;
+        width: 600px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        margin-bottom: 100px;
+        background-color: #ffffff;
+        text-decoration: underline;
+        text-align: center;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName:'a',
+            as: 123,
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'A' });
+        },
+        clickme() {
+            this.$page.setTitleBar({ text: this.$t('message.component.a.clickAtoB')});
+        }
+    }
+</script>

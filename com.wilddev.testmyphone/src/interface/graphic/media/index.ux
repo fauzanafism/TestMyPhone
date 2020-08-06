@@ -1,0 +1,466 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.graphic.media.pathOfTakePhoto')}}: {{pathPhotoSave}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.nameOfTakePhoto')}}：{{namePhotoSave}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.sizeOfTakePhoto')}}：{{sizePhotoSave}}</text>		
+                <text class="txt">{{$t('message.interface.graphic.media.pathOfPickPhoto')}}：{{pathPhotoPick}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.nameOfPickPhoto')}}：{{namePhotoPick}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.sizeOfPickPhoto')}}：{{sizePhotoPick}}</text>		
+                <text class="txt">{{$t('message.interface.graphic.media.pathOfRingtone')}}：{{ringtonePath}}</text>
+            </div>
+            <image src="{{photoUri}}" class="image"></image>
+            <input type="button" class="btn" onclick="takePhoto" value="{{$t('message.interface.graphic.media.takePhoto')}}" />
+            <input type="button" class="btn" onclick="SavePhoto" value="{{$t('message.interface.graphic.media.savePhoto')}}" />
+            <input type="button" class="btn" onclick="pickPhoto" value="{{$t('message.interface.graphic.media.pickPhoto')}}" />
+            <input type="button" class="btn" onclick="setRingtone" value="{{$t('message.interface.graphic.media.setRingtone')}}" />
+            <input type="button" class="btn" onclick="setAlarmRingtone" value="{{$t('message.interface.graphic.media.setAlarmRingtone')}}" />
+            <input type="button" class="btn" onclick="setNotificationRingtone" value="{{$t('message.interface.graphic.media.setNotificationRingtone')}}" />
+            <input type="button" class="btn" onclick="getRingtone" value="{{$t('message.interface.graphic.media.getRingtone')}}" />
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.graphic.media.pathOfTakeVideo')}}：{{pathVideoSave}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.nameOfTakeVideo')}}：{{nameVideoSave}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.sizeOfTakeVideo')}}：{{sizeVideoSave}}</text>		
+                <text class="txt">{{$t('message.interface.graphic.media.pathOfPickVideo')}}：{{pathVideoPick}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.nameOfPickVideo')}}：{{nameVideoPick}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.sizeOfPickVideo')}}：{{sizeVideoPick}}</text>
+            </div>
+            <video src="{{videoUri}}" class="video" autoplay="true"></video>
+            <input type="button" class="btn" onclick="takeVideo" value="{{$t('message.interface.graphic.media.takeVideo')}}" />
+            <input type="button" class="btn" onclick="SaveVideo" value="{{$t('message.interface.graphic.media.saveVideo')}}" />
+            <input type="button" class="btn" onclick="pickVideo" value="{{$t('message.interface.graphic.media.pickVideo')}}" />
+
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.graphic.media.pathOfPickFile')}}：{{pathFilePick}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.nameOfPickFile')}}：{{nameFilePick}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.sizeOfPickFile')}}：{{sizeFilePick}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.fileGetData')}}：{{fileGetData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="pickFile" value="{{$t('message.interface.graphic.media.pickFile')}}" />
+            <input type="button" class="btn" onclick="getFile" value="{{$t('message.interface.graphic.media.getFileInfo')}}" />
+            <input class="btn" type="button" value="{{$t('message.interface.graphic.media.viewPics')}}" onclick="viewPics" />
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.graphic.media.pathOfMultiPickFile')}}：{{pathFilePicks}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.listOfMultiPickFile')}}：{{filesFilePicks}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.pathOfMultiPickPic')}}：{{pathImagePicks}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.listOfMultiPickPic')}}：{{filesImagePicks}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.pathOfMultiPickVideo')}}：{{pathVideoPicks}}</text>
+                <text class="txt">{{$t('message.interface.graphic.media.listOfMultiPickVideo')}}：{{filesVideoPicks}}</text>
+            </div>
+            <input type="button" class="btn" onclick="pickFiles" value="{{$t('message.interface.graphic.media.pickMultiFile')}}" />
+            <input type="button" class="btn" onclick="pickImages" value="{{$t('message.interface.graphic.media.pickMultiPic')}}" />
+            <input type="button" class="btn" onclick="pickVideos" value="{{$t('message.interface.graphic.media.pickMultiVideo')}}" />
+       
+        </div>
+    </div>
+</template>
+
+<style>
+    @import '../../../common/css/common.css';
+
+    .item-container {
+        margin-top: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 30px;
+    }
+
+    .image {
+        margin: 50px 0px;
+        width: 630px;
+        height: 300px;
+    }
+
+    .video {
+        margin: 50px 0px;
+        width: 630px;
+        height: 300px;
+    }
+</style>
+
+<script>
+    import media from '@system.media'
+    import prompt from '@system.prompt'
+    import file from '@system.file'
+
+    export default {
+        data: {
+            componentName: 'media',
+            pathPhotoSave: '',
+            namePhotoSave: '',
+            sizePhotoSave: '',
+            pathPhotoPick: '',
+            namePhotoPick: '',
+            sizePhotoPick: '',
+            pathVideoSave: '',
+            nameVideoSave: '',
+            sizeVideoSave: '',
+            pathVideoPick: '',
+            nameVideoPick: '',
+            sizeVideoPick: '',
+            pathRecordStart: '',
+            pathRecordStop: '',
+            photoUri: '',
+            videoUri: '',
+            pathFilePick: '',
+            nameFilePick: '',
+            sizeFilePick: '',
+            FileUri: '',
+            fileGetData: '',
+            ringtonePath: '',
+            pathFilePicks: '',
+            filesFilePicks: '',
+            pathImagePicks: '',
+            filesImagePicks: '',
+            pathVideoPicks: '',
+            filesVideoPicks: ''
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'media' })
+        },
+        takePhoto: function () {
+            var that = this;
+            media.takePhoto({
+                success: function (ret) {
+                    that.pathPhotoSave = ret.uri;
+                    that.namePhotoSave = ret.name;
+                    that.sizePhotoSave = ret.size;
+                    that.photoUri = ret.uri;
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "takePhoto fail------" + errocode + ': ' + erromsg })
+                    console.log('media.takePhoto----------' + errocode + ': ' + erromsg)
+                },
+                cancel: function () {
+                    console.log('media.takePhoto----------cancel')
+                },
+                complete: function () {
+                    console.log('media.takePhoto----------complete')
+                }
+            })
+        },
+        pickPhoto: function () {
+            var that = this;
+            media.pickImage({
+                success: function (ret) {
+                    that.pathPhotoPick = ret.uri;
+                    that.namePhotoPick = ret.name;
+                    that.sizePhotoPick = ret.size;
+                    that.photoUri = ret.uri;
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "pickImage fail------" + errocode + ': ' + erromsg })
+                    console.log('media.pickImage----------' + errocode + ': ' + erromsg)
+                },
+                cancel: function () {
+                    console.log('media.pickImage----------cancel')
+                },
+                complete: function () {
+                    console.log('media.pickImage----------complete')
+                }
+            })
+        },
+        setRingtone: function () {
+            media.setRingtone({
+                uri: "/common/audio/20181211_155437.m4a",
+                type: "ringtone",
+                success: function (ret) {
+                    prompt.showToast({ message: 'media.setRingtone----------success' })
+                    console.log('media.setRingtone----------success')
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "setRingtone fail------" + errocode + ': ' + erromsg })
+                    console.log('media.setRingtone----------' + errocode + ': ' + erromsg)
+                },
+                complete: function () {
+                    console.log('media.setRingtone----------complete')
+                }
+
+            })
+        },
+        setAlarmRingtone: function () {
+            media.setRingtone({
+                uri: '/common/audio/20181211_155437.m4a',
+                type: "alarm",
+                success: function (ret) {
+                    prompt.showToast({ message: 'media.setRingtone----------success' })
+                    console.log('media.setRingtone----------success')
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "setRingtone fail------" + errocode + ': ' + erromsg })
+                    console.log('media.setRingtone----------' + errocode + ': ' + erromsg)
+                },
+                complete: function () {
+                    console.log('media.setRingtone----------complete')
+                }
+            })
+        },
+        setNotificationRingtone: function () {
+            media.setRingtone({
+                uri: '/common/audio/20181211_155437.m4a',
+                type: "notification",
+                success: function (ret) {
+                    prompt.showToast({ message: 'media.setRingtone----------success' })
+                    console.log('media.setRingtone----------success')
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "setRingtone fail------" + errocode + ': ' + erromsg })
+                    console.log('media.setRingtone----------' + errocode + ': ' + erromsg)
+                },
+                complete: function () {
+                    console.log('media.setRingtone----------complete')
+                }
+
+            })
+        },
+        getRingtone: function () {
+            var that = this;
+            media.getRingtone({
+                type: "alarm",
+                success: function (ret) {
+                    that.ringtonePath = that.ringtonePath + "alarm  title:" + ret.title + "\n"
+                    console.log('media.getRingtone----------success' + ret.title)
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "getRingtone fail------" + errocode + ': ' + erromsg })
+                    console.log('media.getRingtone----------' + errocode + ': ' + erromsg)
+                },
+                complete: function () {
+                    console.log('media.getRingtone----------complete')
+                }
+
+            });
+            media.getRingtone({
+                type: "ringtone",
+                success: function (ret) {
+                    that.ringtonePath = that.ringtonePath + "ringtone  title:" + ret.title + "\n"
+                    console.log('media.getRingtone----------success' + ret.title)
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "getRingtone fail------" + errocode + ': ' + erromsg })
+                    console.log('media.getRingtone----------' + errocode + ': ' + erromsg)
+                },
+                complete: function () {
+                    console.log('media.getRingtone----------complete')
+                }
+            });
+            media.getRingtone({
+                type: "notification",
+                success: function (ret) {
+                    that.ringtonePath = that.ringtonePath + "notification  title:" + ret.title + "\n"
+                    console.log('media.getRingtone----------success' + ret.title)
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "getRingtone fail------" + errocode + ': ' + erromsg })
+                    console.log('media.getRingtone----------' + errocode + ': ' + erromsg)
+                },
+                complete: function () {
+                    console.log('media.getRingtone----------complete')
+                }
+
+            })
+        },
+        takeVideo: function () {
+            var that = this;
+            media.takeVideo({
+                success: function (ret) {
+                    that.pathVideoSave = ret.uri;
+                    that.nameVideoSave = ret.name;
+                    that.sizeVideoSave = ret.size;
+                    that.videoUri = ret.uri;
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "takeVideo fail------" + errocode + ': ' + erromsg })
+                    console.log('media.takeVideo----------' + errocode + ': ' + erromsg)
+                },
+                cancel: function () {
+                    console.log('media.takeVideo----------cancel')
+                },
+                complete: function () {
+                    console.log('media.takeVideo----------complete')
+                }
+            })
+        },
+        pickVideo: function () {
+            var that = this;
+            media.pickVideo({
+                success: function (ret) {
+                    that.pathVideoPick = ret.uri;
+                    that.nameVideoPick = ret.name;
+                    that.sizeVideoPick = ret.size;
+                    that.videoUri = ret.uri;
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "pickVideo fail------" + errocode + ': ' + erromsg })
+                    console.log('media.pickVideo----------' + errocode + ': ' + erromsg)
+                },
+                cancel: function () {
+                    console.log('media.pickVideo----------cancel')
+                },
+                complete: function () {
+                    console.log('media.pickVideo----------complete')
+                }
+            })
+        },
+        getFile: function () {
+            var that = this;
+            file.get({
+                uri: that.pathFilePick,
+                success: function (ret) {
+                    that.fileGetData = JSON.stringify(ret);
+                    console.log('file_get_data---------success ' + JSON.stringify(ret));
+                },
+                fail: function (errmsg, errcode) {
+                    that.fileGetData = errcode + '---' + errmsg;
+                    console.log('file_get_data---------fail ' + errcode + ': ' + errmsg);
+                }
+            })
+        },
+        pickFile: function () {
+            var that = this;
+            media.pickFile({
+                success: function (ret) {
+                    that.pathFilePick = ret.uri;
+                    that.nameFilePick = ret.name;
+                    that.sizeFilePick = ret.size;
+                    console.log('media.pickFile----------success')
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "pickFile fail------" + errocode + ': ' + erromsg })
+                    console.log('media.pickFile----------' + errocode + ': ' + erromsg)
+                },
+                cancel: function () {
+                    console.log('media.pickFile----------cancel')
+                },
+                complete: function () {
+                    console.log('media.pickFile----------complete')
+                }
+            })
+        },
+        SavePhoto: function () {
+            var that = this;
+            media.saveToPhotosAlbum({
+                uri: that.pathPhotoSave,
+                success: function () {
+                    console.log('media.saveToPhotosAlbum----------success')
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "media.saveToPhotosAlbum fail------" + errocode + ': ' + erromsg })
+                    console.log('media.saveToPhotosAlbum----------' + errocode + ': ' + erromsg)
+                },
+                complete: function () {
+                    console.log('media.saveToPhotosAlbum----------complete')
+                }
+            })
+        },
+        SaveVideo: function () {
+            var that = this;
+            media.saveToPhotosAlbum({
+                uri: that.pathVideoSave,
+                success: function () {
+                    console.log('media.saveToPhotosAlbum----------success')
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "saveToPhotosAlbum fail------" + errocode + ': ' + erromsg })
+                    console.log('media.saveToPhotosAlbum----------' + errocode + ': ' + erromsg)
+                },
+                complete: function () {
+                    console.log('media.saveToPhotosAlbum----------complete')
+                }
+            })
+        },
+        viewPics() {
+            media.previewImage({
+                current: "http://static.wgpet.com/editor/attached/image/20141124/20141124225933_71813.jpg",
+                uris: ["http://img3.imgtn.bdimg.com/it/u=3993672553,267575750&fm=21&gp=0.jpg",
+                    "http://img5.imgtn.bdimg.com/it/u=2652905594,2769975769&fm=21&gp=0.jpg",
+                    "/common/logo.png",
+                    "http://imgsrc.baidu.com/forum/w%3D580/sign=fe8a7e7f78ec54e741ec1a1689399bfd/4b3f9682d158ccbfb334467b1ad8bc3eb33541cd.jpg",
+                    "http://static.wgpet.com/editor/attached/image/20141124/20141124225933_71813.jpg",
+                    "http://zyline-photo.qiniudn.com/1392705051156.jpg",
+                    "http://v1.qzone.cc/pic/201405/25/13/57/5381864e3b8af886.jpg%21600x600.jpg",
+                    "http://wanzao2.b0.upaiyun.com/system/pictures/23660313/original/8d4f08e50be02ae3.png"],
+                success: function () {
+                    console.log('previewImage success');
+                },
+                fail: function (erromsg, errocode) {
+                    console.log('previewImage errocode:' + errocode);
+                },
+                complete: function () {
+                    console.log('previewImage complete');
+                }
+            });
+        },
+        pickFiles: function () {
+            var that = this;
+            media.pickFiles({
+                success: function (ret) {
+                    that.pathFilePicks = ret.uris;
+                    that.filesFilePicks = JSON.stringify(ret.files);
+                    console.log('media.pickFiles----------success');
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "pickFiles fail------" + errocode + ': ' + erromsg });
+                    console.log('media.pickFiles----------' + errocode + ': ' + erromsg);
+                },
+                cancel: function () {
+                    console.log('media.pickFiles----------cancel');
+                },
+                complete: function () {
+                    console.log('media.pickFiles----------complete');
+                }
+            })
+        },
+        pickImages: function () {
+            var that = this;
+            media.pickImages({
+                success: function (ret) {
+                    that.pathImagePicks = ret.uris;
+                    that.filesImagePicks = JSON.stringify(ret.files);
+                    console.log('media.pickImages----------success');
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "pickImages fail------" + errocode + ': ' + erromsg });
+                    console.log('media.pickImages----------' + errocode + ': ' + erromsg);
+                },
+                cancel: function () {
+                    console.log('media.pickImages----------cancel');
+                },
+                complete: function () {
+                    console.log('media.pickImages----------complete');
+                }
+            })
+        },
+        pickVideos: function () {
+            var that = this;
+            media.pickVideos({
+                success: function (ret) {
+                    that.pathVideoPicks = ret.uris;
+                    that.filesVideoPicks = JSON.stringify(ret.files);
+                    console.log('media.pickVideos----------success');
+                },
+                fail: function (erromsg, errocode) {
+                    prompt.showToast({ message: "pickVideos fail------" + errocode + ': ' + erromsg });
+                    console.log('media.pickVideos----------' + errocode + ': ' + erromsg);
+                },
+                cancel: function () {
+                    console.log('media.pickVideos----------cancel');
+                },
+                complete: function () {
+                    console.log('media.pickVideos----------complete');
+                }
+            })
+        }
+    }
+</script>

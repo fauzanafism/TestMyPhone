@@ -1,0 +1,307 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+
+        <div class="item-container">
+            <!-- download file -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.downloadFile')}}：{{fileDownloadData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="downloadFile" value="{{$t('message.interface.fileData.file.downloadFile')}}" />
+
+            <!-- move file -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.moveFile')}}：{{fileMoveData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="moveFile" value="{{$t('message.interface.fileData.file.moveFile')}}" />
+
+            <!-- move file to folder -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.moveFileToFolder')}}：{{fileMoveToFolderData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="moveFileToFolder" value="{{$t('message.interface.fileData.file.moveFileToFolder')}}" />
+
+            <!-- copy file -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.copyFile')}}：{{fileCopyData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="copyFile" value="{{$t('message.interface.fileData.file.copyFile')}}" />
+
+            <!-- file list -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.getFileList')}}：{{fileGetListData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getFileList" value="{{$t('message.interface.fileData.file.getFileList')}}" />
+
+            <!-- get file information -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.getFileInfo')}}：{{fileGetData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="getFile" value="{{$t('message.interface.fileData.file.getFileInfo')}}" />
+
+            <!-- delete file -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.deleteFile')}}：{{fileDeleteData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="deleteFile" value="{{$t('message.interface.fileData.file.deleteFile')}}" />
+
+            <!-- write file -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.writeFile')}}：{{fileWriteData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="writeFile" value="{{$t('message.interface.fileData.file.writeFile')}}" />
+
+            <!-- read file -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.readFile')}}：{{fileReadData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="readFile" value="{{$t('message.interface.fileData.file.readFile')}}" />
+            <!-- write Buffer -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.writeBuffer')}}：{{writeBufferData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="writeBuffer" value="{{$t('message.interface.fileData.file.writeBuffer')}}" />
+
+            <!-- read Buffer -->
+            <div class="item-content">
+                <text class="txt">{{$t('message.interface.fileData.file.readBuffer')}}：{{readBufferData}}</text>
+            </div>
+            <input type="button" class="btn" onclick="readBuffer" value="{{$t('message.interface.fileData.file.readBuffer')}}" />
+        </div>
+    </div>
+</template>
+
+<style>
+    @import "../../../common/css/common.css";
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .item-content {
+        flex-direction: column;
+        background-color: #ffffff;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+    }
+
+    .txt {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+
+<script>
+    import file from '@system.file'
+    import fetch from '@system.fetch'
+
+    export default {
+        data: {
+            componentName: 'file',
+            fileDownloadData: '',
+            fileMoveData: '',
+            fileMoveToFolderData: '',
+            fileCopyData: '',
+            fileGetListData: '',
+            fileGetData: '',
+            fileDeleteData: '',
+            fileWriteData: '',
+            fileReadData: '',
+            writeBufferData: '',
+            readBufferData: ''
+        },
+        onInit: function () {
+            this.$page.setTitleBar({ text: 'file' })
+        },
+        downloadFile: function () {
+            var that = this;
+            fetch.fetch({
+                url: 'http://www.huawei.com/Assets/CBG/img/logo.png',
+                success: function (ret) {
+                    that.fileDownloadData = ret.data;
+                    that.fileDeleteData = that.fileDownloadData;
+                    console.log('file_downlaod_data--------' + JSON.stringify(ret));
+                }
+            })
+        },
+        moveFile: function () {
+            var that = this;
+            var dstUri = 'internal://files/testfile/file.png';
+            file.move({
+                srcUri: this.fileDownloadData,
+                dstUri: dstUri,
+                success: function (ret) {
+                    that.fileMoveData = dstUri;
+                    that.fileDownloadData = dstUri
+                    that.fileDeleteData = that.fileDownloadData;
+                    console.log('file_save--------success ' + JSON.stringify(ret))
+                },
+                fail: function (errmsg, errcode) {
+                    that.fileMoveData = errcode + '---' + errmsg;
+                    console.log('file_save--------fail ' + errcode + ': ' + errmsg);
+                }
+            })
+        },
+        moveFileToFolder: function () {
+            var that = this;
+            var dstUri = 'internal://files/testfile/';
+            file.move({
+                srcUri: this.fileDownloadData,
+                dstUri: dstUri,
+                success: function (ret) {
+                    that.fileMoveToFolderData = ret;
+                    that.fileDownloadData = ret
+                    that.fileDeleteData = ret;
+                    console.log('file_save--------success ' + JSON.stringify(ret))
+                },
+                fail: function (errmsg, errcode) {
+                    that.fileMoveToFolderData = errcode + '---' + errmsg;
+                    console.log('file_save--------fail ' + errcode + ': ' + errmsg);
+                }
+            })
+        },
+        copyFile: function () {
+            var that = this;
+            var dstUri = 'internal://files/testfile/filecopy.png'
+            file.copy({
+                srcUri: that.fileDownloadData,
+                dstUri: dstUri,
+                success: function (ret) {
+                    that.fileCopyData = ret;
+                    console.log("file_list_data-------- success " + JSON.stringify(ret));
+                },
+                fail: function (errmsg, errcode) {
+                    that.fileCopyData = errcode + '---' + errmsg;
+                    console.log("file_list_data--------complete " + errcode + ': ' + errmsg);
+                }
+            })
+        },
+        getFileList: function () {
+            var that = this;
+            file.list({
+                uri: 'internal://files/testfile',
+                success: function (ret) {
+                    that.fileGetListData = JSON.stringify(ret);
+                    console.log('file_get_data---------success ' + JSON.stringify(ret));
+                },
+                fail: function (errmsg, errcode) {
+                    that.fileGetListData = errcode + '---' + errmsg;
+                    console.log('file_get_data---------fail ' + errcode + ': ' + errmsg);
+                }
+            })
+        },
+        getFile: function () {
+            var that = this;
+            file.get({
+                uri: that.fileDownloadData,
+                success: function (ret) {
+                    that.fileGetData = JSON.stringify(ret);
+                    console.log('file_get_data---------success ' + JSON.stringify(ret));
+                },
+                fail: function (errmsg, errcode) {
+                    that.fileGetData = errcode + '---' + errmsg;
+                    console.log('file_get_data---------fail ' + errcode + ': ' + errmsg);
+                }
+            })
+        },
+        deleteFile: function () {
+            var that = this;
+            file.delete({
+                uri: that.fileDownloadData,
+                success: function (ret) {
+                    that.fileDownloadData = '';
+                    that.fileMoveData = '';
+                    that.fileMoveToFolderData = '';
+                    that.fileCopyData = '';
+                    that.fileGetListData = '';
+                    that.fileGetData = '';
+                    that.fileDeleteData = JSON.stringify(ret);
+                    console.log('file_remove_data---------success ' + JSON.stringify(ret));
+                },
+                fail: function (errmsg, errcode) {
+                    that.fileDeleteData = errcode + '---' + errmsg;
+                    console.log('file_remove_data---------fail ' + errcode + ': ' + errmsg);
+                }
+            })
+        },
+
+        writeFile: function () {
+            var that = this;
+            file.writeText({
+                uri: 'internal://cache/test/test.txt',
+                text: 'hello quickapp',
+                encoding: 'UTF-8',
+                success: function () {
+                    console.log('file_write_data---------success ');
+                    that.fileWriteData = "Success";
+                },
+                fail: function (errmsg, errcode) {
+                    that.fileWriteData = "Fail";
+                    console.log('file_write_data---------failed ' + errmsg + " errcode = " + errcode);
+                }
+            })
+        },
+
+        readFile: function () {
+            var that = this;
+            file.readText({
+                uri: 'internal://cache/test/test.txt',
+                encoding: 'UTF-8',
+                success: function (data) {
+                    console.log(`success data.text = ${data.text}`);
+                    that.fileReadData = data.text;
+                },
+                fail: function (errmsg, errcode) {
+                    console.log('failed ' + errmsg + ' errcode = ' + errcode);
+                    that.fileReadData = 'Failed';
+                }
+            })
+        },
+        writeBuffer: function () {
+            var that = this;
+            var uint8 = new Uint8Array(3);
+            uint8[0] = 198;
+            uint8[1] = 31;
+            uint8[2] = 219;
+            file.writeArrayBuffer({
+                uri: 'internal://cache/test/test1.txt',
+                buffer: uint8,
+                position: 0,
+                success: function () {
+                    console.log('success ');
+                    that.writeBufferData = "Success";
+                },
+                fail: function (errmsg, errcode) {
+                    console.log('failed ' + errmsg + " errcode = " + errcode);
+                    that.writeBufferData = "Failed";
+                }
+            })
+        },
+
+        readBuffer: function () {
+            var that = this;
+
+            file.readArrayBuffer({
+                uri: 'internal://cache/test/test1.txt',
+                position: 0,
+                length: 3,
+                success: function (data) {
+                    that.readBufferData = data.buffer;
+                    console.log('data buffer  = ' + data.buffer)
+                },
+                fail: function (errmsg, errcode) {
+                    console.log('failed ' + errmsg + ' errcode = ' + errcode);
+                }
+            })
+        }
+    }
+</script>
