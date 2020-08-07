@@ -1649,7 +1649,7 @@
             }
         },
         "main": {
-            "mainTitlebar": "快应用功能展示",
+            "mainTitlebar": "Test My Phone",
             "tabsData": {
                 "framework": {
                     "name": "页面",

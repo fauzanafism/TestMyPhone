@@ -1,0 +1,2224 @@
+{
+    "message": {
+        "appName":"Test My Phone",
+        "funcDisplay":"Test My Phone",
+        "component": {
+            "a": {
+                "huaweiHrefValue": "华为官方网页",
+                "homeHrefValue": "跳转到应用内的首页",
+                "carryDataInfo": "interface/basic/router/detail?pageInfo=我是A...我是上个页面传递来的数据",
+                "carryDataHrefValue": "携带数据跳转到应用内的详情页",
+                "hrefA": "我是A,我支持Click",
+                "aAClick": "我是A,我支持Click",
+                "clickAtoB": "点击A后我变成了B"
+            },
+            "image": {
+                "type1": "细长型：指定图片的style宽度高度：750px,250px",
+                "type2": "细长型：仅指定图片的style高度：250px",
+                "type3": "胖矮型：指定图片的style宽度高度：750px,250px",
+                "type4": "胖矮型：仅指定图片的style高度：250px",
+                "or": "或者",
+                "imageShow": "svg 图片展示"
+            },
+            "map": {},
+            "mapIndoor": {},
+            "mapMaker": {},
+            "progress": {
+                "default": "默认"
+            },
+            "rating": {},
+            "span": {
+                "title1": "作为text的子组件",
+                "title2": "作为text的子组件:给text设置样式",
+                "title3": "作为a的子组件",
+                "title4": "作为a的子组件:给a设置样式",
+                "title5": "span嵌套：作为text的子组件",
+                "title6": "span嵌套：作为a的子组件"
+            },
+            "text": {
+                "hslaBackgroundColor": "hsla背景颜色",
+                "default": "默认值",
+                "setAs": "设置为",
+                "loneText": "本框架是一套以前端开发技术栈为主进行应用开发的框架，采用流行的前端开发模式，贴合主流前端开发者的思维习惯，同时大幅提升应用的性能，提供大量前端环境无法使用的系统能力，以及很多第三方服务的对接能力。"
+            },
+            "web": {
+                "huaweiWeb": "华为官方网页",
+                "FileUpload": "web文件上传支持",
+                "communication": "web通讯能力",
+                "video": "web视频播放全屏",
+                "deepLink": "测试快应用DeepLink",
+                "refresh": "重新加载",
+                "sendMessage": "发送消息给网页",
+                "expiredCertificate":"过期证书",
+                "untrustedCertificate":"不可信证书",
+                "customeUADefault":"自定义UA-default",
+                "customeUASystem":"自定义UA-system",
+                "customeUAother":"自定义UA-other",
+                "customeUAotherNewWindow":"自定义UA-新窗口",
+                "openWindowjumpPolicy":"新窗口使用浏览器打开"
+            },
+            "div": {},
+            "list": {
+                "listComponentMethod": "列表组件方法",
+                "arrayObjectMethod": "数组对象方法",
+                "backToFirstItem": "回到第一个item",
+                "loadMore": "加载更多",
+                "isBottom": "到底部了",
+                "isTop": "在最顶部了",
+                "scrollStoped": "停止滑动了",
+                "theFingerIsRaised": "手指抬起了",
+                "sliding": "滑动中",
+                "addPush": "向数组的末尾添加一个'push'元素",
+                "deleteArrayLastElement": "删除数组的最后一个元素",
+                "deleteArrayFirstElement": "删除数组的第一个元素",
+                "addUnshift": "向数组的开头添加一个'unshift'元素",
+                "deleteFirstElement": "删除第一个元素",
+                "addSpliceElement": "并添加一个'splice元素'",
+                "smoothToTheRight":"向右平滑移动200px"
+            },
+            "popup": {
+                "popup": "弹出"
+            },
+            "refresh": {
+                "stopRefresh": "停止刷新",
+                "refreshing": "刷新中.....",
+                "refreshComplete": "刷新完成"
+            },
+            "refreshAuto": {
+                "stopRefresh": "停止刷新",
+                "refreshing": "刷新中.....",
+                "refreshComplete": "刷新完成"
+            },
+            "refreshWithList": {
+                "stopRefresh": "停止刷新",
+                "refreshing": "刷新中.....",
+                "refreshComplete": "刷新完成",
+                "loadMore": "加载更多",
+                "isBottom": "到底部了",
+                "isTop": "在最顶部了",
+                "sliding": "滑动中"
+            },
+            "refreshController": {},
+            "refreshMeterial": {
+                "stopRefresh": "停止刷新",
+                "refreshing": "刷新中.....",
+                "refreshComplete": "刷新完成"
+            },
+            "refreshMeterialWithList": {
+                "stopRefresh": "停止刷新",
+                "refreshing": "刷新中.....",
+                "refreshComplete": "刷新完成",
+                "loadMore": "加载更多",
+                "isBottom": "到底部了",
+                "isTop": "在最顶部了",
+                "sliding": "滑动中"
+            },
+            "refreshOverScollWithList": {
+                "stopRefresh": "停止刷新",
+                "refreshing": "刷新中.....",
+                "refreshComplete": "刷新完成",
+                "loadMore": "加载更多",
+                "isBottom": "到底部了",
+                "isTop": "在最顶部了",
+                "sliding": "滑动中"
+            },
+            "refreshPullDownWithList": {
+                "stopRefresh": "停止刷新",
+                "refreshing": "刷新中.....",
+                "refreshComplete": "刷新完成",
+                "loadMore": "加载更多",
+                "isBottom": "到底部了",
+                "isTop": "在最顶部了",
+                "sliding": "滑动中"
+            },
+            "richtext": {
+                "description": "html类型富文本的值，最外层必须使用开发文档中html支持的块级元素包装。"
+            },
+            "stack": {
+                "description": "stack容器排列方式为层叠，每个子组件按照先后顺序依次堆叠，覆盖前面的组件"
+            },
+            "swiper": {
+                "indicator": "指示点",
+                "autoPlay": "自动播放",
+                "loopChange": "能否循环滚动",
+                "vertical": "竖向",
+                "autoPlayInterval": "自动播放间隔时长(ms)",
+                "animation": "动画时长(ms)",
+                "toSecondPage": "来到第二页",
+                "range": "播放中。。第",
+                "page": "页"
+            },
+            "tabs": {
+                "switchScollable": "切换tab-content的scrollable值",
+                "basic": "基础组件",
+                "form": "表单组件",
+                "list": "列表组件",
+                "huaweiWeb": "华为官网",
+                "backToFirstItem": "回到第一个item",
+                "loadMore": "加载更多",
+                "range": "播放中。。第",
+                "page": "页"
+            },
+            "input": {
+                "value1": "设置focus为true",
+                "value2": "设置focus为false",
+                "pleaseEnter": "请输入",
+                "ok": "确认",
+                "cancel": "取消",
+                "submit": "提交",
+                "setInputValue": "设置或清空输入框的值：",
+                "placeholder1": "必须在change事件中同步value才能改变value",
+                "setValue": "设置value值",
+                "clearValue": "清空value值",
+                "controlPlaceholderColor": "控制占位符颜色的input:",
+                "placeholder2": "占位符字体是红色的",
+                "placeholder3": "下一个焦点项",
+                "placeholder4": "输入关键词",
+                "switch": "切换",
+                "clicked": "点击了",
+                "welcomeInstall": "欢迎使用免安装应用",
+                "focus": "获取焦点",
+                "blur": "失去焦点"
+            },
+            "label": {
+                "label": "label标签:",
+                "pleaseEnter": "请输入"
+            },
+            "picker": {
+                "areaSelector": "地区选择器",
+                "currentSelection": "当前选择",
+                "timeSelector": "时间选择器",
+                "dateSelector": "日期选择",
+                "multiColumnSelector": "多列选择器",
+                "useAreaSelectorByCode": "通过代码调取地区选择器",
+                "list": [
+                    "中国",
+                    "美国",
+                    "日本",
+                    "韩国"
+                ],
+                "province": [
+                    "广东",
+                    "湖北",
+                    "江西",
+                    "陕西"
+                ],
+                "city": [
+                    "深圳",
+                    "广州",
+                    "惠州",
+                    "东莞",
+                    "西安"
+                ],
+                "area": [
+                    "南山",
+                    "福田",
+                    "坂田"
+                ],
+                "country": "中国",
+                "address": [
+                    [
+                        "广东",
+                        "湖北",
+                        "江西",
+                        "陕西"
+                    ],
+                    [
+                        "宝鸡",
+                        "渭南",
+                        "韩城",
+                        "西安"
+                    ],
+                    [
+                        "南山",
+                        "福田",
+                        "坂田"
+                    ]
+                ],
+                "addvalue": [
+                    "湖北",
+                    "黄冈",
+                    "福田"
+                ],
+                "shaanxi": "陕西",
+                "baoji": "宝鸡",
+                "xian": "西安",
+                "guangdong": "广东",
+                "guangzhou": "广州",
+                "shenzhen": "深圳",
+                "address1": [
+                    [
+                        "广东",
+                        "湖北",
+                        "江西",
+                        "陕西"
+                    ],
+                    [
+                        "宝鸡",
+                        "渭南",
+                        "韩城",
+                        "西安"
+                    ],
+                    [
+                        "陕1",
+                        "陕2",
+                        "陕3",
+                        "陕4"
+                    ]
+                ],
+                "address2": [
+                    [
+                        "广东",
+                        "湖北",
+                        "江西",
+                        "陕西"
+                    ],
+                    [
+                        "宝鸡",
+                        "渭南",
+                        "韩城",
+                        "西安"
+                    ],
+                    [
+                        "宝1",
+                        "宝2",
+                        "宝3",
+                        "宝4"
+                    ]
+                ],
+                "address3": [
+                    [
+                        "广东",
+                        "湖北",
+                        "江西",
+                        "陕西"
+                    ],
+                    [
+                        "宝鸡",
+                        "渭南",
+                        "韩城",
+                        "西安"
+                    ],
+                    [
+                        "西1",
+                        "西2",
+                        "西3",
+                        "西4"
+                    ]
+                ],
+                "address4": [
+                    [
+                        "广东",
+                        "湖北",
+                        "江西",
+                        "陕西"
+                    ],
+                    [
+                        "深圳",
+                        "广州",
+                        "惠州",
+                        "东莞"
+                    ],
+                    [
+                        "广1",
+                        "广2",
+                        "广3",
+                        "广4"
+                    ]
+                ],
+                "address5": [
+                    [
+                        "广东",
+                        "湖北",
+                        "江西",
+                        "陕西"
+                    ],
+                    [
+                        "深圳",
+                        "广州",
+                        "惠州",
+                        "东莞"
+                    ],
+                    [
+                        "广州1",
+                        "广州2",
+                        "广州3",
+                        "广州4"
+                    ]
+                ],
+                "address6": [
+                    [
+                        "广东",
+                        "湖北",
+                        "江西",
+                        "陕西"
+                    ],
+                    [
+                        "深圳",
+                        "广州",
+                        "惠州",
+                        "东莞"
+                    ],
+                    [
+                        "深圳1",
+                        "深圳2",
+                        "深圳3",
+                        "深圳4"
+                    ]
+                ]
+            },
+            "select": {
+                "nanjing": "南京的景点",
+                "attraction1": "夫子庙",
+                "attraction2": "总统府",
+                "attraction3": "老门东",
+                "attraction4": "大报恩寺",
+                "attraction5": "中华门"
+            },
+            "slider": {
+                "showCurrentValue": "显示当前value",
+                "setStep": "设置step: ",
+                "setMaxAndMin": "设置最小值: 50; 最大值: 200"
+            },
+            "switch": {
+                "defaultStyle": "默认样式",
+                "recommendStyle": "推荐展示样式",
+                "on": "开启中",
+                "off": "关闭中",
+                "statusChanged": "状态改变了.......",
+                "customSwitch":"switch滑轨及滑动小球自定义",
+                "modifyThumbColor":"修改thumb-color",
+                "modifyTrackColor":"修改track-color",
+                "modifySlideAndBall":"同时修改滑轨和小球颜色"
+            },
+            "textarea": {
+                "placeholder": "请输入文本内容",
+                "description": "文本过多时自动换行，定高时滚动显示",
+                "selectAll": "全选",
+                "setSelectedArea": "设置选中区域",
+                "getSelectedFirstAndLast": "获取选中区域首尾位置"
+            },
+            "animation": {},
+            "background": {
+                "title1": ".9png 测试",
+                "content1": "我是测试文字。我是测试文字。我是测试文字。我是测试文字。",
+                "title2": "其他背景 测试",
+                "content2": "我是测试文字。我是测试文字。我是测试文字。我是测试文字。我是测试文字。我是测试文字。",
+                "title3": "输入size",
+                "title4": "输入position",
+                "title5": "输入repeat"
+            },
+            "border": {
+                "border1": "border-color=\"#FF0000红色 #FFFF00黄色 #E066FF紫色 #ADFF2F绿色\" border-width=\"1px 3px 5px 7px\"",
+                "border2": " border-style=\"solid\" border-color=\"#FF0000红色 #FFFF00黄色 #E066FF紫色\" border-width=\"1px 3px 5px\"",
+                "border3": "border-[left|top|right|bottom]-color #FF0000红色 #FFFF00黄色 #E066FF紫色 #ADFF2F绿色"
+            },
+            "camera": {},
+            "canvas": {
+                "text1": "设置一个canvas组件id如：CanvasFirst，默认填充色，默认宽高"
+            },
+            "componentMethods": {
+                "getBoundingClientRect":"getBoundingClientRect(获取组件位置):",
+                "toTempFilePath":"toTempFilePath(生成组件快照):"
+            },
+            "generlEvent": {
+                "test1": "点击,我是test1",
+                "test2": "点击,我是test2",
+                "swipe": "滑动我触发swipe事件"
+            },
+            "marquee": {},
+            "menu": {
+                "text1": "在设置 menu:true 时",
+                "text2": "1.如果设置了onMenuPress回调函数，会调用设置的回调函数",
+                "text3": "2.如果没有设置onMenuPress回调函数，会调用缺省的回调函数,弹出对话框显示",
+                "addToDesk": "添加到桌面",
+                "share": "分享",
+                "createSuccess": "桌面图标创建成功",
+                "createFailed": "创建失败"
+            },
+            "transform": {},
+            "video": {
+                "title": "播放MP4格式",
+                "play": "播放",
+                "pause": "暂停",
+                "seek": "跳转",
+                "fullScreen": "全屏",
+                "exitFullScreen": "退出全屏",
+                "videoConnectSuccess": "视频连接成功",
+                "startPlay": "开始播放",
+                "pausePlay": "暂停播放",
+                "finishPlay": "结束播放",
+                "playError": "播放错误",
+                "event": "事件：",
+                "btnstart": "点击播放按钮,开始播放",
+                "btnpause": "点击暂停按钮,暂停播放",
+                "btnseek": "跳转60",
+                "addOverlay": "stack 添加覆盖层"
+            }
+        },
+        "directive": {
+            "app": {
+                "import": "import公共脚本"
+            },
+            "block": {
+                "city": "城市",
+                "Attractions": "景点",
+                "whetherDisplay": "是否显示",
+                "cities": [
+                    {
+                        "name": "北京",
+                        "showSpots": true,
+                        "spots": [
+                            {
+                                "name": "天安门"
+                            },
+                            {
+                                "name": "八达岭"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "上海",
+                        "showSpots": false,
+                        "spots": [
+                            {
+                                "name": "东方明珠"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "computed": {
+                "basicSample": "基础示例",
+                "initially": "初始的",
+                "reversed": "反转的",
+                "changeMessage": "修改message",
+                "computedSetter": "计算属性的setter",
+                "changeFullName": "修改fullName",
+                "computedCache": "计算属性缓存",
+                "initialValueOfNow": "初始now的值：",
+                "getCurrentValueOfNow": "获取当前now的值"
+            },
+            "component": {
+                "compA": "这是组件A",
+                "compB": "这是组件B",
+                "compC": "这是组件C",
+                "inputValue":"点击切换显示组件"
+            },
+            "for": {},
+            "ifshow": {
+                "show": "show: 渲染但控制是否显示",
+                "toggle": "显示隐藏",
+                "if": "if指令: if指令显示",
+                "elif": "elif指令: elif指令显示",
+                "else": "else指令: 其余",
+                "conditionDirective": "条件指令"
+            },
+            "slot": {
+                "slotHeader": "我是具名slot header",
+                "slotContent": "我是普通slot内容",
+                "slotNode": "slot节点内容",
+                "slotFooter": "我是具名slot footer",
+                "toggleContent": "隐藏或展示插入的内容",
+                "slotDefault": "slot节点默认内容"
+            }
+        },
+        "event": {
+            "bindEvents": {
+                "emitEvent": "触发事件：",
+                "remove": "移除事件响应：",
+                "emitElement": "触发组件节点的事件：",
+                "touchTest": "touch测试,通过logcat看日志",
+                "params": "参数内容"
+            },
+            "interVms": {
+                "pageComponent": "页面组件：",
+                "emit": "触发",
+                "parent": "父组件：事件响应: ",
+                "additionalParameters": "额外参数",
+                "parentsValue": "我是父组件传递过来的数据",
+                "customComponent": "自定义组件:",
+                "outerData": "外部传递的数据：",
+                "watchDataChange": "监听数据变化：",
+                "child": "子组件：事件响应: "
+            },
+            "publicInterface": {
+                "getDom": "获取组件实例对象"
+            }
+        },
+        "framework": {
+            "lifecycle": {
+                "lifecycleName": "生命周期：",
+                "emit": "触发：",
+                "getLcList": "执行：获取data的lcList属性：",
+                "getTemplateNode": "执行：获取模板节点：",
+                "getPageVisible": "执行：获取页面显示状态属性：",
+                "pageDestroy": "执行：页面要被销毁，销毁状态：",
+                "cancelWatch": "，应该做取消接口订阅监听的操作: ",
+                "pageHasDestroyed": "执行：页面已被销毁，不会执行"
+            },
+            "pageI18n":{
+                "text": "中文内容",
+                "title": "多语言",
+                "label1":"应用当前语言的内容：",
+                "label2":"应用当前配置的语言：",
+                "label3":"应用当前配置的地区：",
+                "switchLocale":"中文/英文切换",
+                "console1":"i18n：触发生命周期onConfigurationChange: ",
+                "console2":"i18n：更新为英文的Locale",
+                "console3":"i18n：更新为中文的Locale",
+                "messageTip":"触发应用的生命周期："
+            }
+        },
+        "interface": {
+            "ai": {
+                "aestheic_score": {
+                    "info": "评分: ",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "error": "发生错误",
+                    "titleBar": "美学评分"
+                },
+                "ai_demo_card": {
+                    "littleApp": "小程序",
+                    "aiLittleApp": "AI体验小程序"
+                },
+                "can_use": {
+                    "btnText": "是否支持Ai",
+                    "btnTextErr": "本页不支持参数",
+                    "canUse": "您的手机支持Ai"
+                },
+                "common": {
+                    "imageContainer": {},
+                    "loadingWrapper": {},
+                    "mainBtn": {
+                        "placeholder": "在这里输入参数",
+                        "result": "返回结果:",
+                        "data": "返回数据:",
+                        "complete": "是否成功:"
+                    },
+                    "mainDbBtn": {
+                        "placeholder1": "在这里输入参数一",
+                        "placeholder2": "在这里输入参数二",
+                        "result": "返回结果:",
+                        "data": "返回数据:"
+                    },
+                    "photoSelector": {
+                        "takePhoto": "拍照",
+                        "selectPhoto": "从手机相册选择",
+                        "cancel": "取消"
+                    },
+                    "recognitionResult": {
+                        "title": "识别结果"
+                    },
+                    "twoImageContainer": {
+                        "image1": "选择图片1",
+                        "image2": "选择图片2"
+                    },
+                    "userItem": {}
+                },
+                "detect_barcode": {
+                    "info": "路径: ",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "checkCode": "码检测",
+                    "arr": [
+                        "未知码类型",
+                        "包含电话信息的二维码",
+                        "包含地理位置信息的二维码",
+                        "包含网址信息的二维码",
+                        "包含邮件信息的二维码",
+                        "包含联系人信息的二维码",
+                        "包含短信信息的二维码",
+                        "包含日程事件信息的二维码",
+                        "包含wifi信息的二维码",
+                        "包含文本信息的二维码",
+                        "包含商品信息的条码",
+                        "包含书籍ISBN信息的条码"
+                    ],
+                    "messageTypeInCode": "码内包含信息类型:",
+                    "personName": "人名:",
+                    "phoneNumber": "手机号码:",
+                    "emailAddress": "邮件地址:",
+                    "time": "时间:",
+                    "address": "地址:",
+                    "geolocation": "经纬度:",
+                    "website": "网址:",
+                    "textContent": "文本:",
+                    "error": "发生错误"
+                },
+                "doc_detection_correction": {
+                    "result": "处理结果",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "redressDocError": "文档校正发生错误",
+                    "checkDocError": "文档检测发生错误",
+                    "docCheckRedress": "文档检测校正"
+                },
+                "entity_recognition": {
+                    "btnText": "int调用",
+                    "btnTextErr": "参数调用",
+                    "title": "实体识别"
+                },
+                "face_analysis": {
+                    "info": "路径:  ",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "error": "发生错误",
+                    "title": "人脸解析"
+                },
+                "face_attributes": {
+                    "info": "性别:  ",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "error": "发生错误",
+                    "title": "人脸属性（性别）"
+                },
+                "face_comparision": {
+                    "info": "相似度: ",
+                    "btnText": "人脸比对",
+                    "btnTextErr": "参数调用",
+                    "image1": "选择图片1",
+                    "image2": "选择图片2",
+                    "error": "发生错误",
+                    "title": "人脸比对"
+                },
+                "face_detection": {
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "error": "发生错误",
+                    "checkNoFace": "没有检测到人脸",
+                    "title": "人脸检测"
+                },
+                "face_orientation_recognition": {
+                    "info": "人脸朝向: ",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "headpose0": "无人脸",
+                    "headpose1": "人脸朝上",
+                    "headpose2": "人脸朝右",
+                    "headpose3": "人脸朝下",
+                    "headpose4": "人脸朝左",
+                    "faith": " 置信度: ",
+                    "error": "发生错误",
+                    "title": "人脸朝向识别"
+                },
+                "feature_detection": {
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "error": "发生错误",
+                    "title": "五官特征检测"
+                },
+                "get_assistant_intention": {
+                    "btnText": "int调用",
+                    "btnTextErr": "参数调用",
+                    "result": "意图识别结果：",
+                    "title": "实体识别"
+                },
+                "im_intention_recognition": {
+                    "btnText": "int调用",
+                    "btnTextErr": "参数调用",
+                    "result": "意图识别结果：",
+                    "title": "IM类意图识别"
+                },
+                "image_segmentation": {
+                    "text": "处理结果",
+                    "info": "路径:  ",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "error": "发生错误",
+                    "title": "人像分割"
+                },
+                "image_semantic_segmentation": {
+                    "text": "处理结果",
+                    "info": "路径:  ",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "error": "发生错误",
+                    "title": "图像语义分割"
+                },
+                "index": {
+                    "AIItems": [
+                        {
+                            "title": "人脸识别",
+                            "items": [
+                                {
+                                    "name": "人脸比对",
+                                    "src": "face_comparision"
+                                },
+                                {
+                                    "name": "人脸检测",
+                                    "src": "face_detection"
+                                },
+                                {
+                                    "name": "人脸朝向识别",
+                                    "src": "face_orientation_recognition"
+                                },
+                                {
+                                    "name": "人脸解析",
+                                    "src": "face_analysis"
+                                },
+                                {
+                                    "name": "人脸属性（性别）",
+                                    "src": "face_attributes"
+                                },
+                                {
+                                    "name": "五官特征检测",
+                                    "src": "feature_detection"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "图像识别",
+                            "items": [
+                                {
+                                    "name": "美学评分",
+                                    "src": "aesthetic_score"
+                                },
+                                {
+                                    "name": "图片分类标签",
+                                    "src": "picture_classification_label"
+                                },
+                                {
+                                    "name": "图像超分辨率",
+                                    "src": "picture_super_resolution"
+                                },
+                                {
+                                    "name": "场景检测",
+                                    "src": "scene_detection"
+                                },
+                                {
+                                    "name": "文档检测校正",
+                                    "src": "doc_detection_correction"
+                                },
+                                {
+                                    "name": "文字图像超分辨率",
+                                    "src": "word_image_super_resolution"
+                                },
+                                {
+                                    "name": "图像语义分割",
+                                    "src": "image_semantic_segmentation"
+                                },
+                                {
+                                    "name": "人像分割",
+                                    "src": "image_segmentation"
+                                },
+                                {
+                                    "name": "简单背景OCR",
+                                    "src": "simple_background_ocr"
+                                },
+                                {
+                                    "name": "是否支持Ai",
+                                    "src": "can_use"
+                                },
+                                {
+                                    "name": "助手类意图识别",
+                                    "src": "get_assistant_intention"
+                                },
+                                {
+                                    "name": "IM类意图识别",
+                                    "src": "im_intention_recognition"
+                                },
+                                {
+                                    "name": "词性标注",
+                                    "src": "speech_tagging"
+                                },
+                                {
+                                    "name": "分词",
+                                    "src": "segmented_vocabulary"
+                                },
+                                {
+                                    "name": "实体识别",
+                                    "src": "entity_recognition"
+                                },
+                                {
+                                    "name": "码检测",
+                                    "src": "detect_barcode"
+                                },
+                                {
+                                    "name": "语音识别",
+                                    "src": "speech_recognition"
+                                }
+                            ]
+                        }
+                    ],
+                    "title": "华为AI体验中心"
+                },
+                "picture_classification_label": {
+                    "labelContentArr": [
+                        "人像",
+                        "美食",
+                        "风景",
+                        "文档",
+                        "身份证",
+                        "护照",
+                        "银行卡",
+                        "自行车",
+                        "巴士",
+                        "船",
+                        "火车",
+                        "飞机",
+                        "汽车",
+                        "鸟",
+                        "猫",
+                        "狗",
+                        "鱼",
+                        "",
+                        "衣柜",
+                        "手机",
+                        "笔记本电脑",
+                        "",
+                        "",
+                        "",
+                        "婚纱",
+                        "花朵",
+                        "积木",
+                        "寿司",
+                        "烧烤",
+                        "香蕉",
+                        "",
+                        "西瓜",
+                        "面条",
+                        "",
+                        "钢琴",
+                        "婚礼",
+                        "下棋",
+                        "篮球",
+                        "羽毛球",
+                        "足球",
+                        "城市俯瞰",
+                        "日出日落",
+                        "大海",
+                        "桥",
+                        "天空",
+                        "草地",
+                        "街道",
+                        "夜景",
+                        "",
+                        "树林",
+                        "湖泊",
+                        "雪",
+                        "山",
+                        "建筑",
+                        "云",
+                        "瀑布",
+                        "雾",
+                        "瓷器",
+                        "模特",
+                        "彩虹",
+                        "蜡烛",
+                        "",
+                        "自由女神像",
+                        "演示文稿",
+                        "",
+                        "",
+                        "婴儿车",
+                        "合影",
+                        "聚餐",
+                        "埃菲尔铁塔",
+                        "海豚",
+                        "长颈鹿",
+                        "企鹅",
+                        "老虎",
+                        "斑马",
+                        "",
+                        "狮子",
+                        "大象",
+                        "豹",
+                        "孔雀",
+                        "黑板",
+                        "气球",
+                        "",
+                        "空调",
+                        "洗衣机",
+                        "冰箱",
+                        "相机",
+                        "",
+                        "枪",
+                        "裙子",
+                        "",
+                        "无人机",
+                        "苹果",
+                        "水饺",
+                        "咖啡",
+                        "葡萄",
+                        "火锅",
+                        "毕业照",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "手表",
+                        "眼镜",
+                        "摩天轮",
+                        "喷泉",
+                        "亭子",
+                        "烟花",
+                        "名片",
+                        "骑马",
+                        "演唱会",
+                        "帆船",
+                        "大熊猫",
+                        "生日蛋糕",
+                        "生日",
+                        "圣诞",
+                        "长城",
+                        "东方明珠",
+                        "小蛮腰",
+                        "",
+                        "塔",
+                        "兔子",
+                        "",
+                        "拉杆箱",
+                        "美甲",
+                        "吉他"
+                    ],
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "toast": "未匹配到标签",
+                    "error": "发生错误",
+                    "other": "其他",
+                    "title": "图片分类标签"
+                },
+                "picture_super_resolution": {
+                    "text": "处理结果",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "toast": "图片处理失败",
+                    "title": "图片超分辨率"
+                },
+                "scene_detection": {
+                    "sceneArr": [
+                        "未知场景",
+                        "不支持",
+                        "海滩",
+                        "蓝天",
+                        "黄昏",
+                        "食物",
+                        "花朵",
+                        "绿色植物",
+                        "雪",
+                        "夜晚",
+                        "文本",
+                        "舞台",
+                        "猫",
+                        "狗",
+                        "烟花",
+                        "阴天",
+                        "落叶",
+                        "熊猫",
+                        "汽车",
+                        "老建筑",
+                        "自行车",
+                        "瀑布"
+                    ],
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "error": "发生错误",
+                    "title": "场景检测"
+                },
+                "segmented_vocabulary": {
+                    "btnText": "int调用",
+                    "btnTextErr": "参数调用",
+                    "toast": "分词结果：",
+                    "title": "分词"
+                },
+                "simple_background_ocr": {
+                    "info": "文本: ",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "error": "发生错误",
+                    "title": "简单背景OCR"
+                },
+                "speech_recognition": {
+                    "currentStatus": "当前状态: ",
+                    "currentVolume": "当前音量: ",
+                    "speechCanceled": "已取消识别",
+                    "stopTxt": "停止识别",
+                    "speechStopped": "已停止识别",
+                    "startTxt": "开始识别",
+                    "cancelTxt": "取消识别",
+                    "speeching": "正在识别",
+                    "completeSpeech": "结束识别",
+                    "title": "语音识别"
+                },
+                "speech_tagging": {
+                    "btnText": "int调用",
+                    "btnTextErr": "参数调用",
+                    "toast1": "单词：",
+                    "toast2": "，词性：",
+                    "title": "词性标注"
+                },
+                "word_image_super_resolution": {
+                    "text": "处理结果",
+                    "btnText": "选择图片",
+                    "btnTextErr": "参数调用",
+                    "toast": "图片处理失败",
+                    "title": "文字图像超分辨率"
+                }
+            },
+            "audio": {
+                "audio": {
+                    "showStatusInNotification": "是否在通知栏中显示播放状态",
+                    "autoPlay": "自动播放",
+                    "play": "播放",
+                    "pause": "暂停",
+                    "stop": "停止",
+                    "seek": "跳转",
+                    "volume": "音量",
+                    "mute": "是否静音",
+                    "loop": "是否循环",
+                    "streamType": "设置streamType",
+                    "setTitle": "设置title",
+                    "setArtist": "设置artist",
+                    "setCover": "设置Cover",
+                    "musicName1": "化身孤岛的鲸",
+                    "artist1": "谢安琪",
+                    "musicName2": "同桌的你",
+                    "artist2": "老狼",
+                    "musicName3": "沙漠骆驼",
+                    "artist3": "展展与罗罗"
+                }
+            },
+            "basic": {
+                "contextAndLog": {},
+                "router": {
+                    "button1": "100版本router功能",
+                    "button2": "101版本router新增功能",
+                    "detail": {},
+                    "detailNew": {
+                        "action": "打开我的action：",
+                        "uri": "打开我的uri："
+                    },
+                    "routerNew": {
+                        "https": "https地址",
+                        "http": "http地址",
+                        "downloadPath": "下载文件路径：",
+                        "downloadFile": "下载文件",
+                        "openInternalFile": "打开internal路径文件",
+                        "downloadFailed": "下载失败："
+                    },
+                    "routerOld": {
+                        "router1": "跳转到首页",
+                        "router2": "uri为/",
+                        "router3": "跳转时传入数据(push接口)",
+                        "router4": "跳转时带query参数(push接口)",
+                        "router5": "跳转时传入数据带query和params参数(push接口)",
+                        "router6": "拨打电话10086",
+                        "router7": "sms",
+                        "router8": "mailto",
+                        "router9": "返回上一页面",
+                        "router10": "返回到指定界面",
+                        "router11": "无返回的页面跳转",
+                        "router12": "携带数据的页面跳转(replace接口)",
+                        "router13": "携带数据跳转到其他快应用",
+                        "router14": "跳转到系统定位服务设置界面",
+                        "router15": "跳转到当前快应用信息界面（快应用权限管理）",
+                        "privateData": "privateData改变了吗",
+                        "protectedData": "protectedData改变了吗",
+                        "publicData": "publicData改变了吗"
+                    },
+                    "routerLaunchHome": {
+                        "title":"欢迎打开",
+                        "placeholder":"点击此处输入数字参数，仅供外部跳转使用",
+                        "pageAValue":"跳转到PageA",
+                        "pageBValue":"跳转到PageB",
+                        "pageCValue":"跳转到PageC",
+                        "homeValue":"跳转到Home",
+                        "externalValue":"跳转到外部页面"
+                    },
+                    "routerPageA": {
+                        "title":"欢迎打开",
+                        "pageAValue":"跳转到PageA",
+                        "pageBValue":"跳转到PageB",
+                        "pageCValue":"跳转到PageC",
+                        "homeValue":"跳转到Home"
+                    },
+                    "routerPageB": {
+                        "title":"欢迎打开",
+                        "pageAValue":"跳转到PageA",
+                        "pageBValue":"跳转到PageB",
+                        "pageCValue":"跳转到PageC",
+                        "homeValue":"跳转到Home"
+                    },
+                    "routerPageC": {
+                        "title":"欢迎打开",
+                        "pageAValue":"跳转到PageA",
+                        "pageBValue":"跳转到PageB",
+                        "pageCValue":"跳转到PageC",
+                        "homeValue":"跳转到Home"
+                    }
+                }
+            },
+            "cipher":{
+                "cipher":{
+                    "inputValue1":"AES加密",
+                    "inputValue2":"AES解密"
+                }
+            },
+            "fileData": {
+                "exchange":{
+                    "keyPlaceholder":"请输入key",
+                    "valuePlaceholder":"请输入value",
+                    "setAppExchange":"设置app数据",
+                    "setGlobalExchange":"设置全局数据",
+                    "getAppExchange":"读取局部数据",
+                    "getGlobalExchange":"读取全局数据",
+                    "grantPermission":"授权",
+                    "revokePermission":"取消授权",
+                    "clearExchange":"清除exchange",
+                    "removeExchange":"删除exchange"
+                },
+                "file": {
+                    "downloadFile": "下载文件",
+                    "moveFile": "移动文件：",
+                    "moveFileToFolder": "移动文件到文件夹",
+                    "copyFile": "复制文件",
+                    "getFileList": "获取文件列表",
+                    "getFileInfo": "获取文件信息",
+                    "deleteFile": "删除文件",
+                    "writeFile": "写文件",
+                    "readFile": "读文件",
+                    "writeBuffer": "写Buffer",
+                    "readBuffer": "读Buffer"
+                },
+                "storage": {
+                    "inputKey": "请输入key",
+                    "inputValue": "请输入value",
+                    "inputIndex": "请输入index",
+                    "setStorage": "设置storage",
+                    "getStorage": "读取storage key:",
+                    "getKey": "根据index读取storage key",
+                    "getLength": "获取storage length",
+                    "clearStorage": "清除storage",
+                    "deleteStorage": "删除storage key:",
+                    "inputKeyAndValue": "请输入key和value值"
+                }
+            },
+            "graphic": {
+                "image": {
+                    "pickPhoto": "选取取色图片",
+                    "getExif": "获取exif信息",
+                    "setExif": "设置exif信息",
+                    "setSuccess": "设置成功"
+                },
+                "media": {
+                    "pathOfTakePhoto": "拍摄图片的路径",
+                    "nameOfTakePhoto": "拍摄图片的名称",
+                    "sizeOfTakePhoto": "拍摄图片的大小",
+                    "pathOfPickPhoto": "选取图片的路径",
+                    "nameOfPickPhoto": "选取图片的名称",
+                    "sizeOfPickPhoto": "选取图片的大小",
+
+                    "pathOfRingtone": "铃声路径",
+                    "takePhoto": "拍摄照片",
+                    "savePhoto": "保存刚拍摄的照片到相册",
+                    "pickPhoto": "选取图片",
+                    "setRingtone": "设置系统来电铃声",
+                    "setAlarmRingtone": "设置系统闹铃铃声",
+                    "setNotificationRingtone": "设置系统通知铃声",
+                    "getRingtone": "获取系统铃声",
+                    "pathOfTakeVideo": "拍摄视频的路径",
+                    "nameOfTakeVideo": "拍摄视频的名称",
+                    "sizeOfTakeVideo": "拍摄视频的大小",
+                    "pathOfPickVideo": "选取视频的路径",
+                    "nameOfPickVideo": "选取视频的名称",
+                    "sizeOfPickVideo": "选取视频的大小",
+                    "takeVideo": "拍摄视频",
+                    "saveVideo": "保存刚拍摄的视频到相册",
+                    "pickVideo": "选择视频",
+                    "pathOfPickFile": "选取文件的路径",
+                    "nameOfPickFile": "选取文件的名称",
+                    "sizeOfPickFile": "选取文件的大小",
+                    "fileGetData": "获取文件信息",
+                    "pickFile": "选取文件",
+                    "getFileInfo": "获取图片路径文件信息",
+                    "viewPics": "点击预览图片",
+                    "pathOfMultiPickFile": "多选文件的路径",
+                    "listOfMultiPickFile": "选取文件的列表",
+                    "pathOfMultiPickPic": "多选图片的路径",
+                    "listOfMultiPickPic": "多选图片的列表",
+                    "pathOfMultiPickVideo": "多选视频的路径：",
+                    "listOfMultiPickVideo": "多选视频的列表",
+                    "pickMultiFile":"多选文件",
+                    "pickMultiPic":"多选图片",
+                    "pickMultiVideo":"多选视频"
+                }
+            },
+            "interaction": {
+                "messageChannel": {
+                    "creatChannel": "创建消息通道",
+                    "routeChannel": "跳转到detail页面发送消息",
+                    "cancelChannel": "关闭消息通道",
+                    "toast": "接受消息：",
+                    "detail": {
+                        "sendMessage": "发送消息"
+                    }
+                },
+                "notification": {
+                    "title": "消息标题:",
+                    "titlePlaceholder": "请输入title",
+                    "text": "消息文本:",
+                    "textPlaceholder": "请输入content",
+                    "sendNotification": "发送通知消息",
+                    "titleAs": "标题为: \"",
+                    "notificationHasSend": "\" 的消息已发送，请查看消息通知栏"
+                },
+                "prompt": {
+                    "showToast": "显示浮窗",
+                    "showDialog": "显示对话框",
+                    "showContextMenu": "显示上下文菜单",
+                    "dialogTitle": "弹框标题",
+                    "dialogMessage": "弹框内容、告知当前状态、信息和解决方法，描述文字尽量控制在三行内",
+                    "dialogButtons": [
+                        {
+                            "text": "选项0",
+                            "color": "#0faeff"
+                        },
+                        {
+                            "text": "选项1"
+                        },
+                        {
+                            "text": "选项2"
+                        }
+                    ],
+                    "toastMessage1": "成功回调:选中按钮序号---",
+                    "toastMessage2": "取消回调"
+                },
+                "share": {
+                    "title": "分享文本：",
+                    "shareText": "点击分享文本",
+                    "sharelocal": "分享应用内文件",
+                    "media_pickImage": "选取图片分享"
+                },
+                "vibrator": {
+                    "openVibrator": "开启震动",
+                    "triggerVibrator": "触发震动"
+                },
+                "webview": {
+                    "openHuaweiWebsite": "打开华为官网",
+                    "loaddownLoadUrl": "打开带下载链接的网页",
+                    "loadFileUploadSupportUrl": "打开webview支持文件上传网页",
+                    "allowthirdcookie": "支持cookie跨域",
+                    "testDeepLink": "测试DeepLink"
+                },
+                "pageScroll":{
+                    "swipedown":"scrollBy:向下滑动500px",
+                    "swipeToTop":"scrollBy:滑动到页面顶部"
+                }
+            },
+            "network": {
+                "fetch": {
+                    "refresh": "刷新GET示例",
+                    "refresh1": "刷新arraybuffer POST示例",
+                    "refresh2": "刷新json POST示例",
+                    "refresh3": "刷新text POST示例",
+                    "getData": "获取数据："
+                },
+                "request": {
+                    "downloadFile": "下载文件",
+                    "downloadFileStatus": "下载文件状态",
+                    "uploadFile": "上传文件",
+                    "downloadFailed": "下载失败："
+                },
+                "websocket": {
+                    "connectUrl1": "连接指定url",
+                    "connectUrl2": "连接指定url2",
+                    "connectUrl3": "连接指定url3",
+                    "sendMessage": "发送消息",
+                    "closeMessage": "关闭",
+                    "sendMessage2": "发送消息2",
+                    "closeMessage2": "关闭2",
+                    "sendMessage3": "发送消息3",
+                    "closeMessage3": "关闭3",
+                    "connectFailed": "连接失败",
+                    "connectSuccess": "连接成功",
+                    "sendSuccess": "发送成功",
+                    "sendFailed": "发送失败"
+                }
+            },
+            "service": {
+                "account": {
+                    "login": "token模式登录",
+                    "codelogin": "授权码模式登录",
+                    "getAccountInfo": "获取账号信息",
+                    "result": "授权结果："
+                },
+                "pay": {
+                    "huaweiPay": "华为支付",
+                    "getSign": "获取签名",
+                    "result": "获取数据：",
+                    "getProductDetail":"获取商品详情",
+                    "productPay":"商品支付",
+                    "queryUncosumeOrder":"查询非消耗商品的订单",
+                    "checkOrder":"复核订单",
+                    "getProductPaySign":"获取商品支付签名",
+                    "getUncosumeOrderSign":"获取非消耗商品的订单签名",
+                    "getCheckOrderSign":"获取复核订单签名"
+                },
+                "pushStatShare": {
+                    "getPushProvider": "获取push服务提供商",
+                    "pushsubscribe": "注册push",
+                    "pushunsubscribe": "注销push",
+                    "pushon": "注册透传消息回调",
+                    "pushoff": "注销透传消息回调",
+                    "getStatProvider": "获取统计服务提供商",
+                    "getShareProvider": "获取第三方分享服务提供商",
+                    "serviceProvider": "服务提供商："
+                },
+                "ad":{
+                    "getAdProvider":"获取广告服务提供商",
+                    "adProvider":"广告服务提供商" 
+                }
+            },
+            "thirdparty": {
+                "alipay": {
+                    "useAliPay": "支付宝支付",
+                    "orderInfo": "partner=\"2088611359395958\"&seller=\"2088611359395958\"&out_trade_no=\"201320148794006836322946\"&subject=\"支付金额 29.99 元\"&body=\"支付金额 29.99 元\"&total_fee=\"29.99\"&notify_url=\"https%3A%2F%2Fgw.pay.xiaomi.com%2Fnotify%2Fucashier%2F201320148794006836322946%2F0048002\"&sign_type=\"RSA\"&itbpay=\"1440m\"&sign=\"nKDHQigYsBKlBQQ2CDSdSKXlCwzjjaFLWiihjUNx1X1S2d5qP6mPavZG7le9ty2GdPi7958iOQw76bhALOdUO2Vn2pxIUPwTLWQ%2FUH9h5sp7gTTrjAOEWsDEIJSrJ0%2FLl4GtnBtYEWr0dL23gmbV0IcnqXWsNOGi5XDnfqs4IAw%3D\"",
+                    "paySuccess": "支付成功：",
+                    "cancelPay": "取消支付",
+                    "payFailed": "支付失败："
+                },
+                "serviceShare": {
+                    "pickSDPhoto": "设置分享的SD卡图片",
+                    "pickDataPhoto": "设置分享的应用内部图片",
+                    "pickNetPhoto": "设置分享的网络图片",
+                    "getProvider": "服务提供商",
+                    "getAvailablePlatforms": "可分享平台列表",
+                    "wxFriendShare": "微信好友分享",
+                    "wxCircleShare": "微信朋友圈分享",
+                    "sinaShare": "微博分享",
+                    "systemShare": "系统分享",
+                    "morePlatforms": "多平台分享",
+                    "allPlatforms": "全平台分享",
+                    "thirdShare": "第三方分享",
+                    "wxFriendShareTitle": "微信的标题",
+                    "wxFriendShareSummary": "微信的摘要",
+                    "wxCicleShareTitle": "微信朋友圈的标题",
+                    "wxCicleShareSummary": "微信朋友圈的摘要",
+                    "sinaShareTitle": "微博的标题",
+                    "sinaShareSummary": "微博的摘要",
+                    "systemShareTitle": "系统的标题",
+                    "systemShareSummary": "系统的摘要",
+                    "morePlatformsTitle": "多平台的标题",
+                    "morePlatformsSummary": "多平台的摘要",
+                    "allPlatformsTitle": "全平台的标题",
+                    "allPlatformsSummary": "全平台的摘要"
+                },
+                "wxpay": {
+                    "payType": "微信支付类型",
+                    "appPay": "微信app支付",
+                    "webPay": "微信web支付"
+                }
+            },
+            "system": {
+                "alarm": {
+                    "getProvider": "获取提供商",
+                    "setAlarm": "设置闹钟",
+                    "huaweiTestAlarm": "华为测试闹钟",
+                    "serviceProvider": "服务提供商："
+                },
+                "battery": {
+                    "getBattery": "获取电量",
+                    "getFailed": "获取失败"
+                },
+                "bluetooth": {
+                    "openBluetooth": "打开蓝牙",
+                    "closeBluetooth": "关闭蓝牙",
+                    "getAdapterState": "获取本机蓝牙适配器状态",
+                    "onAdapterState": "打开蓝牙适配器状态监听",
+                    "inputUuid": "输入主service的uuid列表",
+                    "uuid": "主service的uuid列表",
+                    "bluetoothDiscoveryDevices": "蓝牙搜索结果",
+                    "discoveryDevices": "搜索蓝牙设备",
+                    "stopDiscovery": "停止搜索",
+                    "stopDiscoveryDevices": "停止搜索蓝牙设备",
+                    "getBluetoothDevices": "获取蓝牙设备",
+                    "inputDeviceId": "输入deviceId",
+                    "connectBluetoothDevice": "连接蓝牙设备",
+                    "disconnectBluetooth": "断开蓝牙设备连接",
+                    "getBluetoothDevicesService": "获取蓝牙设备服务",
+                    "getConnectedDevices": "获取已连接蓝牙设备",
+                    "inputServiceId": "输入serviceId",
+                    "getBLEDeviceCharacteristics": "获取蓝牙服务所有特征值",
+                    "inputCharacteristicId": "输入characteristicId",
+                    "toggleNotify": "是否启用 notify",
+                    "notifyBLECharacteristicValueChange": "启用notifyBLECharacteristicValueChange",
+                    "onblecharacteristicvaluechange": "开启蓝牙服务特征值数据监听",
+                    "SpecifyBluetoothServiceFeatureValue": "指定蓝牙服务特征值数据",
+                    "readBLECharacteristicValue": "读取蓝牙服务某个特征值数据",
+                    "inputByteStringValue": "输入byteStringValue",
+                    "writeCharacteristicValue": "写入特征值数据",
+                    "lowpowerBleconnectionstate": "低功耗蓝牙连接状态",
+                    "watchLowpowerBleconnectionstate": "监听低功耗蓝牙连接状态",
+                    "monitorSearchNewDevices": "监听搜索新设备：",
+                    "monitorCharacteristicChange": "监听特征值改变：",
+                    "monitorConnectChange": "监听连接状态改变："
+                },
+                "brightness": {
+                    "screenBrightness": "屏幕亮度",
+                    "setScreenBrightness": "设置屏幕亮度",
+                    "getScreenBrightness": "获取屏幕亮度",
+                    "screenMode": "屏幕模式",
+                    "setScreenMode": "设置屏幕模式",
+                    "getScreenMode": "获取屏幕模式",
+                    "setSuccess": "设置成功",
+                    "setFailed": "设置失败",
+                    "notSetScreenBrightness": "未设置屏幕亮度！",
+                    "getSuccess": "获取成功",
+                    "getFailed": "获取失败",
+                    "notSetScreenMode": "未设置屏幕模式！",
+                    "keyScreenBrightness":"屏幕常亮",
+                    "setScreenOn":"设置屏幕常亮",
+                    "notSetScreenOn":"取消屏幕常亮",
+                    "setScreenOnSuccessful":"设置屏幕常亮成功",
+                    "setScreenOnFails":"设置屏幕常亮失败",
+                    "notSetScreenOnSuccessful":"取消屏幕常亮成功",
+                    "notSetScreenOnFails":"取消屏幕常亮失败"
+                },
+                "calendar": {
+                    "eventTitle": "事件的标题",
+                    "placeholder1": "标题",
+                    "eventDescription": "事件的描述",
+                    "placeholder2": "描述",
+                    "startDate": "事件开始时间",
+                    "placeholder3": "从公元纪年开始的毫秒数",
+                    "endDate": "事件结束时间",
+                    "placeholder4": "从公元纪年开始的毫秒数",
+                    "insertEvent": "插入日历事件",
+                    "insertSuccess": "插入成功，id:",
+                    "toast": "标题，开始时间，结束事件为必填项！"
+                },
+                "clipboard": {
+                    "setClipboard": "设置剪切文本",
+                    "getClipboard": "获取剪切文本",
+                    "clipboard": "快应用"
+                },
+                "contact": {
+                    "name": "联系人姓名",
+                    "number": "联系人电话",
+                    "pickName": "选择联系人",
+                    "getContactList": "获取联系人列表"
+                },
+                "device": {
+                    "pageGetInfo": "page获取信息:",
+                    "getInfoByPage": "通过$page获取信息",
+                    "themeInfo": "主题信息:",
+                    "getThemeInfo": "获取主题信息",
+                    "themeInfoSync": "主题信息同步获取方式:",
+                    "deviceInfo": "设备信息:",
+                    "getDeviceInfo": "获取设备信息",
+                    "deviceInfoSync": "设备信息同步获取方式:",
+                    "id": "设备Id:",
+                    "getId": "获取设备Id",
+                    "deviceId": "设备deviceId:",
+                    "getDeviceId": "获取设备DeviceId",
+                    "userId": "设备userId:",
+                    "getUserId": "获取设备UserId",
+                    "advertisingId": "设备advertisingId:",
+                    "getAdvertisingId": "获取设备AdvertisingId",
+                    "totalStorage": "设备totalStorage:",
+                    "getTotalStorage": "获取设备TotalStorage",
+                    "availableStorage": "设备availableStorage:",
+                    "getAvailableStorage": "获取设备AvailableStorage",
+                    "cpuInfo": "设备cpuInfo:",
+                    "getCpuInfo": "获取设备CpuInfo",
+                    "sn": "设备SN:",
+                    "getSNInfo": "获取设备SNinfo",
+                    "requestSuccess": "请求完成",
+                    "deviceUDID":"设备UDID:",
+                    "getDeviceUDID":"获取设备UDID",
+                    "deviceOAID":"设备OAID:",
+                    "getDeviceOAID":"获取设备OAID",
+                    "serviceCountry":"当前服务地信息:",
+                    "getServiceCountry":"获取快应用中心服务地",
+                     "deviceUserId": "设备userId:",
+                     "hostinfo":"宿主应用信息:",
+                     "getHostinfo":"获取宿主应用信息"
+
+                },
+                "geolocation": {
+                    "deviceInfo": "设备信息:",
+                    "isHuawei": "是否在华为环境上:",
+                    "getDeviceInfo": "获取设备信息判断是否为华为环境",
+                    "getGeolocation": "获取地理位置:",
+                    "getGeolocationBtn": "获取地理位置",
+                    "geolocation": "地理位置:",
+                    "listenGeolocation": "监听地理位置",
+                    "cancelGeolocation": "取消地理位置监听",
+                    "type": "支持的定位类型:",
+                    "getLocationType": "获取当前支持的定位类型",
+                    "baiduMap": "百度地图",
+                    "systemMap": "系统地图"
+                },
+                "message": {
+                    "receiver": "接收者",
+                    "receiverNumber": "短信接收号码",
+                    "content": "内容",
+                    "smsContent": "短信内容",
+                    "send": "发送",
+                    "readSafely": "安全读取短信"
+                },
+                "network": {
+                    "networkType": "网络类型: ",
+                    "getNetworkType": "获取网络类型",
+                    "currentType": "网络链接状态: ",
+                    "listenNetwork": "监听网络连接状态",
+                    "cancelNetwork": "取消网络链接状态监听",
+                    "getSuccess": "获取成功",
+                    "listenSuccess": "监听成功",
+                    "listenFailed": "监听失败",
+                    "carrierInformation":"运营商信息: ",
+                    "getCarrierInformation":"获取运营商信息"
+                },
+                "package": {
+                    "pkgHasInstalled": "检测应用是否存在",
+                    "installPkg": "安装原生应用",
+                    "fail": "失败",
+                    "getPkgInfo":"获取应用版本号",
+                    "getPkgSignatureDigests":"获取应用签名信息"
+                },
+                "qrcode": {
+                    "qrcodeData": "二维码扫描数据:",
+                    "openQrcode": "打开二维码扫描"
+                },
+                "record": {
+                    "recordPath": "录音的路径：",
+                    "takeRecord": "开始录音",
+                    "takeRecordDuration": "开始录音（带时间参数）",
+                    "stopRecord": "停止录音"
+                },
+                "sensor": {
+                    "sensorAccelerometerData": "感应数据:",
+                    "accelerometer": "监听重力感应数据",
+                    "unaccelerometer": "取消重力感应监听",
+                    "sensorCompassData": "罗盘数据:",
+                    "compass": "监听罗盘数据",
+                    "uncompass": "取消罗盘监听",
+                    "sensorDistanceData": "距离数据:",
+                    "distance": "监听距离数据",
+                    "undistance": "取消距离监听",
+                    "sensorIntensityData": "光线数据:",
+                    "intensity": "监听光线数据",
+                    "unintensity": "取消光线监听",
+                    "sensorStepData": "步数:",
+                    "step": "监听步数数据",
+                    "unstep": "取消步数监听",
+                    "healthSupport": "是否支持提供每日步数的功能",
+                    "getDaySteps": "获取每日步数",
+                    "getWeekSteps": "获取最近一个星期步数"
+                },
+                "settings": {
+                    "getSettings": "获取Settings.system某个key对应的值",
+                    "inputKey": "输入key",
+                    "get": "获取"
+                },
+                "shortcut": {
+                    "getShortcut": "获取桌面图标是否已创建",
+                    "installShortcut": "创建桌面图标",
+                    "installShortcutMsg": "自定义提示信息创建桌面图标",
+                    "getpromptenabled": "获取当前是否开启了创建快捷方式提醒",
+                    "setpromptenable": "设置快捷方式是否允许提醒",
+                    "hasInstalled": "桌面图标已创建",
+                    "notInstalled": "桌面图标未创建",
+                    "questFail": "请求失败",
+                    "installFail": "创建失败",
+                    "toast": "这是一条添加快捷方式的自定义提示信息"
+                },
+                "volume": {
+                    "set": "设置音量",
+                    "setVolume": "设置多媒体音量",
+                    "setMediaVolume": "设置当前多媒体音量",
+                    "getVolume": "获取当前多媒体音量",
+                    "setSuccess": "设置成功"
+                },
+                "wifi": {
+                    "connectWifi": "连接指定wifi：",
+                    "connectWifiBtn": "连接指定Wifi",
+                    "wifiResult": "wifi结果：",
+                    "onconnected": "监听连接",
+                    "cancelConnect": "取消连接监听",
+                    "scan": "扫描：",
+                    "scanWifi": "扫描Wifi",
+                    "scanResult": "扫描结果：",
+                    "onscaned": "监听扫描结果",
+                    "cancelonScaned": "取消监听扫描",
+                    "wifiinfo": "已经连接的wifi信息：",
+                    "getConnectedWifiInfo": "已连接wifi信息"
+                }
+            }
+        },
+        "main": {
+            "mainTitlebar": "Test My Phone",
+            "tabsData": {
+                "framework": {
+                    "name": "页面",
+                    "desc": "页面功能展示",
+                    "groupList": [
+                        {
+                            "name": "框架指令",
+                            "caseList": [
+                                {
+                                    "name": "block",
+                                    "path": "directive/block"
+                                },
+                                {
+                                    "name": "for",
+                                    "path": "directive/for"
+                                },
+                                {
+                                    "name": "ifshow",
+                                    "path": "directive/ifshow"
+                                },
+                                {
+                                    "name": "slot",
+                                    "path": "directive/slot"
+                                },
+                                {
+                                    "name": "app",
+                                    "path": "directive/app"
+                                },
+                                {
+                                    "name": "computed",
+                                    "path": "directive/computed"
+                                },
+                                {
+                                  "name": "component",
+                                  "path": "directive/component"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "生命周期",
+                            "caseList": [
+                                {
+                                    "name": "lifeCycle",
+                                    "path": "framework/lifecycle"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "多语言",
+                            "caseList": [
+                                {
+                                    "name": "i18n",
+                                    "path": "framework/i18n"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "页面样式",
+                            "caseList": [
+                                {
+                                    "name": "styleSample",
+                                    "path": "style/sample"
+                                },
+                                {
+                                    "name": "styleUpdate",
+                                    "path": "style/update"
+                                },
+                                {
+                                    "name": "StyleLess",
+                                    "path": "style/less"
+                                },
+                                {
+                                    "name": "LinearGradient",
+                                    "path": "style/linearGradient"
+                                },
+                                {
+                                    "name": "PseudoClass",
+                                    "path": "style/pseudoClass"
+                                },
+                                {
+                                    "name": "Style_FontFace",
+                                    "path": "style/fontface"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "事件及子组件",
+                            "caseList": [
+                                {
+                                    "name": "bindEvents",
+                                    "path": "event/bindEvents"
+                                },
+                                {
+                                    "name": "interVms",
+                                    "path": "event/interVms"
+                                },
+                                {
+                                    "name": "publicInterface",
+                                    "path": "event/publicInterface"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "其他",
+                            "caseList": [
+                                {
+                                    "name": "promise",
+                                    "path": "promise"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "component": {
+                    "name": "组件",
+                    "desc": "以下将展示快应用组件能力，组件样式仅供参考，开发者可根据自身需求自定义组件样式，具体属性参数详见新应用开发文档",
+                    "groupList": [
+                        {
+                            "name": "容器组件",
+                            "caseList": [
+                                {
+                                    "name": "div",
+                                    "path": "component/container/div"
+                                },
+                                {
+                                    "name": "list",
+                                    "path": "component/container/list"
+                                },
+                                {
+                                    "name": "refresh",
+                                    "path": "component/container/refresh"
+                                },
+                                {
+                                    "name": "richtext",
+                                    "path": "component/container/richtext"
+                                },
+                                {
+                                    "name": "stack",
+                                    "path": "component/container/stack"
+                                },
+                                {
+                                    "name": "swiper",
+                                    "path": "component/container/swiper"
+                                },
+                                {
+                                    "name": "tabs",
+                                    "path": "component/container/tabs"
+                                },
+                                {
+                                    "name": "popup",
+                                    "path": "component/container/popup"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "基础组件",
+                            "caseList": [
+                                {
+                                    "name": "a",
+                                    "path": "component/basic/a"
+                                },
+                                {
+                                    "name": "image",
+                                    "path": "component/basic/image"
+                                },
+                                {
+                                    "name": "map",
+                                    "path": "component/basic/map"
+                                },
+                                {
+                                    "name": "map_marker",
+                                    "path": "component/basic/mapMarker"
+                                },
+                                {
+                                    "name": "map_indoor",
+                                    "path": "component/basic/mapIndoor"
+                                },
+                                {
+                                    "name": "progress",
+                                    "path": "component/basic/progress"
+                                },
+                                {
+                                    "name": "span",
+                                    "path": "component/basic/span"
+                                },
+                                {
+                                    "name": "text",
+                                    "path": "component/basic/text"
+                                },
+                                {
+                                    "name": "web",
+                                    "path": "component/basic/web"
+                                },
+                                {
+                                    "name": "rating",
+                                    "path": "component/basic/rating"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "表单组件",
+                            "caseList": [
+                                {
+                                    "name": "input",
+                                    "path": "component/form/input"
+                                },
+                                {
+                                    "name": "slider",
+                                    "path": "component/form/slider"
+                                },
+                                {
+                                    "name": "picker",
+                                    "path": "component/form/picker"
+                                },
+                                {
+                                    "name": "switch",
+                                    "path": "component/form/switch"
+                                },
+                                {
+                                    "name": "textarea",
+                                    "path": "component/form/textarea"
+                                },
+                                {
+                                    "name": "label",
+                                    "path": "component/form/label"
+                                },
+                                {
+                                    "name": "select",
+                                    "path": "component/form/select"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "其它",
+                            "caseList": [
+                                {
+                                    "name": "video",
+                                    "path": "component/other/video"
+                                },
+                                {
+                                    "name": "Canvas",
+                                    "path": "component/other/canvas"
+                                },
+                                {
+                                    "name": "Camera",
+                                    "path": "component/other/camera"
+                                },
+                                {
+                                    "name": "animation",
+                                    "path": "component/other/animation"
+                                },
+                                {
+                                    "name": "transform",
+                                    "path": "component/other/transform"
+                                },
+                                {
+                                    "name": "border",
+                                    "path": "component/other/border"
+                                },
+                                {
+                                    "name": "background",
+                                    "path": "component/other/background"
+                                },
+                                {
+                                    "name": "GenerlEvent",
+                                    "path": "component/other/generlEvent"
+                                },
+                                {
+                                    "name": "Menu",
+                                    "path": "component/other/menu"
+                                },
+                                {
+                                    "name": "marquee",
+                                    "path": "component/other/marquee"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "interface": {
+                    "name": "接口",
+                    "desc": "以下将展示快应用接口能力，具体属性参数详见新应用开发文档",
+                    "groupList": [
+                        {
+                            "name": "基本功能",
+                            "caseList": [
+                                {
+                                    "name": "应用上下文和日志",
+                                    "path": "interface/basic/contextAndLog"
+                                },
+                                {
+                                    "name": "页面路由",
+                                    "path": "interface/basic/router"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "界面交互",
+                            "caseList": [
+                                {
+                                    "name": "分享",
+                                    "path": "interface/interaction/share"
+                                },
+                                {
+                                    "name": "弹窗",
+                                    "path": "interface/interaction/prompt"
+                                },
+                                {
+                                    "name": "打开网页",
+                                    "path": "interface/interaction/webview"
+                                },
+                                {
+                                    "name": "通知消息",
+                                    "path": "interface/interaction/notification"
+                                },
+                                {
+                                    "name": "震动",
+                                    "path": "interface/interaction/vibrator"
+                                },
+                                {
+                                    "name": "消息通道",
+                                    "path": "interface/interaction/messageChannel"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "网络访问",
+                            "caseList": [
+                                {
+                                    "name": "数据请求",
+                                    "path": "interface/network/fetch"
+                                },
+                                {
+                                    "name": "上传下载",
+                                    "path": "interface/network/request"
+                                },
+                                {
+                                    "name": "Websocket",
+                                    "path": "interface/network/websocket"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "文件数据",
+                            "caseList": [
+                                {
+                                    "name": "数据存储",
+                                    "path": "interface/fileData/storage"
+                                },
+                                {
+                                    "name": "文件存储",
+                                    "path": "interface/fileData/file"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "系统能力",
+                            "caseList": [
+                                {
+                                    "name": "设置闹钟",
+                                    "path": "interface/system/alarm"
+                                },
+                                {
+                                    "name": "发送短信",
+                                    "path": "interface/system/message"
+                                },
+                                {
+                                    "name": "传感器",
+                                    "path": "interface/system/sensor"
+                                },
+                                {
+                                    "name": "地理位置",
+                                    "path": "interface/system/geolocation"
+                                },
+                                {
+                                    "name": "二维码",
+                                    "path": "interface/system/qrcode"
+                                },
+                                {
+                                    "name": "剪贴板",
+                                    "path": "interface/system/clipboard"
+                                },
+                                {
+                                    "name": "日历事件",
+                                    "path": "interface/system/calendar"
+                                },
+                                {
+                                    "name": "设备信息",
+                                    "path": "interface/system/device"
+                                },
+                                {
+                                    "name": "网络状态",
+                                    "path": "interface/system/network"
+                                },
+                                {
+                                    "name": "桌面图标",
+                                    "path": "interface/system/shortcut"
+                                },
+                                {
+                                    "name": "屏幕亮度",
+                                    "path": "interface/system/brightness"
+                                },
+                                {
+                                    "name": "电量信息",
+                                    "path": "interface/system/battery"
+                                },
+                                {
+                                    "name": "录音",
+                                    "path": "interface/system/record"
+                                },
+                                {
+                                    "name": "系统音量",
+                                    "path": "interface/system/volume"
+                                },
+                                {
+                                    "name": "应用管理",
+                                    "path": "interface/system/package"
+                                },
+                                {
+                                    "name": "联系人",
+                                    "path": "interface/system/contact"
+                                },
+                                {
+                                    "name": "Wifi",
+                                    "path": "interface/system/wifi"
+                                },
+                                {
+                                    "name": "Settings",
+                                    "path": "interface/system/settings"
+                                },
+                                {
+                                    "name": "蓝牙",
+                                    "path": "interface/system/bluetooth"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "图形图像",
+                            "caseList": [
+                                {
+                                    "name": "多媒体",
+                                    "path": "interface/graphic/media"
+                                },
+                                {
+                                    "name": "图片裁剪",
+                                    "path": "interface/graphic/image"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "声音音频",
+                            "caseList": [
+                                {
+                                    "name": "audio",
+                                    "path": "interface/audio/audio"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "厂商服务",
+                            "caseList": [
+                                {
+                                    "name": "支付",
+                                    "path": "interface/service/pay"
+                                },
+                                {
+                                    "name": "账号",
+                                    "path": "interface/service/account"
+                                },
+                                {
+                                    "name": "推送&统计&分享",
+                                    "path": "interface/service/pushStatShare"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "第三方服务",
+                            "caseList": [
+                                {
+                                    "name": "支付宝支付",
+                                    "path": "interface/thirdparty/alipay"
+                                },
+                                {
+                                    "name": "微信支付",
+                                    "path": "interface/thirdparty/wxpay"
+                                },
+                                {
+                                    "name": "第三方分享",
+                                    "path": "interface/thirdparty/serviceShare"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "AI能力",
+                            "caseList": [
+                                {
+                                    "name": "华为Ai能力",
+                                    "path": "interface/ai/index"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "promise": {
+            "promise": {
+                "componentName": "Pormise接口调用在日志中查看"
+            }
+        },
+        "style": {
+            "fontface": {
+                "title": "Text组件设置font-face 样式",
+                "testSpan": "测试SPAN组件",
+                "huaweiWeb": "华为官网",
+                "inputText": "请输入text",
+                "option1": "夫子庙",
+                "option2": "总统府",
+                "option3": "老门东",
+                "option4": "大报恩寺",
+                "aInText": "在text中a的多种表现形式",
+                "testWebFont": "测试网络字体",
+                "testTextFontFamily": "测试text中直接设置data中定义的font-family",
+                "setFontFamilyByButton": "通过按钮重新font-family"
+            },
+            "less": {
+                "sample": "less示例!"
+            },
+            "linearGradient": {
+                "gradient1": "从顶部渐变",
+                "gradient2": "45度夹角渐变",
+                "gradient3": "从左向右渐变",
+                "gradient4": "从左向右渐变，重复渐变"
+            },
+            "position":{
+                "relativeAttributes":"relative属性",
+                "absoluteAttributes":"absolute属性",
+                "fixedAttributes":"fixed属性",
+                "dynamicsTest":"动态测试",
+                "firstIndividualNode":"首个单独的节点",
+                "singleNodeAtTheEnd":"末尾单独的节点",
+                "absoluteTestPage":"absolute测试页面",
+                "fixedTestPage":"fixed测试页面",
+                "testPage":"样式切换测试页面",
+                "positioning":"relative/absolute/fixed 定位",
+                "specifyValue":"指定position属性值：",
+                "offsetParmeter":"偏移参数",
+                "distanceIntro":"勾选边距方向与拖动滑块决定边距距离"
+            },
+            "pseudoclass": {
+                "text1": "这是一个active变颜色的例子（点击我）",
+                "text2": "这是一个disabled变颜色的例子",
+                "placeholder1": "input组件focus伪类（点击我）",
+                "placeholder2": "textarea组件focus伪类（点击我）"
+            },
+            "sample": {
+                "inlineStyle": "内联样式",
+                "idSelector": "ID选择器",
+                "classSelector": "class选择器",
+                "tagSelector": "tag选择器",
+                "example1": "后代选择器示例1",
+                "example2": "后代选择器示例2",
+                "selectorPriority": "选择器优先级",
+                "description": "描述内容",
+                "changeSelector": "改变选择器"
+            },
+            "update": {
+                "text": "点击我修改文字颜色"
+            }
+        }
+    }
+}

@@ -1,0 +1,2208 @@
+{
+  "message": {
+    "appName": "Test My Phone",
+    "funcDisplay": "Test My Phone",
+    "component": {
+      "a": {
+        "huaweiHrefValue": "Huawei official website",
+        "homeHrefValue": "Jump to the home page of the app",
+        "carryDataInfo": "interface/basic/router/detail?pageInfo='I am A... I am the data from the previous page.'",
+        "carryDataHrefValue": "Carry data to jump to the details page in the app",
+        "hrefA": "I am A, I support Click",
+        "aAClick": "I am A, I support Click",
+        "clickAtoB": "After clicking A, I became B."
+      },
+      "image": {
+        "type1": "Slim: Specify the style width of the image: 750px, 250px",
+        "type2": "Slim: only specify the style height of the picture: 250px",
+        "type3": "Fat short: specify the style width of the image: 750px, 250px",
+        "type4": "Fat short: only specify the style height of the picture: 250px",
+        "or": " or ",
+        "imageShow": "svg image display"
+      },
+      "map": {},
+      "mapIndoor": {},
+      "mapMaker": {},
+      "progress": {
+        "default": "default"
+      },
+      "rating": {},
+      "span": {
+        "title1": "As a child component of text",
+        "title2": "As a child component of text:Style text",
+        "title3": "As a child component of a",
+        "title4": "As a child component of a:Style a",
+        "title5": "Span nesting：as a child component of text",
+        "title6": "Span nesting：as a child component of text"
+      },
+      "text": {
+        "hslaBackgroundColor": "hsla background-color",
+        "default": "default",
+        "setAs": "set as",
+        "loneText": "This framework is a framework for application development based on the front-end development technology stack. It adopts the popular front-end development model to fit the thinking habits of mainstream front-end developers, while greatly improving the performance of the application and providing a large number of systems that cannot be used in the front-end environment. Capabilities, as well as the ability to connect with many third-party services."
+      },
+      "web": {
+        "huaweiWeb": "Huawei official website",
+        "FileUpload": "Support web file upload",
+        "communication": "Web communication",
+        "video": "Web video playback full screen",
+        "deepLink": "Test quick app DeepLink",
+        "refresh": "refresh",
+        "sendMessage": "Send message to web",
+        "expiredCertificate": "expired certificate",
+        "untrustedCertificate": "untrusted certificate",
+        "customeUADefault": "custome UA-default",
+        "customeUASystem": "custome UA-system",
+        "customeUAother": "custome UA-other",
+        "customeUAotherNewWindow": "custome UA-otherNewWindow",
+        "openWindowjumpPolicy": "open Window jump Policy",
+        "smoothToTheRight": "200px smooth to the right"
+      },
+      "div": {},
+      "list": {
+        "listComponentMethod": "list component method",
+        "arrayObjectMethod": "array object method",
+        "backToFirstItem": "Back to the first item",
+        "loadMore": "Load more",
+        "isBottom": "To the bottom",
+        "isTop": "Is top",
+        "scrollStoped": "scroll stopped",
+        "theFingerIsRaised": "The finger is raised",
+        "sliding": "Scrolling",
+        "addPush": "Add a 'push' element to the end of the array",
+        "deleteArrayLastElement": "Delete the last element of the array",
+        "deleteArrayFirstElement": "Delete the first element of the array",
+        "addUnshift": "Add an 'unshift' element to the beginning of the array",
+        "deleteFirstElement": "Delete the first element",
+        "addSpliceElement": "And add a 'splice element'"
+      },
+      "popup": {
+        "popup": "pop up"
+      },
+      "refresh": {
+        "stopRefresh": "Stop refreshing",
+        "refreshing": "Refreshing.....",
+        "refreshComplete": "Refresh completed"
+      },
+      "refreshAuto": {
+        "stopRefresh": "Stop refreshing",
+        "refreshing": "Refreshing.....",
+        "refreshComplete": "Refresh completed"
+      },
+      "refreshWithList": {
+        "stopRefresh": "Stop refreshing",
+        "refreshing": "Refreshing.....",
+        "refreshComplete": "Refresh completed",
+        "loadMore": "Load more",
+        "isBottom": "To the bottom",
+        "isTop": "Is top",
+        "sliding": "Scrolling"
+      },
+      "refreshController": {},
+      "refreshMeterial": {
+        "stopRefresh": "Stop refreshing",
+        "refreshing": "Refreshing.....",
+        "refreshComplete": "Refresh completed"
+      },
+      "refreshMeterialWithList": {
+        "stopRefresh": "Stop refreshing",
+        "refreshing": "Refreshing.....",
+        "refreshComplete": "Refresh completed",
+        "loadMore": "Load more",
+        "isBottom": "To the bottom",
+        "isTop": "Is top",
+        "sliding": "Scrolling"
+      },
+      "refreshOverScollWithList": {
+        "stopRefresh": "Stop refreshing",
+        "refreshing": "Refreshing.....",
+        "refreshComplete": "Refresh completed",
+        "loadMore": "Load more",
+        "isBottom": "To the bottom",
+        "isTop": "Is top",
+        "sliding": "Scrolling"
+      },
+      "refreshPullDownWithList": {
+        "stopRefresh": "Stop refreshing",
+        "refreshing": "Refreshing.....",
+        "refreshComplete": "Refresh completed",
+        "loadMore": "Load more",
+        "isBottom": "To the bottom",
+        "isTop": "Is top",
+        "sliding": "Scrolling"
+      },
+      "richtext": {
+        "description": "The value of the html type rich text, the outermost layer must be wrapped with the block-level elements supported by html in the development documentation."
+      },
+      "stack": {
+        "description": "The stack container is arranged in a stack, and each sub-assembly is stacked in order, covering the previous components."
+      },
+      "swiper": {
+        "indicator": "indicator",
+        "autoPlay": "auto play",
+        "loopChange": "Can it cycle through",
+        "vertical": "vertical",
+        "autoPlayInterval": "auto play interval(ms)",
+        "animation": "animation duration(ms)",
+        "toSecondPage": "came to the second page",
+        "range": "the playing page number is ",
+        "page": ""
+      },
+      "tabs": {
+        "switchScollable": "Switch tab-content's scrollable value",
+        "basic": "basic",
+        "form": "form",
+        "list": "list",
+        "huaweiWeb": "Huawei official website",
+        "backToFirstItem": "back to the first item",
+        "loadMore": "load more",
+        "range": "the playing page number is ",
+        "page": ""
+      },
+      "input": {
+        "value1": "set focus to true",
+        "value2": "Set focus to false",
+        "pleaseEnter": "please enter",
+        "ok": "Ok",
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "setInputValue": "Set or clear the value of the input box:",
+        "placeholder1": "The value must be synchronized in the change event to change the value",
+        "setValue": "Set the value",
+        "clearValue": "Clear the value",
+        "controlPlaceholderColor": "Input that controls the color of the placeholder:",
+        "placeholder2": "Placeholder font is red",
+        "placeholder3": "Next focus item",
+        "placeholder4": "enter keyword",
+        "switch": "Switch",
+        "clicked": "clicked",
+        "welcomeInstall": "Welcome to the quick app",
+        "focus": "get focus",
+        "blur": "lose focus"
+      },
+      "label": {
+        "label": "Label tag:",
+        "pleaseEnter": "please enter"
+      },
+      "picker": {
+        "areaSelector": "area selector",
+        "currentSelection": "current selection",
+        "timeSelector": "time selector",
+        "dateSelector": "date selector",
+        "multiColumnSelector": "multi column selector",
+        "useAreaSelectorByCode": "retrieve the region selector by code",
+        "list": [
+          "China",
+          "American",
+          "Japan",
+          "Korea"
+        ],
+        "province": [
+          "Guangdong",
+          "Hubei",
+          "Jiangxi",
+          "Shaanxi"
+        ],
+        "city": [
+          "Shenzhen",
+          "Guangdong",
+          "Huizhou",
+          "Dongguan",
+          "Xi'an"
+        ],
+        "area": [
+          "Nanshan",
+          "Futian",
+          "Bantian"
+        ],
+        "country": "China",
+        "address": [
+          [
+            "Guangdong",
+            "Hubei",
+            "Jiangxi",
+            "Shaanxi"
+          ],
+          [
+            "Baoji",
+            "Weinan",
+            "Hancheng",
+            "Xi'an"
+          ],
+          [
+            "Nanshan",
+            "Futian",
+            "Bantian"
+          ]
+        ],
+        "addvalue": [
+          "Hubei",
+          "Huanggang",
+          "Futian"
+        ],
+        "shaanxi": "Shaanxi",
+        "baoji": "Baoji",
+        "xian": "Xi'an",
+        "guangdong": "Guangdong",
+        "guangzhou": "Guangzhou",
+        "shenzhen": "Shenzhen",
+        "address1": [
+          [
+            "Guangdong",
+            "Hubei",
+            "Jiangxi",
+            "Shaanxi"
+          ],
+          [
+            "Baoji",
+            "Weinan",
+            "Hancheng",
+            "Xi'an"
+          ],
+          [
+            "shaan1",
+            "shaan2",
+            "shaan3",
+            "shaan4"
+          ]
+        ],
+        "address2": [
+          [
+            "Guangdong",
+            "Hubei",
+            "Jiangxi",
+            "Shaanxi"
+          ],
+          [
+            "Baoji",
+            "Weinan",
+            "Hancheng",
+            "Xi'an"
+          ],
+          [
+            "bao1",
+            "bao2",
+            "bao3",
+            "bao4"
+          ]
+        ],
+        "address3": [
+          [
+            "Guangdong",
+            "Hubei",
+            "Jiangxi",
+            "Shaanxi"
+          ],
+          [
+            "Baoji",
+            "Weinan",
+            "Hancheng",
+            "Xi'an"
+          ],
+          [
+            "xi1",
+            "xi2",
+            "xi3",
+            "xi4"
+          ]
+        ],
+        "address4": [
+          [
+            "Guangdong",
+            "Hubei",
+            "Jiangxi",
+            "Shaanxi"
+          ],
+          [
+            "Shenzhen",
+            "Guangdong",
+            "Huizhou",
+            "Dongguan"
+          ],
+          [
+            "Guang1",
+            "Guang2",
+            "Guang3",
+            "Guang4"
+          ]
+        ],
+        "address5": [
+          [
+            "Guangdong",
+            "Hubei",
+            "Jiangxi",
+            "Shaanxi"
+          ],
+          [
+            "Shenzhen",
+            "Guangdong",
+            "Huizhou",
+            "Dongguan"
+          ],
+          [
+            "Guangzhou1",
+            "Guangzhou2",
+            "Guangzhou3",
+            "Guangzhou4"
+          ]
+        ],
+        "address6": [
+          [
+            "Guangdong",
+            "Hubei",
+            "Jiangxi",
+            "Shaanxi"
+          ],
+          [
+            "Shenzhen",
+            "Guangdong",
+            "Huizhou",
+            "Dongguan"
+          ],
+          [
+            "Shenzhen1",
+            "Shenzhen2",
+            "Shenzhen3",
+            "Shenzhen4"
+          ]
+        ]
+      },
+      "select": {
+        "nanjing": "Nanjing Attractions",
+        "attraction1": "Confucius Temple",
+        "attraction2": "presidential palace",
+        "attraction3": "Old door east",
+        "attraction4": "Da Bao En Temple",
+        "attraction5": "Zhonghuamen"
+      },
+      "slider": {
+        "showCurrentValue": "Show current value",
+        "setStep": "set step: ",
+        "setMaxAndMin": "Set minimum: 50; Maximum: 200"
+      },
+      "switch": {
+        "defaultStyle": "default style",
+        "recommendStyle": "recommended display style",
+        "on": "on",
+        "off": "off",
+        "statusChanged": "Status changed.......",
+        "customSwitch": "Switch slide and slide ball customization",
+        "modifyThumbColor": "modify thumb-color",
+        "modifyTrackColor": "modify rack-color",
+        "modifySlideAndBall": "Modify slide and ball color at the same time"
+      },
+      "textarea": {
+        "placeholder": "Please enter content",
+        "description": "Wrap text when there is too much text, scroll display when setting high",
+        "selectAll": "select all",
+        "setSelectedArea": "Set the selected area",
+        "getSelectedFirstAndLast": "Get the first and last position of the selected area"
+      },
+      "animation": {},
+      "background": {
+        "title1": ".9png Test",
+        "content1": "It is test content.It is test content.It is test content.It is test content.",
+        "title2": "其他背景 测试",
+        "content2": "It is test content.It is test content.It is test content.It is test content.It is test content",
+        "title3": "input size",
+        "title4": "input position",
+        "title5": "input repeat"
+      },
+      "border": {
+        "border1": "border-color=\"#FF0000 red #FFFF00 yellow #E066FF purple #ADFF2F green\" border-width=\"1px 3px 5px 7px\"",
+        "border2": " border-style=\"solid\" border-color=\"#FF0000 red #FFFF00 yellow #E066FF purple\" border-width=\"1px 3px 5px\"",
+        "border3": "border-[left|top|right|bottom]-color #FF0000 red #FFFF00 yellow #E066FF purple #ADFF2F green"
+      },
+      "camera": {},
+      "canvas": {
+        "text1": "Set a canvas component id such as: CanvasFirst, default fill color, default width and height"
+      },
+      "componentMethods": {
+        "getBoundingClientRect": "getBoundingClientRect(Get component location):",
+        "toTempFilePath": "toTempFilePath(Take a component snapshot):"
+      },
+      "generlEvent": {
+        "test1": "click,I am test1",
+        "test2": "click,I am test2",
+        "swipe": "Slide me to trigger the swipe event"
+      },
+      "marquee": {},
+      "menu": {
+        "text1": "When setting menu:true",
+        "text2": "1. If the onMenuPress callback function is set, the set callback function will be called.",
+        "text3": "2. If the onMenuPress callback function is not set, the default callback function will be called, and a pop-up dialog will be displayed.",
+        "addToDesk": "Add to desktop",
+        "share": "Share",
+        "createSuccess": "Desktop icon created successfully",
+        "createFailed": "Creation failed"
+      },
+      "transform": {},
+      "video": {
+        "title": "Play MP4 format",
+        "play": "play",
+        "pause": "pause",
+        "seek": "seek",
+        "fullScreen": "full screen",
+        "exitFullScreen": "exit full screen",
+        "videoConnectSuccess": "video connect success",
+        "startPlay": "start play",
+        "pausePlay": "pause play",
+        "finishPlay": "finish play",
+        "playError": "play error",
+        "event": "event:",
+        "btnstart": "Click the play button to start playing",
+        "btnpause": "Click the pause button to pause playback",
+        "btnseek": "seek 60",
+        "addOverlay": "stack Add overlay"
+      }
+    },
+    "directive": {
+      "app": {
+        "import": "Import public script"
+      },
+      "block": {
+        "city": "city:",
+        "attractions": "attractions:",
+        "whetherDisplay": "Whether to display",
+        "cities": [
+          {
+            "name": "Beijing",
+            "showSpots": true,
+            "spots": [
+              {
+                "name": "Tiananmen Square"
+              },
+              {
+                "name": "Badaling"
+              }
+            ]
+          },
+          {
+            "name": "Shanghai",
+            "showSpots": false,
+            "spots": [
+              {
+                "name": "Pearl of the Orient"
+              }
+            ]
+          }
+        ]
+      },
+      "component": {
+        "compA": "This is component A",
+        "compB": "This is component B",
+        "compC": "This is component C",
+        "inputValue": "Click to switch display components"
+      },
+      "computed": {
+        "basicSample": "basic sampele",
+        "initially": "Initially",
+        "reversed": "reversed",
+        "changeMessage": "change message",
+        "computedSetter": "computed setter",
+        "changeFullName": "change fullName",
+        "computedCache": "computed cache",
+        "initialValueOfNow": "initial value of now:",
+        "getCurrentValueOfNow": "get current value of now"
+      },
+      "for": {},
+      "ifshow": {
+        "show": "Show: render but control whether to display",
+        "toggle": "show or hide",
+        "if": "If command: if command display",
+        "elif": "Elif instruction: elif command display",
+        "else": "Else instruction: the rest",
+        "conditionDirective": "conditional instruction"
+      },
+      "slot": {
+        "slotHeader": "I am a named slot header.",
+        "slotContent": "I am a normal slot content",
+        "slotNode": "Slot node content",
+        "slotFooter": "I am a named slot footer.",
+        "toggleContent": "Hide or show inserted content",
+        "slotDefault": "slot node default content"
+      }
+    },
+    "event": {
+      "bindEvents": {
+        "emitEvent": "trigger event:",
+        "remove": "Remove event response:",
+        "emitElement": "The event that triggered the component node:",
+        "touchTest": "Touch test, see the log through logcat",
+        "params": "Parameter content"
+      },
+      "interVms": {
+        "pageComponent": "Page component:",
+        "emit": "trigger",
+        "parent": "Parent component: event response:",
+        "additionalParameters": "Additional parameters",
+        "parentsValue": "I am the data passed by the parent component.",
+        "customComponent": "Custom components:",
+        "outerData": "Externally passed data:",
+        "watchDataChange": "Monitor data changes:",
+        "child": "child component: Event Response:"
+      },
+      "publicInterface": {
+        "getDom": "Get component dom"
+      }
+    },
+    "framework": {
+      "lifecycle": {
+        "lifecycleName": "The life cycle:",
+        "emit": "trigger:",
+        "getLcList": "Execution: Get the lcList attribute of data:",
+        "getTemplateNode": "Execution: Get the template node:",
+        "getPageVisible": "Execution: Get the page display status attribute:",
+        "pageDestroy": "Execution: The page is to be destroyed and destroyed:",
+        "cancelWatch": ", should do the operation to cancel the interface subscription monitoring:",
+        "pageHasDestroyed": "Execution: The page has been destroyed and will not be executed"
+      },
+      "pageI18n": {
+        "text": "English content",
+        "title": "i18n",
+        "label1": "Apply content in current language:",
+        "label2": "Apply the currently configured language:",
+        "label3": "Regions to which the current configuration applies:",
+        "switchLocale": "Chinese / English switch",
+        "console1": "i18n：Trigger life cycle onConfigurationChange: ",
+        "console2": "i18n：Update to Locale in English",
+        "console3": "i18n：Update to Locale in Chinese",
+        "messageTip": "Trigger the application life cycle: "
+      }
+    },
+    "interface": {
+      "ai": {
+        "aestheic_score": {
+          "info": "score:",
+          "btnText": "Select Image",
+          "btnTextErr": "Parameter call",
+          "error": "An error occurred",
+          "titleBar": "Aesthetic score"
+        },
+        "ai_demo_card": {
+          "littleApp": "little app",
+          "aiLittleApp": "AI experience little app"
+        },
+        "can_use": {
+          "btnText": "Whether to support Ai",
+          "btnTextErr": "This page does not support parameters",
+          "canUse": "Your phone supports Ai"
+        },
+        "common": {
+          "imageContainer": {},
+          "loadingWrapper": {},
+          "mainBtn": {
+            "placeholder": "Enter the parameters here",
+            "result": "Return results:",
+            "data": "Return data:",
+            "complete": "whether succeed:"
+          },
+          "mainDbBtn": {
+            "placeholder1": "Enter parameter one here",
+            "placeholder2": "Enter parameter two here",
+            "result": "Return results:",
+            "data": "Return data:"
+          },
+          "photoSelector": {
+            "takePhoto": "take photo",
+            "selectPhoto": "Choose from a mobile photo album",
+            "cancel": "cancel"
+          },
+          "recognitionResult": {
+            "title": "Recognition result"
+          },
+          "twoImageContainer": {
+            "image1": "Select picture 1",
+            "image2": "Select picture 2"
+          },
+          "userItem": {}
+        },
+        "detect_barcode": {
+          "info": "path:",
+          "btnText": "select image",
+          "btnTextErr": "parameter call",
+          "checkCode": "Code detection",
+          "arr": [
+            "Unknown code type",
+            "QR code containing phone information",
+            "QR code with location information",
+            "QR code with URL information",
+            "QR code containing email information",
+            "QR code containing contact information",
+            "QR code with SMS message",
+            "QR code containing calendar event information",
+            "QR code containing wifi information",
+            "QR code containing text information",
+            "Bar code containing product information",
+            "Bar code containing book ISBN information"
+          ],
+          "messageTypeInCode": "The code contains the type of information:",
+          "personName": "Name:",
+          "phoneNumber": "cellphone number:",
+          "emailAddress": "Email address:",
+          "time": "Time:",
+          "address": "Address:",
+          "geolocation": "Latitude and longitude:",
+          "website": "URL:",
+          "textContent": "Text:",
+          "error": "An error occurred"
+        },
+        "doc_detection_correction": {
+          "result": "process result",
+          "btnText": "Select Image",
+          "btnTextErr": "Parameter call",
+          "redressDocError": "Document correction error",
+          "checkDocError": "Document detection error",
+          "docCheckRedress": "Document detection correction"
+        },
+        "entity_recognition": {
+          "btnText": "Int call",
+          "btnTextErr": "Parameter call",
+          "title": "Entity recognition"
+        },
+        "face_analysis": {
+          "info": "path:",
+          "btnText": "Select Image",
+          "btnTextErr": "Parameter call",
+          "error": "An error occurred",
+          "title": "Face analysis"
+        },
+        "face_attributes": {
+          "info": "gender:",
+          "btnText": "Select Image",
+          "btnTextErr": "Parameter call",
+          "error": "An error occurred",
+          "title": "Face attribute (gender)"
+        },
+        "face_comparision": {
+          "info": "Similarity:",
+          "btnText": "Face comparison",
+          "btnTextErr": "Parameter call",
+          "image1": "Select picture 1",
+          "image2": "Select picture 2",
+          "error": "An error occurred",
+          "title": "Face comparison"
+        },
+        "face_detection": {
+          "btnText": "Select Image",
+          "btnTextErr": "Parameter call",
+          "error": "An error occurred",
+          "checkNoFace": "No face detected",
+          "title": "Face Detection"
+        },
+        "face_orientation_recognition": {
+          "info": "Face orientation:",
+          "btnText": "Select Image",
+          "btnTextErr": "Parameter call",
+          "headpose0": "No face",
+          "headpose1": "Face up",
+          "headpose2": "Face to the right",
+          "headpose3": "Face down",
+          "headpose4": "Face to the left",
+          "faith": " Confidence:",
+          "error": "An error occurred",
+          "title": "Face orientation recognition"
+        },
+        "feature_detection": {
+          "btnText": "Select Image",
+          "btnTextErr": "Parameter call",
+          "error": "An error occurred",
+          "title": "Quaternary feature detection"
+        },
+        "get_assistant_intention": {
+          "btnText": "int call",
+          "btnTextErr": "Parameter call",
+          "result": "Intent recognition result",
+          "title": "Entity recognition"
+        },
+        "im_intention_recognition": {
+          "btnText": "int call",
+          "btnTextErr": "Parameter call",
+          "result": "Intent to identify the result:",
+          "title": "IM class intent recognition"
+        },
+        "image_segmentation": {
+          "text": "process result",
+          "info": "path:",
+          "btnText": "Select Image",
+          "btnTextErr": "Parameter call",
+          "error": "An error occurred",
+          "title": "Portrait segmentation"
+        },
+        "image_semantic_segmentation": {
+          "text": "process result",
+          "info": "path:",
+          "btnText": "Select Image",
+          "btnTextErr": "Parameter call",
+          "error": "An error occurred",
+          "title": "Image semantic segmentation"
+        },
+        "index": {
+          "AIItems": [
+            {
+              "title": "Face recognition",
+              "items": [
+                {
+                  "name": "Face comparison",
+                  "src": "face_comparision"
+                },
+                {
+                  "name": "Face Detection",
+                  "src": "face_detection"
+                },
+                {
+                  "name": "Face orientation recognition",
+                  "src": "face_orientation_recognition"
+                },
+                {
+                  "name": "Face analysis",
+                  "src": "face_analysis"
+                },
+                {
+                  "name": "Face attribute (gender)",
+                  "src": "face_attributes"
+                },
+                {
+                  "name": "Quaternary feature detection",
+                  "src": "feature_detection"
+                }
+              ]
+            },
+            {
+              "title": "Image Identification",
+              "items": [
+                {
+                  "name": "Aesthetic score",
+                  "src": "aesthetic_score"
+                },
+                {
+                  "name": "Image classification label",
+                  "src": "picture_classification_label"
+                },
+                {
+                  "name": "Image super resolution",
+                  "src": "picture_super_resolution"
+                },
+                {
+                  "name": "Scene detection",
+                  "src": "scene_detection"
+                },
+                {
+                  "name": "Document detection correction",
+                  "src": "doc_detection_correction"
+                },
+                {
+                  "name": "Text image super resolution",
+                  "src": "word_image_super_resolution"
+                },
+                {
+                  "name": "Image semantic segmentation",
+                  "src": "image_semantic_segmentation"
+                },
+                {
+                  "name": "Portrait segmentation",
+                  "src": "image_segmentation"
+                },
+                {
+                  "name": "Simple background OCR",
+                  "src": "simple_background_ocr"
+                },
+                {
+                  "name": "Whether to support Ai",
+                  "src": "can_use"
+                },
+                {
+                  "name": "Assistant class intent recognition",
+                  "src": "get_assistant_intention"
+                },
+                {
+                  "name": "IM class intent recognition",
+                  "src": "im_intention_recognition"
+                },
+                {
+                  "name": "Part of speech tagging",
+                  "src": "speech_tagging"
+                },
+                {
+                  "name": "Segmented vocabulary",
+                  "src": "segmented_vocabulary"
+                },
+                {
+                  "name": "Entity recognition",
+                  "src": "entity_recognition"
+                },
+                {
+                  "name": "Code detection",
+                  "src": "detect_barcode"
+                },
+                {
+                  "name": "Speech Recognition",
+                  "src": "speech_recognition"
+                }
+              ]
+            }
+          ],
+          "title": "Huawei AI Experience Center"
+        },
+        "picture_classification_label": {
+          "labelContentArr": [
+            "Portrait",
+            "Food",
+            "landscape",
+            "Document",
+            "ID card",
+            "passport",
+            "Bank card",
+            "bicycle",
+            "Bus",
+            "Boat",
+            "Train",
+            "aircraft",
+            "Car",
+            "Bird",
+            "Cat",
+            "Dog",
+            "Fish",
+            "",
+            "wardrobe",
+            "Phone",
+            "aptop",
+            "",
+            "",
+            "",
+            "Wedding dress",
+            "Flower",
+            "blocks",
+            "Sushi",
+            "barbecue",
+            "banana",
+            "",
+            "Watermelon",
+            "noodles",
+            "",
+            "piano",
+            "wedding",
+            "Chess",
+            "basketball",
+            "badminton",
+            "football",
+            "City overlook",
+            "Sunrise and sunset",
+            "Sea",
+            "bridge",
+            "sky",
+            "Grassland",
+            "Street",
+            "Night View",
+            "",
+            "Wood",
+            "lake",
+            "snow",
+            "mountain",
+            "build",
+            "cloud",
+            "Waterfall",
+            "Fog",
+            "Porcelare",
+            "Model",
+            "Rainbow",
+            "Candle",
+            "",
+            "The Statue of Liberty",
+            "Presentation",
+            "",
+            "",
+            "Baby stroller",
+            "Photos",
+            "Meet dinner",
+            "Eiffel Tower",
+            "Dolphin",
+            "Giraffe",
+            "Penguin",
+            "Tiger",
+            "Zebra",
+            "",
+            "Lion",
+            "Elephant",
+            "Leopard",
+            "Peacock",
+            "Blackboard",
+            "Balloon",
+            "",
+            "Air Conditioning",
+            "Washing Machine",
+            "Refrigerator",
+            "Camera",
+            "",
+            "gun",
+            "skirt",
+            "",
+            "UAV",
+            "Apple",
+            "Dumpling",
+            "Coffee",
+            "Grape",
+            "hot pot",
+            "graduation photo",
+            "",
+            "",
+            "",
+            "",
+            "Watch",
+            "glasses",
+            "Ferris wheel",
+            "Fountain",
+            "Pavilion",
+            "Fireworks",
+            "Business Card",
+            "Equestrian",
+            "Concert",
+            "Sailing",
+            "Giant Panda",
+            "Birthday Cake",
+            "Birthday",
+            "Christmas",
+            "Great Wall",
+            "Oriental Pearl",
+            "Small waist",
+            "",
+            "Tower",
+            "Bunny",
+            "",
+            "Trolley Case",
+            "Nail Art",
+            "guitar"
+          ],
+          "btnText": "Select picture",
+          "btnTextErr": "Parameter call",
+          "toast": "not matched to tag",
+          "error": "An error has occurred",
+          "other": "other",
+          "title": "picture classification label"
+        },
+        "picture_super_resolution": {
+          "text": "processing result",
+          "btnText": "Select picture",
+          "btnTextErr": "Parameter call",
+          "toast": "Image processing failed",
+          "title": "picture super resolution"
+        },
+        "scene_detection": {
+          "sceneArr": [
+            "Unknown scene",
+            "No support",
+            "Beach",
+            "Blue sky",
+            "Dusk",
+            "Food",
+            "flower",
+            "green plant",
+            "snow",
+            "night",
+            "Text",
+            "stage",
+            "cat",
+            "dog",
+            "fireworks",
+            "cloudy day",
+            "deciduous",
+            "panda",
+            "car",
+            "old building",
+            "Bicycle",
+            "Waterfall"
+          ],
+          "btnText": "Select picture",
+          "btnTextErr": "Parameter call",
+          "error": "An error has occurred",
+          "title": "Scene detection"
+        },
+        "segmented_vocabulary": {
+          "btnText": "int call",
+          "btnTextErr": "Parameter call",
+          "toast": "participle result:",
+          "title": "Segmented vocabulary"
+        },
+        "simple_background_ocr": {
+          "info": "Text:",
+          "btnText": "Select picture",
+          "btnTextErr": "Parameter call",
+          "error": "An error has occurred",
+          "title": "Simple Background OCR"
+        },
+        "speech_recognition": {
+          "currentStatus": "current status:",
+          "currentVolume": "current volume:",
+          "speechCanceled": "Unrecognized",
+          "stopTxt": "stop recognition",
+          "speechStopped": "Stop recognition",
+          "startTxt": "Start recognition",
+          "cancelTxt": "Cancel recognition",
+          "speeching": "recognizing",
+          "completeSpeech": "End recognition",
+          "title": "speech recognition"
+        },
+        "speech_tagging": {
+          "btnText": "int call",
+          "btnTextErr": "Parameter call",
+          "toast1": "Word:",
+          "toast2": ", part of speech:",
+          "title": "part of speech"
+        },
+        "word_image_super_resolution": {
+          "text": "processing result",
+          "btnText": "Select picture",
+          "btnTextErr": "Parameter call",
+          "toast": "Image processing failed",
+          "title": "text image super resolution"
+        }
+      },
+      "audio": {
+        "audio": {
+          "showStatusInNotification": "Whether the playback status is displayed in the notification bar",
+          "autoPlay": "Autoplay",
+          "play": "play",
+          "pause": "pause",
+          "stop": "stop",
+          "seek": "jump",
+          "volume": "volume",
+          "mute": "Is it silent?",
+          "loop": "Do you want to loop",
+          "streamType": "set streamType",
+          "setTitle": "set title",
+          "setArtist": "Set artist",
+          "setCover": "Set Cover",
+          "musicName1": "The whale of the incarnation",
+          "artist1": "Xie Anqi",
+          "musicName2": "You at the same table",
+          "artist2": "Old Wolf",
+          "musicName3": "Desert Camel",
+          "artist3": "Exhibition and Rollo"
+        }
+      },
+      "basic": {
+        "contextAndLog": {},
+        "router": {
+          "button1": "100 version router function",
+          "button2": "New version of router version 101",
+          "detail": {},
+          "detailNew": {
+            "action": "Open my action:",
+            "uri": "Open my uri:"
+          },
+          "routerNew": {
+            "https": "https address",
+            "http": "http address",
+            "downloadPath": "Download file path:",
+            "downloadFile": "Download file",
+            "openInternalFile": "Open the internal path file",
+            "downloadFailed": "Download failed:"
+          },
+          "routerOld": {
+            "router1": "Go to the home page",
+            "router2": "uri is /",
+            "router3": "incoming data when jumping (push interface)",
+            "router4": "with query parameter (push interface) when jumping",
+            "router5": "Incoming data with query with query and params parameters (push interface)",
+            "router6": "Call 10086",
+            "router7": "sms",
+            "router8": "mailto",
+            "router9": "Return to the previous page",
+            "router10": "Return to the specified interface",
+            "router11": "no return page jump",
+            "router12": "page jump (replace interface) carrying data",
+            "router13": "Move data to jump to other quick applications",
+            "router14": "Jump to system location service settings interface",
+            "router15": "Jump to the current fast application information interface (quick application rights management)",
+            "privateData": "Is privateData changed?",
+            "protectedData": "Is protectedData changed?",
+            "publicData": "Is publicData changed?"
+          },
+          "routerLaunchHome": {
+            "title": "Welcome to open",
+            "placeholder": "Click here to input digital parameters for external jump only",
+            "pageAValue": "Jump to PageA",
+            "pageBValue": "Jump to PageB",
+            "pageCValue": "Jump to PageC",
+            "homeValue": "Jump to Home",
+            "externalValue": "Jump to external page"
+          },
+          "routerPageA": {
+            "title": "Welcome to open",
+            "pageAValue": "Jump to PageA",
+            "pageBValue": "Jump to PageB",
+            "pageCValue": "Jump to PageC",
+            "homeValue": "Jump to Home"
+          }
+        }
+      },
+      "cipher": {
+        "cipher": {
+          "inputValue1": "AES encryption",
+          "inputValue2": "AES decryption"
+        }
+      },
+      "fileData": {
+        "exchange": {
+          "keyPlaceholder": "Please enter key",
+          "valuePlaceholder": "Please enter value",
+          "setAppExchange": "Set app data",
+          "setGlobalExchange": "Set global data",
+          "getAppExchange": "Read local data",
+          "getGlobalExchange": "Read global data",
+          "grantPermission": "To grant authorization",
+          "revokePermission": "Cancellation of authorization",
+          "clearExchange": "Clear exchange",
+          "removeExchange": "Delete exchange"
+        },
+        "file": {
+          "downloadFile": "Download file",
+          "moveFile": "move file:",
+          "moveFileToFolder": "Move files to folder",
+          "copyFile": "copy file",
+          "getFileList": "Get a list of files",
+          "getFileInfo": "Get file information",
+          "deleteFile": "delete file",
+          "writeFile": "write file",
+          "readFile": "read file",
+          "writeBuffer": "Write Buffer",
+          "readBuffer": "Read Buffer"
+        },
+        "storage": {
+          "inputKey": "Please enter the key",
+          "inputValue": "Please enter value",
+          "inputIndex": "Please enter index",
+          "setStorage": "set storage",
+          "getStorage": "Read storage key:",
+          "getKey": "Read storage key according to index",
+          "getLength": "Get storage length",
+          "clearStorage": "clear storage",
+          "deleteStorage": "Delete storage key:",
+          "inputKeyAndValue": "Please enter the key and value values"
+        }
+      },
+      "graphic": {
+        "image": {
+          "pickPhoto": "Choose a color picture",
+          "getExif": "Get exif information",
+          "setExif": "Set exif information",
+          "setSuccess": "Setting success"
+        },
+        "media": {
+          "pathOfTakePhoto": "The path to take pictures",
+          "pathOfPickPhoto": "Select the path to the image",
+          "pathOfRingtone": "Ringtones Path",
+          "takePhoto": "take a photo",
+          "savePhoto": "Save the photo you just took to the album",
+          "pickPhoto": "Select picture",
+          "setRingtone": "Set system caller ringtone",
+          "setAlarmRingtone": "Set system alarm ringtone",
+          "setNotificationRingtone": "Set system notification ringtone",
+          "getRingtone": "Get system ringtones",
+          "pathOfTakeVideo": "The path to shoot the video",
+          "nameOfTakeVideo": "The name to shoot the video",
+          "sizeOfTakeVideo": "The size to shoot the video",
+          "pathOfPickVideo": "The path to pick the video",
+          "nameOfPickVideo": "The name to pick the video",
+          "sizeOfPickVideo": "The size to pick the video",
+          "nameOfPickPhoto": "The name to pick the photo",
+          "sizeOfPickPhoto": "The size to pick the photo",
+          "nameOfTakePhoto": "The name to shoot the photo",
+          "sizeOfTakePhoto": "The size to shoot the photo",
+          "takeVideo": "shooting video",
+          "saveVideo": "Save the video just taken to the album",
+          "pickVideo": "Select Video",
+          "pathOfPickFile": "Select the path to the file",
+          "nameOfPickFile": "Select the name to the file",
+          "sizeOfPickFile": "The size of the selected file",
+          "fileGetData": "Get file information",
+          "pickFile": "Select File",
+          "getFileInfo": "Get image path file information",
+          "viewPics": "Click to preview image",
+          "pathOfMultiPickFile": "Multi-select file path",
+          "listOfMultiPickFile": "Multi-select file list",
+          "pathOfMultiPickPic": "Multi-select image path",
+          "listOfMultiPickPic": "Multi-select image list",
+          "pathOfMultiPickVideo": "Multi-select video path",
+          "listOfMultiPickVideo": "Multi-select video list",
+          "pickMultiFile": "Select multiple files",
+          "pickMultiPic": "Select multiple images",
+          "pickMultiVideo": "Select multiple videos"
+        }
+      },
+      "interaction": {
+        "messageChannel": {
+          "creatChannel": "Create a message channel",
+          "routeChannel": "Jump to the detail page to send a message",
+          "cancelChannel": "close the message channel",
+          "toast": "Accept message:",
+          "detail": {
+            "sendMessage": "Send Message"
+          }
+        },
+        "notification": {
+          "title": "message title:",
+          "titlePlaceholder": "Please enter title",
+          "text": "message text:",
+          "textPlaceholder": "Please enter content",
+          "sendNotification": "send notification message",
+          "titleAs": "The title is: '",
+          "notificationHasSend": "\" message has been sent, please check the message notification bar"
+        },
+        "prompt": {
+          "showToast": "Show floating window",
+          "showDialog": "Show dialog",
+          "showContextMenu": "Show context menu",
+          "dialogTitle": "Ballbox title",
+          "dialogMessage": "Block the contents of the box, inform the current status, information and solutions, and describe the text as much as possible within three lines",
+          "dialogButtons": [
+            {
+              "Text": "option 0",
+              "Color": "#0faeff"
+            },
+            {
+              "Text": "option 1"
+            },
+            {
+              "Text": "Option 2"
+            }
+          ],
+          "toastMessage1": "Successful callback: check button number ---",
+          "toastMessage2": "Cancel callback"
+        },
+        "share": {
+          "title": "Share text:",
+          "shareText": "Click to share text",
+          "sharelocal": "Share in-app files",
+          "media_pickImage": "Choose Picture Sharing"
+        },
+        "vibrator": {
+          "openVibrator": "Open vibration",
+          "triggerVibrator": "trigger vibration"
+        },
+        "webview": {
+          "openHuaweiWebsite": "Open Huawei's official website",
+          "loaddownLoadUrl": "Open a web page with a download link",
+          "loadFileUploadSupportUrl": "Open webview support file upload page",
+          "allowthirdcookie": "Support for cookies across domains",
+          "testDeepLink": "Test DeepLink"
+        },
+        "pageScroll": {
+          "swipedown": "scrollBy: swipe 500px down",
+          "swipeToTop": "scrollBy:Swipe to the top of the page"
+        }
+      },
+      "network": {
+        "fetch": {
+          "refresh": "Refresh GET example",
+          "refresh1": "Refresh the arraybuffer POST example",
+          "refresh2": "Refresh the json POST example",
+          "refresh3": "Refresh text POST example",
+          "getData": "Get data:"
+        },
+        "request": {
+          "downloadFile": "下载文件",
+          "downloadFileStatus": "下载文件状态",
+          "uploadFile": "上传文件",
+          "downloadFailed": "下载失败："
+        },
+        "websocket": {
+          "connectUrl1": "Connect the specified url",
+          "connectUrl2": "Connect to specify url2",
+          "connectUrl3": "Connect to specify url3",
+          "sendMessage": "send message",
+          "closeMessage": "closed",
+          "sendMessage2": "send message 2",
+          "closeMessage2": "close 2",
+          "sendMessage3": "send message 3",
+          "closeMessage3": "close 3",
+          "connectFailed": "Connection failed",
+          "connectSuccess": "Connection succeeded",
+          "sendSuccess": "send successfully",
+          "sendFailed": "Send failed"
+        }
+      },
+      "service": {
+        "account": {
+          "login": "login account in Token mode",
+          "codelogin": "login account in Authorization Code mode",
+          "getAccountInfo": "Get account information",
+          "result": "Authorization result:"
+        },
+        "pay": {
+          "huaweiPay": "Huawei pays",
+          "getSign": "Get signature",
+          "result": "Get data:",
+          "getProductDetail": "Get product details",
+          "productPay": "Product payment",
+          "queryUncosumeOrder": "Query non-consumable orders",
+          "checkOrder": "Review order",
+          "getProductPaySign": "Get product payment signature",
+          "getUncosumeOrderSign": "Get order signature for non-consumable items",
+          "getCheckOrderSign": "Get review order signature"
+        },
+        "pushStatShare": {
+          "getPushProvider": "Get push service provider",
+          "pushsubscribe": "registered push",
+          "pushunsubscribe": "logout push",
+          "pushon": "Registering a transparent message callback",
+          "pushoff": "Logout transparent message callback",
+          "getStatProvider": "Get Statistics Service Provider",
+          "getShareProvider": "Get a third-party sharing service provider",
+          "serviceProvider": "Service Provider:"
+        },
+        "ad": {
+          "getAdProvider": "Get ad service provider",
+          "adProvider": "Ad service provider"
+        }
+      },
+      "thirdparty": {
+        "alipay": {
+          "useAliPay": "Alipay payment",
+          "orderInfo": "partner=\"2088611359395958\"&seller=\"2088611359395958\"&out_trade_no=\"201320148794006836322946\"&subject=\"payment amount 29.99 yuan\"&body=\"payment amount 29.99 yuan\"&total_fee=\"29.99\"&notify_url=\"https%3A%2F% 2Fgw.pay.xiaomi.com% 2Fnotify% 2Fucashier% 2F201320148794006836322946% 2F0048002 \"& sign_type =\" RSA \"& itbpay =\" 1440m \"& sign =\" nKDHQigYsBKlBQQ2CDSdSKXlCwzjjaFLWiihjUNx1X1S2d5qP6mPavZG7le9ty2GdPi7958iOQw76bhALOdUO2Vn2pxIUPwTLWQ% 2FUH9h5sp7gTTrjAOEWsDEIJSrJ0% 2FLl4GtnBtYEWr0dL23gmbV0IcnqXWsNOGi5XDnfqs4IAw% 3D \" ",
+          "paySuccess": "Payment success:",
+          "cancelPay": "Cancel payment",
+          "payFailed": "Payment failed:"
+        },
+        "serviceShare": {
+          "pickSDPhoto": "Setting a shared SD card picture",
+          "pickDataPhoto": "Setting the shared app internal image",
+          "pickNetPhoto": "Setting a shared network picture",
+          "getProvider": "service provider",
+          "getAvailablePlatforms": "List of shareable platforms",
+          "wxFriendShare": "WeChat friends share",
+          "wxCircleShare": "WeChat friends circle sharing",
+          "sinaShare": "Weibo sharing",
+          "systemShare": "System Sharing",
+          "morePlatforms": "Multi-platform sharing",
+          "allPlatforms": "Share all platforms",
+          "thirdShare": "third party sharing",
+          "wxFriendShareTitle": "The title of WeChat",
+          "wxFriendShareSummary": "Summary of WeChat",
+          "wxCicleShareTitle": "The title of WeChat friends circle",
+          "wxCicleShareSummary": "Summary of WeChat Friends Circle",
+          "sinaShareTitle": "Tibo's title",
+          "sinaShareSummary": "Summary of Weibo",
+          "systemShareTitle": "The title of the system",
+          "systemShareSummary": "System Summary",
+          "morePlatformsTitle": "Multi-platform title",
+          "morePlatformsSummary": "Multi-platform summary",
+          "allPlatformsTitle": "All-platform title",
+          "allPlatformsSummary": "A summary of the whole platform"
+        },
+        "wxpay": {
+          "payType": "WeChat payment type",
+          "appPay": "WeChat app payment",
+          "webPay": "WeChat web payment"
+        }
+      },
+      "system": {
+        "alarm": {
+          "getProvider": "Get Provider",
+          "setAlarm": "Set alarm",
+          "huaweiTestAlarm": "Huawei Test Alarm Clock",
+          "serviceProvider": "Service Provider:"
+        },
+        "battery": {
+          "getBattery": "Get power",
+          "getFailed": "Get failed"
+        },
+        "bluetooth": {
+          "openBluetooth": "Open Bluetooth",
+          "closeBluetooth": "Close Bluetooth",
+          "getAdapterState": "Get the native Bluetooth adapter status",
+          "onAdapterState": "Turn on Bluetooth adapter status monitoring",
+          "inputUuid": "Enter the uuid list of the main service",
+          "uuid": "uuid list of main service",
+          "bluetoothDiscoveryDevices": "Bluetooth search results",
+          "discoveryDevices": "Search for Bluetooth devices",
+          "stopDiscovery": "stop searching",
+          "stopDiscoveryDevices": "Stop searching for Bluetooth devices",
+          "getBluetoothDevices": "Get Bluetooth devices",
+          "inputDeviceId": "input deviceId",
+          "connectBluetoothDevice": "Connect Bluetooth device",
+          "disconnectBluetooth": "Disconnect Bluetooth device",
+          "getBluetoothDevicesService": "Get Bluetooth Device Service",
+          "getConnectedDevices": "Get connected Bluetooth devices",
+          "inputServiceId": "enter serviceId",
+          "getBLEDeviceCharacteristics": "Get all the feature values ​​of the Bluetooth service",
+          "inputCharacteristicId": "enter characterId",
+          "toggleNotify": "Do you want to enable notify",
+          "notifyBLECharacteristicValueChange": "Enable notifyBLECharacteristicValueChange",
+          "onblecharacteristicvaluechange": "Turn on Bluetooth service feature value data monitoring",
+          "SpecifyBluetoothServiceFeatureValue": "Specify Bluetooth service feature value data",
+          "readBLECharacteristicValue": "Read a characteristic value data of the Bluetooth service",
+          "inputByteStringValue": "Enter byteStringValue",
+          "writeCharacteristicValue": "write feature value data",
+          "lowpowerBleconnectionstate": "Low-Power Bluetooth Connection Status",
+          "watchLowpowerBleconnectionstate": "listen for low-power Bluetooth connection status",
+          "monitorSearchNewDevices": "Listen to search for new devices:",
+          "monitorCharacteristicChange": "Listening feature value changes:",
+          "monitorConnectChange": "Listening connection status changes:"
+        },
+        "brightness": {
+          "screenBrightness": "screen brightness",
+          "setScreenBrightness": "Set screen brightness",
+          "getScreenBrightness": "Get screen brightness",
+          "screenMode": "screen mode",
+          "setScreenMode": "Set screen mode",
+          "getScreenMode": "Get screen mode",
+          "setSuccess": "Setting success",
+          "setFailed": "Setting failed",
+          "notSetScreenBrightness": "The screen brightness is not set!",
+          "getSuccess": "Get success",
+          "getFailed": "Get failed",
+          "notSetScreenMode": "The screen mode is not set!",
+          "keyScreenBrightness": "The screen is always on",
+          "setScreenOn": "Setting screen is always on",
+          "notSetScreenOn": "Cancel screen always on",
+          "setScreenOnSuccessful": "Setting screen is always on successful",
+          "setScreenOnFails": "Setting screen is always on fails",
+          "notSetScreenOnSuccessful": "Cancel screen always on successful",
+          "notSetScreenOnFails": "Cancel screen always on fails"
+        },
+        "calendar": {
+          "eventTitle": "the title of the event",
+          "placeholder1": "title",
+          "eventDescription": "Description of the event",
+          "placeholder2": "description",
+          "startDate": "Event start time",
+          "placeholder3": "The number of milliseconds since the beginning of the Christian era",
+          "endDate": "Event end time",
+          "placeholder4": "The number of milliseconds since the beginning of the Christian era",
+          "insertEvent": "Insert calendar event",
+          "insertSuccess": "Insert success, id:",
+          "toast": "Title, start time, end event is required!"
+        },
+        "clipboard": {
+          "setClipboard": "Setting cut text",
+          "getClipboard": "Get cut text",
+          "clipboard": "fast application"
+        },
+        "contact": {
+          "name": "contact name",
+          "number": "contact phone",
+          "pickName": "Select a contact",
+          "getContactList": "Get Contact List"
+        },
+        "device": {
+          "pageGetInfo": "page get information:",
+          "getInfoByPage": "Get information via $page",
+          "themeInfo": "Theme information:",
+          "getThemeInfo": "Get theme information",
+          "themeInfoSync": "Thematic information synchronization acquisition method:",
+          "deviceInfo": "device information:",
+          "getDeviceInfo": "Get device information",
+          "deviceInfoSync": "Device information synchronization acquisition method:",
+          "id": "Device Id:",
+          "getId": "Get device Id",
+          "deviceId": "device deviceId:",
+          "getDeviceId": "Get device DeviceId",
+          "userId": "device userId:",
+          "getUserId": "Get device UserId",
+          "advertisingId": "device advertisingId:",
+          "getAdvertisingId": "Get device AdvertisingId",
+          "totalStorage": "device totalStorage:",
+          "getTotalStorage": "Get device TotalStorage",
+          "availableStorage": "device availableStorage:",
+          "getAvailableStorage": "Get device AvailableStorage",
+          "cpuInfo": "device cpuInfo:",
+          "getCpuInfo": "Get device CpuInfo",
+          "sn": "Device SN:",
+          "getSNInfo": "Get device SNinfo",
+          "requestSuccess": "Request completed",
+          "deviceUDID": "device UDID:",
+          "getDeviceUDID": "Get device UDID",
+          "deviceOAID": "device OAID:",
+          "getDeviceOAID": "Get device OAID",
+          "serviceCountry": "Service Location Information:",
+          "getServiceCountry": "Get service Location Information",
+          "deviceUserId": "device userId:",
+          "hostinfo": "Host application information:",
+          "getHostinfo": "Get host application information"
+        },
+        "geolocation": {
+          "deviceInfo": "device information:",
+          "isHuawei": "Whether in Huawei environment:",
+          "getDeviceInfo": "Get device information to determine whether it is Huawei environment",
+          "getGeolocation": "Get geo location:",
+          "getGeolocationBtn": "Get geo location",
+          "geolocation": "Location:",
+          "listenGeolocation": "Listen to location",
+          "cancelGeolocation": "Cancel location monitoring",
+          "type": "Supported targeting types:",
+          "getLocationType": "Get the currently supported targeting type",
+          "baiduMap": "Baidu map",
+          "systemMap": "System Map"
+        },
+        "message": {
+          "receiver": "recipient",
+          "receiverNumber": "SMS receiving number",
+          "content": "content",
+          "smsContent": "SMS content",
+          "send": "send",
+          "readSafely": "Secure read SMS"
+        },
+        "network": {
+          "networkType": "Network Type:",
+          "getNetworkType": "Get network type",
+          "currentType": "Network link status:",
+          "listenNetwork": "Listen to network connection status",
+          "cancelNetwork": "Cancel network link status monitoring",
+          "getSuccess": "Get success",
+          "listenSuccess": "listen successfully",
+          "listenFailed": "listening failed",
+          "carrierInformation": "carrier information:",
+          "getCarrierInformation": "get carrier information"
+        },
+        "package": {
+          "pkgHasInstalled": "Detect if the app exists",
+          "installPkg": "Install native app",
+          "fail": "failed",
+          "getPkgInfo": "get pkg info",
+          "getPkgSignatureDigests": "get pkg signature digests"
+        },
+        "qrcode": {
+          "qrcodeData": "QR code scan data:",
+          "openQrcode": "Open QR Code Scan"
+        },
+        "record": {
+          "recordPath": "The path of the recording:",
+          "takeRecord": "Start recording",
+          "takeRecordDuration": "Start recording (with time parameter)",
+          "stopRecord": "Stop recording"
+        },
+        "sensor": {
+          "sensorAccelerometerData": "Sensor data:",
+          "accelerometer": "listen to gravity sensing data",
+          "unaccelerometer": "Cancel gravity sensing",
+          "sensorCompassData": "Compass data:",
+          "compass": "listen for compass data",
+          "uncompass": "Cancel compass monitoring",
+          "sensorDistanceData": "distance data:",
+          "distance": "listening distance data",
+          "undistance": "Cancel distance monitoring",
+          "sensorIntensityData": "ray data:",
+          "intensity": "listen to ray data",
+          "unintensity": "Cancel light monitoring",
+          "sensorStepData": "Steps:",
+          "step": "listen the number of steps",
+          "unstep": "Cancel step count",
+          "healthSupport": "Do you support the ability to provide daily steps?",
+          "getDaySteps": "Get daily steps",
+          "getWeekSteps": "Get the last week's steps"
+        },
+        "settings": {
+          "getSettings": "Get the value corresponding to a key of Settings.system",
+          "inputKey": "Enter key",
+          "get": "get"
+        },
+        "shortcut": {
+          "getShortcut": "Get the desktop icon created",
+          "installShortcut": "Create a desktop icon",
+          "installShortcutMsg": "Customize prompt information to create desktop icons",
+          "getpromptenabled": "Get the creation of a shortcut reminder is currently enabled",
+          "setpromptenable": "Set a shortcut to allow reminders",
+          "hasInstalled": "The desktop icon has been created",
+          "notInstalled": "Desktop icon not created",
+          "questFail": "Request failed",
+          "installFail": "Create failed",
+          "toast": "This is a custom prompt to add a shortcut"
+        },
+        "volume": {
+          "set": "Set volume",
+          "setVolume": "Set multimedia volume",
+          "setMediaVolume": "Set current multimedia volume",
+          "getVolume": "Get the current multimedia volume",
+          "setSuccess": "Setting success"
+        },
+        "wifi": {
+          "connectWifi": "Connect to specify wifi:",
+          "connectWifiBtn": "Connect to specify Wifi",
+          "wifiResult": "wifi result:",
+          "onconnected": "listen connection",
+          "cancelConnect": "Cancel connection monitoring",
+          "scan": "Scan:",
+          "scanWifi": "Scan Wifi",
+          "scanResult": "Scan result:",
+          "onscaned": "listening scan results",
+          "cancelonScaned": "Cancel the monitor scan",
+          "wifiinfo": "Connected wifi information:",
+          "getConnectedWifiInfo": "Connected wifi information"
+        }
+      }
+    },
+    "main": {
+      "mainTitlebar": "Test My Phone",
+      "tabsData": {
+        "framework": {
+          "name": "Page",
+          "desc": "Page function display",
+          "groupList": [
+            {
+              "name": "Directive",
+              "caseList": [
+                {
+                  "name": "Block",
+                  "path": "directive/block"
+                },
+                {
+                  "name": "For",
+                  "path": "directive/for"
+                },
+                {
+                  "name": "Ifshow",
+                  "path": "directive/ifshow"
+                },
+                {
+                  "name": "Slot",
+                  "path": "directive/slot"
+                },
+                {
+                  "name": "App",
+                  "path": "directive/app"
+                },
+                {
+                  "name": "Computed",
+                  "path": "directive/computed"
+                },
+                {
+                  "name": "component",
+                  "path": "directive/component"
+                }
+              ]
+            },
+            {
+              "name": "Lifecycle",
+              "caseList": [
+                {
+                  "name": "lifeCycle",
+                  "path": "framework/lifecycle"
+                }
+              ]
+            },
+            {
+              "name": "i18n",
+              "caseList": [
+                {
+                  "name": "i18n",
+                  "path": "framework/i18n"
+                }
+              ]
+            },
+            {
+              "name": "Style",
+              "caseList": [
+                {
+                  "name": "StyleSample",
+                  "path": "style/sample"
+                },
+                {
+                  "name": "StyleUpdate",
+                  "path": "style/update"
+                },
+                {
+                  "name": "StyleLess",
+                  "path": "style/less"
+                },
+                {
+                  "name": "LinearGradient",
+                  "path": "style/linearGradient"
+                },
+                {
+                  "name": "PseudoClass",
+                  "path": "style/pseudoClass"
+                },
+                {
+                  "name": "Style_FontFace",
+                  "path": "style/fontface"
+                }
+              ]
+            },
+            {
+              "name": "Event",
+              "caseList": [
+                {
+                  "name": "BindEvents",
+                  "path": "event/bindEvents"
+                },
+                {
+                  "name": "InterVms",
+                  "path": "event/interVms"
+                },
+                {
+                  "name": "PublicInterface",
+                  "path": "event/publicInterface"
+                }
+              ]
+            },
+            {
+              "name": "Other",
+              "caseList": [
+                {
+                  "name": "Promise",
+                  "path": "promise"
+                }
+              ]
+            }
+          ]
+        },
+        "component": {
+          "name": "Component",
+          "desc": "The following will show the quick application component capabilities, component styles are for reference only, developers can customize the component style according to their own needs, specific property parameters see the new application development document",
+          "groupList": [
+            {
+              "name": "Container",
+              "caseList": [
+                {
+                  "name": "Div",
+                  "path": "component/container/div"
+                },
+                {
+                  "name": "List",
+                  "path": "component/container/list"
+                },
+                {
+                  "name": "Refresh",
+                  "path": "component/container/refresh"
+                },
+                {
+                  "name": "Richtext",
+                  "path": "component/container/richtext"
+                },
+                {
+                  "name": "Stack",
+                  "path": "component/container/stack"
+                },
+                {
+                  "name": "Swiper",
+                  "path": "component/container/swiper"
+                },
+                {
+                  "name": "Tabs",
+                  "path": "component/container/tabs"
+                },
+                {
+                  "name": "Popup",
+                  "path": "component/container/popup"
+                }
+              ]
+            },
+            {
+              "name": "Basic",
+              "caseList": [
+                {
+                  "name": "A",
+                  "path": "component/basic/a"
+                },
+                {
+                  "name": "Image",
+                  "path": "component/basic/image"
+                },
+                {
+                  "name": "Map",
+                  "path": "component/basic/map"
+                },
+                {
+                  "name": "Map_marker",
+                  "path": "component/basic/mapMarker"
+                },
+                {
+                  "name": "Map_indoor",
+                  "path": "component/basic/mapIndoor"
+                },
+                {
+                  "name": "Progress",
+                  "path": "component/basic/progress"
+                },
+                {
+                  "name": "Span",
+                  "path": "component/basic/span"
+                },
+                {
+                  "name": "Text",
+                  "path": "component/basic/text"
+                },
+                {
+                  "name": "Web",
+                  "path": "component/basic/web"
+                },
+                {
+                  "name": "Rating",
+                  "path": "component/basic/rating"
+                }
+              ]
+            },
+            {
+              "name": "Form",
+              "caseList": [
+                {
+                  "name": "Input",
+                  "path": "component/form/input"
+                },
+                {
+                  "name": "Slider",
+                  "path": "component/form/slider"
+                },
+                {
+                  "name": "Picker",
+                  "path": "component/form/picker"
+                },
+                {
+                  "name": "Switch",
+                  "path": "component/form/switch"
+                },
+                {
+                  "name": "Textarea",
+                  "path": "component/form/textarea"
+                },
+                {
+                  "name": "Label",
+                  "path": "component/form/label"
+                },
+                {
+                  "name": "Select",
+                  "path": "component/form/select"
+                }
+              ]
+            },
+            {
+              "name": "Other",
+              "caseList": [
+                {
+                  "name": "Video",
+                  "path": "component/other/video"
+                },
+                {
+                  "name": "Canvas",
+                  "path": "component/other/canvas"
+                },
+                {
+                  "name": "Camera",
+                  "path": "component/other/camera"
+                },
+                {
+                  "name": "Animation",
+                  "path": "component/other/animation"
+                },
+                {
+                  "name": "Transform",
+                  "path": "component/other/transform"
+                },
+                {
+                  "name": "Border",
+                  "path": "component/other/border"
+                },
+                {
+                  "name": "Background",
+                  "path": "component/other/background"
+                },
+                {
+                  "name": "GenerlEvent",
+                  "path": "component/other/generlEvent"
+                },
+                {
+                  "name": "Menu",
+                  "path": "component/other/menu"
+                },
+                {
+                  "name": "Marquee",
+                  "path": "component/other/marquee"
+                }
+              ]
+            }
+          ]
+        },
+        "interface": {
+          "name": "Interface",
+          "desc": "The following will show the quick app interface capabilities, specific attribute parameters see the new application development document",
+          "groupList": [
+            {
+              "name": "Basic",
+              "caseList": [
+                {
+                  "name": "Context and Log",
+                  "path": "interface/basic/contextAndLog"
+                },
+                {
+                  "name": "Router",
+                  "path": "interface/basic/router"
+                }
+              ]
+            },
+            {
+              "name": "Interaction",
+              "caseList": [
+                {
+                  "name": "Share",
+                  "path": "interface/interaction/share"
+                },
+                {
+                  "name": "Prompt",
+                  "path": "interface/interaction/prompt"
+                },
+                {
+                  "name": "Webview",
+                  "path": "interface/interaction/webview"
+                },
+                {
+                  "name": "Notification",
+                  "path": "interface/interaction/notification"
+                },
+                {
+                  "name": "Vibrator",
+                  "path": "interface/interaction/vibrator"
+                },
+                {
+                  "name": "MessageChannel",
+                  "path": "interface/interaction/messageChannel"
+                }
+              ]
+            },
+            {
+              "name": "Network",
+              "caseList": [
+                {
+                  "name": "Fetch",
+                  "path": "interface/network/fetch"
+                },
+                {
+                  "name": "Request",
+                  "path": "interface/network/request"
+                },
+                {
+                  "name": "Websocket",
+                  "path": "interface/network/websocket"
+                }
+              ]
+            },
+            {
+              "name": "FileData",
+              "caseList": [
+                {
+                  "name": "Storage",
+                  "path": "interface/fileData/storage"
+                },
+                {
+                  "name": "File",
+                  "path": "interface/fileData/file"
+                }
+              ]
+            },
+            {
+              "name": "System",
+              "caseList": [
+                {
+                  "name": "Alarm",
+                  "path": "interface/system/alarm"
+                },
+                {
+                  "name": "Message",
+                  "path": "interface/system/message"
+                },
+                {
+                  "name": "Sensor",
+                  "path": "interface/system/sensor"
+                },
+                {
+                  "name": "Geolocation",
+                  "path": "interface/system/geolocation"
+                },
+                {
+                  "name": "QRCode",
+                  "path": "interface/system/qrcode"
+                },
+                {
+                  "name": "Clipboard",
+                  "path": "interface/system/clipboard"
+                },
+                {
+                  "name": "Calendar",
+                  "path": "interface/system/calendar"
+                },
+                {
+                  "name": "Device",
+                  "path": "interface/system/device"
+                },
+                {
+                  "name": "Network",
+                  "path": "interface/system/network"
+                },
+                {
+                  "name": "Shortcut",
+                  "path": "interface/system/shortcut"
+                },
+                {
+                  "name": "Brightness",
+                  "path": "interface/system/brightness"
+                },
+                {
+                  "name": "Battery",
+                  "path": "interface/system/battery"
+                },
+                {
+                  "name": "Record",
+                  "path": "interface/system/record"
+                },
+                {
+                  "name": "Volume",
+                  "path": "interface/system/volume"
+                },
+                {
+                  "name": "Package",
+                  "path": "interface/system/package"
+                },
+                {
+                  "name": "Contact",
+                  "path": "interface/system/contact"
+                },
+                {
+                  "name": "Wifi",
+                  "path": "interface/system/wifi"
+                },
+                {
+                  "name": "Settings",
+                  "path": "interface/system/settings"
+                },
+                {
+                  "name": "Bluetooth",
+                  "path": "interface/system/bluetooth"
+                }
+              ]
+            },
+            {
+              "name": "Graphic",
+              "caseList": [
+                {
+                  "name": "Media",
+                  "path": "interface/graphic/media"
+                },
+                {
+                  "name": "Image",
+                  "path": "interface/graphic/image"
+                }
+              ]
+            },
+            {
+              "name": "Audio",
+              "caseList": [
+                {
+                  "name": "audio",
+                  "path": "interface/audio/audio"
+                }
+              ]
+            },
+            {
+              "name": "Service",
+              "caseList": [
+                {
+                  "name": "Pay",
+                  "path": "interface/service/pay"
+                },
+                {
+                  "name": "Account",
+                  "path": "interface/service/account"
+                },
+                {
+                  "name": "Push & Statistics & Sharｅ",
+                  "path": "interface/service/pushStatShare"
+                }
+              ]
+            },
+            {
+              "name": "Thirdparty",
+              "caseList": [
+                {
+                  "name": "Alipay",
+                  "path": "interface/thirdparty/alipay"
+                },
+                {
+                  "name": "Wxpay",
+                  "path": "interface/thirdparty/wxpay"
+                },
+                {
+                  "name": "ServiceShare",
+                  "path": "interface/thirdparty/serviceShare"
+                }
+              ]
+            },
+            {
+              "name": "AI",
+              "caseList": [
+                {
+                  "name": "Huawei Ai",
+                  "path": "interface/ai/index"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "promise": {
+      "promise": {
+        "componentName": "Pormise interface call is viewed in the log"
+      }
+    },
+    "style": {
+      "fontface": {
+        "title": "Text component sets the font-face style",
+        "testSpan": "Test span component",
+        "huaweiWeb": "Huawei official website",
+        "inputText": "please enter text",
+        "option1": "Confucius Temple",
+        "option2": "presidential palace",
+        "option3": "Old door east",
+        "option4": "Da Bao En Temple",
+        "aInText": "Multiple manifestations of a in text",
+        "testWebFont": "Test web font",
+        "testTextFontFamily": "Test text directly set the font-family defined in data",
+        "setFontFamilyByButton": "Reset font-family by button"
+      },
+      "less": {
+        "sample": "less sample!"
+      },
+      "linearGradient": {
+        "gradient1": "Gradient from the top",
+        "gradient2": "45 degree angle gradient",
+        "gradient3": "Gradient from left to right",
+        "gradient4": "Gradient from left to right, repeating the gradient"
+      },
+      "position": {
+        "relativeAttributes": "relative attributes",
+        "absoluteAttributes": "absolute attributes",
+        "fixedAttributes": "fixed attributes",
+        "dynamicsTest": "dynamics test",
+        "firstIndividualNode": "First individual node",
+        "singleNodeAtTheEnd": "Single node at the end",
+        "absoluteTestPage": "absolute test page",
+        "fixedTestPage": "fixed test page",
+        "testPage": "Style switching test page",
+        "positioning": "relative/absolute/fixed positioning",
+        "specifyValue": "Specify the position attribute value:",
+        "offsetParmeter": "Offset parameter",
+        "distanceIntro": "Check the margin direction and drag the slider to determine the margin distance"
+      },
+      "pseudoclass": {
+        "text1": "This is an example of active color change (click on me)",
+        "text2": "This is an color example of disabled",
+        "placeholder1": "Input component focus pseudo-class (click me)",
+        "placeholder2": "Textarea component focus pseudo-class (click me)"
+      },
+      "sample": {
+        "inlineStyle": "Inline style",
+        "idSelector": "id selector",
+        "classSelector": "class selector",
+        "tagSelector": "tag selector",
+        "example1": "Descendant selector example 1",
+        "example2": "Descendant selector example 2",
+        "selectorPriority": "Selector priority",
+        "description": "description content",
+        "changeSelector": "change selector"
+      },
+      "update": {
+        "text": "Click I to edit the text color"
+      }
+    }
+  }
+}
