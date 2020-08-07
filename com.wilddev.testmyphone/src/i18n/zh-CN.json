@@ -1,7 +1,7 @@
 {
     "message": {
-        "appName":"快应用示例",
-        "funcDisplay":"快应用功能展示",
+        "appName":"Test My Phone",
+        "funcDisplay":"Test My Phone",
         "component": {
             "a": {
                 "huaweiHrefValue": "华为官方网页",
